@@ -207,3 +207,8 @@ html body .app-shell:after{background:linear-gradient(90deg,rgba(0,0,0,.18) 0%,t
 html body .notification-button{width:34px!important;height:34px!important}.notification-button svg{width:15px!important;height:15px!important;stroke-width:1.25!important}@media(max-width:1450px){html body .notification-button{width:32px!important;height:32px!important}.notification-button svg{width:14px!important;height:14px!important}}
 html body .hero-actions>.primary-btn svg,html body .hero-actions>.secondary-btn svg{width:17px!important;height:17px!important;stroke-width:1.45!important}
 html body .hero-copy .hero-refined-headline{max-width:720px!important}
+
+/* Requested Home gradient/CTA refinement */
+html body .app-shell{background-image:radial-gradient(ellipse at 82% 42%,rgba(118,125,131,.28),transparent 48%),radial-gradient(ellipse at 100% 52%,rgba(151,158,164,.34),transparent 44%),linear-gradient(108deg,#050607 0%,#090b0d 27%,#171b1e 52%,#3c4247 76%,#666d73 100%)!important;background-color:#060708!important}
+html body .app-shell:after{background:linear-gradient(90deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.16) 35%,transparent 63%,rgba(255,255,255,.035) 100%)!important}
+html body .hero-actions>.secondary-btn{width:190px!important;min-width:190px!important;padding-right:6px!important}

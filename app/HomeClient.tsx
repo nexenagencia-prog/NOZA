@@ -55,7 +55,7 @@ export default function HomeClient({content}:{content:HomeContent}){
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
-          <div className="performance-insight"><small>PADRÃO IDENTIFICADO</small><span>Você está mais claro ao argumentar, mas ainda antecipa soluções antes de entender o contexto.</span></div>
+          <div className="performance-insight"><small>SUA EVOLUÇÃO</small><span>Quanto mais a NOZA conhece seus padrões, mais precisa se torna a direção do seu desenvolvimento.</span></div>
           <div className="hero-actions"><button className="primary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button><button className="secondary-btn" onClick={()=>router.push("/human-pro")}><MessageCircle size={20}/>Falar com a NOZA</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
