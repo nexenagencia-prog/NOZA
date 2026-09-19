@@ -11,7 +11,7 @@ import FloatingCalculator from './FloatingCalculator';
 import FloatingNotes,{type FloatingNotesMode} from './FloatingNotes';
 import {homeCardRoute} from './home-card-route.mjs';
 
-const cardIcon=(slug:string)=>slug==='recordings'?Play:slug==='insights'?Lightbulb:BarChart3;
+const cardIcon=(slug:string)=>slug==='recordings'?Lightbulb:slug==='insights'?Lightbulb:BarChart3;
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
 const heroWords=['evolui','avança','cresce'];
 
@@ -44,9 +44,9 @@ export default function HomeClient({content}:{content:HomeContent}){
   const go=(direction:number)=>setSlide(currentSlide=>slides.length?(currentSlide+direction+slides.length)%slides.length:0);
   const current=slides[slide];
   const nozaCarousel=[
-    {imageUrl:'/noza-home-slide-brain.png',title:'Mais do que reuniões.',subtitle:'Entenda como você decide.'},
-    {imageUrl:'/noza-home-slide-human.png',title:'Mais do que comunicação.',subtitle:'Entenda como você se comporta.'},
-    {imageUrl:'/noza-home-slide-focus.png',title:'Mais do que foco.',subtitle:'Transforme padrões em performance.'},
+    {imageUrl:'/noza-home-slide-brain.png',title:'Entenda como você pensa.',subtitle:'Transforme isso em performance.'},
+    {imageUrl:'/noza-home-slide-human.png',title:'Sua comunicação revela padrões.',subtitle:'Transforme padrões em evolução.'},
+    {imageUrl:'/noza-home-slide-focus.png',title:'Desenvolva o que realmente importa.',subtitle:'Evolua com direção.'},
   ];
   const visual=nozaCarousel[slide%nozaCarousel.length];
   const heroStyle=content.hero.imageUrl?{backgroundImage:`url(${content.hero.imageUrl})`}:undefined;
@@ -63,14 +63,13 @@ export default function HomeClient({content}:{content:HomeContent}){
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
     <section className={`content ${expanded?'shifted':''}`}>
-      <AppTopbar floating={false} searchPlaceholder={content.navigation.searchPlaceholder} nextLabel={content.nextMeeting.label} nextDateTime={content.nextMeeting.dateTime} performancePercent={content.hero.performancePercent}/>
+      <AppTopbar floating={false} searchPlaceholder={content.navigation.searchPlaceholder} nextLabel="FOCO ATUAL" nextDateTime="Comunicação estratégica" performancePercent={content.hero.performancePercent}/>
       <section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{renderHeroLine(line)}{index<titleLines.length-1&&<br/>}</span>)}</h1>
-          <div className="rating-line"><div className="stars">{[0,1,2,3,4].map(number=><Star key={number} size={20} fill="currentColor"/>)}</div><span>{content.hero.ratingText}</span></div>
-          <div className="hero-score"><b>{content.hero.performancePercent}%</b> {content.hero.performanceLabel}</div><div className="progress"><i style={{'--p':`${content.hero.performancePercent}%`} as CSSProperties}/></div><div className="ticks"/>
-          <div className="hero-actions"><button className="primary-btn"><Video size={22}/>{content.hero.primaryButton}</button><button className="secondary-btn"><Play size={25}/>{content.hero.secondaryButton}</button></div>
+          <div className="performance-insight"><small>PADRÃO IDENTIFICADO</small><span>Você está mais claro ao argumentar, mas ainda antecipa soluções antes de entender o contexto.</span></div>
+          <div className="hero-actions"><button className="primary-btn" onClick={()=>router.push("/skills")}><Video size={22}/>Continuar evolução</button><button className="secondary-btn" onClick={()=>router.push("/human-pro")}><Play size={25}/>Falar com a NOZA</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
@@ -82,12 +81,12 @@ export default function HomeClient({content}:{content:HomeContent}){
           const Icon=cardIcon(card.slug);
           const route=homeCardRoute(card.slug);
           const style=undefined;
-          const body=<><Icon className={`card-icon ${card.slug==='recordings'?'circled':''}`}/><h2>{card.title}</h2><p>{card.description}</p><strong>{card.percentage}%</strong><div className="card-progress"><i style={{'--p':`${card.percentage}%`} as CSSProperties}/></div><span className="round-go" aria-hidden="true"><ArrowRight/></span></>;
+          const homeCopy=index===0?{title:'Skills',description:'Suas habilidades em desenvolvimento.',status:'Comunicação em evolução'}:index===1?{title:'Inteligência de Performance',description:'Entenda seus padrões de decisão, comunicação e comportamento.',status:'Novo padrão identificado'}:{title:'Próximo desenvolvimento',description:'O que mais pode elevar sua performance agora.',status:'Argumentação estratégica'}; const body=<><Icon className={`card-icon ${card.slug==='recordings'?'circled':''}`}/><h2>{homeCopy.title}</h2><p>{homeCopy.description}</p><strong className="card-status">{homeCopy.status}</strong><div className="card-progress"><i style={{'--p':`${card.percentage}%`} as CSSProperties}/></div><span className="round-go" aria-hidden="true"><ArrowRight/></span></>;
           return route?<Link className={`info-card ${cardClass(index)}`} key={card.slug} style={style} href={route} aria-label={`${card.title}: ${card.ctaLabel}`}>{body}</Link>:<article className={`info-card ${cardClass(index)}`} key={card.slug} style={style}>{body}</article>;
         })}
       </section>
     </section>
     <FloatingCalculator open={calculatorOpen} onClose={()=>setCalculatorOpen(false)}/><FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
-    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-dynamic-word{display:inline-block;font-style:italic;font-weight:360;min-width:3.9em;animation:heroWordIn .55s cubic-bezier(.22,.72,.18,1) both}@keyframes heroWordIn{from{opacity:0;transform:translateY(10px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}@media(prefers-reduced-motion:reduce){.hero-dynamic-word{animation:none}}`}</style>
+    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}.hero-dynamic-word{display:inline-block;font-style:italic;font-weight:360;min-width:3.9em;animation:heroWordIn .55s cubic-bezier(.22,.72,.18,1) both}@keyframes heroWordIn{from{opacity:0;transform:translateY(10px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}@media(prefers-reduced-motion:reduce){.hero-dynamic-word{animation:none}}`}</style>
   </main>;
 }
