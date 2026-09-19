@@ -50,7 +50,6 @@ export async function PUT(request:Request){
     if(result.error) return NextResponse.json({error:'Não foi possível salvar o carrossel.'},{status:500});
   }
 
-  revalidateTag('zyvo-home-content');
   revalidatePath('/');
   return NextResponse.json({ok:true,content:await loadHomeContent()});
 }
