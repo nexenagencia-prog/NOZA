@@ -7,7 +7,7 @@ import type { HomeContent } from '../lib/cms/types';
 const content: HomeContent = {
   hero: {
     eyebrow: 'PERFORMANCE INTELLIGENCE',
-    title: 'Sua performance evolui com você.',
+    title: 'Você está pronto hoje para evoluir?',
     ratingText: 'Evolução contínua, orientada pela sua própria performance.',
     performancePercent: 82,
     performanceLabel: 'performance',

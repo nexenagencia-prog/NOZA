@@ -1,6 +1,6 @@
 'use client';
 
-import {ArrowLeft,ArrowRight,BarChart3,Lightbulb,Play,Star,Video} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BarChart3,Lightbulb,MessageCircle,TrendingUp} from 'lucide-react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CSSProperties,useEffect,useMemo,useState} from 'react';
@@ -13,7 +13,6 @@ import {homeCardRoute} from './home-card-route.mjs';
 
 const cardIcon=(slug:string)=>slug==='recordings'?Lightbulb:slug==='insights'?Lightbulb:BarChart3;
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
-const heroWords=['evolui','avança','cresce'];
 
 export default function HomeClient({content}:{content:HomeContent}){
   const router=useRouter();
@@ -22,7 +21,6 @@ export default function HomeClient({content}:{content:HomeContent}){
   const[loaded,setLoaded]=useState(false);
   const[calculatorOpen,setCalculatorOpen]=useState(false);
   const[notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
-  const[heroWord,setHeroWord]=useState(0);
   const slides=useMemo(()=>{
     const active=content.carousel.filter(item=>item.isActive);
     return active.length?active:content.carousel;
@@ -36,10 +34,6 @@ export default function HomeClient({content}:{content:HomeContent}){
     return()=>clearInterval(timer);
   },[slides.length,content.carouselIntervalMs]);
   useEffect(()=>setSlide(0),[slides]);
-  useEffect(()=>{
-    const timer=setInterval(()=>setHeroWord(word=>(word+1)%heroWords.length),2400);
-    return()=>clearInterval(timer);
-  },[]);
 
   const go=(direction:number)=>setSlide(currentSlide=>slides.length?(currentSlide+direction+slides.length)%slides.length:0);
   const current=slides[slide];
@@ -52,13 +46,6 @@ export default function HomeClient({content}:{content:HomeContent}){
   const heroStyle=content.hero.imageUrl?{backgroundImage:`url(${content.hero.imageUrl})`}:undefined;
   const titleLines=content.hero.title.split('\n');
   const firstName=content.profile.name.trim().split(/\s+/)[0]||'Sandro';
-  const renderHeroLine=(line:string)=>{
-    const match=line.match(/evolui/i);
-    if(!match)return line;
-    const index=match.index||0;
-    return <>{line.slice(0,index)}<em className="hero-dynamic-word" key={heroWords[heroWord]}>{heroWords[heroWord]}</em>{line.slice(index+match[0].length)}</>;
-  };
-
   return <main className={`app-shell ${loaded?'loaded':''}`}>
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
@@ -67,9 +54,9 @@ export default function HomeClient({content}:{content:HomeContent}){
       <section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
-          <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{renderHeroLine(line)}{index<titleLines.length-1&&<br/>}</span>)}</h1>
+          <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>PADRÃO IDENTIFICADO</small><span>Você está mais claro ao argumentar, mas ainda antecipa soluções antes de entender o contexto.</span></div>
-          <div className="hero-actions"><button className="primary-btn" onClick={()=>router.push("/skills")}><Video size={22}/>Continuar evolução</button><button className="secondary-btn" onClick={()=>router.push("/human-pro")}><Play size={25}/>Falar com a NOZA</button></div>
+          <div className="hero-actions"><button className="primary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button><button className="secondary-btn" onClick={()=>router.push("/human-pro")}><MessageCircle size={20}/>Falar com a NOZA</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
@@ -87,6 +74,6 @@ export default function HomeClient({content}:{content:HomeContent}){
       </section>
     </section>
     <FloatingCalculator open={calculatorOpen} onClose={()=>setCalculatorOpen(false)}/><FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
-    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}.hero-dynamic-word{display:inline-block;font-style:italic;font-weight:360;min-width:3.9em;animation:heroWordIn .55s cubic-bezier(.22,.72,.18,1) both}@keyframes heroWordIn{from{opacity:0;transform:translateY(10px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}@media(prefers-reduced-motion:reduce){.hero-dynamic-word{animation:none}}`}</style>
+    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}`}</style>
   </main>;
 }
