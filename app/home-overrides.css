@@ -177,3 +177,9 @@ html body .topnav a{
   cursor:pointer!important;
   text-decoration:none!important;
 }
+
+/* Home text/topbar correction */
+html body .hero-copy .hero-refined-headline{line-height:.94!important;letter-spacing:-.048em!important;max-width:760px!important;margin-bottom:0!important}
+html body .rating-line{margin-top:22px!important;align-items:center!important}
+html body .rating-line span{font-size:15px!important;line-height:1.25!important;letter-spacing:-.01em!important;color:#b8c2c7!important}
+html body .next-meeting strong{color:#f3f6f7!important;-webkit-text-fill-color:#f3f6f7!important;opacity:1!important;font-weight:500!important}

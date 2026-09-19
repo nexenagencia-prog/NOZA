@@ -13,7 +13,7 @@ import {homeCardRoute} from './home-card-route.mjs';
 
 const cardIcon=(slug:string)=>slug==='recordings'?Play:slug==='insights'?Lightbulb:BarChart3;
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
-const heroWords=['evolua','conecte','cresça'];
+const heroWords=['evolui','avança','cresce'];
 
 export default function HomeClient({content}:{content:HomeContent}){
   const router=useRouter();
@@ -53,7 +53,7 @@ export default function HomeClient({content}:{content:HomeContent}){
   const titleLines=content.hero.title.split('\n');
   const firstName=content.profile.name.trim().split(/\s+/)[0]||'Sandro';
   const renderHeroLine=(line:string)=>{
-    const match=line.match(/evolua/i);
+    const match=line.match(/evolui/i);
     if(!match)return line;
     const index=match.index||0;
     return <>{line.slice(0,index)}<em className="hero-dynamic-word" key={heroWords[heroWord]}>{heroWords[heroWord]}</em>{line.slice(index+match[0].length)}</>;

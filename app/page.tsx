@@ -7,20 +7,20 @@ import type { HomeContent } from '../lib/cms/types';
 const content: HomeContent = {
   hero: {
     eyebrow: 'PERFORMANCE INTELLIGENCE',
-    title: 'Sua performance evolua com você.',
-    ratingText: 'Evolução contínua',
+    title: 'Sua performance evolui com você.',
+    ratingText: 'Evolução contínua, orientada pela sua própria performance.',
     performancePercent: 82,
     performanceLabel: 'performance',
     primaryButton: 'Iniciar',
     secondaryButton: 'Ver Skills',
     imageUrl: ''
   },
-  nextMeeting: { label: 'Próxima reunião', dateTime: '' },
+  nextMeeting: { label: 'Próxima reunião', dateTime: '14:00 — 30 Set 2026' },
   profile: { name: 'Sandro', avatarUrl: '', planLabel: 'PRO' },
   navigation: {
     searchPlaceholder: 'Buscar',
     top: ['Início','Skills','Agenda','Planos e Preços'],
-    sidebar: ['Início','Agenda','Reuniões','Gravações','Anotar','Calculadora','Skills','Human Pro','Planos e Preços','Sair']
+    sidebar: ['Início','Reuniões','Gravações','Calculadora','Skills','Human Pro','Sair']
   },
   cards: [
     {slug:'skills',title:'Skills',description:'Evolução das suas habilidades de performance.',percentage:82,imageUrl:'/skills-card.png',ctaLabel:'Ver Skills',sortOrder:0,isActive:true},

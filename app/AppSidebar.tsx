@@ -11,14 +11,15 @@ import './app-sidebar.css';
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 const icons=[Grid2X2,CirclePlus,CalendarDays,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Skills','Contatos','Notificações','Gravações','Configurações','Sair'];
-const extras=[{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit},{label:'Calculadora',Icon:Calculator},{label:'Anotar',Icon:NotebookPen},{label:'Anotações',Icon:StickyNote},{label:'Criar slides',Icon:Presentation}];
+const extras=[{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit},{label:'Calculadora',Icon:Calculator}];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
   const router=useRouter();const pathname=usePathname();const[profileName,setProfileName]=useState(name);const[editingName,setEditingName]=useState(false);const[avatar,setAvatar]=useState<string|null>(avatarUrl);const fileRef=useRef<HTMLInputElement>(null);
   useEffect(()=>{document.body.classList.add('zyvo-sidebar-expanded');onExpandedChange?.(true);try{const saved=localStorage.getItem(PROFILE_AVATAR_KEY);if(saved)setAvatar(saved)}catch{}return()=>document.body.classList.remove('zyvo-sidebar-expanded')},[onExpandedChange]);
   const changeAvatar=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{const value=String(reader.result);setAvatar(value);try{localStorage.setItem(PROFILE_AVATAR_KEY,value)}catch{}};reader.readAsDataURL(file)};
-  const primary=labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label!=='Configurações'&&item.label!=='Sair');
+  const hiddenLabels=new Set(['Agenda','Anotar','Anotações','Criar slides','Planos e Preços','Preços e Planos']);
+  const primary=labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label!=='Configurações'&&item.label!=='Sair'&&!hiddenLabels.has(item.label));
   const final=labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label==='Configurações'||item.label==='Sair').sort((a,b)=>a.label==='Sair'?1:b.label==='Sair'?-1:a.index-b.index);
   const emit=(eventName:string)=>window.dispatchEvent(new Event(eventName));
   const action=(label:string)=>{const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes')};
