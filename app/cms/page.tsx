@@ -5,6 +5,8 @@ import { isAdminEmail } from '../../lib/cms/auth.mjs';
 import { loadHomeContent } from '../../lib/cms/repository';
 import CmsEditor from './CmsEditor';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CmsPage(){
   const supabase=await createServerSupabaseClient();
   const {data:{user}}=await supabase.auth.getUser();
