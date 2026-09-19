@@ -11,8 +11,8 @@ const content: HomeContent = {
     ratingText: 'Evolução contínua, orientada pela sua própria performance.',
     performancePercent: 82,
     performanceLabel: 'performance',
-    primaryButton: 'Iniciar',
-    secondaryButton: 'Ver Skills',
+    primaryButton: 'Continuar evolução',
+    secondaryButton: 'Falar com a NOZA.',
     imageUrl: ''
   },
   nextMeeting: { label: 'Próxima reunião', dateTime: '14:00 — 30 Set 2026' },

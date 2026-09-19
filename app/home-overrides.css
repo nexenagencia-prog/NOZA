@@ -183,3 +183,15 @@ html body .hero-copy .hero-refined-headline{line-height:.94!important;letter-spa
 html body .rating-line{margin-top:22px!important;align-items:center!important}
 html body .rating-line span{font-size:15px!important;line-height:1.25!important;letter-spacing:-.01em!important;color:#b8c2c7!important}
 html body .next-meeting strong{color:#f3f6f7!important;-webkit-text-fill-color:#f3f6f7!important;opacity:1!important;font-weight:500!important}
+
+/* Home palette aligned with Skills + clean lower cards */
+html body .app-shell{
+  color:#101b2b!important;
+  background:radial-gradient(circle at 13% 8%,rgba(255,255,255,.98) 0 7%,rgba(242,248,252,.82) 17%,transparent 37%),radial-gradient(circle at 88% 18%,rgba(94,119,148,.72) 0 11%,rgba(139,160,182,.46) 27%,transparent 50%),radial-gradient(circle at 62% 78%,rgba(255,255,255,.88) 0 13%,rgba(226,237,246,.56) 31%,transparent 56%),linear-gradient(138deg,#eef5fb 0%,#dfeaf3 34%,#cbd9e5 67%,#d9e4ee 100%)!important;
+}
+html body .app-shell:after{background:radial-gradient(ellipse at 10% 55%,rgba(255,255,255,.75),transparent 38%),radial-gradient(ellipse at 86% 88%,rgba(92,116,143,.22),transparent 44%)!important;filter:blur(28px)}
+html body .hero-greeting{color:#596b79!important}html body .hero-greeting strong,html body .hero-copy h1,html body .hero-copy h1 span,html body .hero-copy .hero-refined-headline,html body .hero-copy .hero-refined-headline span,html body .hero-dynamic-word{color:#0f1c31!important;-webkit-text-fill-color:#0f1c31!important}
+html body .eyebrow,html body .rating-line,html body .rating-line span,html body .hero-score{color:#657989!important}html body .hero-score b{color:#122137!important}html body .stars{color:#536b7d!important}
+html body .topnav a{color:#536777!important}html body .topnav .current{color:#101b2b!important}html body .next-meeting span{color:#6b7d8c!important}html body .next-meeting strong{color:#142338!important;-webkit-text-fill-color:#142338!important}html body .search-box{background:rgba(255,255,255,.38)!important;border:1px solid rgba(255,255,255,.74)!important;box-shadow:inset 0 1px rgba(255,255,255,.72)!important}html body .search-box svg{color:#263c4c!important;stroke:#263c4c!important}html body .search-box span{color:#627584!important}html body .search-box kbd{color:#314655!important;background:rgba(255,255,255,.38)!important;border-color:rgba(255,255,255,.66)!important}html body .notification-button{color:#263c4c!important;background:rgba(255,255,255,.32)!important;border-color:rgba(255,255,255,.72)!important}
+html body .info-card,html body .card-one,html body .card-two,html body .card-three{background-image:none!important;background:linear-gradient(180deg,#f4f6f6,#cfd5d8)!important;border:1px solid rgba(255,255,255,.78)!important;color:#080b0d!important;box-shadow:0 10px 30px rgba(71,91,105,.14),inset 0 1px rgba(255,255,255,.9)!important}
+html body .info-card p{color:#526675!important}html body .info-card .card-icon{color:#101b2b!important}html body .info-card .round-go{background:rgba(255,255,255,.62)!important;color:#101b2b!important}

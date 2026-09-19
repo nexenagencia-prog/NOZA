@@ -80,9 +80,8 @@ export default function HomeClient({content}:{content:HomeContent}){
       <section className="cards-grid">
         {content.cards.filter(card=>card.isActive).sort((a,b)=>a.sortOrder-b.sortOrder).map((card,index)=>{
           const Icon=cardIcon(card.slug);
-          const overlay=index===1?'linear-gradient(90deg,rgba(238,244,247,.88),rgba(238,244,247,.05))':'linear-gradient(90deg,rgba(238,244,247,.9),rgba(238,244,247,.18))';
           const route=homeCardRoute(card.slug);
-          const style=card.imageUrl?{backgroundImage:`${overlay},url(${card.imageUrl})`}:undefined;
+          const style=undefined;
           const body=<><Icon className={`card-icon ${card.slug==='recordings'?'circled':''}`}/><h2>{card.title}</h2><p>{card.description}</p><strong>{card.percentage}%</strong><div className="card-progress"><i style={{'--p':`${card.percentage}%`} as CSSProperties}/></div><span className="round-go" aria-hidden="true"><ArrowRight/></span></>;
           return route?<Link className={`info-card ${cardClass(index)}`} key={card.slug} style={style} href={route} aria-label={`${card.title}: ${card.ctaLabel}`}>{body}</Link>:<article className={`info-card ${cardClass(index)}`} key={card.slug} style={style}>{body}</article>;
         })}
