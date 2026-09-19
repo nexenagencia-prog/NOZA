@@ -1,5 +1,4 @@
 'use client';
-import AppTopbar from '../AppTopbar';
 import {ArrowLeft,ArrowRight,FileText,Pencil,Save,Trash2,X} from 'lucide-react';import {CSSProperties,MouseEvent,PointerEvent,useEffect,useMemo,useRef,useState,WheelEvent} from 'react';import AppTopbar from '../AppTopbar';import AppSidebar from '../AppSidebar';import {createBrowserSupabaseClient} from '../../lib/supabase/client';import '../app-topbar.css';import '../app-sidebar.css';import './notes-page.css';
 type Note={id:string;subject:string;body:string;created_at:string;updated_at:string;demo?:boolean};type Origin={x:number;y:number;sx:number;sy:number};
 const GUEST_NOTES_KEY='zyvo:guest-notes';const readGuest=():Note[]=>{try{const raw=localStorage.getItem(GUEST_NOTES_KEY);return raw?JSON.parse(raw) as Note[]:[]}catch{return[]}};const writeGuest=(items:Note[])=>{try{localStorage.setItem(GUEST_NOTES_KEY,JSON.stringify(items))}catch{}};
