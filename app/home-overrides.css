@@ -1,0 +1,179 @@
+/* Final Home overrides. Loaded after globals/refine/cms-home to avoid legacy CSS winning by specificity. */
+html body{font-weight:300}
+html body .hero-copy h1,html body .hero-copy h1 span{font-weight:430;background:none!important;background-image:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;-webkit-text-fill-color:#0b0d0f!important;color:#0b0d0f!important;opacity:1!important}
+.eyebrow,.search-box span,.search-box kbd,.topnav a,.next-meeting span,.rating-line span,.hero-score,.info-card p,.avatar-meta>span,.side-item,.sidebar-toggle{font-weight:300}.topnav .current,.next-meeting strong,.name-edit strong{font-weight:430}
+html body .hero-greeting{font-size:17px;line-height:1.15;font-weight:300;letter-spacing:-.018em;color:#20282d;margin-bottom:8px}html body .hero-greeting strong{font-weight:600;color:#0b0d0f}
+html body .info-card h2{font-weight:320!important;letter-spacing:-.018em}html body .info-card p{font-weight:280!important;letter-spacing:-.006em;line-height:1.32}html body .info-card>strong{font-weight:350!important}
+html body a.info-card{text-decoration:none;cursor:pointer}
+html body .info-card .card-icon,html body .side-item svg,html body .sidebar-toggle svg{stroke-width:1.35!important;vector-effect:non-scaling-stroke}html body .info-card .card-icon{width:31px!important;height:31px!important}html body .side-item svg{width:18px!important;height:18px!important}html body .sidebar-toggle svg{width:18px!important;height:18px!important}html body .circled{border-width:1.25px!important}
+html body .side-nav{flex:1;justify-content:flex-start!important;gap:5px!important;margin-top:4px!important;overflow:hidden}html body .side-item{height:34px!important;min-height:34px!important;font-size:12px!important}html body .sidebar.expanded .side-item{padding:0 12px!important}
+.feature-text{font-weight:380}.hero-score{font-size:16px}.hero-score b{font-size:21px;font-weight:430}
+html body .search-box{height:38px!important;min-height:38px!important;padding:0 12px!important;gap:9px!important;margin-left:10px!important;transform:translateY(-7px)!important;border-radius:19px!important;align-self:center!important}html body .search-box svg{width:20px!important;height:20px!important;color:#26343d!important;stroke:#26343d!important;opacity:.92!important;stroke-width:1.55!important;flex:0 0 auto}html body .search-box span{font-size:12px!important;color:#53616a!important;opacity:.94!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}html body .search-box kbd{font-size:10px!important;line-height:22px!important;height:22px!important;padding:0 7px!important;margin-left:auto!important;border-radius:7px!important;color:#26343d!important;background:rgba(255,255,255,.5)!important;border:1px solid rgba(52,68,78,.16)!important;box-shadow:inset 0 1px rgba(255,255,255,.72)!important;opacity:1!important}
+html body .content.shifted .topbar{grid-template-columns:132px minmax(255px,.72fr) minmax(390px,1fr) 200px 48px!important;column-gap:14px!important}html body .content.shifted .search-box{width:100%!important;max-width:315px!important;margin-left:0!important}
+html body .hero-actions{gap:12px!important;margin-top:12px!important}html body .hero-actions>.primary-btn,html body .hero-actions>.secondary-btn{height:52px!important;border-radius:26px!important;padding:0!important;font-size:14px!important;font-weight:300!important;letter-spacing:-.006em!important;min-width:0!important;display:grid!important;grid-template-columns:18px auto!important;place-content:center!important;align-items:center!important;justify-items:center!important;column-gap:10px!important;text-align:center!important}html body .hero-actions>.primary-btn{width:190px!important;min-width:190px!important}html body .hero-actions>.secondary-btn{width:150px!important;min-width:150px!important;background:rgba(255,255,255,.22)!important;border:1px solid rgba(255,255,255,.62)!important;color:#0b0d0f!important;backdrop-filter:blur(22px) saturate(125%)!important;-webkit-backdrop-filter:blur(22px) saturate(125%)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 8px 24px rgba(62,79,91,.12)!important}html body .secondary-btn:hover{background:rgba(255,255,255,.3)!important}html body .hero-actions>.primary-btn svg,html body .hero-actions>.secondary-btn svg{width:18px!important;height:18px!important;stroke-width:1.35!important;margin:0!important;position:static!important;transform:none!important}
+html body .hero-copy .progress,html body .info-card .card-progress{border-radius:999px;overflow:hidden;background:rgba(118,137,151,.28);box-shadow:inset 0 1px 2px rgba(86,105,119,.12),0 1px 0 rgba(255,255,255,.28)}html body .hero-copy .progress{width:460px;height:11px;margin-top:10px}html body .info-card .card-progress{height:8px}html body .hero-copy .progress i,html body .info-card .card-progress i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.96),#fff)!important;box-shadow:0 0 5px rgba(255,255,255,.9),0 0 13px rgba(255,255,255,.7)!important}html body .hero-copy .ticks{width:460px;height:12px;margin-top:7px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.92) 0 1px,transparent 1px 44px);background-size:auto 6px;background-repeat:repeat-x;background-position:left top;opacity:.72;mask:none;-webkit-mask:none}.card-dot,.feature-dot{display:none!important}.menu-top{display:none!important}
+html body .topbar{grid-template-columns:132px minmax(390px,1.15fr) minmax(430px,1fr) 220px 48px!important;column-gap:22px!important;align-items:center!important;height:42px!important}html body .zyvo-brand{display:flex;align-items:center;gap:9px;align-self:center;transform:none!important;height:38px;white-space:nowrap}html body .zyvo-mark{width:32px;height:32px;border-radius:8px;background:#050607;color:#fff;display:grid;place-items:center;font-size:27px;line-height:1;font-weight:620;letter-spacing:-.09em;overflow:hidden;padding:0;text-indent:-1px}html body .zyvo-word{font-size:14px;line-height:1;font-weight:520;letter-spacing:.12em;color:#0b0d0f}html body .topnav{align-self:center!important;padding-top:0!important}html body .next-meeting{align-self:center!important}.notification-wrap{position:relative;display:flex;justify-content:flex-end;align-self:center;z-index:30}.notification-button{width:42px;height:42px;border:1px solid rgba(255,255,255,.72);border-radius:50%;background:rgba(255,255,255,.38);backdrop-filter:blur(18px);display:grid;place-items:center;color:#182027;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.7),0 8px 24px rgba(74,92,104,.12);transition:.2s ease}.notification-button:hover,.notification-button.active{background:rgba(255,255,255,.72);transform:translateY(-1px)}.notification-button svg{width:19px;height:19px;stroke-width:1.35}.notification-panel{position:absolute;right:0;top:52px;width:320px;padding:16px;border:1px solid rgba(255,255,255,.76);border-radius:20px;background:rgba(239,244,247,.86);backdrop-filter:blur(26px);box-shadow:0 18px 55px rgba(62,79,91,.18),inset 0 1px rgba(255,255,255,.75);color:#121719;animation:notificationIn .18s ease}.notification-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 12px;border-bottom:1px solid rgba(91,108,119,.12)}.notification-head strong{font-size:15px;font-weight:430}.notification-head span{font-size:11px;color:#77838b;font-weight:300}.notification-item{display:flex;gap:11px;align-items:flex-start;padding:13px 4px 8px}.notification-item+.notification-item{border-top:1px solid rgba(91,108,119,.1)}.notification-item strong{font-size:13px;font-weight:400}.notification-item p{margin:3px 0 0;font-size:12px;line-height:1.35;color:#69757d;font-weight:300}.notification-mark{width:7px;height:7px;border-radius:50%;background:#0f171c;margin-top:5px;flex:0 0 auto}.notification-mark.muted{background:#9aa6ad}@keyframes notificationIn{from{opacity:0;transform:translateY(-5px) scale(.985)}to{opacity:1;transform:none}}@media(max-width:1450px){html body .search-box{height:36px!important;min-height:36px!important;transform:translateY(-7px)!important;padding:0 11px!important}html body .hero-copy .progress,html body .hero-copy .ticks{width:420px}html body .topbar{height:40px!important;grid-template-columns:118px minmax(320px,1.05fr) minmax(340px,1fr) 190px 44px!important;column-gap:16px!important}html body .content.shifted .topbar{grid-template-columns:118px minmax(220px,.68fr) minmax(300px,1fr) 170px 44px!important;column-gap:12px!important}html body .content.shifted .search-box{max-width:270px!important}html body .zyvo-brand{gap:8px;height:36px;transform:none!important}html body .zyvo-mark{width:29px;height:29px;font-size:24px}html body .zyvo-word{font-size:13px}.notification-button{width:40px;height:40px}}
+
+/* Performance pass: preserve the exact collapsed geometry and move the content on the compositor instead of animating layout. */
+html body .content{transition:transform .24s cubic-bezier(.22,.8,.22,1)!important;will-change:transform;transform:translate3d(0,0,0);contain:layout paint style}
+html body .content.shifted{padding-left:9.6vw!important;transform:translate3d(8.4vw,0,0)}
+html body .content.shifted .topbar{grid-template-columns:132px minmax(390px,1.15fr) minmax(430px,1fr) 220px 48px!important;column-gap:22px!important}
+html body .content.shifted .search-box{width:auto!important;max-width:none!important;margin-left:10px!important}
+html body .sidebar{transition:width .24s cubic-bezier(.22,.8,.22,1),background-color .18s ease,border-color .18s ease!important;will-change:width;contain:layout paint}
+html body .side-item,html body .sidebar-toggle,html body .avatar-meta{transition:opacity .16s ease,transform .16s ease,background-color .16s ease!important}
+html body .sidebar.expanded .avatar-meta,html body .sidebar.expanded .side-item span{animation:sidebarTextIn .16s ease both}
+@keyframes sidebarTextIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+@media(max-width:1450px){html body .content.shifted{padding-left:10.5vw!important;transform:translate3d(8.5vw,0,0)}html body .content.shifted .topbar{grid-template-columns:118px minmax(320px,1.05fr) minmax(340px,1fr) 190px 44px!important;column-gap:16px!important}html body .content.shifted .search-box{max-width:none!important;margin-left:10px!important}}
+@media(prefers-reduced-motion:reduce){html body .content,html body .sidebar,html body .side-item,html body .sidebar-toggle,html body .avatar-meta{transition:none!important;animation:none!important}}
+
+
+/* =========================================================
+   HOME HERO — HUMAN PRO DARK LANGUAGE
+   Keeps structure/content; changes only visual palette/contrast.
+   ========================================================= */
+html body .app-shell{
+  color:#e8f0f5!important;
+  background:
+    radial-gradient(ellipse 62% 46% at 49% 41%,rgba(25,43,55,.50),transparent 72%),
+    radial-gradient(ellipse 42% 38% at 7% 3%,rgba(48,68,81,.33),transparent 76%),
+    radial-gradient(ellipse 37% 34% at 90% 64%,rgba(19,42,57,.34),transparent 75%),
+    linear-gradient(132deg,#060d12 0%,#02070b 52%,#061017 100%)!important;
+}
+html body .app-shell:after{
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.24),transparent 24%,transparent 76%,rgba(0,0,0,.26)),
+    radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.34) 100%)!important;
+}
+html body .hero-media{
+  opacity:.10!important;
+  filter:saturate(.65) contrast(1.05) brightness(.50)!important;
+}
+
+/* Hero typography: every formerly dark element becomes white/silver */
+html body .hero-greeting,
+html body .hero-greeting strong,
+html body .eyebrow,
+html body .hero-copy h1,
+html body .hero-copy h1 span,
+html body .hero-copy .hero-refined-headline,
+html body .hero-copy .hero-refined-headline span{
+  color:#edf2f4!important;
+  -webkit-text-fill-color:#edf2f4!important;
+}
+html body .hero-dynamic-word{
+  color:#d9e1e5!important;
+  -webkit-text-fill-color:#d9e1e5!important;
+}
+html body .hero-greeting{color:#aebbc2!important}
+html body .hero-greeting strong{color:#f4f6f7!important}
+html body .eyebrow{color:#9eabb2!important}
+html body .rating-line,
+html body .rating-line span,
+html body .hero-score{color:#aeb9bf!important}
+html body .hero-score b{color:#f2f5f6!important}
+html body .stars{color:#dce2e5!important}
+
+/* Progress becomes liquid silver on charcoal */
+html body .hero-copy .progress{
+  background:rgba(183,197,205,.16)!important;
+  border:1px solid rgba(221,230,235,.10)!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.38)!important;
+}
+html body .hero-copy .progress i{
+  background:linear-gradient(90deg,#747e84 0%,#f3f6f7 48%,#aeb8bd 100%)!important;
+  box-shadow:0 0 8px rgba(232,240,244,.38)!important;
+}
+html body .hero-copy .ticks{
+  background:repeating-linear-gradient(90deg,rgba(220,229,233,.58) 0 1px,transparent 1px 44px)!important;
+}
+
+/* Buttons */
+html body .hero-actions>.primary-btn{
+  background:linear-gradient(180deg,#f4f6f6,#cfd5d8)!important;
+  color:#080b0d!important;
+  border:1px solid rgba(255,255,255,.65)!important;
+  box-shadow:0 10px 30px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.8)!important;
+}
+html body .hero-actions>.primary-btn svg{
+  color:#080b0d!important;stroke:#080b0d!important;
+}
+html body .hero-actions>.secondary-btn{
+  background:linear-gradient(145deg,rgba(30,43,52,.72),rgba(9,16,21,.76))!important;
+  color:#eef3f5!important;
+  border:1px solid rgba(194,215,226,.24)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07),0 12px 30px rgba(0,0,0,.26)!important;
+}
+html body .hero-actions>.secondary-btn svg{
+  color:#eef3f5!important;stroke:#eef3f5!important;
+}
+
+/* Hero feature card */
+html body .feature-card{
+  border-color:rgba(189,220,238,.28)!important;
+  background:linear-gradient(145deg,rgba(17,29,38,.66),rgba(3,10,15,.78))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07),0 24px 70px rgba(0,0,0,.42),0 0 25px rgba(167,218,244,.06)!important;
+}
+html body .feature-text{color:#edf3f5!important}
+html body .feature-arrows button{
+  background:rgba(167,190,203,.10)!important;
+  border:1px solid rgba(203,220,229,.15)!important;
+  color:#e8eef1!important;
+}
+html body .feature-arrows button svg{stroke:#e8eef1!important}
+html body .slider-dashes i{background:#4d5960!important}
+html body .slider-dashes i.on{background:#dce4e8!important}
+
+/* Topbar is inside the dark Home background, so invert its old light-page colors too */
+html body .topnav a{color:#9faab0!important}
+html body .topnav .current{color:#f0f3f4!important}
+html body .topnav .current:after{background:#e6ecef!important;box-shadow:0 0 10px rgba(230,236,239,.32)!important}
+html body .next-meeting{border-left-color:rgba(204,218,226,.16)!important}
+html body .next-meeting span{color:#89969d!important}
+html body .next-meeting strong{color:#e9edef!important}
+html body .zyvo-word{color:#e8edef!important}
+html body .zyvo-mark{background:#e6eaec!important;color:#080b0d!important}
+html body .search-box{
+  background:rgba(13,22,28,.58)!important;
+  border-color:rgba(195,214,224,.18)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.045)!important;
+}
+html body .search-box svg{color:#c8d1d6!important;stroke:#c8d1d6!important}
+html body .search-box span{color:#9ba8af!important}
+html body .search-box kbd{
+  color:#cbd4d8!important;
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(207,220,227,.12)!important;
+  box-shadow:none!important;
+}
+html body .notification-button{
+  color:#dce4e8!important;
+  background:rgba(16,27,34,.58)!important;
+  border-color:rgba(199,216,225,.17)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.05),0 8px 24px rgba(0,0,0,.22)!important;
+}
+
+/* NOZA — restaura interação do menu superior da Home */
+html body .content{
+  position:relative!important;
+  z-index:100!important;
+}
+html body .topbar,
+html body .app-topbar{
+  position:relative!important;
+  z-index:500!important;
+  pointer-events:auto!important;
+}
+html body .topnav{
+  position:relative!important;
+  z-index:501!important;
+  pointer-events:auto!important;
+  display:flex!important;
+  visibility:visible!important;
+}
+html body .topnav a{
+  position:relative!important;
+  z-index:502!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  text-decoration:none!important;
+}

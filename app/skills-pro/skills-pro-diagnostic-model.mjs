@@ -1,0 +1,1 @@
+export function createCentralDiagnostic(){return {stated:'Preço',realRisk:'Segurança da implantação',explanation:'A objeção não era preço: o cliente precisava sentir que a equipe conseguiria adotar a solução sem perder ritmo.'};}

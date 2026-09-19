@@ -1,0 +1,102 @@
+.contacts-page{
+  background:
+    linear-gradient(104deg,transparent 0 48%,rgba(255,255,255,.76) 48.5% 56%,transparent 57%),
+    linear-gradient(104deg,transparent 0 64%,rgba(255,255,255,.7) 64.5% 72%,transparent 73%),
+    linear-gradient(104deg,transparent 0 79%,rgba(255,255,255,.64) 79.5% 88%,transparent 89%),
+    radial-gradient(ellipse at 18% 8%,rgba(255,255,255,.98) 0 10%,rgba(245,249,253,.86) 24%,transparent 50%),
+    linear-gradient(135deg,#f5f9fc 0%,#e9f1f8 38%,#dce8f2 68%,#edf3f8 100%) !important;
+  position:relative;
+  overflow:hidden;
+}
+.contacts-page:before{
+  content:"";
+  position:absolute;
+  inset:-7%;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(13deg,transparent 0 18%,rgba(188,207,224,.18) 19% 22%,rgba(255,255,255,.72) 23% 31%,transparent 32%),
+    linear-gradient(102deg,transparent 0 53%,rgba(183,203,220,.22) 54% 57%,rgba(255,255,255,.58) 58% 66%,transparent 67%);
+  filter:blur(16px);
+  opacity:.9;
+}
+.contacts-page:after{
+  content:"";
+  position:absolute;
+  right:-2%;
+  bottom:-4%;
+  width:18%;
+  height:52%;
+  pointer-events:none;
+  z-index:0;
+  background:radial-gradient(ellipse at 70% 70%,rgba(58,91,76,.18),rgba(95,125,108,.08) 30%,transparent 67%);
+  filter:blur(22px);
+  opacity:.62;
+}
+.contacts-content{position:relative;z-index:1}
+.contacts-page>aside{position:relative;z-index:20}
+.contacts-page>header.app-topbar{
+  position:fixed!important;
+  z-index:9999!important;
+  pointer-events:auto!important;
+  isolation:isolate;
+}
+.contacts-page>header.app-topbar a,
+.contacts-page>header.app-topbar button,
+.contacts-page>header.app-topbar .topnav,
+.contacts-page>header.app-topbar .next-meeting,
+.contacts-page>header.app-topbar .notification-wrap{
+  pointer-events:auto!important;
+}
+.contacts-page>header.app-topbar .search-box{
+  width:420px!important;
+  max-width:420px!important;
+  min-width:0!important;
+  height:48px!important;
+  margin-top:0!important;
+  padding:0 14px 0 18px!important;
+  gap:11px!important;
+  border-radius:26px!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  flex:none!important;
+}
+.contacts-page>header.app-topbar .search-box>svg{width:21px!important;height:21px!important;stroke-width:1.7!important;flex:0 0 auto!important}
+.contacts-page>header.app-topbar .search-box span{font-size:12.5px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.contacts-page>header.app-topbar .search-box kbd{font-size:12px!important;padding:6px 10px!important;border-radius:12px!important;flex:0 0 auto!important}
+.contacts-page>header.app-topbar .topnav{
+  position:relative!important;
+  z-index:10001!important;
+  pointer-events:auto!important;
+}
+.contacts-page>header.app-topbar .topnav a{
+  position:relative!important;
+  z-index:10002!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+}
+.contact-card{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.favorite-toggle{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:25px;
+  height:25px;
+  border:0;
+  border-radius:50%;
+  padding:0;
+  display:grid;
+  place-items:center;
+  color:#6f7f90;
+  background:rgba(255,255,255,.48);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  cursor:pointer;
+  z-index:3;
+  transition:transform .18s ease,color .18s ease,background .18s ease;
+}
+.favorite-toggle:hover{transform:scale(1.08);background:rgba(255,255,255,.72)}
+.favorite-toggle svg{width:13px;height:13px;stroke-width:1.45}
+.favorite-toggle.is-favorite{color:#182333;background:rgba(255,255,255,.8)}
+.favorite-toggle.is-favorite svg{fill:currentColor}
+.pill{cursor:pointer}

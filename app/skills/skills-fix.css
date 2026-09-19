@@ -1,0 +1,231 @@
+.skills-page .skills-site-topbar{position:relative!important;z-index:30!important}.skills-page .skills-stage{position:relative!important;z-index:2!important;padding-top:14px!important}.skills-page .skills-top-grid{align-items:stretch!important}.skills-page .skills-photo-card{position:relative!important;z-index:1!important;margin-top:0!important;transform:none!important;max-height:100%!important;isolation:isolate;overflow:hidden!important}.skills-page .skills-photo-card img{position:absolute!important;left:0!important;top:-53px!important;width:100%!important;height:calc(100% + 53px)!important;object-fit:cover!important;object-position:center 28%!important;display:block!important;z-index:0!important;filter:none!important}.skills-page .skills-photo-glass{z-index:1!important;opacity:.18!important}.skills-page .search-box,.skills-page .topnav,.skills-page .next-meeting,.skills-page .notification-wrap,.skills-page .zyvo-brand{position:relative!important;z-index:31!important}
+
+/* Full meeting analysis — supplied NOZA background */
+.skills-site-content:has(.full-analysis){background-image:none!important;background:transparent!important}
+.full-analysis{background:transparent!important;color:#0b1a31!important}
+.full-analysis:before{content:none!important}
+.full-analysis>*{z-index:1}
+.analysis-heading h1{color:#07162d!important;font-weight:300!important;letter-spacing:-.052em!important}.analysis-heading span{color:#526b82!important;letter-spacing:.14em!important}.analysis-heading p{color:#60788f!important}
+.analysis-panel{background:linear-gradient(145deg,rgba(235,245,252,.42),rgba(194,215,231,.25))!important;border:1px solid rgba(255,255,255,.78)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 16px 42px rgba(61,91,116,.07)!important;backdrop-filter:blur(28px) saturate(120%)!important;-webkit-backdrop-filter:blur(28px) saturate(120%)!important}
+.analysis-video{border:1px solid rgba(255,255,255,.82)!important;box-shadow:inset 0 1px rgba(255,255,255,.55),0 18px 45px rgba(43,71,94,.11)!important}.analysis-video-image{filter:saturate(.72) contrast(.96)!important}.analysis-video>button{background:rgba(33,48,67,.52)!important;backdrop-filter:blur(10px)!important;box-shadow:0 6px 20px rgba(12,29,47,.16)!important}
+.analysis-meeting h2,.analysis-insights h3{color:#0b1a31!important}.analysis-date,.analysis-meeting>p,.analysis-people{color:#627c94!important}
+.analysis-score-ring{position:relative!important;background:conic-gradient(from -90deg,#ffffff 0 82%,rgba(236,247,255,.42) 82% 100%)!important;box-shadow:0 0 18px rgba(255,255,255,.95),0 0 42px rgba(214,239,255,.72),0 22px 55px rgba(55,86,110,.12)!important}
+.analysis-score-ring:before,.analysis-score-ring:after{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:10px!important;height:10px!important;margin:-5px 0 0 -5px!important;border-radius:50%!important;background:#fff!important;pointer-events:none!important;z-index:3!important;box-shadow:0 0 10px rgba(255,255,255,.98),0 0 18px rgba(215,240,255,.9)!important}
+.analysis-score-ring:before{transform:rotate(-90deg) translateX(150px)!important}.analysis-score-ring:after{transform:rotate(205.2deg) translateX(150px)!important}.analysis-score-ring em{color:#168255!important}.analysis-score-tabs span{background:linear-gradient(145deg,rgba(196,216,231,.9),rgba(166,194,216,.72))!important;border:1px solid rgba(255,255,255,.72)!important;box-shadow:inset 0 1px rgba(255,255,255,.6)!important}
+.analysis-metric{background:linear-gradient(145deg,rgba(237,246,252,.52),rgba(196,216,232,.31))!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:inset 0 1px rgba(255,255,255,.65),0 10px 24px rgba(52,82,106,.055)!important;backdrop-filter:blur(24px)!important}.analysis-metric:hover{transform:translateY(-3px)!important;box-shadow:inset 0 1px rgba(255,255,255,.75),0 15px 30px rgba(47,77,101,.1)!important}.analysis-mini-ring{background:conic-gradient(#355674 var(--score),rgba(222,235,244,.72) 0)!important;box-shadow:0 0 14px rgba(255,255,255,.62)!important}.analysis-mini-ring:before{background:linear-gradient(145deg,#eef6fb,#d9e8f2)!important}.analysis-metric h3{color:#0b1a31!important}.analysis-metric p{color:#61798f!important}.analysis-bar{background:rgba(255,255,255,.88)!important;box-shadow:0 0 8px rgba(255,255,255,.7)!important;overflow:hidden}.analysis-bar i{background:linear-gradient(90deg,#244562 0%,#7895ab 66%,#fff 100%)!important;box-shadow:0 0 8px rgba(255,255,255,.9)!important;transform-origin:left center;animation:analysisBarLoad 1.35s cubic-bezier(.22,.78,.24,1) both}.analysis-metric:nth-child(2) .analysis-bar i{animation-delay:.08s}.analysis-metric:nth-child(3) .analysis-bar i{animation-delay:.16s}.analysis-metric:nth-child(4) .analysis-bar i{animation-delay:.24s}.analysis-metric:nth-child(5) .analysis-bar i{animation-delay:.32s}.analysis-metric:nth-child(6) .analysis-bar i{animation-delay:.40s}.analysis-metric:nth-child(7) .analysis-bar i{animation-delay:.48s}@keyframes analysisBarLoad{from{transform:scaleX(0);opacity:.35}to{transform:scaleX(1);opacity:1}}
+.analysis-insights>div{background:linear-gradient(145deg,rgba(239,247,252,.55),rgba(202,221,235,.32))!important;border:1px solid rgba(255,255,255,.72)!important;box-shadow:inset 0 1px rgba(255,255,255,.56)!important}.analysis-insights>div b{background:rgba(209,240,224,.9)!important;color:#168258!important}.analysis-insights>div:nth-of-type(3) b{background:rgba(232,240,246,.86)!important;color:#34516b!important}.analysis-insights button{background:rgba(242,248,252,.7)!important;border:1px solid rgba(255,255,255,.84)!important;color:#0b1a31!important;box-shadow:inset 0 1px rgba(255,255,255,.8)!important}.analysis-insights button:hover{background:rgba(255,255,255,.84)!important}
+.analysis-stats article{background:linear-gradient(145deg,rgba(236,246,252,.42),rgba(194,216,232,.28))!important;border:1px solid rgba(255,255,255,.72)!important;backdrop-filter:blur(20px)!important;color:#102039!important}.analysis-stats article>svg,.analysis-stats .stat-clock{display:none!important}.analysis-focus-card{background:linear-gradient(145deg,rgba(239,247,252,.7),rgba(195,216,232,.42))!important}.analysis-focus-card:after{background:radial-gradient(circle,rgba(77,112,143,.18),transparent 68%)!important}
+.analysis-avatars i{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;box-shadow:0 2px 7px rgba(25,49,68,.12)}
+.analysis-avatars i:nth-child(1){background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=82')!important}.analysis-avatars i:nth-child(2){background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=82')!important}.analysis-avatars i:nth-child(3){background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=96&q=82')!important}.analysis-avatars i:nth-child(4){background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&q=82')!important}.analysis-avatars i:nth-child(5){background-image:url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&q=82')!important}
+@media(prefers-reduced-motion:reduce){.analysis-bar i{animation:none!important}}@media(max-width:1450px){.skills-page .skills-stage{padding-top:10px!important}.skills-page .skills-photo-card img{object-position:center 25%!important}}
+/* ANALISE_COMPLETA_ANEXO2_FINAL */
+.skills-site-content:has(.full-analysis){background-image:radial-gradient(ellipse at 12% 8%,rgba(119,126,131,.42),transparent 43%),radial-gradient(ellipse at 49% 58%,rgba(82,88,92,.24),transparent 39%),linear-gradient(118deg,#15191c 0%,#272c30 27%,#171b1e 52%,#090c0e 100%)!important;background-color:#111416!important}
+.full-analysis{background:transparent!important;color:#f5f5f5!important;overflow:hidden!important}.full-analysis:before{content:none!important}
+.analysis-panel{background:linear-gradient(145deg,rgba(54,59,62,.68),rgba(24,28,30,.82))!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px rgba(255,255,255,.04),0 12px 30px rgba(0,0,0,.16)!important;backdrop-filter:blur(20px)!important}
+.analysis-heading{left:4.1%!important;top:70px!important}.analysis-heading span{color:#aeb3b6!important;letter-spacing:.18em!important}.analysis-heading h1{color:#f3f4f4!important;font-size:42px!important;line-height:1.08!important;font-weight:300!important;letter-spacing:-.035em!important;margin:18px 0 19px!important}.analysis-heading p{color:#b8bdc0!important;font-size:13px!important;line-height:1.55!important}
+.analysis-video{left:35.1%!important;top:68px!important;width:30.7%!important;height:230px!important;border-radius:15px!important;border:1px solid rgba(255,255,255,.25)!important;box-shadow:0 12px 30px rgba(0,0,0,.18)!important}.analysis-video-image{filter:saturate(.64) contrast(.96)!important}.analysis-video>button{width:58px!important;height:58px!important;background:rgba(25,27,29,.70)!important;border:1px solid rgba(255,255,255,.75)!important}
+.analysis-score{left:3%!important;top:326px!important;width:29.5%!important;height:355px!important}.analysis-score-ring{width:315px!important;height:315px!important;padding:8px!important;background:conic-gradient(from -90deg,#fff 0 82%,rgba(255,255,255,.19) 82% 100%)!important;box-shadow:0 0 18px rgba(255,255,255,.45),0 0 44px rgba(255,255,255,.15)!important}.analysis-score-ring:before,.analysis-score-ring:after{display:none!important}.analysis-score-ring>div{width:299px!important;height:299px!important;background:radial-gradient(circle at 48% 43%,#292e31,#101315 75%)!important}.analysis-score-ring strong{color:#fff!important;font-size:70px!important;font-weight:300!important}.analysis-score-ring span,.analysis-score-ring b,.analysis-score-ring small{color:#d0d3d5!important}.analysis-score-ring em{color:#55df94!important}
+.analysis-metrics{left:33.4%!important;top:326px!important;width:34.5%!important;height:332px!important;grid-template-columns:repeat(4,1fr)!important;gap:12px!important}.analysis-metric{min-height:151px!important;border-radius:13px!important;padding:16px!important;background:linear-gradient(145deg,rgba(52,57,60,.70),rgba(25,29,31,.83))!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:none!important;display:flex!important;flex-direction:column!important}.analysis-metric:hover{transform:none!important}.analysis-metric>svg{order:1!important;position:static!important;width:25px!important;height:25px!important;color:#f4f5f5!important;margin:0 0 20px!important}.analysis-mini-ring{order:2!important;width:auto!important;height:auto!important;display:block!important;background:none!important;box-shadow:none!important}.analysis-mini-ring:before{display:none!important}.analysis-mini-ring strong{font-size:27px!important;font-weight:350!important;color:#fff!important}.analysis-metric h3{order:3!important;color:#fff!important;font-size:11px!important;margin:6px 0 0!important}.analysis-metric p{display:none!important}.analysis-bar{order:4!important;position:absolute!important;left:16px!important;right:16px!important;bottom:16px!important;height:4px!important;background:rgba(255,255,255,.14)!important;box-shadow:none!important}.analysis-bar i{background:#f2f3f3!important;box-shadow:none!important}
+.analysis-meeting{right:2.7%!important;top:68px!important;width:27.7%!important;height:213px!important;border-radius:17px!important;padding:21px!important;background:linear-gradient(145deg,rgba(54,59,62,.73),rgba(29,33,35,.84))!important}.analysis-date{color:#c4c8ca!important;font-size:10px!important}.analysis-meeting h2{color:#fff!important;font-size:19px!important;font-weight:400!important;margin:25px 0 10px!important}.analysis-meeting>p{color:#c1c5c7!important}.analysis-people{margin-top:22px!important;color:#c6c9cb!important}.analysis-avatars img{width:25px!important;height:25px!important;border:1px solid #373c3f!important}.analysis-avatars b{background:#3b4043!important;color:#fff!important}
+.analysis-insights{right:2.7%!important;top:301px!important;width:27.7%!important;height:435px!important;border-radius:18px!important;padding:20px!important;background:linear-gradient(145deg,rgba(42,47,50,.83),rgba(17,20,22,.91))!important}.analysis-insights h3{color:#fff!important;font-size:14px!important;margin:0 0 16px!important}.analysis-insights>div{height:67px!important;margin:7px 0!important;padding:10px 12px!important;border-radius:12px!important;background:linear-gradient(145deg,rgba(67,72,75,.64),rgba(38,42,45,.70))!important;border:1px solid rgba(255,255,255,.07)!important;box-shadow:none!important}.analysis-insights>div>b{width:31px!important;height:31px!important;background:#347a5a!important;color:#e1f8eb!important}.analysis-insights>div:nth-of-type(2)>b,.analysis-insights>div:nth-of-type(3)>b{background:#4b5053!important;color:#fff!important}.analysis-insights p strong{color:#f4f5f5!important}.analysis-insights p span{color:#b5b9bc!important}.analysis-insights>button{height:50px!important;margin-top:10px!important;border-radius:11px!important;background:linear-gradient(145deg,#404548,#292d2f)!important;color:#fff!important;border:1px solid rgba(255,255,255,.12)!important}
+.analysis-stats,.analysis-status-row,.analysis-evolution,.analysis-result-grid{display:none!important}
+
+/* FIX_FINAL_CARD_BARRAS_SKILLS */
+
+/* ANÁLISE COMPLETA — card direito exatamente alinhado ao vídeo */
+.full-analysis .analysis-video{
+  top:68px!important;
+  height:230px!important;
+  bottom:auto!important;
+}
+.full-analysis .analysis-meeting{
+  top:68px!important;
+  bottom:auto!important;
+  height:230px!important;
+  min-height:230px!important;
+  max-height:230px!important;
+  padding:20px 21px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+.full-analysis .analysis-meeting .analysis-date{
+  position:static!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:18px!important;
+  line-height:18px!important;
+  transform:none!important;
+}
+.full-analysis .analysis-meeting h2{
+  margin:22px 0 9px!important;
+  line-height:1.2!important;
+}
+.full-analysis .analysis-meeting>p{
+  margin:0!important;
+  line-height:1.35!important;
+}
+.full-analysis .analysis-meeting .analysis-people{
+  margin-top:20px!important;
+  min-height:30px!important;
+  overflow:visible!important;
+}
+.full-analysis .analysis-insights{
+  top:316px!important;
+  bottom:auto!important;
+  height:412px!important;
+  min-height:412px!important;
+  max-height:412px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+
+/* SKILLS — barras prata líquida, sem névoa */
+.skills-page .analysis-bar,
+.skills-page [class*="progress"],
+.skills-page [class*="skill-bar"],
+.skills-page [class*="metric-bar"]{
+  filter:none!important;
+  box-shadow:none!important;
+}
+.skills-page .analysis-bar{
+  overflow:hidden!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+}
+.skills-page .analysis-bar i{
+  position:relative!important;
+  display:block!important;
+  height:100%!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,#555b60 0%,#9da3a7 20%,#f8f8f8 48%,#a7adb1 72%,#5e6468 100%)!important;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.75),0 0 5px rgba(255,255,255,.16)!important;
+  filter:none!important;
+  transform-origin:left center!important;
+  animation:nozaLiquidFill .95s cubic-bezier(.22,.8,.25,1) both!important;
+}
+.skills-page .analysis-bar i:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  background:linear-gradient(100deg,transparent 15%,rgba(255,255,255,.55) 45%,transparent 72%)!important;
+  opacity:.75!important;
+  animation:nozaSilverSweep 1.7s ease-in-out .35s both!important;
+}
+@keyframes nozaLiquidFill{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+@keyframes nozaSilverSweep{
+  from{transform:translateX(-115%)}
+  to{transform:translateX(115%)}
+}
+
+/* Barras da página principal Skills: anima qualquer preenchimento percentual existente */
+.skills-page:not(:has(.full-analysis)) [style*="width"]{
+  transform-origin:left center;
+}
+.skills-page:not(:has(.full-analysis)) .skill-progress-fill,
+.skills-page:not(:has(.full-analysis)) .progress-fill,
+.skills-page:not(:has(.full-analysis)) [class*="progress"] > i,
+.skills-page:not(:has(.full-analysis)) [class*="progress"] > span,
+.skills-page:not(:has(.full-analysis)) [class*="bar"] > i{
+  background:linear-gradient(90deg,#555b60 0%,#9da3a7 20%,#fafafa 48%,#a8aeb2 72%,#5e6468 100%)!important;
+  filter:none!important;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 0 4px rgba(255,255,255,.12)!important;
+  transform-origin:left center!important;
+  animation:nozaLiquidFill 1.05s cubic-bezier(.22,.8,.25,1) both!important;
+}
+
+/* AJUSTE_VELOCIDADE_E_EXPANSAO_COGNITIVA */
+
+/* Skills: carregamento prata líquida mais lento */
+.skills-page .analysis-bar i,
+.skills-page:not(:has(.full-analysis)) .skill-progress-fill,
+.skills-page:not(:has(.full-analysis)) .progress-fill,
+.skills-page:not(:has(.full-analysis)) [class*="progress"] > i,
+.skills-page:not(:has(.full-analysis)) [class*="progress"] > span,
+.skills-page:not(:has(.full-analysis)) [class*="bar"] > i{
+  animation-duration:2.8s!important;
+  animation-timing-function:cubic-bezier(.16,.72,.22,1)!important;
+}
+.skills-page .analysis-bar i:after{
+  animation-duration:3.2s!important;
+  animation-delay:.55s!important;
+}
+
+/* Card Expansão de performance cognitiva: desce sem alterar os demais */
+.skills-page:not(:has(.full-analysis)) .skills-cognitive-card,
+.skills-page:not(:has(.full-analysis)) [class*="cognitive"],
+.skills-page:not(:has(.full-analysis)) [class*="expansion"]{
+  transform:translateY(24px)!important;
+}
+
+/* fallback para o card identificado pelo bloco superior da Skills */
+.skills-page:not(:has(.full-analysis)) .skills-hero-card{
+  margin-top:24px!important;
+}
+
+/* SO_CARD_COGNITIVO — não altera nenhum outro elemento */
+.skills-page:not(:has(.full-analysis)) :is(article,section,div):has(.noza-cognitive-anchor){
+  overflow:visible!important;
+}
+
+/* O card que contém exatamente "Expansão de performance cognitiva" */
+.skills-page:not(:has(.full-analysis)) :is(article,section,div,button):has(.noza-cognitive-anchor){
+  top:0!important;
+}
+
+/* seleciona o ancestral visual imediato do título e alinha com o card de desempenho */
+.skills-page:not(:has(.full-analysis)) :is(article,section,div,button):has(> * .noza-cognitive-anchor){
+  position:relative!important;
+  margin-top:0!important;
+  transform:translateY(0)!important;
+}
+
+/* card central: mesma linha superior e inferior do card Seu desempenho */
+.skills-page:not(:has(.full-analysis)) .skills-main-grid > :has(.noza-cognitive-anchor),
+.skills-page:not(:has(.full-analysis)) .skills-hero-grid > :has(.noza-cognitive-anchor),
+.skills-page:not(:has(.full-analysis)) [class*="hero"] > :has(.noza-cognitive-anchor){
+  align-self:stretch!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+
+/* CARD_COGNITIVO_ALINHAMENTO_FINAL */
+/* Só o card central da imagem: desce para não ficar atrás da topbar
+   e mantém a base na mesma linha do card "Seu desempenho". */
+.skills-page:not(:has(.full-analysis)) :is(article,section,div,button):has(.noza-cognitive-anchor){
+  box-sizing:border-box!important;
+}
+.skills-page:not(:has(.full-analysis)) :is(article,section,div,button):has(> * .noza-cognitive-anchor){
+  position:relative!important;
+  top:16px!important;
+  height:calc(100% - 16px)!important;
+  max-height:calc(100% - 16px)!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+
+/* SKILLS_CARDS_INTERATIVOS */
+.skills-page:not(:has(.full-analysis)) .skills-metric,
+.skills-page:not(:has(.full-analysis)) .skill-card,
+.skills-page:not(:has(.full-analysis)) [class*="metric-card"]{
+  cursor:pointer!important;
+}
+.skills-page:not(:has(.full-analysis)) .skills-metric:active,
+.skills-page:not(:has(.full-analysis)) .skill-card:active,
+.skills-page:not(:has(.full-analysis)) [class*="metric-card"]:active{
+  transform:scale(.985)!important;
+}
+.skills-analysis-button{
+  display:none!important;
+}
