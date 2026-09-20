@@ -1,7 +1,6 @@
 import './globals.css';
 import './logo.css';
 import type { Metadata } from 'next';
-import FloatingAIChat from './FloatingAIChat';
 import GlobalFloatingTools from './GlobalFloatingTools';
 
 export const metadata: Metadata = {
@@ -15,7 +14,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         {children}
         <GlobalFloatingTools />
-        <FloatingAIChat />
       </body>
     </html>
   );
