@@ -162,3 +162,26 @@ html:has(.pricing-page),body:has(.pricing-page){background:#090a0b!important}
 body:has(.pricing-page){background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important;background-attachment:fixed!important}
 .pricing-page{background:transparent!important}
 .pricing-page:before{content:none!important;display:none!important}
+
+
+/* Pricing final parity with Home */
+html:has(.pricing-page),body:has(.pricing-page){
+  background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important;
+  background-attachment:fixed!important;
+}
+body:has(.pricing-page) .app-topbar.app-topbar-floating{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body:has(.pricing-page) .notification-button{
+  width:34px!important;height:34px!important;border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  background:rgba(255,255,255,.09)!important;
+  color:#eceeef!important;box-shadow:none!important;padding:0!important;
+  display:grid!important;place-items:center!important;
+}
+body:has(.pricing-page) .notification-button svg{width:15px!important;height:15px!important;stroke-width:1.25!important}
