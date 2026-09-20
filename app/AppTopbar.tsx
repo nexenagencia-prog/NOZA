@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {Bell,Search} from 'lucide-react';
+import {Bell} from 'lucide-react';
 import {usePathname,useRouter} from 'next/navigation';
 import {useEffect,useRef,useState} from 'react';
 import {BRAND_LOGO,BRAND_NAME} from './brand.mjs';
@@ -11,7 +11,6 @@ const nav=[['Início','/'],['Skills','/skills'],['Agenda','/agenda'],['Planos e 
 
 type AppTopbarProps={
   floating?:boolean;
-  searchPlaceholder?:string;
   nextLabel?:string;
   nextDateTime?:string;
   performancePercent?:number;
@@ -19,7 +18,6 @@ type AppTopbarProps={
 
 export default function AppTopbar({
   floating=false,
-  searchPlaceholder='Buscar reunião, pessoa ou gravação...',
   nextLabel='Sua próxima Reunião',
   nextDateTime='14:00 — 30 Set 2026',
   performancePercent=69
@@ -44,7 +42,6 @@ export default function AppTopbar({
 
   return <header className={`topbar app-topbar ${floating?'app-topbar-floating':''}`}>
     <Link href="/" prefetch className="zyvo-brand" aria-label={BRAND_NAME}><img src={BRAND_LOGO} alt="" aria-hidden="true"/></Link>
-    <div className="search-box"><Search size={27}/><span>{searchPlaceholder}</span><kbd>⌘ K</kbd></div>
     <nav className="topnav">{nav.map(([label,href])=><Link href={href} prefetch className={pathname===href?'current':''} key={href}>{label}</Link>)}</nav>
     <div className="next-meeting"><span>{nextLabel}</span><strong>{nextDateTime}</strong></div>
     <div className="notification-wrap">
