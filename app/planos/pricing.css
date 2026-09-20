@@ -218,7 +218,7 @@ html body:has(.pricing-page) main.pricing-page{
 }
 html body:has(.pricing-page) .pricing-shell{
   padding-top:0!important;
-  transform:none!important;
+  transform:translateY(-60px)!important;
   margin:auto!important;
 }
 html body:has(.pricing-page) .billing-toggle{
@@ -228,4 +228,5 @@ html body:has(.pricing-page) .billing-toggle{
 html body:has(.pricing-page) .pricing-grid{margin-top:0!important}
 @media (max-height:820px){
   html body:has(.pricing-page) main.pricing-page{align-items:flex-start!important;padding-top:92px!important}
+  html body:has(.pricing-page) .pricing-shell{transform:none!important}
 }
