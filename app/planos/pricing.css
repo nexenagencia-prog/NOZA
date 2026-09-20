@@ -156,4 +156,9 @@ html:has(.pricing-page),body:has(.pricing-page){background:#090a0b!important}
 .plan-note,.featured .plan-note{color:#6f7276!important;font:500 8px/1.4 monospace!important}
 .pricing-footnote{color:#73767a!important;font:500 9px monospace!important;letter-spacing:.02em!important}.pricing-footnote strong{color:#b9bbbd!important;font-weight:600!important}
  
-/* production-trigger-noza-2 */
+
+/* Pricing — exact Home background */
+html:has(.pricing-page),body:has(.pricing-page){background:#090a0b!important}
+body:has(.pricing-page){background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important;background-attachment:fixed!important}
+.pricing-page{background:transparent!important}
+.pricing-page:before{content:none!important;display:none!important}
