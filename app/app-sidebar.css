@@ -112,3 +112,9 @@
     background-position:0 50%!important;
   }
 }
+
+/* Instant pointer response */
+.side-item{transition:none!important;will-change:auto!important}
+.side-item:hover{transition:none!important}
+.side-item span,.side-item svg{transition:none!important}
+.sidebar:after{will-change:auto!important}
