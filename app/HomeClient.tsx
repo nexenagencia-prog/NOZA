@@ -18,7 +18,7 @@ export default function HomeClient({content}:{content:HomeContent}){
   const router=useRouter();
   const[expanded,setExpanded]=useState(false);
   const[slide,setSlide]=useState(0);
-  const[loaded,setLoaded]=useState(false);
+  const[loaded,setLoaded]=useState(false);\n  const[homeName,setHomeName]=useState(content.profile.name);
   const[calculatorOpen,setCalculatorOpen]=useState(false);
   const[notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
   const slides=useMemo(()=>{
@@ -33,7 +33,7 @@ export default function HomeClient({content}:{content:HomeContent}){
     const timer=setInterval(()=>setSlide(current=>(current+1)%slides.length),content.carouselIntervalMs||4000);
     return()=>clearInterval(timer);
   },[slides.length,content.carouselIntervalMs]);
-  useEffect(()=>setSlide(0),[slides]);
+  useEffect(()=>setSlide(0),[slides]);\n  useEffect(()=>{try{const saved=localStorage.getItem('noza-profile-name');if(saved)setHomeName(saved)}catch{};const sync=(e:any)=>setHomeName(e.detail||content.profile.name);window.addEventListener('noza:profile-name',sync);return()=>window.removeEventListener('noza:profile-name',sync)},[content.profile.name]);
 
   const go=(direction:number)=>setSlide(currentSlide=>slides.length?(currentSlide+direction+slides.length)%slides.length:0);
   const current=slides[slide];
@@ -56,7 +56,7 @@ export default function HomeClient({content}:{content:HomeContent}){
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>SUA EVOLUÇÃO</small><span>Quanto mais a NOZA conhece seus padrões, mais precisa se torna a direção do seu desenvolvimento.</span></div>
-          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><BrainCircuit size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">Mapeia como você pensa, interpreta, decide e reage sob pressão para criar um ponto de partida da sua evolução.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><BrainCircuit size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
