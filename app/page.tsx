@@ -11,7 +11,7 @@ const content: HomeContent = {
     ratingText: 'Evolução contínua, orientada pela sua própria performance.',
     performancePercent: 82,
     performanceLabel: 'performance',
-    primaryButton: 'Continuar evolução',
+    primaryButton: 'Continuar evolução', // production bundle
     secondaryButton: 'Falar com a NOZA.',
     imageUrl: ''
   },
