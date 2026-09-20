@@ -9,9 +9,3 @@ html body main.skills-page:has(.full-analysis) .full-analysis {
   background-color: #151718 !important;
   background-image: none !important;
 }
-
-/* App-wide rendering performance */
-@supports(content-visibility:auto){
-  .info-card,.full-analysis,.cal-result{content-visibility:auto;contain-intrinsic-size:1px 420px}
-}
-html{scroll-behavior:auto}
