@@ -2,6 +2,7 @@ const routes={
   'Início':'/',
   'Agenda':'/agenda',
   'Skills':'/skills',
+  'Calibragem':'/calibragem',
   'Contatos':'/contatos',
   'Gravações':'/gravacoes',
   'Skills Pro':'/skills-pro',
