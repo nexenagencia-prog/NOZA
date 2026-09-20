@@ -204,3 +204,9 @@ body:has(.pricing-page) .app-topbar:after{content:none!important;display:none!im
 /* reconnect-deploy-noza */
 
 /* vercel-nextjs-reconnect-check */
+
+
+/* Pricing vertical centering refinement */
+body:has(.pricing-page) .pricing-page{padding-top:122px!important}
+body:has(.pricing-page) .pricing-toggle{margin-top:14px!important;margin-bottom:30px!important}
+body:has(.pricing-page) .pricing-grid{margin-top:8px!important}
