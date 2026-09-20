@@ -156,3 +156,4 @@ html:has(.pricing-page),body:has(.pricing-page){background:#090a0b!important}
 .plan-note,.featured .plan-note{color:#6f7276!important;font:500 8px/1.4 monospace!important}
 .pricing-footnote{color:#73767a!important;font:500 9px monospace!important;letter-spacing:.02em!important}.pricing-footnote strong{color:#b9bbbd!important;font-weight:600!important}
  
+/* deploy-trigger */
