@@ -30,7 +30,7 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
     <div className="side-nav">
       {primary.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
       {extras.map(({label,Icon})=>label==='Human Pro'||label==='Skills Pro'||label==='Skills Full'?<Link className={`side-item ${active(label)?'active':''}`} href={resolveSidebarRoute(label)!} key={label}><Icon/><span>{label}</span></Link>:<button className={`side-item ${active(label)?'active':''}`} key={label} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
-      {final.map(({label,index,Icon})=><button className="side-item" key={`${label}-${index}`}><Icon/><span>{label}</span></button>)}
+      {final.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
     </div>
     
   </aside>
