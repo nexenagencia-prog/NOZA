@@ -278,3 +278,7 @@ html body .info-card .card-icon{
 html body .hero-greeting{font-size:20px!important;font-weight:400!important}
 html body .hero-greeting strong{font-weight:500!important}
 html body .hero-copy .eyebrow{font-size:9px!important;font-weight:400!important;letter-spacing:.13em!important}
+
+/* Home action buttons — compact single-line labels */
+html body .hero-actions>.secondary-btn{width:214px!important;min-width:214px!important;white-space:nowrap!important;padding:0 18px!important}
+html body .calibration-cta{white-space:nowrap!important}
