@@ -41,7 +41,7 @@ const moments=[
  {time:'18:27',title:'Janela de decisão',text:'Participante verbaliza intenção e prazo.',pos:'52% 46%'},
  {time:'21:08',title:'Interesse desperdiçado',text:'Explicação continuou após validação.',pos:'58% 42%'},
 ];
-const skillsArtwork='/skills-card.png';
+const skillsArtwork='/skills-card.png?v=noza-cognitive-silver-20260919';
 const participantPhotos=['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=85','https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=85','https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=80&q=85','https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=85','https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=80&q=85'];
 
 function AnalysisView({onBack,initialMetric}:{onBack:()=>void;initialMetric:MetricKey|null}){
