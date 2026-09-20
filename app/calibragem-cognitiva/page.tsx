@@ -106,3 +106,5 @@ export default function Calibragem(){
  </main></div>
 }
 /* cognitive-topics-deploy */
+
+/* force-cognitive-deploy */
