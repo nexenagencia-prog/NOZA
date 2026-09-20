@@ -185,3 +185,18 @@ body:has(.pricing-page) .notification-button{
   display:grid!important;place-items:center!important;
 }
 body:has(.pricing-page) .notification-button svg{width:15px!important;height:15px!important;stroke-width:1.25!important}
+
+
+/* Pricing top navigation — no dark strip behind menu */
+body:has(.pricing-page) .app-topbar,
+body:has(.pricing-page) .app-topbar.app-topbar-floating{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body:has(.pricing-page) .app-topbar:before,
+body:has(.pricing-page) .app-topbar:after{content:none!important;display:none!important;background:none!important}
