@@ -37,3 +37,14 @@ html,body{overflow-y:auto!important}.cal-shell{height:auto!important;min-height:
 .cal-intro h1 em{font:inherit!important;font-style:normal!important;letter-spacing:inherit!important}
 .cal-domains.cal-topic-grid button.selected{background:#f2f2ef!important;border-color:#f2f2ef!important;color:#111315!important}
 .cal-domains.cal-topic-grid button.selected b{color:#666a6e!important}
+
+/* Cognitive skills selector — compact above the fold */
+.cal-intro h1{font-size:clamp(34px,3.4vw,52px)!important;line-height:1!important;letter-spacing:-.045em!important;white-space:nowrap!important;margin-bottom:12px!important}
+.cal-intro>p{max-width:900px!important;font-size:13px!important;line-height:1.45!important;margin:0 0 14px!important}
+.cal-topic-intro{margin:8px 0 10px!important;max-width:900px!important}
+.cal-topic-intro p{margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.cal-domains.cal-topic-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:7px!important}
+.cal-domains.cal-topic-grid button{min-height:46px!important;padding:8px 10px!important}
+.cal-intro .cal-existing{margin:14px 0!important}
+.cal-intro .cal-start{margin-top:12px!important}
+@media(max-width:900px){.cal-intro h1,.cal-topic-intro p{white-space:normal!important}.cal-domains.cal-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
