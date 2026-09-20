@@ -228,3 +228,48 @@ html body .calibration-cta{padding:16px 22px!important;border-radius:8px!importa
 html body .calibration-tooltip{position:absolute;left:0;bottom:calc(100% + 12px);width:290px;padding:13px 15px;border:1px solid #303236;border-radius:10px;background:#111315;color:#a7aaad;font:500 11px/1.5 monospace;letter-spacing:.02em;opacity:0;visibility:hidden;transform:translateY(5px);transition:.18s;z-index:50;box-shadow:0 14px 38px rgba(0,0,0,.35);pointer-events:none}
 html body .calibration-tooltip:after{content:"";position:absolute;left:26px;top:100%;border:6px solid transparent;border-top-color:#303236}
 html body .calibration-cta-wrap:hover .calibration-tooltip,html body .calibration-cta-wrap:focus-within .calibration-tooltip{opacity:1;visibility:visible;transform:translateY(0)}
+
+/* Home proportion refinements */
+html body .hero-actions>.secondary-btn,
+html body .calibration-cta-wrap,
+html body .calibration-cta{
+  width:190px!important;
+  min-width:190px!important;
+  height:50px!important;
+  box-sizing:border-box!important;
+}
+html body .calibration-cta-wrap{display:inline-flex!important}
+html body .calibration-cta,
+html body .hero-actions>.secondary-btn{
+  align-items:center!important;
+  justify-content:center!important;
+  gap:9px!important;
+  padding:0 16px!important;
+}
+html body .hero-greeting{
+  font-size:17px!important;
+  line-height:1.35!important;
+}
+html body .cards-grid{
+  gap:14px!important;
+}
+html body .info-card{
+  min-height:190px!important;
+  padding:20px!important;
+}
+html body .info-card h2{
+  font-size:19px!important;
+  margin-top:14px!important;
+}
+html body .info-card p{
+  font-size:12px!important;
+  line-height:1.45!important;
+}
+html body .info-card .card-status{
+  margin-top:14px!important;
+  font-size:11px!important;
+}
+html body .info-card .card-icon{
+  width:18px!important;
+  height:18px!important;
+}
