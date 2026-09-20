@@ -202,3 +202,5 @@ body:has(.pricing-page) .app-topbar:before,
 body:has(.pricing-page) .app-topbar:after{content:none!important;display:none!important;background:none!important}
 
 /* reconnect-deploy-noza */
+
+/* vercel-nextjs-reconnect-check */
