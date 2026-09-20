@@ -230,3 +230,6 @@ html body:has(.pricing-page) .pricing-grid{margin-top:0!important}
   html body:has(.pricing-page) main.pricing-page{align-items:flex-start!important;padding-top:92px!important}
   html body:has(.pricing-page) .pricing-shell{transform:none!important}
 }
+
+/* Refined pricing plan titles */
+html body:has(.pricing-page) .price-card h2{font-weight:400!important;letter-spacing:-.025em!important}
