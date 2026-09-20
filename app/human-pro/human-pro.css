@@ -261,3 +261,14 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
 .human-message p{color:#b4b6b7!important}
 .human-chat.has-messages{border-color:rgba(255,255,255,.11)!important;background:rgba(9,10,11,.97)!important}
 .human-chat.has-messages .human-composer,.human-chat.has-messages .human-composer:focus-within{background:#0c0e0f!important;border-top-color:rgba(255,255,255,.08)!important}
+
+/* Final NOZA override: sent user bubble must never inherit legacy blue */
+.human-pro-page .human-message.user p,
+.human-pro-page .human-message.user .human-message-text,
+.human-pro-page [data-role="user"] p{
+ background:#292c2f!important;
+ background-image:linear-gradient(135deg,#34383b,#202326)!important;
+ border-color:rgba(232,234,235,.14)!important;
+ color:#f3f3f1!important;
+ box-shadow:none!important;
+}
