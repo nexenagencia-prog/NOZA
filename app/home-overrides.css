@@ -273,3 +273,8 @@ html body .info-card .card-icon{
   width:18px!important;
   height:18px!important;
 }
+
+/* Final home typography refinements */
+html body .hero-greeting{font-size:20px!important;font-weight:400!important}
+html body .hero-greeting strong{font-weight:500!important}
+html body .hero-copy .eyebrow{font-size:9px!important;font-weight:400!important;letter-spacing:.13em!important}
