@@ -1,6 +1,6 @@
 'use client';
 
-import {ArrowLeft,ArrowRight,BarChart3,Lightbulb,MessageCircle,TrendingUp} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BarChart3,BrainCircuit,Lightbulb,TrendingUp} from 'lucide-react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CSSProperties,useEffect,useMemo,useState} from 'react';
@@ -56,7 +56,7 @@ export default function HomeClient({content}:{content:HomeContent}){
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>SUA EVOLUÇÃO</small><span>Quanto mais a NOZA conhece seus padrões, mais precisa se torna a direção do seu desenvolvimento.</span></div>
-          <div className="hero-actions"><button className="primary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button><button className="secondary-btn" onClick={()=>router.push("/human-pro")}><MessageCircle size={20}/>Falar com a NOZA</button></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><BrainCircuit size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">Mapeia como você pensa, interpreta, decide e reage sob pressão para criar um ponto de partida da sua evolução.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
