@@ -11,6 +11,7 @@ const routes={
   'Human Pro':'/human-pro',
   'Space':'/space',
   'Anotações':'/anotacoes',
+  'Configurações':'/configuracoes',
 };
 
 export function resolveSidebarRoute(label){
