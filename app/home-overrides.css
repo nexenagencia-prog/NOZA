@@ -212,3 +212,19 @@ html body .hero-copy .hero-refined-headline{max-width:720px!important}
 html body .app-shell{background-image:radial-gradient(ellipse at 82% 42%,rgba(118,125,131,.28),transparent 48%),radial-gradient(ellipse at 100% 52%,rgba(151,158,164,.34),transparent 44%),linear-gradient(108deg,#050607 0%,#090b0d 27%,#171b1e 52%,#3c4247 76%,#666d73 100%)!important;background-color:#060708!important}
 html body .app-shell:after{background:linear-gradient(90deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.16) 35%,transparent 63%,rgba(255,255,255,.035) 100%)!important}
 html body .hero-actions>.secondary-btn{width:190px!important;min-width:190px!important;padding-right:6px!important}
+
+/* Home — visual language aligned to Cognitive Calibration without changing structure */
+html body .app-shell{background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important}
+html body .hero-copy .eyebrow,html body .performance-insight small{font-family:monospace!important;font-weight:600!important;letter-spacing:.16em!important;color:#8b8d90!important}
+html body .hero-copy .hero-refined-headline{font-weight:500!important;letter-spacing:-.055em!important;line-height:.98!important}
+html body .performance-insight span{color:#9b9b9b!important}
+html body .feature-card,html body .info-card,html body .card-one,html body .card-two,html body .card-three{background:rgba(255,255,255,.025)!important;border:1px solid #2b2d30!important;border-radius:12px!important;color:#f5f5f2!important;box-shadow:none!important}
+html body .info-card p{color:#8b8d90!important}html body .info-card .card-icon{color:#d9d9d6!important}html body .info-card .card-status{font-family:monospace!important;color:#b9bbbd!important;letter-spacing:.03em}
+html body .info-card .card-progress{height:3px!important;background:#292b2e!important;opacity:1!important}.info-card .card-progress i{background:linear-gradient(90deg,#666 0%,#f4f4f4 45%,#9b9b9b 72%,#fff 100%)!important;box-shadow:0 0 10px rgba(255,255,255,.14)!important}
+html body .hero-actions{align-items:center!important}
+html body .hero-actions>.secondary-btn{width:auto!important;min-width:190px!important;padding:16px 22px!important;background:rgba(255,255,255,.025)!important;border:1px solid #303236!important;color:#d8d8d6!important;box-shadow:none!important;border-radius:8px!important;font:700 11px monospace!important;letter-spacing:.08em!important}
+html body .calibration-cta-wrap{position:relative;display:inline-flex}
+html body .calibration-cta{padding:16px 22px!important;border-radius:8px!important;font:700 11px monospace!important;letter-spacing:.08em!important;background:#e8e8e4!important;color:#111!important;border:1px solid #d9d9d6!important;box-shadow:none!important}
+html body .calibration-tooltip{position:absolute;left:0;bottom:calc(100% + 12px);width:290px;padding:13px 15px;border:1px solid #303236;border-radius:10px;background:#111315;color:#a7aaad;font:500 11px/1.5 monospace;letter-spacing:.02em;opacity:0;visibility:hidden;transform:translateY(5px);transition:.18s;z-index:50;box-shadow:0 14px 38px rgba(0,0,0,.35);pointer-events:none}
+html body .calibration-tooltip:after{content:"";position:absolute;left:26px;top:100%;border:6px solid transparent;border-top-color:#303236}
+html body .calibration-cta-wrap:hover .calibration-tooltip,html body .calibration-cta-wrap:focus-within .calibration-tooltip{opacity:1;visibility:visible;transform:translateY(0)}
