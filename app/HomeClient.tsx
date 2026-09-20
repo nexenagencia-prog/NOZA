@@ -18,7 +18,8 @@ export default function HomeClient({content}:{content:HomeContent}){
   const router=useRouter();
   const[expanded,setExpanded]=useState(false);
   const[slide,setSlide]=useState(0);
-  const[loaded,setLoaded]=useState(false);\n  const[homeName,setHomeName]=useState(content.profile.name);
+  const[loaded,setLoaded]=useState(false);
+  const[homeName,setHomeName]=useState(content.profile.name);
   const[calculatorOpen,setCalculatorOpen]=useState(false);
   const[notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
   const slides=useMemo(()=>{
@@ -33,7 +34,8 @@ export default function HomeClient({content}:{content:HomeContent}){
     const timer=setInterval(()=>setSlide(current=>(current+1)%slides.length),content.carouselIntervalMs||4000);
     return()=>clearInterval(timer);
   },[slides.length,content.carouselIntervalMs]);
-  useEffect(()=>setSlide(0),[slides]);\n  useEffect(()=>{try{const saved=localStorage.getItem('noza-profile-name');if(saved)setHomeName(saved)}catch{};const sync=(e:any)=>setHomeName(e.detail||content.profile.name);window.addEventListener('noza:profile-name',sync);return()=>window.removeEventListener('noza:profile-name',sync)},[content.profile.name]);
+  useEffect(()=>setSlide(0),[slides]);
+  useEffect(()=>{try{const saved=localStorage.getItem('noza-profile-name');if(saved)setHomeName(saved)}catch{};const sync=(e:any)=>setHomeName(e.detail||content.profile.name);window.addEventListener('noza:profile-name',sync);return()=>window.removeEventListener('noza:profile-name',sync)},[content.profile.name]);
 
   const go=(direction:number)=>setSlide(currentSlide=>slides.length?(currentSlide+direction+slides.length)%slides.length:0);
   const current=slides[slide];
@@ -45,7 +47,7 @@ export default function HomeClient({content}:{content:HomeContent}){
   const visual=nozaCarousel[slide%nozaCarousel.length];
   const heroStyle=content.hero.imageUrl?{backgroundImage:`url(${content.hero.imageUrl})`}:undefined;
   const titleLines=content.hero.title.split('\n');
-  const firstName=content.profile.name.trim().split(/\s+/)[0]||'Sandro';
+  const firstName=homeName.trim().split(/\s+/)[0]||'Sandro';
   return <main className={`app-shell ${loaded?'loaded':''}`}>
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
