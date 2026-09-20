@@ -25,3 +25,42 @@
 @media(max-width:1180px){.space-page .space-content{padding-left:226px!important;padding-right:18px!important}.space-page .app-topbar{grid-template-columns:minmax(230px,1fr) minmax(300px,1fr) 44px!important}.space-page .app-topbar .next-meeting{display:none}.space-workspace{grid-template-columns:1fr 1.12fr;grid-template-rows:minmax(300px,1fr) 250px}.space-live-card{grid-row:1}.space-participants-panel{grid-row:1}.space-evolution{grid-column:1;grid-row:2}.space-agenda,.space-notes{grid-column:2;grid-row:2}.space-controls{left:226px;right:28px}.space-controls>button,.space-control-menu>button{min-width:58px}}
 @media(max-width:820px){.space-page{height:auto;min-height:100vh;overflow:auto}.space-page .space-content{height:auto!important;min-height:100vh;padding:18px 14px 105px 198px!important;overflow:visible}.space-page .app-topbar .topnav,.space-page .app-topbar .next-meeting{display:none}.space-page .app-topbar{grid-template-columns:1fr 44px!important}.space-page .app-topbar .search-box{display:flex!important}.space-workspace{height:auto;display:flex;flex-direction:column}.space-live-card{height:560px}.space-participants-panel{height:570px}.space-evolution{height:260px}.space-agenda,.space-notes{width:100%;min-height:240px}.space-controls{left:198px;right:14px;overflow-x:auto;justify-content:flex-start}.space-controls>button,.space-control-menu>button{min-width:62px}}
 @media(prefers-reduced-motion:reduce){.space-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* NOZA Home visual system — Space skin only, structure preserved */
+.space-page{background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important;color:#f5f5f2!important}
+.space-page .space-content{background:transparent!important}
+.space-page .space-glass,.space-page .space-live-card{background:rgba(255,255,255,.025)!important;border:1px solid #2b2d30!important;box-shadow:none!important;backdrop-filter:blur(18px)!important}
+.space-page .space-participants-panel,.space-page .space-evolution,.space-page .space-agenda,.space-page .space-notes{border-radius:12px!important}
+.space-page .space-participants-panel>header strong,.space-page .space-agenda header strong,.space-page .space-notes header strong{font-weight:500!important;color:#e8e8e4!important;letter-spacing:-.02em}
+.space-page .space-participants-panel>header span,.space-page .space-agenda header small,.space-page .space-notes header small{font-family:monospace!important;color:#7d8084!important;letter-spacing:.06em}
+.space-page .space-view-switch{background:rgba(255,255,255,.035)!important;border:1px solid #303236!important;border-radius:8px!important}
+.space-page .space-view-switch button{color:#8b8d90!important;border-radius:6px!important;font-family:monospace!important}
+.space-page .space-view-switch button.active{background:#e8e8e4!important;color:#111!important}
+.space-page .space-participant-card{border-radius:10px!important;background:#17191b!important;border:1px solid #2b2d30!important}
+.space-page .space-participant-card strong,.space-page .space-participant-stage-copy strong{font-weight:500!important}
+.space-page .space-participant-card>span.active{color:#e8e8e4!important}
+.space-page .space-evolution{background:#111315!important;color:#f5f5f2!important}
+.space-page .space-evolution:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.025),transparent 48%)}
+.space-page .space-evolution h1{font-size:30px!important;font-weight:500!important;letter-spacing:-.055em!important;color:#f5f5f2!important}
+.space-page .space-evolution p{color:#8b8d90!important}
+.space-page .space-evolution-copy>small{font-family:monospace!important;letter-spacing:.1em!important;color:#7d8084!important}
+.space-page .space-wave{background:repeating-radial-gradient(ellipse at 95% 50%,rgba(230,230,226,.62) 0 3px,rgba(112,114,117,.35) 4px 8px,rgba(24,26,28,.72) 9px 14px,transparent 15px 22px)!important;filter:none!important;opacity:.6!important}
+.space-page .space-evolution.blue .space-wave,.space-page .space-evolution.green .space-wave{filter:none!important}
+.space-page .space-slide-actions button,.space-page .space-previous-slide,.space-page .space-next-slide{background:rgba(255,255,255,.06)!important;border:1px solid #303236!important;color:#d8d8d6!important;border-radius:8px!important}
+.space-page .space-dots button{background:#3a3c3f!important}.space-page .space-dots button.active{background:#e8e8e4!important}
+.space-page .space-agenda-list>button{color:#b9bbbd!important;border-radius:8px!important}.space-page .space-agenda-list>button:hover,.space-page .space-note-list article:hover{background:rgba(255,255,255,.045)!important}
+.space-page .space-agenda-form input,.space-page .space-note-form input,.space-page .space-note-form textarea{background:rgba(255,255,255,.025)!important;border:1px solid #303236!important;color:#ddd!important}
+.space-page .space-agenda-form button,.space-page .space-note-form button{background:#e8e8e4!important;color:#111!important}
+.space-page .space-note-list strong{color:#c8c9c7!important}.space-page .space-note-list small{color:#74777b!important}
+.space-page .space-controls{border:1px solid #303236!important;border-radius:14px!important;background:rgba(17,19,21,.88)!important;box-shadow:0 18px 42px rgba(0,0,0,.24)!important;backdrop-filter:blur(28px)!important}
+.space-page .space-controls>button,.space-page .space-control-menu>button{color:#8b8d90!important;font-family:monospace!important;border-radius:9px!important}
+.space-page .space-controls button:hover,.space-page .space-controls button.active{background:rgba(255,255,255,.055)!important;color:#f1f1ee!important}
+.space-page .space-controls .space-leave{background:#e8e8e4!important;color:#111!important;box-shadow:none!important}
+.space-page .space-control-menu>div{border:1px solid #303236!important;border-radius:10px!important;background:#111315!important;box-shadow:0 13px 38px rgba(0,0,0,.3)!important}
+.space-page .space-control-menu>div button{color:#aaa!important}.space-page .space-control-menu>div button.active,.space-page .space-control-menu>div button:hover{background:rgba(255,255,255,.055)!important;color:#eee!important}
+.space-page .space-chat-list>div{background:rgba(17,19,21,.7)!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:10px!important}.space-page .space-chat-list>div.mine{background:#e8e8e4!important;color:#111!important}
+.space-page .space-chat-panel form{border:1px solid #303236!important;border-radius:9px!important;background:rgba(17,19,21,.8)!important}
+.space-page .space-chat-panel form button{background:#e8e8e4!important;color:#111!important}
+.space-page .space-reactions button{background:rgba(17,19,21,.62)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important}
+.space-page .space-toast,.space-page .space-dialog{background:#111315!important;border:1px solid #303236!important;color:#eee!important;border-radius:12px!important;box-shadow:0 20px 60px rgba(0,0,0,.35)!important}
+.space-page .space-dialog p{color:#8b8d90!important}.space-page .space-dialog>div button{background:rgba(255,255,255,.04)!important;border:1px solid #303236!important;color:#ccc!important}.space-page .space-dialog>div .danger{background:#e8e8e4!important;border-color:#e8e8e4!important;color:#111!important}
