@@ -1,6 +1,6 @@
 'use client';
 
-import {ArrowLeft,ArrowRight,BarChart3,BrainCircuit,Lightbulb,TrendingUp} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BarChart3,Gauge,Lightbulb,TrendingUp} from 'lucide-react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CSSProperties,useEffect,useMemo,useState} from 'react';
@@ -58,7 +58,7 @@ export default function HomeClient({content}:{content:HomeContent}){
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>SUA EVOLUÇÃO</small><span>Quanto mais a NOZA conhece seus padrões, mais precisa se torna a direção do seu desenvolvimento.</span></div>
-          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><BrainCircuit size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><Gauge size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
