@@ -122,3 +122,36 @@ body:has(.pricing-page) .app-topbar .search-box svg{
   transform:none!important;
   margin:0!important;
 }
+
+/* NOZA Home visual system — Pricing skin, content/structure preserved */
+html:has(.pricing-page),body:has(.pricing-page){background:#090a0b!important}
+.pricing-page,.pricing-page:before{background:radial-gradient(circle at 75% 25%,#242629 0,transparent 28%),linear-gradient(135deg,#090a0b,#111315 55%,#08090a)!important}
+.pricing-shell{max-width:1180px!important}
+.pricing-kicker{height:auto!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#8b8d90!important;font:400 9px monospace!important;letter-spacing:.16em!important}
+.billing-toggle{height:38px!important;border:1px solid #303236!important;border-radius:9px!important;background:rgba(255,255,255,.025)!important;box-shadow:none!important;padding:3px!important}
+.billing-toggle button{border-radius:6px!important;color:#8b8d90!important;font:500 10px monospace!important;letter-spacing:.04em!important}
+.billing-toggle button.active{background:#e8e8e4!important;color:#111!important;box-shadow:none!important}
+.billing-toggle button span{border-radius:4px!important;font:600 8px monospace!important}
+.price-card,.price-card.featured{min-height:560px!important;padding:22px!important;border:1px solid #2b2d30!important;border-radius:12px!important;background:rgba(255,255,255,.025)!important;color:#f5f5f2!important;box-shadow:none!important;transform:none!important;backdrop-filter:blur(18px)!important}
+.price-card.featured{border-color:#55585c!important;background:rgba(255,255,255,.045)!important}
+.price-card.featured:before{background:linear-gradient(135deg,rgba(255,255,255,.045),transparent 45%)!important}
+.plan-icon,.featured .plan-icon{width:36px!important;height:36px!important;border:1px solid #303236!important;border-radius:8px!important;background:rgba(255,255,255,.035)!important;color:#d9d9d6!important}
+.plan-icon svg{width:17px!important;height:17px!important;stroke:#d9d9d6!important}
+.choice-badge{height:22px!important;border:1px solid #55585c!important;border-radius:6px!important;color:#c8c9c7!important;font:600 8px monospace!important;letter-spacing:.1em!important}
+.plan-eyebrow,.featured .plan-eyebrow{margin-top:16px!important;color:#73767a!important;font:600 9px monospace!important;letter-spacing:.14em!important}
+.price-card h2{margin:7px 0 8px!important;color:#f5f5f2!important;font-size:30px!important;font-weight:500!important;letter-spacing:-.045em!important}
+.plan-price{color:#f1f1ee!important;font-size:40px!important;font-weight:400!important;letter-spacing:-.055em!important}
+.plan-price small,.featured .plan-price small{color:#777b80!important;font:500 10px monospace!important;letter-spacing:.04em!important}
+.annual-note,.featured .annual-note{color:#73767a!important;font:500 8px monospace!important;letter-spacing:.03em!important}
+.plan-description,.featured .plan-description{color:#8b8d90!important;font-size:12px!important;line-height:1.5!important;font-weight:400!important}
+.ai-allowance,.featured .ai-allowance{padding:11px 12px!important;border:1px solid #2b2d30!important;border-radius:9px!important;background:rgba(255,255,255,.02)!important}
+.ai-allowance-head,.featured .ai-allowance-head{color:#777b80!important;font:600 9px monospace!important;letter-spacing:.08em!important}
+.ai-allowance strong{color:#d8d8d6!important;font-size:12px!important;font-weight:500!important}
+.plan-divider,.featured .plan-divider{background:#292b2e!important}
+.price-card ul{gap:8px!important}
+.price-card li,.featured li{color:#a7aaad!important;font-size:11px!important;line-height:1.35!important;font-weight:400!important}
+.check,.featured .check{width:15px!important;height:15px!important;border:1px solid #3b3e42!important;background:rgba(255,255,255,.035)!important;color:#d9d9d6!important}
+.plan-cta,.featured .plan-cta{height:42px!important;border:1px solid #d9d9d6!important;border-radius:8px!important;background:#e8e8e4!important;color:#111!important;box-shadow:none!important;font:700 10px monospace!important;letter-spacing:.07em!important}
+.plan-cta:hover,.featured .plan-cta:hover{background:#fff!important}
+.plan-note,.featured .plan-note{color:#6f7276!important;font:500 8px/1.4 monospace!important}
+.pricing-footnote{color:#73767a!important;font:500 9px monospace!important;letter-spacing:.02em!important}.pricing-footnote strong{color:#b9bbbd!important;font-weight:600!important}
