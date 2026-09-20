@@ -210,3 +210,8 @@ body:has(.pricing-page) .app-topbar:after{content:none!important;display:none!im
 body:has(.pricing-page) .pricing-page{padding-top:122px!important}
 body:has(.pricing-page) .pricing-toggle{margin-top:14px!important;margin-bottom:30px!important}
 body:has(.pricing-page) .pricing-grid{margin-top:8px!important}
+
+/* Pricing layout position — actual selectors */
+body:has(.pricing-page) .pricing-shell{padding-top:44px!important}
+body:has(.pricing-page) .billing-toggle{margin-top:26px!important;margin-bottom:38px!important}
+body:has(.pricing-page) .pricing-grid{margin-top:0!important}
