@@ -1,5 +1,5 @@
 'use client';
-import {useMemo,useState} from 'react';
+import {useEffect,useMemo,useState} from 'react';
 import AppSidebar from '../AppSidebar';
 import './calibragem.css';
 
@@ -18,9 +18,12 @@ const skills=['Comunicação','Escuta','Investigação','Persuasão','Argumenta�
 export default function Calibragem(){
  const [started,setStarted]=useState(false),[i,setI]=useState(0),[answers,setAnswers]=useState<number[]>([]);
  const done=answers.length===qs.length;
+ const [saved,setSaved]=useState(false);
  const scores=useMemo(()=>Object.fromEntries(skills.map((s,idx)=>{const qi=qs.findIndex(q=>q.skill===s);const ans=answers[qi];const base=ans===undefined?0:[64,88,72,58][ans];return [s,Math.min(96,base+(idx%3)*2)]})),[answers]);
  const choose=(n:number)=>{const next=[...answers,n];setAnswers(next);if(i<qs.length-1)setTimeout(()=>setI(i+1),120)};
- const reset=()=>{setAnswers([]);setI(0);setStarted(true)};
+ const performance=Math.round(Object.values(scores).reduce((a:number,b:any)=>a+Number(b),0)/skills.length)||0;
+ useEffect(()=>{if(!done||saved)return;const payload={performance,scores,completedAt:new Date().toISOString()};localStorage.setItem('noza-performance-baseline',JSON.stringify(payload));window.dispatchEvent(new CustomEvent('noza:performance-updated',{detail:payload}));setSaved(true)},[done,saved,performance,scores]);
+ const reset=()=>{localStorage.removeItem('noza-performance-baseline');window.dispatchEvent(new Event('noza:performance-reset'));setAnswers([]);setI(0);setSaved(false);setStarted(false)};
  return <div className="cal-shell"><AppSidebar/><main className="cal-main">
    <div className="cal-top"><span>NOZA / INTELLIGENCE SYSTEM</span><span>{started&&!done?String(i+1).padStart(2,'0')+' / '+String(qs.length).padStart(2,'0'):'BASELINE'}</span></div>
    {!started?<section className="cal-intro">
@@ -38,11 +41,11 @@ export default function Calibragem(){
     <div className="cal-options">{qs[i].a.map((a,n)=><button key={a} onClick={()=>choose(n)}><b>{String.fromCharCode(65+n)}</b><span>{a}</span><i>↗</i></button>)}</div>
    </section>:<section className="cal-result">
     <div className="cal-kicker"><i/> BASELINE 01 CONCLUÍDO</div>
-    <h1>Seu ponto de partida<br/><em>foi identificado.</em></h1>
+    <h1>Seu número de performance<br/><em>foi identificado.</em></h1><div className="cal-performance-number"><strong>{performance}</strong><span>/100<br/>PERFORMANCE</span></div>
     <p>Este é um retrato inicial. A NOZA vai confrontar esta calibragem com evidências reais das suas próximas interações.</p>
     <div className="cal-scoregrid">{skills.map(s=><div key={s}><header><span>{s}</span><b>{scores[s]}</b></header><div><i style={{width:`${scores[s]}%`}}/></div></div>)}</div>
     <div className="cal-insight"><span>PRIORIDADE INICIAL</span><strong>Investigação antes da argumentação.</strong><p>Seu padrão sugere espaço para aprofundar contexto e critérios antes de construir a resposta. A confiança deste diagnóstico aumentará com evidências reais.</p></div>
-    <button className="cal-start" onClick={reset}>RECALIBRAR <b>↻</b></button>
+    <button className="cal-start" onClick={reset}>RESETAR CALIBRAGEM <b>↻</b></button>
    </section>}
  </main></div>
 }
