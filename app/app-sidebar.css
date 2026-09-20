@@ -118,3 +118,9 @@
 .side-item:hover{transition:none!important}
 .side-item span,.side-item svg{transition:none!important}
 .sidebar:after{will-change:auto!important}
+
+/* NOZA sidebar hover: color only, zero paint-heavy hover surface */
+.side-item:hover{background:transparent!important;box-shadow:none!important}
+.side-item:hover span{color:#f4f4f2!important}
+.side-item:hover svg{stroke:#f4f4f2!important}
+.side-item,.side-item span,.side-item svg{transition:none!important}
