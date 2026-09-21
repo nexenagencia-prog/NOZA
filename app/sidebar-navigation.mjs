@@ -2,7 +2,6 @@ const routes={
   'Início':'/',
   'Agenda':'/agenda',
   'Skills':'/skills',
-  'Calibragem':'/calibragem',
   'Calibragem Cognitiva':'/calibragem-cognitiva',
   'Contatos':'/contatos',
   'Gravações':'/gravacoes',
