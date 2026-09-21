@@ -282,3 +282,6 @@ html body .hero-copy .eyebrow{font-size:9px!important;font-weight:400!important;
 /* Home action buttons — compact single-line labels */
 html body .hero-actions>.secondary-btn{width:214px!important;min-width:214px!important;white-space:nowrap!important;padding:0 18px!important}
 html body .calibration-cta{white-space:nowrap!important}
+
+/* Home intelligence label */
+html body .hero-copy .eyebrow{color:#777b7e!important;-webkit-text-fill-color:#777b7e!important}
