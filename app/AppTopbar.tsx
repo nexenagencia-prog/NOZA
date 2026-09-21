@@ -7,7 +7,7 @@ import {useEffect,useRef,useState} from 'react';
 import {BRAND_LOGO,BRAND_NAME} from './brand.mjs';
 import './app-topbar.css';
 
-const nav=[['Início','/'],['Skills','/skills'],['Agenda','/agenda'],['Planos e Preços','/planos']] as const;
+const nav=[['Início','/'],['Skills','/skills'],['Planos e Preços','/planos']] as const;
 
 type AppTopbarProps={
   floating?:boolean;
