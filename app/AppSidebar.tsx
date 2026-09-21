@@ -11,7 +11,7 @@ import './app-sidebar.css';
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 const icons=[Grid2X2,CirclePlus,CalendarDays,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Skills','Contatos','Notificações','Gravações','Configurações','Sair'];
-const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Calibragem Cognitiva',Icon:BrainCircuit},{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit},{label:'Calculadora',Icon:Calculator}];
+const extras=[{label:'Calibragem Cognitiva',Icon:BrainCircuit},{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit},{label:'Calculadora',Icon:Calculator}];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
