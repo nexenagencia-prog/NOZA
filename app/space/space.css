@@ -624,3 +624,9 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
 /* Calculator keeps its original floating behavior; only NOZA skin changes */
 .space-calculator-layer{position:fixed!important;inset:auto 28px 92px auto!important;z-index:10030!important;background:transparent!important;backdrop-filter:none!important;display:block!important;padding:0!important;pointer-events:none!important}
 .space-calculator{width:300px!important;padding:14px!important;border:1px solid rgba(210,214,216,.15)!important;border-radius:18px!important;background:linear-gradient(145deg,rgba(35,38,40,.98),rgba(14,16,17,.98))!important;box-shadow:0 18px 55px rgba(0,0,0,.48)!important;pointer-events:auto!important}
+
+/* Skills Pro is now the full continuation of Skills da reunião */
+.space-page .space-meeting-skills-embedded{grid-column:1/-1!important;width:100%!important;height:4200px!important;min-height:4200px!important;overflow:visible!important;border-radius:0!important;background:transparent!important;margin:12px 0 140px!important}
+.space-page .space-meeting-skills-embedded iframe{width:100%!important;height:4200px!important;min-height:4200px!important;display:block!important;border:0!important;overflow:hidden!important}
+.space-page,.space-page .space-content{min-height:100vh!important;height:auto!important;overflow-y:visible!important}
+html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
