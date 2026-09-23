@@ -76,3 +76,6 @@
 
 /* Skills da reunião positioned below the slides card */
 .space-meeting-skills-below-slides{display:flex;align-items:flex-start;justify-content:flex-start;margin-top:8px}.space-meeting-skills-below-slides .space-meeting-skills-btn{position:static!important;margin:0!important}
+
+/* Join scheduled meetings from Space agenda */
+.space-agenda-entry{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}.space-agenda-main{min-width:0}.space-agenda-enter{height:30px!important;width:auto!important;padding:0 12px!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:7px!important;background:#e8e8e4!important;color:#111!important;font:700 9px monospace!important;letter-spacing:.05em!important;cursor:pointer!important}.space-agenda-enter:hover{background:#fff!important}
