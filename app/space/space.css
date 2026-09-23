@@ -631,13 +631,12 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
 .space-page,.space-page .space-content{min-height:100vh!important;height:auto!important;overflow-y:visible!important}
 html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 
-/* Collapsible bottom Space control dock */
-.space-page .space-controls{overflow:visible!important;transition:none!important}
-.space-page .space-controls-inner{display:flex!important;align-items:center!important;gap:inherit!important}
-.space-page .space-controls-collapse{position:absolute!important;right:8px!important;top:-34px!important;width:auto!important;height:28px!important;min-width:28px!important;padding:0 9px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:14px!important;background:rgba(17,19,20,.94)!important;color:#aeb1b2!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important}
-.space-page .space-controls-collapse svg{width:14px!important;height:14px!important}
-.space-page .space-controls-collapse span{font-size:10px!important}
-.space-page .space-controls.is-collapsed{width:44px!important;min-width:44px!important;height:44px!important;padding:0!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
-.space-page .space-controls.is-collapsed .space-controls-inner{display:none!important}
-.space-page .space-controls.is-collapsed .space-controls-collapse{position:static!important;width:44px!important;height:44px!important;border-radius:22px!important;padding:0!important;background:linear-gradient(145deg,rgba(35,38,40,.98),rgba(14,16,17,.98))!important}
-.space-page .space-controls.is-collapsed .space-controls-collapse span{display:none!important}
+
+/* Space bottom dock: original layout preserved; collapse control only */
+.space-page .space-controls{overflow:visible!important}
+.space-page .space-controls-collapse{position:absolute!important;right:-34px!important;top:50%!important;transform:translateY(-50%)!important;width:26px!important;height:26px!important;min-width:26px!important;padding:0!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:50%!important;background:rgba(17,19,20,.96)!important;color:#aeb1b2!important;display:grid!important;place-items:center!important}
+.space-page .space-controls-collapse svg{width:13px!important;height:13px!important}
+.space-page .space-controls.is-collapsed>button:not(.space-controls-collapse),
+.space-page .space-controls.is-collapsed>.space-control-menu{display:none!important}
+.space-page .space-controls.is-collapsed{width:32px!important;min-width:32px!important;height:32px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.space-page .space-controls.is-collapsed .space-controls-collapse{position:static!important;transform:none!important;width:32px!important;height:32px!important}
