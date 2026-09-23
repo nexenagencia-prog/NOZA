@@ -675,3 +675,14 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 @media(max-width:1450px){.space-page .space-icon-topbar{top:28px!important;right:3vw!important}}
 @media(max-width:1180px){.space-page .space-icon-topbar{right:30px!important}}
 @media(max-width:820px){.space-page .space-icon-topbar{top:20px!important;right:18px!important}}
+
+/* Space vertical placement: move workspace down without moving the fixed bottom dock */
+.space-page .space-workspace{margin-top:88px!important}
+
+/* Restore every slide-card action above the slide media */
+.space-page .space-evolution{overflow:hidden!important}
+.space-page .space-evolution .space-evolution-copy.file-copy{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:20!important;pointer-events:none!important}
+.space-page .space-evolution .space-slide-actions{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:22!important;pointer-events:auto!important}
+.space-page .space-evolution .space-slide-actions button{display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+.space-page .space-evolution .space-previous-slide,.space-page .space-evolution .space-next-slide{display:grid!important;visibility:visible!important;opacity:1!important;z-index:22!important;pointer-events:auto!important}
+.space-page .space-evolution .space-dots{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:22!important;pointer-events:auto!important}
