@@ -48,3 +48,5 @@ html,body{overflow-y:auto!important}.cal-shell{height:auto!important;min-height:
 .cal-intro .cal-existing{margin:14px 0!important}
 .cal-intro .cal-start{margin-top:12px!important}
 @media(max-width:900px){.cal-intro h1,.cal-topic-intro p{white-space:normal!important}.cal-domains.cal-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+
+.cal-selected-focus{margin:20px 0 14px;display:flex;flex-direction:column;gap:7px;max-width:900px}.cal-selected-focus span{font-size:10px;letter-spacing:.13em;color:rgba(255,255,255,.42)}.cal-selected-focus strong{font-size:13px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.55}.cal-start:disabled{opacity:.34!important;cursor:not-allowed!important;pointer-events:none!important}
