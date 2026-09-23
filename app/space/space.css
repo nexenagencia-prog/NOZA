@@ -686,3 +686,21 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-evolution .space-slide-actions button{display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
 .space-page .space-evolution .space-previous-slide,.space-page .space-evolution .space-next-slide{display:grid!important;visibility:visible!important;opacity:1!important;z-index:22!important;pointer-events:auto!important}
 .space-page .space-evolution .space-dots{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:22!important;pointer-events:auto!important}
+
+/* Slide controls only — do not alter Space geometry */
+.space-page .space-evolution:not(.is-collapsed) .space-evolution-copy.file-copy{
+  display:flex!important;visibility:visible!important;opacity:1!important;z-index:30!important;
+}
+.space-page .space-evolution:not(.is-collapsed) .space-slide-actions{
+  display:flex!important;visibility:visible!important;opacity:1!important;z-index:31!important;pointer-events:auto!important;
+}
+.space-page .space-evolution:not(.is-collapsed) .space-slide-actions>button{
+  display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+}
+.space-page .space-evolution:not(.is-collapsed) .space-previous-slide,
+.space-page .space-evolution:not(.is-collapsed) .space-next-slide{
+  display:grid!important;visibility:visible!important;opacity:1!important;z-index:31!important;pointer-events:auto!important;
+}
+.space-page .space-evolution:not(.is-collapsed) .space-dots{
+  display:flex!important;visibility:visible!important;opacity:1!important;z-index:31!important;pointer-events:auto!important;
+}
