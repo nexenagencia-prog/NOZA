@@ -20,7 +20,7 @@ const content: HomeContent = {
   navigation: {
     searchPlaceholder: 'Buscar',
     top: ['Início','Skills','Agenda','Planos e Preços'],
-    sidebar: ['Início','Reuniões','Gravações','Calculadora','Skills','Human Pro','Sair']
+    sidebar: ['Início','Criar reunião','Reuniões','Gravações','Calculadora','Skills','Human Pro','Sair']
   },
   cards: [
     {slug:'skills',title:'Skills',description:'Evolução das suas habilidades de performance.',percentage:82,imageUrl:'/skills-card.png',ctaLabel:'Ver Skills',sortOrder:0,isActive:true},
