@@ -327,3 +327,42 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
   max-height:var(--video-stage-h)!important;
   margin:0!important;
 }
+
+/* Reference layout: tight 3-column masonry inside second 9:16 screen */
+.space-page .space-participants.mosaic{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:28px!important;
+  grid-auto-flow:dense!important;
+  gap:5px!important;
+  padding:0!important;
+  align-content:start!important;
+  overflow:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+  aspect-ratio:auto!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+1){grid-row:span 7!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+2){grid-row:span 6!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+3){grid-row:span 7!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+4){grid-row:span 8!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+5){grid-row:span 7!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+6){grid-row:span 8!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+7){grid-row:span 7!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n){grid-row:span 6!important}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important
+}
+/* Bottom Space controls centered independently of sidebar/panels */
+.space-page .space-controls{
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  margin-left:0!important;
+}
