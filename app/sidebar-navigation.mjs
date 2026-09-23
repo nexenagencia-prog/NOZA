@@ -1,5 +1,6 @@
 const routes={
   'Início':'/',
+  'Criar reunião':'/criar-reuniao',
   'Agenda':'/agenda',
   'Skills':'/skills',
   'Calibragem':'/calibragem-cognitiva',
