@@ -127,3 +127,30 @@
 
 /* Space utility group */
 .space-tools{margin-top:3px;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)}.space-tools-title{height:30px;padding:0 24px;display:flex;align-items:center;gap:15px;color:#d7d8d8}.space-tools-title svg{width:17px;height:17px;stroke-width:1.4}.space-tools-title span{font-size:11px;font-weight:500;letter-spacing:.08em}.space-tools .side-item{height:31px!important;min-height:31px!important;padding-left:28px!important;gap:13px!important}.space-tools .side-item svg{width:15px!important;height:15px!important}.space-tools .side-item span{font-size:11px!important;color:#898c8e!important}.space-tools .side-item:hover span{color:#f4f4f2!important}
+
+/* Canonical NOZA sidebar: identical geometry/typography on every route. */
+.sidebar,.sidebar.expanded{width:224px!important;padding:28px 20px 24px!important}
+.sidebar .sidebar-brand{height:50px!important;min-height:50px!important;margin-bottom:16px!important}
+.sidebar .avatar-wrap{min-height:62px!important;margin-bottom:17px!important}
+.sidebar .side-nav{gap:7px!important}
+.sidebar .side-item{height:48px!important;min-height:48px!important;padding:0 24px!important;gap:15px!important}
+.sidebar .side-item span{font-size:12.6px!important;line-height:1!important}
+.sidebar .side-item svg{width:19px!important;height:19px!important}
+.space-sidebar-toggle{display:none!important}
+@media(min-width:821px){
+  body:has(.space-page) .sidebar.space-collapsed{width:76px!important;padding-left:14px!important;padding-right:14px!important}
+  body:has(.space-page) .sidebar.space-collapsed .sidebar-brand{padding:0!important;justify-content:center!important}
+  body:has(.space-page) .sidebar.space-collapsed .sidebar-brand img{width:52px!important}
+  body:has(.space-page) .sidebar.space-collapsed .avatar-wrap{padding:7px!important;justify-content:center!important}
+  body:has(.space-page) .sidebar.space-collapsed .avatar-meta{display:none!important}
+  body:has(.space-page) .sidebar.space-collapsed .side-item{padding:0!important;justify-content:center!important;gap:0!important}
+  body:has(.space-page) .sidebar.space-collapsed .side-item span{display:none!important}
+  body:has(.space-page) .sidebar.space-collapsed .space-sidebar-toggle{justify-content:center!important}
+  body:has(.space-page) .sidebar.space-collapsed .space-sidebar-toggle span{display:none!important}
+  body:has(.space-page) .sidebar.space-collapsed + .content,
+  body:has(.space-page) .sidebar.space-collapsed ~ .content{margin-left:76px!important;width:calc(100vw - 76px)!important;max-width:calc(100vw - 76px)!important}
+}
+body:has(.space-page) .space-sidebar-toggle{display:flex!important;margin-top:auto!important;width:100%!important;height:42px!important;min-height:42px!important;border:0!important;background:transparent!important;color:#a5a6a6!important;align-items:center!important;justify-content:flex-start!important;gap:15px!important;padding:0 24px!important;cursor:pointer!important}
+body:has(.space-page) .space-sidebar-toggle:hover{color:#f4f4f2!important}
+body:has(.space-page) .space-sidebar-toggle svg{width:18px!important;height:18px!important}
+body:has(.space-page) .space-sidebar-toggle span{font-size:12.6px!important}
