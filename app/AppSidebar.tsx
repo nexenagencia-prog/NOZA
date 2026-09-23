@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,CirclePlus,DoorOpen,Grid2X2,Hexagon,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,UserRound,Video} from 'lucide-react';
+import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,ChevronLeft,ChevronRight,CirclePlus,DoorOpen,Grid2X2,Hexagon,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,UserRound,Video} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -15,7 +15,7 @@ const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Human Pro',Icon:Bra
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
-  const router=useRouter();const pathname=usePathname();const[profileName,setProfileName]=useState(name);const[editingName,setEditingName]=useState(false);const[avatar,setAvatar]=useState<string|null>(avatarUrl);const fileRef=useRef<HTMLInputElement>(null);
+  const router=useRouter();const pathname=usePathname();const isSpace=pathname==='/space'||pathname.startsWith('/space/');const[spaceCollapsed,setSpaceCollapsed]=useState(false);const[profileName,setProfileName]=useState(name);const[editingName,setEditingName]=useState(false);const[avatar,setAvatar]=useState<string|null>(avatarUrl);const fileRef=useRef<HTMLInputElement>(null);
   useEffect(()=>{document.body.classList.add('zyvo-sidebar-expanded');onExpandedChange?.(true);try{const saved=localStorage.getItem(PROFILE_AVATAR_KEY);if(saved)setAvatar(saved);const savedName=localStorage.getItem('noza-profile-name');if(savedName)setProfileName(savedName)}catch{}return()=>{onExpandedChange?.(false)}},[onExpandedChange]);
   const changeAvatar=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{const value=String(reader.result);setAvatar(value);try{localStorage.setItem(PROFILE_AVATAR_KEY,value)}catch{}};reader.readAsDataURL(file)};
   const hiddenLabels=new Set(['Agenda','Skills','Anotar','Anotações','Criar slides','Planos e Preços','Preços e Planos','Contatos','Gravações','Calculadora','Reuniões']);
@@ -24,7 +24,7 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
   const emit=(eventName:string)=>window.dispatchEvent(new Event(eventName));
   const action=(label:string)=>{const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes');else if(label==='Criar slides')router.push('/slides')};
   const active=(label:string)=>isSidebarRouteActive(label,pathname);
-  return <aside className="sidebar expanded" aria-label="Menu lateral">
+  return <aside className={`sidebar expanded ${isSpace&&spaceCollapsed?'space-collapsed':''}`} aria-label="Menu lateral">
     <button className="sidebar-brand" onClick={()=>router.push('/')} aria-label={BRAND_NAME}><img src={BRAND_LOGO} alt={BRAND_NAME}/></button>
     <div className="avatar-wrap"><button className="avatar-button" onClick={()=>fileRef.current?.click()}><div className="avatar" style={avatar?{backgroundImage:`url(${avatar})`}:undefined}>{!avatar&&profileName.split(/\s+/).map(value=>value[0]).slice(0,2).join('')}</div><span className="avatar-camera"><Camera size={11}/></span></button><input ref={fileRef} className="avatar-input" type="file" accept="image/*" onChange={changeAvatar}/><div className="avatar-meta">{editingName?<input className="name-input" value={profileName} autoFocus onChange={event=>setProfileName(event.target.value)} onBlur={()=>{setEditingName(false);try{localStorage.setItem('noza-profile-name',profileName);window.dispatchEvent(new CustomEvent('noza:profile-name',{detail:profileName}))}catch{}}}/>:<button className="name-edit" onClick={()=>setEditingName(true)}><strong>{profileName}</strong><Pencil size={12}/></button>}<span>{rebrandPublicText(planLabel)}</span></div></div>
     <div className="side-nav">
@@ -32,6 +32,6 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
       {extras.map(({label,Icon})=>label==='Human Pro'||label==='Skills Pro'||label==='Skills Full'?<Link className={`side-item ${active(label)?'active':''}`} href={resolveSidebarRoute(label)!} key={label}><Icon/><span>{label}</span></Link>:<button className={`side-item ${active(label)?'active':''}`} key={label} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
       {final.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
     </div>
-    
+    {isSpace&&<button className="space-sidebar-toggle" onClick={()=>setSpaceCollapsed(value=>!value)} aria-label={spaceCollapsed?'Expandir menu lateral':'Encolher menu lateral'}>{spaceCollapsed?<ChevronRight/>:<ChevronLeft/>}<span>{spaceCollapsed?'Expandir':'Encolher'}</span></button>}
   </aside>
 }
