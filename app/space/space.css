@@ -242,3 +242,41 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
   min-height:var(--video-stage-h)!important;max-height:var(--video-stage-h)!important;
   justify-self:center!important;align-self:center!important;
 }
+
+/* Restore the original interlaced participant mosaic and keep collapsed stages close together */
+.space-page .space-workspace.support-cards-collapsed{
+  column-gap:8px!important;
+  gap:8px!important;
+  justify-content:center!important;
+}
+.space-page .space-participants-panel{
+  aspect-ratio:auto!important;
+}
+.space-page .space-participants.mosaic{
+  position:relative!important;
+  display:block!important;
+  height:calc(100% - 42px)!important;
+  overflow:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:absolute!important;
+  width:44%!important;
+  height:39%!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:9/16!important;
+  border-radius:12px!important;
+  overflow:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(1){left:3%!important;top:4%!important;z-index:5!important;transform:rotate(-2deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(2){right:3%!important;top:11%!important;z-index:4!important;transform:rotate(2deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(3){left:8%!important;top:33%!important;z-index:7!important;transform:rotate(1.5deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(4){right:7%!important;top:40%!important;z-index:6!important;transform:rotate(-1.5deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(5){left:3%!important;bottom:2%!important;z-index:3!important;transform:rotate(-1deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6){right:3%!important;bottom:0!important;z-index:2!important;transform:rotate(1deg)!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(n+7){display:none!important}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important
+}
