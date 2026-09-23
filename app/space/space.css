@@ -64,3 +64,6 @@
 .space-page .space-reactions button{background:rgba(17,19,21,.62)!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important}
 .space-page .space-toast,.space-page .space-dialog{background:#111315!important;border:1px solid #303236!important;color:#eee!important;border-radius:12px!important;box-shadow:0 20px 60px rgba(0,0,0,.35)!important}
 .space-page .space-dialog p{color:#8b8d90!important}.space-page .space-dialog>div button{background:rgba(255,255,255,.04)!important;border:1px solid #303236!important;color:#ccc!important}.space-page .space-dialog>div .danger{background:#e8e8e4!important;border-color:#e8e8e4!important;color:#111!important}
+
+/* Skills shortcut above the Space video */
+.space-skills-link{display:inline-flex!important;align-items:center!important;gap:6px!important;border:0!important;background:transparent!important;color:inherit!important;padding:0 8px 0 0!important;font:inherit!important;cursor:pointer!important}.space-skills-link svg{width:15px!important;height:15px!important;stroke-width:1.6!important}.space-skills-link span{font-size:12px!important}.space-skills-link:hover{opacity:.72!important}
