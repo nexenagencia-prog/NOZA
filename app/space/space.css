@@ -366,3 +366,28 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
   transform:translateX(-50%)!important;
   margin-left:0!important;
 }
+
+/* Fix participant images hidden by earlier global absolute-image override */
+.space-page .space-participants.mosaic .space-participant-card{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  background:#1a2024!important;
+}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  z-index:0!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:after{z-index:1!important}
+.space-page .space-participants.mosaic .space-participant-card>div,
+.space-page .space-participants.mosaic .space-participant-card>span,
+.space-page .space-participants.mosaic .space-participant-expand{z-index:2!important}
