@@ -4,7 +4,6 @@ import {ChangeEvent,FormEvent,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {Bell,BrainCircuit,CalendarDays,Camera,CameraOff,Check,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,Calculator,ContactRound,Copy,Download,Ellipsis,FileUp,Filter,Grid2X2,Heart,LayoutList,Maximize2,MessageCircle,Mic,MicOff,MonitorUp,NotebookPen,PanelBottomClose,Plus,Presentation,Save,Send,Share2,SlidersHorizontal,Smile,StickyNote,Users,Video as VideoIcon,X,Trash2} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
-import AppTopbar from '../AppTopbar';
 import FloatingNotes,{type FloatingNotesMode} from '../FloatingNotes';
 import {appendMessage,createLocalSlide,filterParticipants,getParticipantPanelView,getSlideOverlay,mergeSlides,previousSlideIndex,toggleAgendaItem,upsertNote} from './space-model.mjs';
 import './space.css';
@@ -152,7 +151,7 @@ export default function SpaceClient(){
   return <main className="app-shell space-page">
     <AppSidebar/>
     <section className="content space-content">
-      <AppTopbar/>
+      <header className="space-icon-topbar" aria-label="NOZA Space"><button onClick={()=>router.push('/')} aria-label="Voltar para início"><BrainCircuit/></button></header>
       <div className={`space-workspace ${supportCardsCollapsed?'support-cards-collapsed ':''}${collapsed.slides?'slides-collapsed ':''}${collapsed.agenda?'agenda-collapsed ':''}${collapsed.notes?'notes-collapsed':''}`}>
         <button className="space-support-toggle" onClick={toggleSupportCards} aria-label={supportCardsCollapsed?'Expandir cards auxiliares':'Encolher cards auxiliares'}>{supportCardsCollapsed?<><ChevronDown/><span>Expandir painéis</span></>:<><ChevronUp/><span>Encolher painéis</span></>}</button>
         <section className="space-live-card" aria-label="Reunião ao vivo">
