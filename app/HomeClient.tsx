@@ -1,6 +1,6 @@
 'use client';
 
-import {ArrowLeft,ArrowRight,BarChart3,Crosshair,Lightbulb,TrendingUp} from 'lucide-react';
+import {ArrowLeft,ArrowRight,BrainCircuit,Crosshair,Focus,Route,TrendingUp} from 'lucide-react';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CSSProperties,useEffect,useMemo,useState} from 'react';
@@ -11,7 +11,7 @@ import FloatingCalculator from './FloatingCalculator';
 import FloatingNotes,{type FloatingNotesMode} from './FloatingNotes';
 import {homeCardRoute} from './home-card-route.mjs';
 
-const cardIcon=(slug:string)=>slug==='recordings'?Lightbulb:slug==='insights'?Lightbulb:BarChart3; // production sync retry 3
+const cardIcon=(slug:string)=>slug==='skills'?BrainCircuit:slug==='insights'?Focus:Route;
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
 
 export default function HomeClient({content}:{content:HomeContent}){
