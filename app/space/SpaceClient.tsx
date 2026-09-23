@@ -176,8 +176,7 @@ export default function SpaceClient(){
       </div>
 
       <nav className={`space-controls ${controlsCollapsed?'is-collapsed':''}`} aria-label="Controles da reunião">
-        <button className="space-controls-collapse" onClick={()=>setControlsCollapsed(value=>!value)} aria-label={controlsCollapsed?'Expandir controles':'Encolher controles'}>{controlsCollapsed?<ChevronUp/>:<ChevronDown/>}<span>{controlsCollapsed?'Expandir':'Encolher'}</span></button>
-        <div className="space-controls-inner">
+        <button className="space-controls-collapse" onClick={()=>setControlsCollapsed(value=>!value)} aria-label={controlsCollapsed?'Expandir controles':'Encolher controles'}>{controlsCollapsed?<ChevronUp/>:<ChevronDown/>}</button>
         <button className={micOn?'active':''} onClick={()=>toggleDevice('microphone')} aria-pressed={micOn}>{micOn?<Mic/>:<MicOff/>}<span>Microfone</span></button>
         <button className={cameraOn?'active':''} onClick={()=>toggleDevice('camera')} aria-pressed={cameraOn}>{cameraOn?<Camera/>:<CameraOff/>}<span>Câmera</span></button>
         <button className={chatOpen?'active':''} onClick={()=>setChatOpen(value=>!value)} aria-pressed={chatOpen}><MessageCircle/><span>Chat</span></button>
@@ -192,7 +191,6 @@ export default function SpaceClient(){
         <button onClick={()=>router.push('/slides')}><Presentation/><span>Criar slides</span></button>
         <div className="space-control-menu"><button onClick={()=>setMoreOpen(value=>!value)} aria-expanded={moreOpen}><Ellipsis/><span>Mais</span></button>{moreOpen&&<div><button onClick={()=>setChatOpen(value=>!value)}><PanelBottomClose/>{chatOpen?'Ocultar chat':'Mostrar chat'}</button><button onClick={()=>setMediaError('Preferências da reunião atualizadas.')}><SlidersHorizontal/>Preferências</button></div>}</div>
         <button className="space-leave" onClick={()=>setExitOpen(true)}><Share2/><span>Sair</span></button>
-        </div>
       </nav>
       {calculatorOpen&&<div className="space-calculator-layer" onMouseDown={event=>{if(event.target===event.currentTarget)setCalculatorOpen(false)}}><section className="space-calculator" role="dialog" aria-modal="true" aria-label="Calculadora"><header><div><Calculator/><span><strong>Calculadora</strong><small>NOZA SPACE</small></span></div><button onClick={()=>setCalculatorOpen(false)} aria-label="Fechar calculadora"><X/></button></header><div className="space-calculator-display"><small>{calcExpression||'0'}</small><strong>{calcResult}</strong></div><div className="space-calculator-grid">{['C','(',')','÷','7','8','9','×','4','5','6','-','1','2','3','+','0',',','⌫','='].map(key=><button key={key} className={key==='='?'equals':/[÷×+\-]/.test(key)?'operator':''} onClick={()=>pressCalc(key)}>{key}</button>)}</div></section></div>}
       <FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
