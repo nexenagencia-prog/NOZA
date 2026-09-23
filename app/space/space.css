@@ -484,3 +484,40 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
   object-fit:cover!important;
   object-position:center!important;
 }
+
+/* Align participant masonry: straight columns, no rotation/offset, staggered heights only */
+.space-page .space-participants.mosaic{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:14px!important;
+  grid-auto-flow:dense!important;
+  column-gap:6px!important;
+  row-gap:6px!important;
+  padding:0!important;
+  align-items:stretch!important;
+  align-content:start!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  margin:0!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;
+  vertical-align:initial!important;
+  break-inside:auto!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+1),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+3){grid-row:span 16!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+2),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+4){grid-row:span 13!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+5){grid-row:span 19!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n){grid-row:span 16!important}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;transform:none!important;
+}
