@@ -391,3 +391,56 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
 .space-page .space-participants.mosaic .space-participant-card>div,
 .space-page .space-participants.mosaic .space-participant-card>span,
 .space-page .space-participants.mosaic .space-participant-expand{z-index:2!important}
+
+/* Participant masonry definitive fix: explicit pixel-like row spans + images above skeleton rules */
+.space-page .space-participants.mosaic{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:12px!important;
+  grid-auto-flow:dense!important;
+  gap:6px!important;
+  align-content:start!important;
+  padding:0 2px 6px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  display:block!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+  width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+  opacity:1!important;
+  visibility:visible!important;
+  background:#202428!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+1){grid-row:span 15!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+2){grid-row:span 19!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+3){grid-row:span 16!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+4){grid-row:span 20!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+5){grid-row:span 17!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+6){grid-row:span 20!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n+7){grid-row:span 18!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8n){grid-row:span 16!important}
+.space-page .space-participants.mosaic .space-participant-card img,
+.space-page .space-participants.mosaic button.space-participant-card img{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:100%!important;
+  min-height:100%!important;
+  opacity:1!important;
+  visibility:visible!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  z-index:1!important;
+  filter:saturate(.82) contrast(.98)!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:after{z-index:2!important}
+.space-page .space-participants.mosaic .space-participant-card>div,
+.space-page .space-participants.mosaic .space-participant-card>span,
+.space-page .space-participants.mosaic .space-participant-expand{z-index:3!important}
