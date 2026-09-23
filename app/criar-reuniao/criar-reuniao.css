@@ -2,3 +2,35 @@
 
 /* Full-page scroll + meeting members */
 html:has(.meeting-create-page),body:has(.meeting-create-page){height:auto!important;min-height:100%!important;overflow-y:auto!important;overflow-x:hidden!important}.meeting-create-page{height:auto!important;min-height:100vh!important;overflow:visible!important}.meeting-create-content{height:auto!important;min-height:100vh!important;overflow:visible!important;padding-bottom:110px!important}.meeting-create-shell{padding-bottom:80px!important}.meeting-members{border-top:1px solid #25272a;margin-top:28px;padding-top:24px}.meeting-member-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:18px 0 10px}.meeting-member-grid>button{height:62px;display:grid;grid-template-columns:38px 1fr 18px;align-items:center;gap:10px;text-align:left;padding:8px 10px;border:1px solid #292b2e;border-radius:9px;background:#101214;color:#9b9da0;cursor:pointer}.meeting-member-grid>button.active{border-color:#55585b;background:#181a1c;color:#f1f1ee}.meeting-member-grid img{width:38px;height:38px;border-radius:50%;object-fit:cover;filter:saturate(.75)}.meeting-member-grid span strong,.meeting-member-grid span small{display:block}.meeting-member-grid span strong{font-size:11px;font-weight:500}.meeting-member-grid span small{font-size:9px;color:#696c6f;margin-top:3px}.meeting-member-grid svg{width:13px}.meeting-member-add{display:flex;gap:8px}.meeting-member-add input{flex:1;height:44px;border:1px solid #2c2e31;border-radius:8px;background:#0d0f10;color:#f1f1ee;padding:0 13px;outline:none;font-size:11px}.meeting-member-add button{height:44px;padding:0 14px;border:1px solid #303236;border-radius:8px;background:rgba(255,255,255,.025);color:#d8d8d6;font:600 9px monospace;display:flex;align-items:center;gap:6px;cursor:pointer}.meeting-member-add button svg{width:13px}.meeting-selected-members{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.meeting-selected-members>span{height:32px;display:flex;align-items:center;gap:7px;padding:0 7px;border:1px solid #303236;border-radius:18px;color:#b9bbbd;font-size:9px}.meeting-selected-members img{width:22px;height:22px;border-radius:50%;object-fit:cover}.meeting-selected-members button{border:0;background:transparent;color:#777;display:grid;place-items:center;padding:0;cursor:pointer}.meeting-selected-members button svg{width:11px}@media(max-width:700px){.meeting-member-grid{grid-template-columns:1fr}.meeting-member-add{flex-direction:column}}
+
+/* Fix native date/time controls: keep both fields visible and aligned */
+.meeting-fields .meeting-date-time{
+  grid-column:2!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:10px!important;
+  width:100%!important;
+  margin-top:10px!important;
+}
+.meeting-fields .meeting-date-time input{
+  grid-column:auto!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  height:48px!important;
+  margin:0!important;
+  padding:0 14px!important;
+  box-sizing:border-box!important;
+  color-scheme:dark!important;
+  appearance:auto!important;
+  -webkit-appearance:auto!important;
+}
+.meeting-fields .meeting-date-time input::-webkit-calendar-picker-indicator{
+  display:block!important;
+  opacity:.72!important;
+  cursor:pointer!important;
+  filter:invert(.75)!important;
+}
+@media(max-width:700px){
+  .meeting-fields .meeting-date-time{grid-template-columns:1fr!important}
+}
