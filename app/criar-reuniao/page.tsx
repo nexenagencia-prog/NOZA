@@ -29,6 +29,9 @@ export default function CriarReuniao(){
   const[type,setType]=useState('venda');
   const[person,setPerson]=useState('');
   const[goal,setGoal]=useState('');
+  const[meetingDate,setMeetingDate]=useState('');
+  const[meetingTime,setMeetingTime]=useState('');
+  const[subject,setSubject]=useState('');
   const[context,setContext]=useState('');
   const[selectedSkills,setSelectedSkills]=useState<string[]>([]);
   const[selectedMembers,setSelectedMembers]=useState<string[]>([]);
@@ -37,7 +40,7 @@ export default function CriarReuniao(){
   const skills=selectedSkills.length?selectedSkills:current.skills;
   const toggleMember=(id:string)=>setSelectedMembers(list=>list.includes(id)?list.filter(item=>item!==id):[...list,id]);
   const toggle=(skill:string)=>setSelectedSkills(list=>list.includes(skill)?list.filter(item=>item!==skill):[...list,skill]);
-  const prepare=()=>{const payload={type:current.label,person,goal,context,skills,members:members.filter(member=>selectedMembers.includes(member.id)),createdAt:new Date().toISOString()};try{localStorage.setItem('noza-meeting-preparation',JSON.stringify(payload));localStorage.setItem('noza-meeting-skills',JSON.stringify(skills))}catch{}router.push('/space')};
+  const prepare=()=>{const invited=members.filter(member=>selectedMembers.includes(member.id));const payload={id:'meeting-'+Date.now(),type:current.label,person,goal,context,skills,members:invited,date:meetingDate,time:meetingTime,subject:subject.trim()||goal.trim()||current.label,createdAt:new Date().toISOString()};const invite={meetingId:payload.id,date:meetingDate,time:meetingTime,subject:payload.subject,participants:invited.map(member=>({id:member.id,name:member.name,image:member.image})),status:'pending'};try{localStorage.setItem('noza-meeting-preparation',JSON.stringify(payload));localStorage.setItem('noza-meeting-skills',JSON.stringify(skills));localStorage.setItem('noza-last-meeting-invite',JSON.stringify(invite));const queue=JSON.parse(localStorage.getItem('noza-meeting-invites')||'[]');localStorage.setItem('noza-meeting-invites',JSON.stringify([invite,...queue].slice(0,50)))}catch{}router.push('/space')};
 
   return <main className="app-shell meeting-create-page">
     <AppSidebar/>
@@ -55,6 +58,7 @@ export default function CriarReuniao(){
             <div className="meeting-type-grid">{types.map(({id,label,Icon})=><button key={id} className={type===id?'active':''} onClick={()=>{setType(id);setSelectedSkills([])}}><Icon/><span>{label}</span>{type===id&&<Check/>}</button>)}</div>
 
             <div className="meeting-fields">
+              <label><span>00</span><div><strong>Quando e sobre o quê?</strong><small>Estas são as informações compartilhadas com os participantes convidados.</small></div><input value={subject} onChange={e=>setSubject(e.target.value)} placeholder="Assunto da reunião"/><div className="meeting-date-time"><input aria-label="Data da reunião" type="date" value={meetingDate} onChange={e=>setMeetingDate(e.target.value)}/><input aria-label="Horário da reunião" type="time" value={meetingTime} onChange={e=>setMeetingTime(e.target.value)}/></div></label>
               <label><span>02</span><div><strong>Com quem você vai falar?</strong><small>Pessoa, cliente, empresa ou equipe.</small></div><input value={person} onChange={e=>setPerson(e.target.value)} placeholder="Ex.: cliente de marketing"/></label>
               <label><span>03</span><div><strong>O que você precisa conseguir?</strong><small>Defina o resultado real que deseja produzir.</small></div><textarea value={goal} onChange={e=>setGoal(e.target.value)} placeholder="Ex.: avançar para o fechamento sem reduzir o preço."/></label>
               <label><span>04</span><div><strong>O que a NOZA precisa saber antes?</strong><small>Resistências, histórico, riscos ou qualquer contexto importante.</small></div><textarea value={context} onChange={e=>setContext(e.target.value)} placeholder="Ex.: o cliente já demonstrou resistência ao preço e adiou a decisão."/></label>
