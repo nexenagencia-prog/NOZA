@@ -560,3 +560,40 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
   display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
   object-fit:cover!important;object-position:center!important;opacity:1!important;visibility:visible!important;transform:none!important
 }
+
+/* Final reference mosaic: three independent vertical stacks, compact and aligned like supplied model */
+.space-page .space-participants.mosaic{
+  display:block!important;
+  column-count:3!important;
+  column-gap:6px!important;
+  height:calc(100% - 42px)!important;
+  padding:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  display:inline-block!important;
+  width:100%!important;
+  min-height:0!important;
+  margin:0 0 6px!important;
+  break-inside:avoid!important;
+  transform:none!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(1),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(4),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(7){height:205px!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(2),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(5),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(8){height:245px!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(3),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6){height:225px!important}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  display:block!important;position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;
+  opacity:1!important;visibility:visible!important
+}
