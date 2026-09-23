@@ -665,3 +665,49 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-icon-topbar button{width:38px!important;height:38px!important;border:0!important;border-radius:12px!important;background:transparent!important;color:#c8cbcc!important;display:grid!important;place-items:center!important;padding:0!important;cursor:pointer!important}
 .space-page .space-icon-topbar button:hover{color:#fff!important}
 .space-page .space-icon-topbar svg{width:20px!important;height:20px!important;stroke-width:1.45!important}
+
+/* Space recovery: keep host image and slide card visible in the normal workspace */
+.space-page .space-workspace:not(.support-cards-collapsed) .space-evolution{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  grid-column:3!important;
+  grid-row:1!important;
+}
+.space-page .space-live-card .space-host-media,
+.space-page .space-live-card .space-host-media>img{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.space-page .space-live-card .space-host-media>img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+.space-page .space-live-card .space-host-media>video{z-index:1!important}
+.space-page .space-live-card .space-host-media>video:not(.is-visible){opacity:0!important}
+
+/* Requested dock behavior: collapse on the right; expand centered below */
+.space-page .space-controls:not(.is-collapsed) .space-controls-collapse{
+  position:absolute!important;
+  left:auto!important;
+  right:-34px!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  margin:0!important;
+}
+.space-page .space-controls.is-collapsed .space-controls-collapse{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:-34px!important;
+  transform:translateX(-50%)!important;
+  margin:0!important;
+}
