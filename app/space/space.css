@@ -280,3 +280,50 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
 .space-page .space-participants.mosaic .space-participant-card>img{
   position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important
 }
+
+/* Exact restoration: original staggered participant mosaic; fixed 9:16 stages move as one group */
+.space-page .space-participants.mosaic{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:46px!important;
+  grid-auto-flow:dense!important;
+  gap:7px!important;
+  align-content:start!important;
+  height:calc(100% - 42px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;
+  width:auto!important;height:auto!important;
+  min-width:0!important;max-width:none!important;min-height:102px!important;max-height:none!important;
+  aspect-ratio:auto!important;
+  display:block!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+1),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+3){grid-row:span 4!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+2),
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+4){grid-row:span 3!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n+5){grid-row:span 5!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(6n){grid-row:span 4!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(n+7){display:block!important}
+.space-page .space-workspace.support-cards-collapsed{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+}
+.space-page .space-workspace.support-cards-collapsed .space-live-card,
+.space-page .space-workspace.support-cards-collapsed .space-participants-panel{
+  flex:0 0 var(--video-stage-w)!important;
+  width:var(--video-stage-w)!important;
+  height:var(--video-stage-h)!important;
+  min-width:var(--video-stage-w)!important;
+  max-width:var(--video-stage-w)!important;
+  min-height:var(--video-stage-h)!important;
+  max-height:var(--video-stage-h)!important;
+  margin:0!important;
+}
