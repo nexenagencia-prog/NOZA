@@ -444,3 +444,43 @@ html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-co
 .space-page .space-participants.mosaic .space-participant-card>div,
 .space-page .space-participants.mosaic .space-participant-card>span,
 .space-page .space-participants.mosaic .space-participant-expand{z-index:3!important}
+
+/* Simple masonry override — no row-span sizing. */
+.space-page .space-participants.mosaic{
+  display:block!important;
+  column-count:3!important;
+  column-gap:6px!important;
+  height:calc(100% - 42px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:0!important;
+}
+.space-page .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  display:inline-block!important;
+  break-inside:avoid!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0 0 6px!important;
+  vertical-align:top!important;
+  overflow:hidden!important;
+  border-radius:14px!important;
+  grid-row:auto!important;
+  aspect-ratio:auto!important;
+}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(3n+1){height:185px!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(3n+2){height:235px!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(3n){height:205px!important}
+.space-page .space-participants.mosaic .space-participant-card:nth-child(4n){height:255px!important}
+.space-page .space-participants.mosaic .space-participant-card>img{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  opacity:1!important;
+  visibility:visible!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
