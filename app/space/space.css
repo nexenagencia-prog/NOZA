@@ -659,3 +659,9 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
   transform:none!important;
   margin:0 auto!important;
 }
+
+/* Space: no global top menu, icon only */
+.space-page .space-icon-topbar{height:54px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:0!important;margin:0 0 8px!important;background:transparent!important;border:0!important}
+.space-page .space-icon-topbar button{width:38px!important;height:38px!important;border:0!important;border-radius:12px!important;background:transparent!important;color:#c8cbcc!important;display:grid!important;place-items:center!important;padding:0!important;cursor:pointer!important}
+.space-page .space-icon-topbar button:hover{color:#fff!important}
+.space-page .space-icon-topbar svg{width:20px!important;height:20px!important;stroke-width:1.45!important}
