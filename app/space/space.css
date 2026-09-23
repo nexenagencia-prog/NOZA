@@ -73,3 +73,6 @@
 
 /* Skills da reunião overlays the video card without consuming layout space */
 .space-live-card{position:relative}.space-meeting-skills-overlay{position:absolute;top:12px;left:14px;z-index:12;margin:0!important}.space-host{position:relative;z-index:5}.space-meeting-skills-row{display:none!important}
+
+/* Skills da reunião positioned below the slides card */
+.space-meeting-skills-below-slides{display:flex;align-items:flex-start;justify-content:flex-start;margin-top:8px}.space-meeting-skills-below-slides .space-meeting-skills-btn{position:static!important;margin:0!important}
