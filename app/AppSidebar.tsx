@@ -11,8 +11,7 @@ import './app-sidebar.css';
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 const icons=[Grid2X2,CirclePlus,CalendarDays,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Skills','Contatos','Notificações','Gravações','Configurações','Sair'];
-const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit}];
-const spaceTools=[{label:'Contatos',Icon:UserRound},{label:'Gravações',Icon:Video},{label:'Calculadora',Icon:Calculator},{label:'Criar slides',Icon:Presentation}];
+const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Skills Pro',Icon:Sparkles},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit}];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
@@ -31,7 +30,6 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
     <div className="side-nav">
       {primary.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
       {extras.map(({label,Icon})=>label==='Human Pro'||label==='Skills Pro'||label==='Skills Full'?<Link className={`side-item ${active(label)?'active':''}`} href={resolveSidebarRoute(label)!} key={label}><Icon/><span>{label}</span></Link>:<button className={`side-item ${active(label)?'active':''}`} key={label} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
-      <div className="space-tools"><div className="space-tools-title"><Orbit/><span>Space</span></div>{spaceTools.map(({label,Icon})=><button className={`side-item space-tool ${active(label)?'active':''}`} key={label} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}</div>
       {final.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)}><Icon/><span>{label}</span></button>)}
     </div>
     
