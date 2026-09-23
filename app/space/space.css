@@ -70,3 +70,6 @@
 
 /* Meeting Skills CTA: below top navigation, above video */
 .space-meeting-skills-row{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-start;margin:0 0 2px}.space-meeting-skills-btn{width:214px;height:50px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;border-radius:8px;border:1px solid #303236;background:rgba(255,255,255,.025);color:#d8d8d6;font:700 11px monospace;letter-spacing:.08em;white-space:nowrap;cursor:pointer;box-shadow:none}.space-meeting-skills-btn svg{width:17px;height:17px;stroke-width:1.45}.space-meeting-skills-btn:hover{background:rgba(255,255,255,.065);color:#fff;border-color:#484b4f}
+
+/* Skills da reunião overlays the video card without consuming layout space */
+.space-live-card{position:relative}.space-meeting-skills-overlay{position:absolute;top:12px;left:14px;z-index:12;margin:0!important}.space-host{position:relative;z-index:5}.space-meeting-skills-row{display:none!important}
