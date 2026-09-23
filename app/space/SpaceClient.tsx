@@ -151,7 +151,7 @@ export default function SpaceClient(){
   return <main className="app-shell space-page">
     <AppSidebar/>
     <section className="content space-content">
-      <header className="space-icon-topbar" aria-label="NOZA Space"><button onClick={()=>setMediaError('Nenhuma nova notificação.')} aria-label="Notificações"><Bell/></button></header>
+      <header className="space-icon-topbar" aria-label="NOZA Space"><button className="notification-button" onClick={()=>setMediaError('Nenhuma nova notificação.')} aria-label="Notificações"><Bell/></button></header>
       <div className={`space-workspace ${supportCardsCollapsed?'support-cards-collapsed ':''}${collapsed.slides?'slides-collapsed ':''}${collapsed.agenda?'agenda-collapsed ':''}${collapsed.notes?'notes-collapsed':''}`}>
         <button className="space-support-toggle" onClick={toggleSupportCards} aria-label={supportCardsCollapsed?'Expandir cards auxiliares':'Encolher cards auxiliares'}>{supportCardsCollapsed?<><ChevronDown/><span>Expandir painéis</span></>:<><ChevronUp/><span>Encolher painéis</span></>}</button>
         <section className="space-live-card" aria-label="Reunião ao vivo">
