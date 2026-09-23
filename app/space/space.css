@@ -67,3 +67,6 @@
 
 /* Skills shortcut above the Space video */
 .space-skills-link{display:inline-flex!important;align-items:center!important;gap:6px!important;border:0!important;background:transparent!important;color:inherit!important;padding:0 8px 0 0!important;font:inherit!important;cursor:pointer!important}.space-skills-link svg{width:15px!important;height:15px!important;stroke-width:1.6!important}.space-skills-link span{font-size:12px!important}.space-skills-link:hover{opacity:.72!important}
+
+/* Meeting Skills CTA: below top navigation, above video */
+.space-meeting-skills-row{grid-column:1/-1;display:flex;align-items:center;justify-content:flex-start;margin:0 0 2px}.space-meeting-skills-btn{width:214px;height:50px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 18px;border-radius:8px;border:1px solid #303236;background:rgba(255,255,255,.025);color:#d8d8d6;font:700 11px monospace;letter-spacing:.08em;white-space:nowrap;cursor:pointer;box-shadow:none}.space-meeting-skills-btn svg{width:17px;height:17px;stroke-width:1.45}.space-meeting-skills-btn:hover{background:rgba(255,255,255,.065);color:#fff;border-color:#484b4f}
