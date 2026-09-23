@@ -95,3 +95,9 @@
 .space-agenda.is-collapsed,.space-notes.is-collapsed{height:52px!important;min-height:52px!important}.space-agenda.is-collapsed>*:not(header),.space-notes.is-collapsed>*:not(header){display:none!important}.space-agenda.is-collapsed header,.space-notes.is-collapsed header{height:100%!important;align-items:center!important}
 .space-workspace.slides-collapsed .space-live-card,.space-workspace.agenda-collapsed .space-live-card,.space-workspace.notes-collapsed .space-live-card{justify-self:center!important}.space-workspace.slides-collapsed.agenda-collapsed.notes-collapsed{grid-template-columns:minmax(0,1fr) minmax(270px,.72fr) 210px!important}.space-workspace.slides-collapsed.agenda-collapsed.notes-collapsed .space-live-card{width:min(100%,820px)!important}
 @media(max-width:1180px){.space-page .space-workspace{grid-template-columns:minmax(0,1fr) minmax(280px,.9fr)!important}}
+
+/* Keep Space on the exact global Home sidebar/content rail */
+html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{margin-left:var(--zyvo-sidebar-expanded,238px)!important;width:calc(100vw - var(--zyvo-sidebar-expanded,238px))!important;padding-left:28px!important;padding-right:28px!important}
+.space-page .app-topbar{margin-left:0!important}
+@media(max-width:1180px){html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{padding-left:20px!important;padding-right:18px!important}}
+@media(max-width:820px){html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{padding-left:16px!important;padding-right:14px!important}}
