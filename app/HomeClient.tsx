@@ -11,7 +11,7 @@ import FloatingCalculator from './FloatingCalculator';
 import FloatingNotes,{type FloatingNotesMode} from './FloatingNotes';
 import {homeCardRoute} from './home-card-route.mjs';
 
-const cardIcon=(slug:string)=>slug==='recordings'?Lightbulb:slug==='insights'?Lightbulb:BarChart3; // production sync retry 2
+const cardIcon=(slug:string)=>slug==='recordings'?Lightbulb:slug==='insights'?Lightbulb:BarChart3; // production sync retry 3
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
 
 export default function HomeClient({content}:{content:HomeContent}){
