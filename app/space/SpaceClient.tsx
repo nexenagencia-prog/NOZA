@@ -2,7 +2,7 @@
 
 import {ChangeEvent,FormEvent,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {Bell,CalendarDays,Camera,CameraOff,Check,ChevronLeft,ChevronRight,Copy,Download,Ellipsis,FileUp,Filter,Grid2X2,Heart,LayoutList,Maximize2,MessageCircle,Mic,MicOff,MonitorUp,NotebookPen,PanelBottomClose,Plus,Save,Send,Share2,SlidersHorizontal,Smile,StickyNote,Users,X} from 'lucide-react';
+import {Bell,CalendarDays,Camera,CameraOff,Check,ChevronLeft,ChevronRight,Calculator,ContactRound,Copy,Download,Ellipsis,FileUp,Filter,Grid2X2,Heart,LayoutList,Maximize2,MessageCircle,Mic,MicOff,MonitorUp,NotebookPen,PanelBottomClose,Plus,Presentation,Save,Send,Share2,SlidersHorizontal,Smile,StickyNote,Users,Video as VideoIcon,X} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 import AppTopbar from '../AppTopbar';
 import {appendMessage,createLocalSlide,filterParticipants,getParticipantPanelView,getSlideOverlay,mergeSlides,previousSlideIndex,toggleAgendaItem,upsertNote} from './space-model.mjs';
@@ -156,6 +156,10 @@ export default function SpaceClient(){
         <button onClick={()=>setLayout(value=>value==='mosaic'?'list':'mosaic')}><Users/><span>Participantes</span></button>
         <div className="space-control-menu"><button onClick={()=>setFilterOpen(value=>!value)} aria-expanded={filterOpen}><Filter/><span>Filtros</span></button>{filterOpen&&<div>{(['all','active','muted'] as ParticipantFilter[]).map(value=><button key={value} className={filter===value?'active':''} onClick={()=>{setFilter(value);setFilterOpen(false)}}>{value==='all'?'Todos':value==='active'?'Ativos':'Silenciados'}</button>)}</div>}</div>
         <button onClick={shareSpace}><MonitorUp/><span>{shared?'Link copiado':'Compartilhar'}</span></button>
+        <button onClick={()=>router.push('/contatos')}><ContactRound/><span>Contatos</span></button>
+        <button onClick={()=>router.push('/gravacoes')}><VideoIcon/><span>Gravações</span></button>
+        <button onClick={()=>window.dispatchEvent(new Event('zyvo:open-calculator'))}><Calculator/><span>Calculadora</span></button>
+        <button onClick={()=>router.push('/slides')}><Presentation/><span>Criar slides</span></button>
         <div className="space-control-menu"><button onClick={()=>setMoreOpen(value=>!value)} aria-expanded={moreOpen}><Ellipsis/><span>Mais</span></button>{moreOpen&&<div><button onClick={()=>setChatOpen(false)}><PanelBottomClose/>Ocultar chat</button><button onClick={()=>setMediaError('Preferências da reunião atualizadas.')}><SlidersHorizontal/>Preferências</button></div>}</div>
         <button className="space-leave" onClick={()=>setExitOpen(true)}><Share2/><span>Sair</span></button>
       </nav>
