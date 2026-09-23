@@ -94,11 +94,15 @@ export default function SpaceClient(){
   const [supportCardsCollapsed,setSupportCardsCollapsed]=useState(false);
   const [notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
   const [contactsOpen,setContactsOpen]=useState(false);
+  const [calculatorOpen,setCalculatorOpen]=useState(false);
+  const [calcExpression,setCalcExpression]=useState('');
+  const [calcResult,setCalcResult]=useState('0');
   const [contactSelection,setContactSelection]=useState<string[]>([]);
   const togglePanel=(key:'slides'|'agenda'|'notes')=>setCollapsed(value=>({...value,[key]:!value[key]}));
   const toggleSupportCards=()=>{setSupportCardsCollapsed(value=>{const next=!value;setCollapsed({slides:next,agenda:next,notes:next});return next})};
   const toggleContact=(id:string)=>setContactSelection(list=>list.includes(id)?list.filter(item=>item!==id):[...list,id]);
   const addContactsNow=()=>{if(!contactSelection.length){setMediaError('Selecione pelo menos um contato.');return}setMediaError(`${contactSelection.length} contato(s) adicionados à reunião.`);setContactsOpen(false)};
+  const pressCalc=(value:string)=>{if(value==='C'){setCalcExpression('');setCalcResult('0');return}if(value==='⌫'){setCalcExpression(text=>text.slice(0,-1));return}if(value==='='){try{const safe=calcExpression.replace(/×/g,'*').replace(/÷/g,'/').replace(/,/g,'.');if(!/^[0-9+\-*/().% ]+$/.test(safe))throw new Error();const result=Function('"use strict";return ('+safe+')')();setCalcResult(Number.isFinite(result)?String(result).replace('.',','):'0')}catch{setCalcResult('Erro')}return}setCalcExpression(text=>text+value)};
   const scheduleContacts=()=>{const names=participants.filter(person=>contactSelection.includes(person.id)).map(person=>person.name).join(', ');setAgendaTitle(names?`Reunião com ${names}`:'Próxima reunião');setAgendaForm(true);setContactsOpen(false);setTimeout(()=>document.querySelector<HTMLInputElement>('.space-agenda-form input[type="time"]')?.focus(),0)};
 
   useEffect(()=>{
@@ -179,11 +183,12 @@ export default function SpaceClient(){
         <button onClick={shareSpace}><MonitorUp/><span>{shared?'Link copiado':'Compartilhar'}</span></button>
         <div className="space-control-menu space-contacts-control"><button className={contactsOpen?'active':''} onClick={()=>setContactsOpen(value=>!value)} aria-expanded={contactsOpen}><ContactRound/><span>Contatos</span></button>{contactsOpen&&<div className="space-contacts-popover"><header><strong>Adicionar à reunião</strong><small>Deslize para escolher</small></header><div className="space-contact-strip">{participants.map(person=><button key={person.id} className={contactSelection.includes(person.id)?'selected':''} onClick={()=>toggleContact(person.id)}><span><img src={person.image} alt=""/>{contactSelection.includes(person.id)&&<Check/>}</span><small>{person.name.split(' ')[0]}</small></button>)}</div><footer><button onClick={addContactsNow}><Users/>Adicionar agora</button><button onClick={scheduleContacts}><CalendarDays/>Agendar próxima</button></footer></div>}</div>
         <button onClick={()=>router.push('/gravacoes')}><VideoIcon/><span>Gravações</span></button>
-        <button onClick={()=>window.dispatchEvent(new Event('zyvo:open-calculator'))}><Calculator/><span>Calculadora</span></button>
+        <button onClick={()=>setCalculatorOpen(true)}><Calculator/><span>Calculadora</span></button>
         <button onClick={()=>router.push('/slides')}><Presentation/><span>Criar slides</span></button>
         <div className="space-control-menu"><button onClick={()=>setMoreOpen(value=>!value)} aria-expanded={moreOpen}><Ellipsis/><span>Mais</span></button>{moreOpen&&<div><button onClick={()=>setChatOpen(value=>!value)}><PanelBottomClose/>{chatOpen?'Ocultar chat':'Mostrar chat'}</button><button onClick={()=>setMediaError('Preferências da reunião atualizadas.')}><SlidersHorizontal/>Preferências</button></div>}</div>
         <button className="space-leave" onClick={()=>setExitOpen(true)}><Share2/><span>Sair</span></button>
       </nav>
+      {calculatorOpen&&<div className="space-calculator-layer" onMouseDown={event=>{if(event.target===event.currentTarget)setCalculatorOpen(false)}}><section className="space-calculator" role="dialog" aria-modal="true" aria-label="Calculadora"><header><div><Calculator/><span><strong>Calculadora</strong><small>NOZA SPACE</small></span></div><button onClick={()=>setCalculatorOpen(false)} aria-label="Fechar calculadora"><X/></button></header><div className="space-calculator-display"><small>{calcExpression||'0'}</small><strong>{calcResult}</strong></div><div className="space-calculator-grid">{['C','(',')','÷','7','8','9','×','4','5','6','-','1','2','3','+','0',',','⌫','='].map(key=><button key={key} className={key==='='?'equals':/[÷×+\-]/.test(key)?'operator':''} onClick={()=>pressCalc(key)}>{key}</button>)}</div></section></div>}
       <FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
       {mediaError&&<div className="space-toast" role="status"><Bell/>{mediaError}<button onClick={()=>setMediaError('')} aria-label="Fechar aviso"><X/></button></div>}
       {exitOpen&&<div className="space-dialog-backdrop" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)setExitOpen(false)}}><div className="space-dialog" role="dialog" aria-modal="true" aria-labelledby="space-exit-title"><button className="space-dialog-close" onClick={()=>setExitOpen(false)} aria-label="Fechar"><X/></button><h2 id="space-exit-title">Sair do Space?</h2><p>A câmera e o microfone serão desligados. Suas mensagens, agenda e anotações permanecerão salvas.</p><div><button onClick={()=>setExitOpen(false)}>Continuar na reunião</button><button className="danger" onClick={finishMeeting}>Finalizar e gerar relatório</button></div></div></div>}
