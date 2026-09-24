@@ -23,6 +23,7 @@ export default function HomeClient({content}:{content:HomeContent}){
   const[calculatorOpen,setCalculatorOpen]=useState(false);
   const[notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
   const[focusLabel,setFocusLabel]=useState('Performance estratégica');
+  const[hasNozaHistory,setHasNozaHistory]=useState(false);
   const slides=useMemo(()=>{
     const active=content.carousel.filter(item=>item.isActive);
     return active.length?active:content.carousel;
@@ -37,6 +38,12 @@ export default function HomeClient({content}:{content:HomeContent}){
   },[slides.length,content.carouselIntervalMs]);
   useEffect(()=>setSlide(0),[slides]);
   useEffect(()=>{try{const raw=localStorage.getItem('noza-cognitive-selected-topics');if(raw){const topics=JSON.parse(raw) as string[];if(topics.length){const groups=[{label:'Estratégia cognitiva',keys:['Cognição','Raciocínio','Investigação','Percepção','Metacognição']},{label:'Influência estratégica',keys:['Persuasão','Influência','Vendas','Objeções','Psicologia']},{label:'Adaptação estratégica',keys:['Adaptabilidade','Atualização','Repertório']}];const ranked=groups.map(g=>({...g,n:g.keys.filter(k=>topics.includes(k)).length})).sort((a,b)=>b.n-a.n);setFocusLabel(ranked[0].n?ranked[0].label:'Performance estratégica')}}}catch{}},[]);
+  useEffect(()=>{try{
+    const history=localStorage.getItem('noza-cognitive-history');
+    const baseline=localStorage.getItem('noza-cognitive-baseline');
+    const selected=localStorage.getItem('noza-cognitive-selected-topics');
+    setHasNozaHistory(Boolean((history&&history!=='[]')||baseline||(selected&&selected!=='[]')));
+  }catch{}},[]);
   useEffect(()=>{try{const saved=localStorage.getItem('noza-profile-name');if(saved)setHomeName(saved)}catch{};const sync=(e:any)=>setHomeName(e.detail||content.profile.name);window.addEventListener('noza:profile-name',sync);return()=>window.removeEventListener('noza:profile-name',sync)},[content.profile.name]);
 
   const go=(direction:number)=>setSlide(currentSlide=>slides.length?(currentSlide+direction+slides.length)%slides.length:0);
@@ -48,7 +55,10 @@ export default function HomeClient({content}:{content:HomeContent}){
   ];
   const visual=nozaCarousel[slide%nozaCarousel.length];
   const heroStyle=content.hero.imageUrl?{backgroundImage:`url(${content.hero.imageUrl})`}:undefined;
-  const titleLines=content.hero.title.split('\n');
+  const adaptiveHero=hasNozaHistory
+    ? {title:'Eu estou aprendendo como você funciona.',subtitle:'Observo seus padrões, conecto suas experiências e identifico o que pode levar sua performance além.'}
+    : {title:'Vamos descobrir como você funciona.',subtitle:'A NOZA começa conhecendo seus padrões, suas capacidades e como você pensa, comunica e decide.'};
+  const titleLines=adaptiveHero.title.split('\n');
   const firstName=homeName.trim().split(/\s+/)[0]||'Sandro';
   return <main className={`app-shell ${loaded?'loaded':''}`}>
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
@@ -59,8 +69,8 @@ export default function HomeClient({content}:{content:HomeContent}){
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
-          <div className="performance-insight"><small>SUA EVOLUÇÃO</small><span>Quanto mais a NOZA conhece seus padrões, mais precisa se torna a direção do seu desenvolvimento.</span></div>
-          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><Crosshair size={20}/>Fazer Calibragem</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
+          <div className="performance-insight"><small>{hasNozaHistory?'SUA EVOLUÇÃO':'PRIMEIRO PASSO'}</small><span>{adaptiveHero.subtitle}</span></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><Crosshair size={20}/>{hasNozaHistory?'Fazer Calibragem':'Fazer minha primeira calibragem'}</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
