@@ -14,13 +14,15 @@ type AppTopbarProps={
   nextLabel?:string;
   nextDateTime?:string;
   performancePercent?:number;
+  showContext?:boolean;
 };
 
 export default function AppTopbar({
   floating=false,
   nextLabel='Sua próxima Reunião',
   nextDateTime='14:00 — 30 Set 2026',
-  performancePercent=69
+  performancePercent=69,
+  showContext=false
 }:AppTopbarProps){
   const pathname=usePathname();
   const router=useRouter();
@@ -43,7 +45,7 @@ export default function AppTopbar({
   return <header className={`topbar app-topbar ${floating?'app-topbar-floating':''}`}>
     <Link href="/" prefetch className="zyvo-brand" aria-label={BRAND_NAME}><img src={BRAND_LOGO} alt="" aria-hidden="true"/></Link>
     <nav className="topnav">{nav.map(([label,href])=><Link href={href} prefetch className={pathname===href?'current':''} key={href}>{label}</Link>)}</nav>
-    <div className="next-meeting"><span>{nextLabel}</span><strong>{nextDateTime}</strong></div>
+    {showContext&&<div className="next-meeting"><span>{nextLabel}</span><strong>{nextDateTime}</strong></div>}
     <div className="notification-wrap">
       <button ref={notificationButtonRef} className={`notification-button ${notificationsOpen?'active':''}`} aria-label="Notificações" aria-expanded={notificationsOpen} onClick={()=>setNotificationsOpen(v=>!v)}><Bell/></button>
       {notificationsOpen&&<div ref={notificationRef} className="notification-panel">
