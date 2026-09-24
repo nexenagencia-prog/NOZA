@@ -69,7 +69,7 @@ export default function RecordingsPage(){
  const reversed=[...recordings].reverse();
  const repeated=[...recordings,...recordings,...recordings];
  const repeatedReversed=[...reversed,...reversed,...reversed];
- return <main className="recordings-page"><AppSidebar/><AppTopbar/><section className="content recordings-content"><AppTopbar floating={false}/><div className="recordings-stage">
+ return <main className="recordings-page"><AppSidebar/><section className="content recordings-content"><AppTopbar floating={false}/><div className="recordings-stage">
   <input ref={fileRef} className="recordings-file-input" type="file" accept="image/*" onChange={changeThumbnail}/>
   {featured&&<section className="recordings-featured-wrap">
    <button className="recordings-arrow left" onClick={()=>shift(-1)} disabled={active===0} aria-label="Gravação anterior"><ChevronLeft/></button>
