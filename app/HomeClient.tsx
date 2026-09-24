@@ -24,12 +24,22 @@ export default function HomeClient({content}:{content:HomeContent}){
   const[notesMode,setNotesMode]=useState<FloatingNotesMode>(null);
   const[focusLabel,setFocusLabel]=useState('Performance estratégica');
   const[hasNozaHistory,setHasNozaHistory]=useState(false);
+  const[homeDateTime,setHomeDateTime]=useState('');
   const slides=useMemo(()=>{
     const active=content.carousel.filter(item=>item.isActive);
     return active.length?active:content.carousel;
   },[content.carousel]);
 
   useEffect(()=>{router.prefetch('/anotacoes');router.prefetch('/skills')},[router]);
+  useEffect(()=>{
+    const update=()=>{
+      const now=new Date();
+      const date=new Intl.DateTimeFormat('pt-BR',{weekday:'long',day:'2-digit',month:'long'}).format(now);
+      const time=new Intl.DateTimeFormat('pt-BR',{hour:'2-digit',minute:'2-digit'}).format(now);
+      setHomeDateTime(`${date} · ${time}`);
+    };
+    update();const timer=setInterval(update,60000);return()=>clearInterval(timer);
+  },[]);
   useEffect(()=>{
     requestAnimationFrame(()=>setLoaded(true));
     if(!slides.length)return;
@@ -64,7 +74,7 @@ export default function HomeClient({content}:{content:HomeContent}){
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
     <section className={`content ${expanded?'shifted':''}`}>
-      <AppTopbar floating={false} searchPlaceholder={content.navigation.searchPlaceholder} nextLabel="FOCO ATUAL" nextDateTime={focusLabel} performancePercent={content.hero.performancePercent}/>
+      <AppTopbar floating={false} nextLabel="AGORA" nextDateTime={homeDateTime} performancePercent={content.hero.performancePercent} showContext/>
       <section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
