@@ -36,3 +36,41 @@
 .analysis-page .analysis-stats span{color:#85898d!important}
 .analysis-page .app-topbar{background:transparent!important}
 @media(max-width:1200px){.analysis-page .analysis-stage{transform:none!important;width:100%!important;height:calc(100vh - 78px)!important}}
+
+
+/* Definitive layout isolation: analysis is positioned inside the post-sidebar content box. */
+html body .analysis-page>.content{
+  position:relative!important;
+  margin-left:224px!important;
+  width:calc(100vw - 224px)!important;
+  max-width:calc(100vw - 224px)!important;
+  height:100vh!important;
+  min-height:100vh!important;
+  padding:0 32px 0 24px!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+.analysis-page>.content>.app-topbar{
+  position:relative!important;
+  width:100%!important;
+  height:78px!important;
+  margin:0!important;
+}
+.analysis-page>.content>.analysis-stage{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:calc(100vh - 78px)!important;
+  margin:0!important;
+  transform:none!important;
+  transform-origin:initial!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:1450px){
+  html body .analysis-page>.content{margin-left:210px!important;width:calc(100vw - 210px)!important;max-width:calc(100vw - 210px)!important}
+}
+@media(max-width:820px){
+  html body .analysis-page>.content{margin-left:184px!important;width:calc(100vw - 184px)!important;max-width:calc(100vw - 184px)!important;padding-left:16px!important;padding-right:14px!important}
+}
