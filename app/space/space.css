@@ -704,3 +704,65 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-evolution:not(.is-collapsed) .space-dots{
   display:flex!important;visibility:visible!important;opacity:1!important;z-index:31!important;pointer-events:auto!important;
 }
+
+/* Participant screen — faithful to supplied 3-column portrait reference; no other Space geometry changed */
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:11px!important;
+  grid-auto-flow:dense!important;
+  gap:6px!important;
+  height:calc(100% - 42px)!important;
+  padding:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  align-content:start!important;
+  column-count:initial!important;
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:0!important;
+  transform:none!important;
+  break-inside:auto!important;
+  border:0!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+  background:#17191b!important;
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+1){grid-row:span 18!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+2){grid-row:span 22!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+3){grid-row:span 19!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+4){grid-row:span 23!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+5){grid-row:span 20!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+6){grid-row:span 23!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n+7){grid-row:span 21!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(8n){grid-row:span 19!important}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>img{
+  display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  object-fit:cover!important;object-position:center!important;opacity:1!important;visibility:visible!important;filter:saturate(.82) contrast(1.02)!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:after{
+  content:""!important;position:absolute!important;inset:0!important;z-index:1!important;
+  background:linear-gradient(180deg,transparent 45%,rgba(5,7,8,.08) 58%,rgba(5,7,8,.88) 100%)!important;
+  -webkit-mask-image:none!important;mask-image:none!important;backdrop-filter:none!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>div{
+  left:10px!important;right:10px!important;bottom:11px!important;z-index:2!important;text-align:center!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card small{
+  font-size:8px!important;color:rgba(255,255,255,.72)!important;margin-bottom:3px!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card strong{
+  font-size:14px!important;line-height:1!important;font-weight:600!important;color:#fff!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>span{
+  display:none!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-expand{
+  display:none!important
+}
