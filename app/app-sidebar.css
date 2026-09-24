@@ -154,3 +154,32 @@ body:has(.space-page) .space-sidebar-toggle{display:flex!important;margin-top:au
 body:has(.space-page) .space-sidebar-toggle:hover{color:#f4f4f2!important}
 body:has(.space-page) .space-sidebar-toggle svg{width:18px!important;height:18px!important}
 body:has(.space-page) .space-sidebar-toggle span{font-size:12.6px!important}
+
+/* Space sidebar: expanded state is exactly the canonical Home sidebar */
+body:has(.space-page) .sidebar:not(.space-collapsed),
+body:has(.space-page) .sidebar.expanded:not(.space-collapsed){
+  width:224px!important;
+  padding:28px 20px 24px!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .sidebar-brand{
+  height:50px!important;min-height:50px!important;margin-bottom:16px!important;padding:0 27px!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .avatar-wrap{
+  min-height:62px!important;margin:0 0 17px!important;padding:7px 10px!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .side-nav{
+  gap:7px!important;padding:0 0 6px!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .side-item{
+  height:48px!important;min-height:48px!important;padding:0 24px!important;gap:15px!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .side-item span{
+  display:inline!important;font-size:12.6px!important;line-height:1!important;font-weight:350!important;letter-spacing:-.01em!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) .side-item svg{
+  width:19px!important;height:19px!important;stroke-width:1.55!important;
+}
+body:has(.space-page) .sidebar:not(.space-collapsed) + .content,
+body:has(.space-page) .sidebar:not(.space-collapsed) ~ .content{
+  margin-left:224px!important;width:calc(100vw - 224px)!important;max-width:calc(100vw - 224px)!important;
+}
