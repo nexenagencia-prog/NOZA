@@ -92,7 +92,7 @@ export default function AnalysisPageClient(){
   const thumb=recording?.thumbnail||'/skills-card.png';
   return <main className="app-shell analysis-page">
     <AppSidebar/>
-    <section className="content">
+    <section className="content analysis-content">
       <AppTopbar/>
       <section className={analysisThemeClass('analysis-stage')} style={analysisThemeVars as CSSProperties}>
         <div className="analysis-heading"><button onClick={()=>router.push('/gravacoes')} aria-label="Voltar para gravações"><ChevronLeft/></button><div><span>ANÁLISE DE REUNIÕES</span><h1>Desempenho que<br/>gera resultados.</h1><p>IA conversacional baseada em evidências,<br/>momentos e decisões da reunião.</p></div></div>
