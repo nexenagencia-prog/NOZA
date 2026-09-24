@@ -66,7 +66,7 @@ export default function HomeClient({content}:{content:HomeContent}){
   const visual=nozaCarousel[slide%nozaCarousel.length];
   const heroStyle=content.hero.imageUrl?{backgroundImage:`url(${content.hero.imageUrl})`}:undefined;
   const adaptiveHero=hasNozaHistory
-    ? {title:'Eu estou aprendendo como você funciona.',subtitle:'Observo seus padrões, conecto suas experiências e identifico o que pode levar sua performance além.'}
+    ? {title:'Estou trabalhando para fazer você evoluir ainda mais.',subtitle:'A cada interação, entendo melhor seus padrões e encontro novas formas de elevar sua performance.'}
     : {title:'Vamos descobrir como você funciona.',subtitle:'A NOZA começa conhecendo seus padrões, suas capacidades e como você pensa, comunica e decide.'};
   const titleLines=adaptiveHero.title.split('\n');
   const firstName=homeName.trim().split(/\s+/)[0]||'Sandro';
