@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,ChevronLeft,ChevronRight,CirclePlus,DoorOpen,Grid2X2,Hexagon,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,UserRound,Video} from 'lucide-react';
+import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,ChevronLeft,ChevronRight,CirclePlus,DoorOpen,Grid2X2,Hexagon,Headphones,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,UserRound,Video} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -11,7 +11,7 @@ import './app-sidebar.css';
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 const icons=[Grid2X2,CirclePlus,CalendarDays,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Skills','Contatos','Notificações','Gravações','Configurações','Sair'];
-const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit}];
+const extras=[{label:'Calibragem',Icon:BrainCircuit},{label:'Human Pro',Icon:BrainCircuit},{label:'Skills Full',Icon:BrainCircuit},{label:'Space',Icon:Orbit},{label:'Suporte',Icon:Headphones}];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
@@ -22,7 +22,7 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
   const primary=labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label!=='Configurações'&&item.label!=='Sair'&&!hiddenLabels.has(item.label));
   const final=[...labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label==='Configurações'||item.label==='Sair'),...(!labels.includes('Configurações')?[{label:'Configurações',index:998,Icon:Hexagon}]:[])].sort((a,b)=>a.label==='Sair'?1:b.label==='Sair'?-1:a.index-b.index);
   const emit=(eventName:string)=>window.dispatchEvent(new Event(eventName));
-  const action=(label:string)=>{const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes');else if(label==='Criar slides')router.push('/slides')};
+  const action=(label:string)=>{if(label==='Suporte'){router.push('/suporte');return}const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes');else if(label==='Criar slides')router.push('/slides')};
   const active=(label:string)=>isSidebarRouteActive(label,pathname);
   return <aside className={`sidebar expanded ${isSpace&&spaceCollapsed?'space-collapsed':''}`} aria-label="Menu lateral">
     <button className="sidebar-brand" onClick={()=>router.push('/')} aria-label={BRAND_NAME}><img src={BRAND_LOGO} alt={BRAND_NAME}/></button>
