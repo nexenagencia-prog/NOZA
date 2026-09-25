@@ -74,3 +74,22 @@ html body .analysis-page>.content{
 @media(max-width:820px){
   html body .analysis-page>.content{margin-left:184px!important;width:calc(100vw - 184px)!important;max-width:calc(100vw - 184px)!important;padding-left:16px!important;padding-right:14px!important}
 }
+
+
+/* Historical meeting-skill feedback: reuses the Score Geral card without changing layout. */
+.analysis-page .analysis-metric{cursor:pointer;transition:border-color .16s ease,background .16s ease,transform .16s ease}
+.analysis-page .analysis-metric:hover,.analysis-page .analysis-metric.selected{border-color:rgba(235,236,233,.38)!important;background:rgba(255,255,255,.055)!important}
+.analysis-page .analysis-metric:focus-visible{outline:1px solid #d8dad7;outline-offset:2px}
+.analysis-page .analysis-score.is-feedback{display:block!important;padding:24px 26px!important;overflow:auto!important}
+.analysis-skill-feedback{position:relative;height:100%;color:#efefec}
+.analysis-skill-feedback>button{position:absolute;right:0;top:0;width:30px;height:30px;border:1px solid #303236;border-radius:8px;background:rgba(255,255,255,.025);color:#d8dad7;display:grid;place-items:center;cursor:pointer}
+.analysis-skill-feedback>button svg{width:15px;height:15px}
+.analysis-skill-feedback>span{display:block;padding-right:38px;font:600 8px/1.4 monospace;letter-spacing:.13em;color:#777b7e}
+.analysis-skill-feedback>h2{margin:14px 0 4px;font-size:25px;font-weight:450;letter-spacing:-.035em}
+.analysis-skill-feedback>strong{display:block;font-size:43px;line-height:1;font-weight:350;color:#f5f5f2}
+.analysis-skill-feedback>h3{margin:14px 0 7px;font-size:12px;font-weight:500;color:#dfe0dd}
+.analysis-skill-feedback>p{margin:0;color:#929598;font-size:10px;line-height:1.5}
+.analysis-skill-feedback>div{margin-top:16px;padding-top:13px;border-top:1px solid #303236}
+.analysis-skill-feedback>div>b{display:block;margin-bottom:6px;font:600 8px monospace;letter-spacing:.12em;color:#b9bbbd}
+.analysis-skill-feedback>div>p{margin:0;color:#c3c5c3;font-size:10px;line-height:1.5}
+.analysis-skill-feedback>small{display:block;margin-top:15px;color:#6f7275;font:500 8px/1.4 monospace}
