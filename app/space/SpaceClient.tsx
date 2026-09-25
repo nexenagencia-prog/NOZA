@@ -2,7 +2,7 @@
 
 import {ChangeEvent,FormEvent,useEffect,useMemo,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {Bell,BrainCircuit,CalendarDays,Camera,CameraOff,Check,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,Calculator,ContactRound,Copy,Download,Ellipsis,FileUp,Filter,Grid2X2,Heart,LayoutList,Maximize2,MessageCircle,Mic,MicOff,MonitorUp,NotebookPen,PanelBottomClose,Plus,Presentation,Save,Send,Share2,SlidersHorizontal,Smile,StickyNote,Users,Video as VideoIcon,X,Trash2} from 'lucide-react';
+import {Bell,BrainCircuit,CalendarDays,Camera,CameraOff,Check,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,Calculator,ContactRound,Copy,Download,Ellipsis,FileUp,Grid2X2,Heart,LayoutList,Maximize2,MessageCircle,Mic,MicOff,MonitorUp,NotebookPen,PanelBottomClose,Plus,Presentation,Save,Send,Share2,SlidersHorizontal,Smile,StickyNote,Users,Video as VideoIcon,X,Trash2} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 import FloatingNotes,{type FloatingNotesMode} from '../FloatingNotes';
 import {appendMessage,createLocalSlide,filterParticipants,getParticipantPanelView,getSlideOverlay,mergeSlides,previousSlideIndex,toggleAgendaItem,upsertNote} from './space-model.mjs';
@@ -71,7 +71,7 @@ export default function SpaceClient(){
   const [chatOpen,setChatOpen]=useState(true);
   const [layout,setLayout]=useState<'mosaic'|'list'>('mosaic');
   const [filter,setFilter]=useState<ParticipantFilter>('all');
-  const [filterOpen,setFilterOpen]=useState(false);
+  const [preferencesOpen,setPreferencesOpen]=useState(false);
   const [moreOpen,setMoreOpen]=useState(false);
   const [exitOpen,setExitOpen]=useState(false);
   const [cameraOn,setCameraOn]=useState(false);
@@ -87,7 +87,7 @@ export default function SpaceClient(){
   const [reactionCounts,setReactionCounts]=useState({likes:12,messages:8,shares:3});
   const [transcript,setTranscript]=useState('');
   const [transcribing,setTranscribing]=useState(false);
-  const [videoFilter,setVideoFilter]=useState<'none'|'contrast'|'soft'|'mono'>('none');
+  const [videoFilter,setVideoFilter]=useState<'none'|'contrast'|'soft'|'mono'>(()=>{try{return (localStorage.getItem('noza-space-video-filter') as 'none'|'contrast'|'soft'|'mono')||'none'}catch{return 'none'}});
   const recognitionRef=useRef<any>(null);
   const [collapsed,setCollapsed]=useState({slides:false,agenda:false,notes:false});
   const [supportCardsCollapsed,setSupportCardsCollapsed]=useState(false);
@@ -181,15 +181,15 @@ export default function SpaceClient(){
         <button onClick={()=>setNotesMode('editor')}><NotebookPen/><span>Anotar</span></button>
         <button onClick={()=>setLayout(value=>value==='mosaic'?'list':'mosaic')}><Users/><span>Participantes</span></button>
         <button className={transcribing?'active':''} onClick={toggleTranscription}><StickyNote/><span>{transcribing?'Transcrevendo':'Transcrever'}</span></button>
-        <div className="space-control-menu"><button onClick={()=>setFilterOpen(value=>!value)} aria-expanded={filterOpen}><Filter/><span>Filtros</span></button>{filterOpen&&<div>{(['none','contrast','soft','mono'] as const).map(value=><button key={value} className={videoFilter===value?'active':''} onClick={()=>{setVideoFilter(value);setFilterOpen(false)}}>{value==='none'?'Sem filtro':value==='contrast'?'Definição':value==='soft'?'Suave':'P&B'}</button>)}</div>}</div>
         <button onClick={shareSpace}><MonitorUp/><span>{shared?'Link copiado':'Compartilhar'}</span></button>
         <div className="space-control-menu space-contacts-control"><button className={contactsOpen?'active':''} onClick={()=>setContactsOpen(value=>!value)} aria-expanded={contactsOpen}><ContactRound/><span>Contatos</span></button>{contactsOpen&&<div className="space-contacts-popover"><header><strong>Adicionar à reunião</strong><small>Deslize para escolher</small></header><div className="space-contact-strip">{participants.map(person=><button key={person.id} className={contactSelection.includes(person.id)?'selected':''} onClick={()=>toggleContact(person.id)}><span><img src={person.image} alt=""/>{contactSelection.includes(person.id)&&<Check/>}</span><small>{person.name.split(' ')[0]}</small></button>)}</div><footer><button onClick={addContactsNow}><Users/>Adicionar agora</button><button onClick={scheduleContacts}><CalendarDays/>Agendar próxima</button></footer></div>}</div>
         <button onClick={()=>router.push('/gravacoes')}><VideoIcon/><span>Gravações</span></button>
         <button onClick={()=>setCalculatorOpen(true)}><Calculator/><span>Calculadora</span></button>
         <button onClick={()=>router.push('/slides')}><Presentation/><span>Criar slides</span></button>
-        <div className="space-control-menu"><button onClick={()=>setMoreOpen(value=>!value)} aria-expanded={moreOpen}><Ellipsis/><span>Mais</span></button>{moreOpen&&<div><button onClick={()=>setChatOpen(value=>!value)}><PanelBottomClose/>{chatOpen?'Ocultar chat':'Mostrar chat'}</button><button onClick={()=>setMediaError('Preferências da reunião atualizadas.')}><SlidersHorizontal/>Preferências</button></div>}</div>
+        <div className="space-control-menu"><button onClick={()=>setMoreOpen(value=>!value)} aria-expanded={moreOpen}><Ellipsis/><span>Mais</span></button>{moreOpen&&<div><button onClick={()=>setChatOpen(value=>!value)}><PanelBottomClose/>{chatOpen?'Ocultar chat':'Mostrar chat'}</button><button onClick={()=>setPreferencesOpen(value=>!value)}><SlidersHorizontal/>Preferências</button></div>}</div>
         <button className="space-leave" onClick={()=>setExitOpen(true)}><Share2/><span>Sair</span></button>
       </nav>
+      {preferencesOpen&&<div className="space-calculator-layer" onMouseDown={event=>{if(event.target===event.currentTarget)setPreferencesOpen(false)}}><section className="space-calculator space-preferences" role="dialog" aria-modal="true" aria-label="Preferências da reunião"><header><div><SlidersHorizontal/><span><strong>Preferências</strong><small>NOZA SPACE</small></span></div><button onClick={()=>setPreferencesOpen(false)} aria-label="Fechar preferências"><X/></button></header><div className="space-preferences-options"><strong>Imagem da reunião</strong>{(['none','contrast','soft','mono'] as const).map(value=><button key={value} className={videoFilter===value?'active':''} onClick={()=>{setVideoFilter(value);try{localStorage.setItem('noza-space-video-filter',value)}catch{}setMediaError('Preferência de imagem salva.')}}><span>{value==='none'?'Natural':value==='contrast'?'Definição':value==='soft'?'Suave':'Preto e branco'}</span>{videoFilter===value&&<Check/>}</button>)}</div></section></div>}
       {calculatorOpen&&<div className="space-calculator-layer" onMouseDown={event=>{if(event.target===event.currentTarget)setCalculatorOpen(false)}}><section className="space-calculator" role="dialog" aria-modal="true" aria-label="Calculadora"><header><div><Calculator/><span><strong>Calculadora</strong><small>NOZA SPACE</small></span></div><button onClick={()=>setCalculatorOpen(false)} aria-label="Fechar calculadora"><X/></button></header><div className="space-calculator-display"><small>{calcExpression||'0'}</small><strong>{calcResult}</strong></div><div className="space-calculator-grid">{['C','(',')','÷','7','8','9','×','4','5','6','-','1','2','3','+','0',',','⌫','='].map(key=><button key={key} className={key==='='?'equals':/[÷×+\-]/.test(key)?'operator':''} onClick={()=>pressCalc(key)}>{key}</button>)}</div></section></div>}
       <FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
       {mediaError&&<div className="space-toast" role="status"><Bell/>{mediaError}<button onClick={()=>setMediaError('')} aria-label="Fechar aviso"><X/></button></div>}
