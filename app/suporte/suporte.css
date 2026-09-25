@@ -17,3 +17,12 @@
 .support-detail{padding:6px 2px 2px}.support-detail>button:first-child{border:0;background:none;color:#85888b;padding:0;display:flex;align-items:center;gap:5px;font-size:9px;cursor:pointer}.support-detail>button:first-child svg{width:13px}.support-detail>small{display:block;margin-top:24px;font:600 8px monospace;letter-spacing:.13em;color:#74777a}.support-detail h3{font-size:25px;font-weight:420;margin:7px 0 9px}.support-detail p{max-width:650px;color:#9a9da0;font-size:11px;line-height:1.65}.support-detail-action{margin-top:18px;border:1px solid #393c3f;border-radius:9px;background:rgba(255,255,255,.04);color:#dedfdb;padding:9px 12px;display:flex;align-items:center;gap:7px;font-size:9px;cursor:pointer}.support-detail-action svg{width:14px}
 
 .support-whatsapp-notice{position:fixed;right:24px;bottom:24px;z-index:310;width:340px;border:1px solid #34373a;border-radius:14px;background:#111315;color:#ddd;padding:15px;display:flex;gap:11px;align-items:flex-start;box-shadow:0 22px 60px rgba(0,0,0,.5)}.support-whatsapp-notice>svg{width:19px;flex:0 0 auto}.support-whatsapp-notice span{display:flex;flex-direction:column;gap:5px}.support-whatsapp-notice strong{font-size:11px;font-weight:500}.support-whatsapp-notice small{font-size:9px;line-height:1.45;color:#818589}.support-whatsapp-notice>button{margin-left:auto;border:0;background:none;color:#888;font-size:18px;cursor:pointer}
+
+/* Leo: keep the active conversation in view and remove horizontal overflow. */
+.support-chat{overflow:hidden!important}
+.support-chat-body{min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:smooth!important;padding-bottom:22px!important}
+.support-chat-body>div{overflow-wrap:anywhere!important;word-break:normal!important}
+.support-chat-quick{flex:0 0 auto!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none!important}
+.support-chat-quick::-webkit-scrollbar{display:none!important}
+.support-chat form{flex:0 0 44px!important}
+.support-chat footer{flex:0 0 auto!important}
