@@ -43,13 +43,41 @@ export default function SuportePage(){
  };
  const sendChat=(event?:FormEvent)=>{event?.preventDefault();const text=chatText.trim();if(!text)return;setChat(items=>[...items,{from:'user',text},{from:'leo',text:supportReply(text)}]);setChatText('')};
  const submit=()=>{if(!message.trim())return;try{const current=JSON.parse(localStorage.getItem('noza-support-tickets')||'[]');const ticket={id:'NOZA-'+Date.now().toString().slice(-6),message:message.trim(),status:'EM ANÁLISE',createdAt:new Date().toISOString(),page:location.pathname,browser:navigator.userAgent};localStorage.setItem('noza-support-tickets',JSON.stringify([ticket,...current].slice(0,30)))}catch{}setSent(true)};
- return <main className="app-shell support-page"><AppSidebar/><section className="content support-content"><AppTopbar/><div className="support-stage">
-  <button className="support-back" onClick={()=>router.back()}><ChevronLeft/>Voltar</button>
-  <header><span>SUPORTE NOZA</span><h1>Como posso ajudar?</h1><p>Descreva o que aconteceu. A NOZA organiza as informações e direciona seu atendimento.</p></header>
-  {!sent?<>{activeTopic?<section className="support-topic-view"><button className="support-topic-back" onClick={()=>setActiveTopic(null)}><ChevronLeft/>Todos os assuntos</button><div className="support-topic-title"><activeTopic.Icon/><span><small>SUPORTE · {activeTopic.title.toUpperCase()}</small><h2>{activeTopic.title}</h2><p>{activeTopic.copy}</p></span></div>{detail?<div className="support-detail"><button onClick={()=>setDetail(null)}><ChevronLeft/>Voltar às opções</button><small>{detail.topic.toUpperCase()}</small><h3>{detail.option}</h3><p>{detail.body}</p><button className="support-detail-action" onClick={()=>openChat(detail.topic+' '+detail.option)}><Headphones/>Falar com Léo sobre isso</button></div>:<div className="support-topic-options">{activeTopic.options.map(option=><button key={option} onClick={()=>activeTopic.id==='technical'?openChat(activeTopic.title+' '+option):explainOption(activeTopic.title,option)}><span>{option}</span><ArrowRight/></button>)}</div>}</section>:<><section className="support-compose"><textarea value={message} onChange={e=>setMessage(e.target.value)} placeholder="Conte para a NOZA o que você precisa. Ex.: Minha câmera não aparece quando entro no Space."/><button onClick={submit}><Send/>Enviar para o suporte</button></section>
-  <div className="support-topics">{topics.map(({title,copy,Icon})=><button key={title} onClick={()=>setActiveTopic(topics.find(topic=>topic.title===title)??null)}><Icon/><span><strong>{title}</strong><small>{copy}</small></span><ArrowRight/></button>)}</div>
-  <section className="support-direct"><div><Headphones/><span><strong>Falar com atendimento</strong><small>Léo · suporte inteligente NOZA</small></span></div><button onClick={()=>openChat()}>Iniciar atendimento</button></section>
-  <section className="support-whatsapp"><div><MessageCircle/><span><strong>WhatsApp</strong><small>Atendimento direto · resposta rápida</small></span></div><button onClick={()=>{const number=(process.env.NEXT_PUBLIC_NOZA_WHATSAPP||'').replace(/\D/g,'');const text=encodeURIComponent('Olá! Preciso de suporte com a NOZA.');if(number){window.location.href='https://wa.me/'+number+'?text='+text}else{setMediaWhatsapp(true)}}>Abrir WhatsApp<ArrowRight/></button><p>O número oficial poderá ser conectado aqui sem alterar esta tela.</p></section></>}</>:<section className="support-success"><UserRound/><span>CHAMADO RECEBIDO</span><h2>Estamos analisando seu pedido.</h2><p>Seu atendimento ficou salvo em <b>Meus atendimentos</b>. Você poderá acompanhar a resposta por aqui.</p><button onClick={()=>{setSent(false);setMessage('')}}>Novo atendimento</button></section>}
- {mediaWhatsapp&&<div className="support-whatsapp-notice"><MessageCircle/><span><strong>WhatsApp ainda não conectado</strong><small>Adicione o número oficial em NEXT_PUBLIC_NOZA_WHATSAPP para este botão abrir a conversa diretamente.</small></span><button onClick={()=>setMediaWhatsapp(false)}>×</button></div>}{chatOpen&&<aside className="support-chat" aria-label="Chat de suporte Léo"><header><div><span className="support-agent-icon"><Headphones/></span><span><strong>Léo</strong><small><i/>Suporte inteligente NOZA</small></span></div><button onClick={()=>setChatOpen(false)} aria-label="Fechar chat">×</button></header><div className="support-chat-body">{chat.map((item,index)=><div key={index} className={item.from==='user'?'user':'leo'}>{item.from==='leo'&&<b>LÉO</b>}<p>{item.text}</p></div>)}</div><div className="support-chat-quick">{['Câmera ou microfone','Problema no Space','Gravação ou vídeo','Erro ao entrar','Conta e assinatura','Calibragem Cognitiva','Skills e evolução'].map(value=><button key={value} onClick={()=>setChat(items=>[...items,{from:'user',text:value},{from:'leo',text:supportReply(value)}])}>{value}</button>)}</div><form onSubmit={sendChat}><input autoFocus value={chatText} onChange={e=>setChatText(e.target.value)} placeholder="Pergunte ao Léo..."/><button aria-label="Enviar"><Send/></button></form><footer>Suporte NOZA · não envie senhas ou dados financeiros sensíveis</footer></aside>}
- </div></section></main>
+ return (
+  <main className="app-shell support-page">
+   <AppSidebar/>
+   <section className="content support-content">
+    <AppTopbar/>
+    <div className="support-stage">
+     <button className="support-back" onClick={()=>router.back()}><ChevronLeft/>Voltar</button>
+     <header><span>SUPORTE NOZA</span><h1>Como posso ajudar?</h1><p>Descreva o que aconteceu. A NOZA organiza as informações e direciona seu atendimento.</p></header>
+     {!sent ? (
+      activeTopic ? (
+       <section className="support-topic-view">
+        <button className="support-topic-back" onClick={()=>{setActiveTopic(null);setDetail(null)}}><ChevronLeft/>Todos os assuntos</button>
+        <div className="support-topic-title"><activeTopic.Icon/><span><small>SUPORTE · {activeTopic.title.toUpperCase()}</small><h2>{activeTopic.title}</h2><p>{activeTopic.copy}</p></span></div>
+        {detail ? <div className="support-detail"><button onClick={()=>setDetail(null)}><ChevronLeft/>Voltar às opções</button><small>{detail.topic.toUpperCase()}</small><h3>{detail.option}</h3><p>{detail.body}</p><button className="support-detail-action" onClick={()=>openChat(detail.topic+' '+detail.option)}><Headphones/>Falar com Léo sobre isso</button></div>
+        : <div className="support-topic-options">{activeTopic.options.map(option=><button key={option} onClick={()=>activeTopic.id==='technical'?openChat(activeTopic.title+' '+option):explainOption(activeTopic.title,option)}><span>{option}</span><ArrowRight/></button>)}</div>}
+       </section>
+      ) : (
+       <>
+        <section className="support-compose"><textarea value={message} onChange={e=>setMessage(e.target.value)} placeholder="Conte para a NOZA o que você precisa. Ex.: Minha câmera não aparece quando entro no Space."/><button onClick={submit}><Send/>Enviar para o suporte</button></section>
+        <div className="support-topics">{topics.map(topic=><button key={topic.id} onClick={()=>setActiveTopic(topic)}><topic.Icon/><span><strong>{topic.title}</strong><small>{topic.copy}</small></span><ArrowRight/></button>)}</div>
+        <section className="support-direct"><div><Headphones/><span><strong>Falar com atendimento</strong><small>Léo · suporte inteligente NOZA</small></span></div><button onClick={()=>openChat()}>Iniciar atendimento</button></section>
+        <section className="support-whatsapp"><div><MessageCircle/><span><strong>WhatsApp</strong><small>Atendimento direto · resposta rápida</small></span></div><button onClick={()=>{const number=(process.env.NEXT_PUBLIC_NOZA_WHATSAPP||'').replace(/\D/g,'');const text=encodeURIComponent('Olá! Preciso de suporte com a NOZA.');if(number) window.location.href='https://wa.me/'+number+'?text='+text; else setMediaWhatsapp(true)}}>Abrir WhatsApp<ArrowRight/></button></section>
+       </>
+      )
+     ) : <section className="support-success"><UserRound/><span>CHAMADO RECEBIDO</span><h2>Estamos analisando seu pedido.</h2><p>Seu atendimento ficou salvo em <b>Meus atendimentos</b>.</p><button onClick={()=>{setSent(false);setMessage('')}}>Novo atendimento</button></section>}
+     {mediaWhatsapp&&<div className="support-whatsapp-notice"><MessageCircle/><span><strong>WhatsApp ainda não conectado</strong><small>O número oficial da NOZA precisa ser configurado para abrir a conversa.</small></span><button onClick={()=>setMediaWhatsapp(false)}>×</button></div>}
+     {chatOpen&&<aside className="support-chat" aria-label="Chat de suporte Léo">
+      <header><div><span className="support-agent-icon"><Headphones/></span><span><strong>Léo</strong><small><i/>Suporte inteligente NOZA</small></span></div><button onClick={()=>setChatOpen(false)} aria-label="Fechar chat">×</button></header>
+      <div className="support-chat-body">{chat.map((item,index)=><div key={index} className={item.from==='user'?'user':'leo'}>{item.from==='leo'&&<b>LÉO</b>}<p>{item.text}</p></div>)}</div>
+      <div className="support-chat-quick">{['Câmera ou microfone','Problema no Space','Gravação ou vídeo','Erro ao entrar','Conta e assinatura','Calibragem Cognitiva','Skills e evolução'].map(value=><button key={value} onClick={()=>setChat(items=>[...items,{from:'user',text:value},{from:'leo',text:supportReply(value)}])}>{value}</button>)}</div>
+      <form onSubmit={sendChat}><input autoFocus value={chatText} onChange={e=>setChatText(e.target.value)} placeholder="Pergunte ao Léo..."/><button aria-label="Enviar"><Send/></button></form>
+      <footer>Suporte NOZA · não envie senhas ou dados financeiros sensíveis</footer>
+     </aside>}
+    </div>
+   </section>
+  </main>
+ )
 }
