@@ -766,3 +766,5 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-expand{
   display:none!important
 }
+
+.space-preferences{height:auto!important;min-height:310px!important}.space-preferences-options{padding:18px;display:grid;gap:8px}.space-preferences-options>strong{font-size:11px;font-weight:500;margin-bottom:5px}.space-preferences-options>button{height:42px;border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(255,255,255,.035);color:#d9dcde;padding:0 12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}.space-preferences-options>button.active{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}.space-preferences-options>button svg{width:15px;height:15px}
