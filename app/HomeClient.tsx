@@ -91,7 +91,7 @@ export default function HomeClient({content}:{content:HomeContent}){
       <section className="cards-grid">
         {content.cards.filter(card=>card.isActive).sort((a,b)=>a.sortOrder-b.sortOrder).map((card,index)=>{
           const Icon=cardIcon(card.slug);
-          const route=homeCardRoute(card.slug);
+          const route=index===2?'/skills-pro':homeCardRoute(card.slug);
           const style=undefined;
           const homeCopy=index===0?{title:'Skills',description:'Suas habilidades em desenvolvimento.',status:'Comunicação em evolução'}:index===1?{title:'Inteligência de Performance',description:'Entenda seus padrões de decisão, comunicação e comportamento.',status:'Novo padrão identificado'}:{title:'Próximo desenvolvimento',description:'O que mais pode elevar sua performance agora.',status:'Argumentação estratégica'}; const body=<><Icon className={`card-icon ${card.slug==='recordings'?'circled':''}`}/><h2>{homeCopy.title}</h2><p>{homeCopy.description}</p><strong className="card-status">{homeCopy.status}</strong><div className="card-progress"><i style={{'--p':`${card.percentage}%`} as CSSProperties}/></div><span className="round-go" aria-hidden="true"><ArrowRight/></span></>;
           return route?<Link className={`info-card ${cardClass(index)}`} key={card.slug} style={style} href={route} aria-label={`${card.title}: ${card.ctaLabel}`}>{body}</Link>:<article className={`info-card ${cardClass(index)}`} key={card.slug} style={style}>{body}</article>;
@@ -99,6 +99,6 @@ export default function HomeClient({content}:{content:HomeContent}){
       </section>
     </section>
     <FloatingCalculator open={calculatorOpen} onClose={()=>setCalculatorOpen(false)}/><FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
-    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}`}</style>
+    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}.hero-actions .calibration-cta,.hero-actions .secondary-btn{font-weight:300!important}`}</style>
   </main>;
 }
