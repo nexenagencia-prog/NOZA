@@ -67,6 +67,7 @@ export default function AnalysisPageClient(){
   const router=useRouter();
   const [recording,setRecording]=useState<Recording|null>(null);
   const [recordings,setRecordings]=useState<Recording[]>([]);
+  const [selectedMetric,setSelectedMetric]=useState<Metric|null>(null);
 
   useEffect(()=>{
     const list=readRecordings();
@@ -85,11 +86,18 @@ export default function AnalysisPageClient(){
     if(!recordings.length)return;
     const next=recordings[(index+recordings.length)%recordings.length];
     setRecording(next);
+    setSelectedMetric(null);
     try{window.localStorage.setItem(SELECTED_KEY,JSON.stringify(next))}catch{}
     window.history.replaceState(null,'',`/analise-reunioes?analysis=${encodeURIComponent(next.id)}`);
   };
 
   const thumb=recording?.thumbnail||'/skills-card.png';
+  const metricFeedback=selectedMetric?{
+    title:selectedMetric.label,
+    headline:selectedMetric.value>=88?'Ponto forte desta reunião':selectedMetric.value>=78?'Performance consistente':'Oportunidade de evolução',
+    evidence:`Nesta reunião, ${selectedMetric.copy.charAt(0).toLowerCase()+selectedMetric.copy.slice(1)} O indicador registrado foi de ${selectedMetric.value}%.`,
+    action:selectedMetric.value>=88?'Mantenha esse padrão e observe em quais contextos ele gera mais resposta do outro lado.':selectedMetric.value>=78?'Repita o comportamento nos próximos encontros e procure reduzir as oscilações nos momentos de maior pressão.':'Na próxima reunião, escolha um momento específico para praticar esta skill e compare o resultado com este histórico.'
+  }:null;
   return <main className="app-shell analysis-page">
     <AppSidebar/>
     <section className="content analysis-content">
@@ -107,9 +115,9 @@ export default function AnalysisPageClient(){
 
         <article className="analysis-meeting analysis-panel"><div className="analysis-date"><CalendarDays/>10 de setembro de 2026 • 14:00</div><h2>{recording?.title||'Reunião de planejamento'}</h2><p>{recording?.phrase||'Estratégia, proposta e próximos passos.'}</p><div className="analysis-people"><div className="analysis-avatars">{participantPhotos.map((photo,index)=><img src={photo} alt={`Participante ${index+1}`} key={photo}/>)}<b>+1</b></div><span>6 participantes • 48 min</span></div></article>
 
-        <article className="analysis-score analysis-panel"><div className="analysis-score-ring" style={{'--analysis-score':`${score}%`} as CSSProperties}><div><strong>{score}</strong><span>/100</span><b>Score geral</b><em>↑ +6,4%</em><small>vs. última análise</small></div></div></article>
+        <article className={"analysis-score analysis-panel"+(metricFeedback?" is-feedback":"")}>{metricFeedback?<div className="analysis-skill-feedback"><button onClick={()=>setSelectedMetric(null)} aria-label="Voltar ao score geral"><ChevronLeft/></button><span>HISTÓRICO DE SKILLS · ESTA REUNIÃO</span><h2>{metricFeedback.title}</h2><strong>{selectedMetric!.value}%</strong><h3>{metricFeedback.headline}</h3><p>{metricFeedback.evidence}</p><div><b>PRÓXIMO AJUSTE</b><p>{metricFeedback.action}</p></div><small>Este feedback fica vinculado a esta reunião no histórico.</small></div>:<div className="analysis-score-ring" style={{'--analysis-score':`${score}%`} as CSSProperties}><div><strong>{score}</strong><span>/100</span><b>Score geral</b><em>↑ +6,4%</em><small>vs. última análise</small></div></div>}</article>
 
-        <div className="analysis-metrics">{metrics.map(({label,value,copy,Icon})=><article className="analysis-metric analysis-panel" key={label}><div className="analysis-mini-ring" style={{'--score':`${value*3.6}deg`} as CSSProperties}><strong>{value}%</strong></div><Icon/><h3>{label}</h3><p>{copy}</p><div className="analysis-bar"><i style={{width:`${value}%`}}/></div></article>)}</div>
+        <div className="analysis-metrics">{metrics.map(({label,value,copy,Icon})=><article className={"analysis-metric analysis-panel"+(selectedMetric?.label===label?" selected":"")} key={label} role="button" tabIndex={0} onClick={()=>setSelectedMetric({label,value,copy,Icon})} onKeyDown={event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();setSelectedMetric({label,value,copy,Icon})}}}><div className="analysis-mini-ring" style={{'--score':`${value*3.6}deg`} as CSSProperties}><strong>{value}%</strong></div><Icon/><h3>{label}</h3><p>{copy}</p><div className="analysis-bar"><i style={{width:`${value}%`}}/></div></article>)}</div>
 
         <aside className="analysis-insights analysis-panel"><h3><Sparkles/> Principais insights</h3><div><b>↑</b><p><strong>{strongest.label} é o principal ponto forte · {strongest.value}%</strong><span>Maior evidência de performance nesta gravação.</span></p></div><div><b>!</b><p><strong>{weakest.label} pede mais atenção · {weakest.value}%</strong><span>É a skill com maior margem de evolução nesta reunião.</span></p></div><div><b>◎</b><p><strong>Score individual desta reunião: {score}/100</strong><span>Os indicadores exibidos pertencem somente a esta gravação.</span></p></div><div><b>→</b><p><strong>Próximo passo</strong><span>Use os pontos fortes como base e ataque a menor nota na próxima reunião.</span></p></div></aside>
 
