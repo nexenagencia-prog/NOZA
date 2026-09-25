@@ -20,6 +20,7 @@ export default function SuportePage(){
  const [activeTopic,setActiveTopic]=useState<(typeof topics)[number]|null>(null);
  const [chatOpen,setChatOpen]=useState(false);
  const [chatText,setChatText]=useState('');
+ const [chatThinking,setChatThinking]=useState(false);
  const [mediaWhatsapp,setMediaWhatsapp]=useState(false);
  const [firstName,setFirstName]=useState('');
  const [detail,setDetail]=useState<{topic:string;option:string;body:string}|null>(null);
@@ -47,7 +48,7 @@ export default function SuportePage(){
    if(/nao funciona|erro|bug|trav|carreg|sumiu|nao abre|nao aparece/.test(q))return 'Vou tratar isso como falha técnica. Me diga em qual tela acontece e qual é o último passo que funciona antes do erro. Se puder, informe também a mensagem exibida. Com isso eu separo problema de acesso, carregamento ou função específica.';
    return 'Entendi o que você escreveu, mas preciso de um detalhe para responder com precisão: isso é sobre Space/reunião, câmera ou áudio, gravações, Skills/Calibragem/Human Pro, ou conta/assinatura? Diga também o que você esperava que acontecesse e o que aconteceu de fato. Se for algo que exija intervenção na conta ou eu não conseguir concluir o diagnóstico,'+whatsapp;
  };
- const sendChat=(event?:FormEvent)=>{event?.preventDefault();const text=chatText.trim();if(!text)return;const reply=supportReply(text);setChat(items=>[...items,{from:'user',text},{from:'leo',text:reply}]);setChatText('')};
+ const sendChat=async(event?:FormEvent)=>{event?.preventDefault();const text=chatText.trim();if(!text||chatThinking)return;const next=[...chat,{from:'user',text}] as {from:string;text:string}[];setChat(next);setChatText('');setChatThinking(true);try{const response=await fetch('/api/suporte/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:next})});const data=await response.json();if(!response.ok||!data.reply)throw new Error(data.error||'support error');setChat(items=>[...items,{from:'leo',text:data.reply}])}catch{setChat(items=>[...items,{from:'leo',text:supportReply(text)+' Se eu não conseguir concluir por aqui, clique em WhatsApp para continuar com o suporte humano.'}])}finally{setChatThinking(false)}};
  const submit=()=>{if(!message.trim())return;try{const current=JSON.parse(localStorage.getItem('noza-support-tickets')||'[]');const ticket={id:'NOZA-'+Date.now().toString().slice(-6),message:message.trim(),status:'EM ANÁLISE',createdAt:new Date().toISOString(),page:location.pathname,browser:navigator.userAgent};localStorage.setItem('noza-support-tickets',JSON.stringify([ticket,...current].slice(0,30)))}catch{}setSent(true)};
  return (
   <main className="app-shell support-page">
@@ -77,9 +78,9 @@ export default function SuportePage(){
      {mediaWhatsapp&&<div className="support-whatsapp-notice"><MessageCircle/><span><strong>WhatsApp ainda não conectado</strong><small>O número oficial da NOZA precisa ser configurado para abrir a conversa.</small></span><button onClick={()=>setMediaWhatsapp(false)}>×</button></div>}
      {chatOpen&&<aside className="support-chat" aria-label="Chat de suporte Léo">
       <header><div><span className="support-agent-icon"><Headphones/></span><span><strong>Léo</strong><small><i/>Suporte inteligente NOZA</small></span></div><button onClick={()=>setChatOpen(false)} aria-label="Fechar chat">×</button></header>
-      <div className="support-chat-body">{chat.map((item,index)=><div key={index} className={item.from==='user'?'user':'leo'}>{item.from==='leo'&&<b>LÉO</b>}<p>{item.text}</p></div>)}<div ref={chatEndRef}/></div>
+      <div className="support-chat-body">{chat.map((item,index)=><div key={index} className={item.from==='user'?'user':'leo'}>{item.from==='leo'&&<b>LÉO</b>}<p>{item.text}</p></div>)}{chatThinking&&<div className="leo"><b>LÉO</b><p className="support-thinking">Analisando…</p></div>}<div ref={chatEndRef}/></div>
       <div className="support-chat-quick">{['Câmera ou microfone','Problema no Space','Gravação ou vídeo','Erro ao entrar','Conta e assinatura','Calibragem Cognitiva','Skills e evolução'].map(value=><button key={value} onClick={()=>setChat(items=>[...items,{from:'user',text:value},{from:'leo',text:supportReply(value)}])}>{value}</button>)}</div>
-      <form onSubmit={sendChat}><input autoFocus value={chatText} onChange={e=>setChatText(e.target.value)} placeholder="Pergunte ao Léo..."/><button aria-label="Enviar"><Send/></button></form>
+      <form onSubmit={sendChat}><input autoFocus value={chatText} onChange={e=>setChatText(e.target.value)} placeholder="Pergunte ao Léo..." disabled={chatThinking}/><button aria-label="Enviar" disabled={chatThinking}><Send/></button></form>
       <footer>Suporte NOZA · não envie senhas ou dados financeiros sensíveis</footer>
      </aside>}
     </div>
