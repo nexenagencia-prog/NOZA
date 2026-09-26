@@ -5,6 +5,7 @@ import type {CSSProperties} from 'react';
 import Link from 'next/link';
 import {Bell,CalendarDays,Check,ChevronLeft,ChevronRight,CircleHelp,FileText,Headphones,Lightbulb,Maximize2,MessageCircle,Mic2,MoreVertical,Play,Search,ShieldCheck,Sparkles,Target,Users,AlertCircle,X} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
+import {getPerformanceProfile} from '../../lib/performance/core';
 import {analysisThemeClass,analysisThemeVars} from '../analysis-theme.mjs';
 import '../refine.css';
 import '../cms-home.css';
