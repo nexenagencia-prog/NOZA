@@ -183,3 +183,35 @@ body:has(.space-page) .sidebar:not(.space-collapsed) + .content,
 body:has(.space-page) .sidebar:not(.space-collapsed) ~ .content{
   margin-left:224px!important;width:calc(100vw - 224px)!important;max-width:calc(100vw - 224px)!important;
 }
+
+
+/* NOZA mobile navigation — drawer, safe areas and touch targets */
+.mobile-nav-trigger,.mobile-nav-close,.mobile-nav-backdrop{display:none}
+@media(max-width:820px){
+ html,body{max-width:100%;overflow-x:hidden}
+ body.zyvo-sidebar-expanded{padding-left:0!important}
+ .mobile-nav-trigger{display:grid!important;place-items:center;position:fixed;z-index:990;left:max(16px,env(safe-area-inset-left));top:max(16px,env(safe-area-inset-top));width:44px;height:44px;border-radius:13px;border:1px solid rgba(255,255,255,.11);background:rgba(18,20,22,.78);color:#e8eaeb;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 28px rgba(0,0,0,.24)}
+ .mobile-nav-trigger svg,.mobile-nav-close svg{width:20px;height:20px;stroke-width:1.5}
+ .mobile-nav-backdrop{display:block!important;position:fixed;inset:0;z-index:995;border:0;background:rgba(0,0,0,.52);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+ .sidebar,.sidebar.expanded,body:has(.space-page) .sidebar:not(.space-collapsed),body:has(.space-page) .sidebar.space-collapsed{
+   position:fixed!important;z-index:1000!important;left:0!important;top:0!important;bottom:0!important;
+   width:min(84vw,320px)!important;height:100dvh!important;
+   padding:max(24px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom))!important;
+   transform:translateX(-105%)!important;transition:transform .24s cubic-bezier(.2,.8,.2,1)!important;
+   border-radius:0 24px 24px 0!important;overflow-y:auto!important;overscroll-behavior:contain!important;
+   box-shadow:24px 0 60px rgba(0,0,0,.42)!important
+ }
+ .sidebar.mobile-open,.sidebar.expanded.mobile-open{transform:translateX(0)!important}
+ .mobile-nav-close{display:grid!important;place-items:center;position:absolute;right:14px;top:max(14px,env(safe-area-inset-top));width:40px;height:40px;border:0;background:transparent;color:#aeb1b3}
+ .sidebar .sidebar-brand,.sidebar.expanded .sidebar-brand{height:48px!important;min-height:48px!important;margin-bottom:14px!important;padding:0 24px!important}
+ .sidebar .avatar-wrap{min-height:60px!important;margin-bottom:14px!important}
+ .sidebar .side-nav{gap:3px!important}
+ .sidebar .side-item,body:has(.space-page) .sidebar.space-collapsed .side-item{height:46px!important;min-height:46px!important;padding:0 24px!important;justify-content:flex-start!important;gap:15px!important}
+ .sidebar .side-item span,body:has(.space-page) .sidebar.space-collapsed .side-item span{display:inline!important;font-size:13px!important}
+ .sidebar .side-item svg{width:19px!important;height:19px!important}
+ body:has(.space-page) .space-sidebar-toggle{display:none!important}
+ body:has(.space-page) .sidebar + .content,body:has(.space-page) .sidebar ~ .content,
+ body:has(.space-page) .sidebar.space-collapsed + .content,body:has(.space-page) .sidebar.space-collapsed ~ .content{
+   margin-left:0!important;width:100%!important;max-width:100%!important
+ }
+}
