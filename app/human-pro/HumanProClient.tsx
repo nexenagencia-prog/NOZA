@@ -42,7 +42,7 @@ export default function HumanProClient(){
 
   useEffect(()=>{
     setMeetings(loadMeetings());
-    getPerformanceProfile().then(profile=>{const top=profile.skills.slice(0,6).map((s:any)=>`${s.skill}: ${s.score} (${s.evidence_count} evidências)`).join('; ');const recent=profile.events.slice(0,5).map((e:any)=>`${e.skill||e.event_type}: ${e.evidence||''}`).join(' | ');setPerformanceContext([top,recent].filter(Boolean).join('\n'))}).catch(()=>{});
+    getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\n'))}).catch(()=>{});
   },[]);
 
   const runAnalysis=(value=question)=>{
