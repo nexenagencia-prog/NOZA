@@ -233,3 +233,16 @@ html body:has(.pricing-page) .pricing-grid{margin-top:0!important}
 
 /* Refined pricing plan titles */
 html body:has(.pricing-page) .price-card h2{font-weight:400!important;letter-spacing:-.025em!important}
+
+@media(max-width:820px){
+ html body:has(.pricing-page) main.pricing-page,.pricing-page{
+  margin-left:0!important;width:100%!important;min-height:100dvh!important;height:auto!important;
+  padding:82px 16px 36px!important;display:block!important;overflow-x:hidden!important
+ }
+ html body:has(.pricing-page) .pricing-shell{width:100%!important;max-width:100%!important;transform:none!important;margin:0!important}
+ .pricing-grid{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;width:100%!important}
+ .price-card{width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;padding:22px 18px!important;box-sizing:border-box!important}
+ .price-card h2{font-size:28px!important}.price-card p{font-size:13px!important;line-height:1.5!important}
+ .price-card li{font-size:12px!important;line-height:1.45!important}
+ .billing-toggle{margin:14px auto 20px!important}
+}
