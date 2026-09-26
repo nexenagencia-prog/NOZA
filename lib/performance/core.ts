@@ -56,7 +56,7 @@ function buildSkillIntelligence(skills:any[],events:any[]):SkillIntelligence[]{
   const recent=evidence.slice(0,Math.min(5,evidence.length)),previous=evidence.slice(5,10);
   const recentAverage=weighted(recent),previousAverage=weighted(previous);
   const trend=recentAverage!==null&&previousAverage!==null?Math.round((recentAverage-previousAverage)*10)/10:Number(profile.trend||0);
-  const direction:evidence.length<2?'insufficient':trend>2?'rising':trend< -2?'falling':'stable';
+  const direction:SkillIntelligence['direction']=evidence.length<2?'insufficient':trend>2?'rising':trend< -2?'falling':'stable';
   const recurrence=evidence.length;
   const scores=evidence.map((e:any)=>Number(e.score));const spread=scores.length>1?Math.max(...scores)-Math.min(...scores):0;
   const contradiction=Math.round(Math.min(1,spread/45)*100)/100;
