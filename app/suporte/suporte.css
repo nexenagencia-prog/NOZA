@@ -26,3 +26,16 @@
 .support-chat-quick::-webkit-scrollbar{display:none!important}
 .support-chat form{flex:0 0 44px!important}
 .support-chat footer{flex:0 0 auto!important}
+
+@media(max-width:820px){
+ .support-page,.support-content{width:100%!important;min-height:100dvh!important;overflow-x:hidden!important}
+ .support-stage{width:100%!important;max-width:100%!important;padding:86px 16px 34px!important;box-sizing:border-box!important}
+ .support-back{margin-bottom:26px!important}
+ .support-stage header h1{font-size:clamp(34px,10vw,44px)!important;line-height:1!important}
+ .support-stage header p{font-size:13px!important;line-height:1.55!important}
+ .support-compose{margin-top:22px!important;padding:14px!important;border-radius:14px!important}
+ .support-chat{left:10px!important;right:10px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;width:auto!important;height:calc(100dvh - 20px - env(safe-area-inset-bottom))!important}
+ .support-chat-body>div{max-width:90%!important}
+ .support-chat-body p{font-size:12px!important}
+ .support-whatsapp-notice{left:12px!important;right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;width:auto!important;box-sizing:border-box!important}
+}
