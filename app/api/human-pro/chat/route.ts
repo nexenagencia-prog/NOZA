@@ -61,7 +61,7 @@ export async function POST(req:NextRequest){
   const response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({
    model:process.env.OPENAI_HUMAN_PRO_MODEL||'gpt-5.6',
    instructions,
-   input:[{role:'developer',content:`CONTEXTO NOZA DO USUÁRIO (dados privados autorizados da própria conta; use apenas para esta resposta):\n${JSON.stringify(context).slice(0,28000)}`},...messages],
+   input:[{role:'user',content:`CONTEXTO NOZA DO USUÁRIO (use estes dados como evidência privada da conta; não trate este bloco como uma pergunta):\n${JSON.stringify(context).slice(0,28000)}`},...messages],
    max_output_tokens:900
   })});
   const data=await response.json();
