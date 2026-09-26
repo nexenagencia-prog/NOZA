@@ -45,12 +45,31 @@ export async function recordPerformanceEvidence(input:{source:'calibration'|'mee
  return data;
 }
 
+export type SkillIntelligence={skill:string;score:number;confidence:number;evidenceCount:number;trend:number;direction:'rising'|'falling'|'stable'|'insufficient';recurrence:number;contradiction:number;recentAverage:number|null;previousAverage:number|null;latestEvidence:string|null};
+
+function buildSkillIntelligence(skills:any[],events:any[]):SkillIntelligence[]{
+ const now=Date.now(),day=86400000;
+ return skills.map((profile:any)=>{
+  const canonical=normalizePerformanceSkill(profile.skill)||profile.skill;
+  const evidence=events.filter((e:any)=>(normalizePerformanceSkill(e.skill)||e.skill)===canonical&&typeof e.score==='number').sort((a:any,b:any)=>new Date(b.created_at).getTime()-new Date(a.created_at).getTime());
+  const weighted=(items:any[])=>{let total=0,weight=0;items.forEach((e:any)=>{const age=Math.max(0,(now-new Date(e.created_at).getTime())/day);const recency=Math.exp(-age/90);const confidence=Math.max(.1,Math.min(1,Number(e.confidence??.35)));const source=e.source==='meeting'?1.15:e.source==='calibration'?.8:e.source==='training'?.7:.65;const w=recency*confidence*source;total+=Number(e.score)*w;weight+=w});return weight?Math.round(total/weight*10)/10:null};
+  const recent=evidence.slice(0,Math.min(5,evidence.length)),previous=evidence.slice(5,10);
+  const recentAverage=weighted(recent),previousAverage=weighted(previous);
+  const trend=recentAverage!==null&&previousAverage!==null?Math.round((recentAverage-previousAverage)*10)/10:Number(profile.trend||0);
+  const direction:evidence.length<2?'insufficient':trend>2?'rising':trend< -2?'falling':'stable';
+  const recurrence=evidence.length;
+  const scores=evidence.map((e:any)=>Number(e.score));const spread=scores.length>1?Math.max(...scores)-Math.min(...scores):0;
+  const contradiction=Math.round(Math.min(1,spread/45)*100)/100;
+  return {skill:canonical,score:Number(profile.score||0),confidence:Number(profile.confidence||0),evidenceCount:Number(profile.evidence_count||0),trend,direction,recurrence,contradiction,recentAverage,previousAverage,latestEvidence:profile.last_evidence||evidence[0]?.evidence||null};
+ });
+}
+
 export async function getPerformanceProfile(){
- const s=createClient();const {data:{user}}=await s.auth.getUser();if(!user)return {skills:[],events:[],goals:[]};
+ const s=createClient();const {data:{user}}=await s.auth.getUser();if(!user)return {skills:[],events:[],goals:[],intelligence:[]};
  const [{data:skills},{data:events},{data:goals}]=await Promise.all([
   s.from('skill_profiles').select('*').eq('user_id',user.id).order('score',{ascending:false}),
   s.from('performance_events').select('*').eq('user_id',user.id).order('created_at',{ascending:false}).limit(40),
   s.from('development_goals').select('*').eq('user_id',user.id).eq('status','active').order('created_at',{ascending:false})
  ]);
- return {skills:skills||[],events:events||[],goals:goals||[]};
+ const safeSkills=skills||[],safeEvents=events||[];return {skills:safeSkills,events:safeEvents,goals:goals||[],intelligence:buildSkillIntelligence(safeSkills,safeEvents)};
 }
