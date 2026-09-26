@@ -50,3 +50,17 @@ html,body{overflow-y:auto!important}.cal-shell{height:auto!important;min-height:
 @media(max-width:900px){.cal-intro h1,.cal-topic-intro p{white-space:normal!important}.cal-domains.cal-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
 
 .cal-selected-focus{margin:20px 0 14px;display:flex;flex-direction:column;gap:7px;max-width:900px}.cal-selected-focus span{font-size:10px;letter-spacing:.13em;color:rgba(255,255,255,.42)}.cal-selected-focus strong{font-size:13px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.55}.cal-start:disabled{opacity:.34!important;cursor:not-allowed!important;pointer-events:none!important}
+
+@media(max-width:820px){
+ .cal-shell{min-height:100dvh!important;overflow-x:hidden!important}
+ .cal-main{margin-left:0!important;width:100%!important;min-height:100dvh!important;padding:82px 16px 40px!important;box-sizing:border-box!important}
+ .cal-intro,.cal-result{width:100%!important;max-width:100%!important;margin:28px auto 0!important}
+ .cal-intro h1,.cal-result h1{font-size:clamp(34px,10vw,46px)!important;line-height:1.02!important;white-space:normal!important;letter-spacing:-.045em!important}
+ .cal-intro>p,.cal-result>p{font-size:14px!important;line-height:1.55!important}
+ .cal-domains.cal-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .cal-domains.cal-topic-grid button{min-height:52px!important;padding:10px!important;font-size:10px!important}
+ .cal-topic-intro p{white-space:normal!important;overflow:visible!important}
+ .cal-history,.cal-compare{max-width:100%!important}
+ .cal-history-score{padding:14px!important}
+}
+@media(max-width:380px){.cal-domains.cal-topic-grid{grid-template-columns:1fr!important}}
