@@ -99,6 +99,6 @@ export default function HomeClient({content}:{content:HomeContent}){
       </section>
     </section>
     <FloatingCalculator open={calculatorOpen} onClose={()=>setCalculatorOpen(false)}/><FloatingNotes mode={notesMode} onClose={()=>setNotesMode(null)}/>
-    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:420!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}.hero-actions .calibration-cta,.hero-actions .secondary-btn{font-weight:300!important}`}</style>
+    <style jsx global>{`.hero-copy .hero-refined-headline{font-weight:300!important}.hero-copy .eyebrow{font-size:10px!important;letter-spacing:.12em!important}.performance-insight{max-width:610px;margin:20px 0 18px;display:flex;flex-direction:column;gap:6px}.performance-insight small{font-size:10px;letter-spacing:.13em;opacity:.62}.performance-insight span{font-size:14px;line-height:1.45;opacity:.82}.info-card .card-status{font-size:13px!important;font-weight:500!important;display:block;margin-top:22px}.info-card .card-progress{opacity:.5}.hero-actions .calibration-cta,.hero-actions .secondary-btn{font-weight:300!important}`}</style>
   </main>;
 }
