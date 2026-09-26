@@ -272,3 +272,12 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
  color:#f3f3f1!important;
  box-shadow:none!important;
 }
+
+@media(max-width:820px){
+ .human-pro-page{min-height:100dvh!important;overflow-x:hidden!important;overflow-y:auto!important}
+ .human-pro-content{--sidebar-width:0px!important;margin-left:0!important;width:100%!important;height:auto!important;min-height:100dvh!important;overflow:visible!important;padding:78px 16px 28px!important;box-sizing:border-box!important}
+ .human-pro-content h1{font-size:clamp(32px,10vw,44px)!important;line-height:1!important}
+ .human-chat{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;bottom:max(12px,env(safe-area-inset-bottom))!important}
+ .human-message p{font-size:13px!important;line-height:1.5!important}
+ .scene-window{max-width:calc(100vw - 32px)!important}
+}
