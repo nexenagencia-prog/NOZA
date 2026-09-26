@@ -6,6 +6,7 @@ import AppSidebar from '../AppSidebar';
 import {createHumanParticleField,createLocalChatReply,getHumanProPresentation,HUMAN_PRO_PROMPTS,shouldSubmitOnKeyDown} from './human-pro-model.mjs';
 import '../app-sidebar.css';
 import './human-pro.css';
+import {getPerformanceProfile} from '../../lib/performance/core';
 
 type Meeting={id:string;title:string;objective?:string;phrase?:string;summary?:string;transcript?:string};
 type ChatMessage={id:string;role:'user'|'assistant';content:string};
@@ -36,10 +37,12 @@ export default function HumanProClient(){
   const[messages,setMessages]=useState<ChatMessage[]>([]);
   const[meetings,setMeetings]=useState<Meeting[]>(defaultMeetings);
   const[working,setWorking]=useState(false);
+  const[performanceContext,setPerformanceContext]=useState('');
   const fileRef=useRef<HTMLInputElement>(null);
 
   useEffect(()=>{
     setMeetings(loadMeetings());
+    getPerformanceProfile().then(profile=>{const top=profile.skills.slice(0,6).map((s:any)=>`${s.skill}: ${s.score} (${s.evidence_count} evidências)`).join('; ');const recent=profile.events.slice(0,5).map((e:any)=>`${e.skill||e.event_type}: ${e.evidence||''}`).join(' | ');setPerformanceContext([top,recent].filter(Boolean).join('\n'))}).catch(()=>{});
   },[]);
 
   const runAnalysis=(value=question)=>{
@@ -49,7 +52,8 @@ export default function HumanProClient(){
     setQuestion('');
     setWorking(true);
     window.setTimeout(()=>{
-      const reply=createLocalChatReply(clean,meetings);
+      const enriched=performanceContext?`${clean}\n\nContexto longitudinal NOZA:\n${performanceContext}`:clean;
+      const reply=createLocalChatReply(enriched,meetings);
       setMessages(current=>[...current,{id:`assistant-${stamp}`,role:'assistant',content:reply}]);
       setWorking(false);
     },420);
@@ -101,7 +105,7 @@ export default function HumanProClient(){
           </div>}
           <form className="human-composer" onSubmit={submit}>
             <textarea aria-label="Pergunta para o Human Pro" value={question} onChange={event=>setQuestion(event.target.value)} onKeyDown={submitOnEnter} placeholder="O que você quer entender sobre sua performance?"/>
-            <div><button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Paperclip/></button><input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/><span>{meetings.length} reuniões locais disponíveis</span><button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button></div>
+            <div><button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Paperclip/></button><input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/><span>{performanceContext?'Perfil longitudinal conectado':`${meetings.length} reuniões locais disponíveis`}</span><button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button></div>
           </form>
         </section>
       </div>
