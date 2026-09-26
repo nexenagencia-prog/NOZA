@@ -8,8 +8,8 @@ export async function recordPerformanceEvidence(input:{source:'calibration'|'mee
  if(error)throw error;
  if(input.skill&&typeof input.score==='number'){
   const {data:current}=await s.from('skill_profiles').select('*').eq('user_id',user.id).eq('skill',input.skill).maybeSingle();
-  const count=(current?.evidence_count||0)+1;const old=Number(current?.score??input.score);const confidence=Math.min(1,Number(current?.confidence||0)+.12);
-  const score=Math.round((old*(count-1)+input.score)/count*10)/10;
+  const count=(current?.evidence_count||0)+1;const old=Number(current?.score??0);const confidence=Math.min(1,Number(current?.confidence||0)+.12);
+  const score=Math.round((count===1?input.score:(old*(count-1)+input.score)/count)*10)/10;
   await s.from('skill_profiles').upsert({user_id:user.id,skill:input.skill,score,confidence,evidence_count:count,trend:Math.round((score-old)*10)/10,last_evidence:input.evidence||current?.last_evidence||null,updated_at:new Date().toISOString()});
  }
  return data;
