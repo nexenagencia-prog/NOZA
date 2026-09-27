@@ -50,7 +50,7 @@ export async function POST(req:NextRequest){
    const recent=ev.slice(0,5),older=ev.slice(5,10);
    const avg=(a:any[])=>a.length?Math.round(a.reduce((n:number,e:any)=>n+Number(e.score||0),0)/a.length*10)/10:null;
    const ra=avg(recent),oa=avg(older);const delta:number=ra!==null&&oa!==null?Math.round((ra-oa)*10)/10:Number(s.trend||0);
-   const spread=ev.length>1?Math.max(...ev.map((e:any)=>Number(e.score)))-Math.min(...ev.map((e:any)=>Number(e.score)):0;
+   const spread=ev.length>1?Math.max(...ev.map((e:any)=>Number(e.score)))-Math.min(...ev.map((e:any)=>Number(e.score))):0;
    return {skill:s.skill,score:Number(s.score),confidence:Number(s.confidence),evidence_count:Number(s.evidence_count),direction:ev.length<2?'insufficient':delta>2?'rising':delta< -2?'falling':'stable',recent_average:ra,previous_average:oa,delta,contradiction:Math.round(Math.min(1,spread/45)*100)/100,last_evidence:s.last_evidence};
   });
   const meetingContext=safeMeetings.map((m:any)=>({subject:m.subject,date:m.starts_at||m.created_at,status:m.status,analysis:m.analysis||{},transcript_excerpt:typeof m.transcript==='string'?m.transcript.slice(0,1800):''}));
