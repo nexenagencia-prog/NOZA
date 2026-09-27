@@ -62,7 +62,7 @@ export default function HumanProClient(){
   };
   const submit=(event:FormEvent)=>{event.preventDefault();runAnalysis()};
   const submitOnEnter=(event:KeyboardEvent<HTMLTextAreaElement>)=>{
-    if(!shouldSubmitOnKeyDown({key:event.key,shiftKey:event.shiftKey,isComposing:event.nativeEvent.isComposing}))return;
+    if(event.key!=='Enter'||event.shiftKey||event.nativeEvent.isComposing)return;
     event.preventDefault();
     runAnalysis();
   };
