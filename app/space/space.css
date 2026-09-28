@@ -23,7 +23,7 @@
 .space-toast{position:fixed;z-index:220;right:25px;bottom:105px;max-width:340px;min-height:46px;border:1px solid rgba(255,255,255,.9);border-radius:16px;background:rgba(245,249,250,.94);box-shadow:0 14px 42px rgba(40,56,67,.16);display:flex;align-items:center;gap:9px;padding:9px 11px;font-size:11px}.space-toast>svg{width:16px}.space-toast button{margin-left:auto;border:0;background:transparent}.space-toast button svg{width:14px}
 .space-dialog-backdrop{position:fixed;z-index:250;inset:0;background:rgba(16,24,30,.32);backdrop-filter:blur(9px);display:grid;place-items:center}.space-dialog{position:relative;width:min(430px,90vw);padding:28px;border:1px solid rgba(255,255,255,.9);border-radius:27px;background:rgba(243,248,250,.94);box-shadow:0 30px 90px rgba(28,42,51,.25)}.space-dialog h2{margin:0 0 9px;font-size:26px;font-weight:420}.space-dialog p{margin:0;color:#6b7984;font-size:13px;line-height:1.5}.space-dialog>div{display:flex;justify-content:flex-end;gap:8px;margin-top:24px}.space-dialog>div button{height:40px;border:1px solid rgba(82,99,111,.15);border-radius:20px;background:#fff;padding:0 15px;font-size:11px}.space-dialog>div .danger{background:#ef4650;color:#fff;border-color:#ef4650}.space-dialog-close{position:absolute;right:15px;top:15px;border:0;background:transparent}.space-dialog-close svg{width:18px}
 @media(max-width:1180px){.space-page .space-content{padding-left:226px!important;padding-right:18px!important}.space-page .app-topbar{grid-template-columns:minmax(230px,1fr) minmax(300px,1fr) 44px!important}.space-page .app-topbar .next-meeting{display:none}.space-workspace{grid-template-columns:1fr 1.12fr;grid-template-rows:minmax(300px,1fr) 250px}.space-live-card{grid-row:1}.space-participants-panel{grid-row:1}.space-evolution{grid-column:1;grid-row:2}.space-agenda,.space-notes{grid-column:2;grid-row:2}.space-controls{left:226px;right:28px}.space-controls>button,.space-control-menu>button{min-width:58px}}
-@media(max-width:820px){.space-page{height:auto;min-height:100vh;overflow:auto}.space-page .space-content{height:auto!important;min-height:100vh;padding:18px 14px 105px 198px!important;overflow:visible}.space-page .app-topbar .topnav,.space-page .app-topbar .next-meeting{display:none}.space-page .app-topbar{grid-template-columns:1fr 44px!important}.space-page .app-topbar .search-box{display:flex!important}.space-workspace{height:auto;display:flex;flex-direction:column}.space-live-card{height:560px}.space-participants-panel{height:570px}.space-evolution{height:260px}.space-agenda,.space-notes{width:100%;min-height:240px}.space-controls{left:198px;right:14px;overflow-x:auto;justify-content:flex-start}.space-controls>button,.space-control-menu>button{min-width:62px}}
+
 @media(prefers-reduced-motion:reduce){.space-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
 /* NOZA Home visual system — Space skin only, structure preserved */
@@ -100,7 +100,7 @@
 html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{margin-left:var(--zyvo-sidebar-expanded,238px)!important;width:calc(100vw - var(--zyvo-sidebar-expanded,238px))!important;padding-left:28px!important;padding-right:28px!important}
 .space-page .app-topbar{margin-left:0!important}
 @media(max-width:1180px){html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{padding-left:20px!important;padding-right:18px!important}}
-@media(max-width:820px){html body.zyvo-sidebar-expanded .space-page .space-content,.space-page .space-content{padding-left:16px!important;padding-right:14px!important}}
+
 
 /* Correction: every video tile remains portrait 9:16. One control collapses all support cards. */
 .space-page .space-host-media{display:flex!important;align-items:center!important;justify-content:center!important;background:#080a0b!important}
@@ -674,7 +674,7 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-icon-topbar{position:fixed!important;top:36px!important;left:auto!important;right:52px!important;width:44px!important;height:44px!important;margin:0!important;padding:0!important;z-index:10000!important}
 @media(max-width:1450px){.space-page .space-icon-topbar{top:28px!important;right:3vw!important}}
 @media(max-width:1180px){.space-page .space-icon-topbar{right:30px!important}}
-@media(max-width:820px){.space-page .space-icon-topbar{top:20px!important;right:18px!important}}
+
 
 /* Space vertical placement: move workspace down without moving the fixed bottom dock */
 .space-page .space-workspace{margin-top:88px!important}
@@ -771,14 +771,4 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 
 
 /* Space mobile — preserve functions while adapting workspace to touch */
-@media(max-width:820px){
- .space-page{width:100%!important;min-height:100dvh!important;overflow-x:hidden!important}
- .space-page .space-workspace{margin-top:0!important;width:100%!important;max-width:100%!important;display:flex!important;flex-direction:column!important;gap:10px!important;padding:0 12px 96px!important;box-sizing:border-box!important}
- .space-page .space-participants-panel,.space-page .space-evolution{position:relative!important;width:100%!important;max-width:100%!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important}
- .space-page .space-participants-panel{min-height:54dvh!important}
- .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
- .space-page .space-evolution{min-height:280px!important}
- .space-page .space-dock{position:fixed!important;z-index:90!important;left:10px!important;right:10px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;width:auto!important;max-width:none!important;transform:none!important;overflow-x:auto!important;justify-content:flex-start!important;-webkit-overflow-scrolling:touch!important}
- .space-page .space-dock button{min-width:46px!important;min-height:46px!important;flex:0 0 auto!important}
- .space-page .space-preferences{max-width:calc(100vw - 24px)!important;max-height:70dvh!important;overflow:auto!important}
-}
+
