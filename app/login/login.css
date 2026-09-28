@@ -51,3 +51,18 @@
  .auth form{gap:7px!important}.auth input,.auth .primary,.auth .google{height:42px!important;min-height:42px!important;border-radius:9px!important}
  .or{margin:10px 0!important}.auth-links{margin-top:10px!important}.auth-msg{margin-top:10px!important}
 }
+
+
+/* NOZA login — lighter typography on desktop and mobile */
+.auth,.auth input,.auth button{font-weight:300!important}
+.auth-copy h1{font-weight:250!important}
+.auth-copy p{font-weight:300!important}
+.auth-copy span{font-weight:300!important}
+.auth input{font-weight:300!important}
+.primary{font-weight:400!important}
+.google{font-weight:300!important}
+.auth-links button,.auth-msg{font-weight:300!important}
+@media(max-width:850px){
+ .auth-copy h1{font-weight:250!important}
+ .auth-copy p,.auth-copy span,.auth input,.auth button,.auth-links button,.auth-msg{font-weight:300!important}
+}
