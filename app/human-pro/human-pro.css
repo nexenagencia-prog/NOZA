@@ -281,3 +281,16 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
  .human-message p{font-size:13px!important;line-height:1.5!important}
  .scene-window{max-width:calc(100vw - 32px)!important}
 }
+/* Mobile flow + scroll repair */
+@media(max-width:820px){
+ html:has(.human-pro-page),body:has(.human-pro-page){height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+ .human-pro-page{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ .human-pro-content{margin:0!important;padding:88px 16px 34px!important;height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ .human-main{position:relative!important;inset:auto!important;width:100%!important;max-width:620px!important;margin:0 auto!important;padding:clamp(120px,18vh,180px) 0 0!important;transform:none!important}
+ .human-hero{margin-bottom:24px!important}.human-hero h1{font-size:clamp(38px,11vw,54px)!important;letter-spacing:.14em!important;white-space:nowrap!important}
+ .human-prompts{width:100%!important;max-width:100%!important;grid-template-columns:1fr!important;gap:8px!important;margin:0 0 18px!important}
+ .human-prompts button,.human-prompts button:last-child{grid-column:auto!important;width:100%!important;min-height:48px!important;height:auto!important}
+ .human-chat{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;width:100%!important;max-width:100%!important;margin:0!important}
+ .human-chat.has-messages{height:min(56dvh,520px)!important;min-height:340px!important}
+}
+@media(max-width:430px){.human-main{padding-top:100px!important}.human-hero h1{font-size:34px!important;letter-spacing:.11em!important}}
