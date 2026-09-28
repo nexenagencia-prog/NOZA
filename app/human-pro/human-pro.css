@@ -179,33 +179,14 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
 .human-prompts button{padding-inline:10px}
 .scene-right{right:-13%}
 }
-@media(max-width:900px){.human-main{width:calc(100% - 28px);padding-top:clamp(150px,25vh,205px)}
-.human-prompts{flex-wrap:wrap;max-width:650px;margin-bottom:22px}
-.human-chat{width:min(100%,690px)}
-.scene-left-top,.scene-right{opacity:.42}
-}
-@media(max-width:820px){.human-pro-content{--sidebar-width:184px}
-.human-hero h1{font-size:33px}
-.human-prompts{gap:7px}
-.human-prompts button{height:34px}
-.scene-rear-top{left:10%;width:80%}
-}
+
+
 @media(max-height:760px) and (min-width:901px){.human-main{padding-top:clamp(176px,28vh,214px)}
 .human-hero{margin-bottom:22px}
 .human-prompts{margin-bottom:20px}
 .human-chat.has-messages{height:320px}
 }
-@media(max-width:620px){.human-main{padding-top:clamp(96px,18vh,135px)}
-.human-hero h1{font-size:27px}
-.human-hero p{font-size:7px}
-.human-prompts{display:grid;grid-template-columns:1fr 1fr}
-.human-prompts button:last-child{grid-column:1/-1}
-.human-chat.has-messages{height:min(390px,44vh)}
-.scene-window{opacity:.23}
-.scene-left-top{width:48%}
-.scene-left-bottom{width:52%}
-.scene-right{width:43%}
-}
+
 @media(prefers-reduced-motion:reduce){.human-pro-page *{animation:none!important;transition:none!important}
 .human-particle-field{display:none}
 .human-scenery{transform:none}
@@ -273,11 +254,4 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
  box-shadow:none!important;
 }
 
-@media(max-width:820px){
- .human-pro-page{min-height:100dvh!important;overflow-x:hidden!important;overflow-y:auto!important}
- .human-pro-content{--sidebar-width:0px!important;margin-left:0!important;width:100%!important;height:auto!important;min-height:100dvh!important;overflow:visible!important;padding:78px 16px 28px!important;box-sizing:border-box!important}
- .human-pro-content h1{font-size:clamp(32px,10vw,44px)!important;line-height:1!important}
- .human-chat{left:12px!important;right:12px!important;width:auto!important;max-width:none!important;bottom:max(12px,env(safe-area-inset-bottom))!important}
- .human-message p{font-size:13px!important;line-height:1.5!important}
- .scene-window{max-width:calc(100vw - 32px)!important}
-}
+
