@@ -782,3 +782,18 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
  .space-page .space-dock button{min-width:46px!important;min-height:46px!important;flex:0 0 auto!important}
  .space-page .space-preferences{max-width:calc(100vw - 24px)!important;max-height:70dvh!important;overflow:auto!important}
 }
+
+/* Space mobile — restore document scroll and full-width meeting panels */
+@media(max-width:820px){
+ html:has(.space-page),body:has(.space-page){height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+ .space-page{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ .space-page .space-content{height:auto!important;min-height:100dvh!important;width:100%!important;max-width:100%!important;padding:76px 12px 104px!important;overflow:visible!important;box-sizing:border-box!important}
+ .space-page .space-workspace{height:auto!important;min-height:0!important;margin:0!important;padding:0!important;display:flex!important;flex-direction:column!important;gap:12px!important;overflow:visible!important}
+ .space-page .space-workspace>*{width:100%!important;max-width:100%!important;min-width:0!important;position:relative!important;inset:auto!important;grid-row:auto!important;grid-column:auto!important;box-sizing:border-box!important}
+ .space-page .space-live-card{height:66dvh!important;min-height:500px!important;max-height:720px!important}
+ .space-page .space-participants-panel{height:auto!important;min-height:440px!important;overflow:visible!important}
+ .space-page .space-participants-panel .space-participants{height:auto!important;max-height:none!important;overflow:visible!important}
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic{height:auto!important;max-height:none!important;overflow:visible!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .space-page .space-evolution{height:auto!important;min-height:300px!important}
+ .space-page .space-icon-topbar{top:16px!important;right:16px!important}
+}
