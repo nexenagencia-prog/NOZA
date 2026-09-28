@@ -363,3 +363,21 @@ html body .hero-copy .hero-refined-headline,html body .hero-copy .hero-refined-h
  html body .app-shell .feature-card{grid-template-columns:92px minmax(0,1fr)!important}
  html body .app-shell .feature-photo{width:92px!important;height:144px!important;min-height:144px!important}
 }
+
+
+/* HOME MOBILE FINAL FLOW — no overlap between hero, carousel and cards */
+@media(max-width:820px){
+ html:has(.app-shell),body:has(.app-shell){height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+ html body .app-shell{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ html body .app-shell>.content,html body .app-shell>.content.shifted{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+ html body .app-shell .hero-grid{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px!important;height:auto!important;min-height:0!important}
+ html body .app-shell .hero-copy,html body .app-shell .hero-feature{position:relative!important;inset:auto!important;transform:none!important;float:none!important}
+ html body .app-shell .hero-copy{display:block!important;min-height:0!important;padding:12px 0 8px!important}
+ html body .app-shell .hero-copy .hero-refined-headline,html body .app-shell .hero-copy .hero-refined-headline span{font-size:clamp(34px,9.8vw,46px)!important;line-height:1.01!important}
+ html body .app-shell .performance-insight{position:relative!important;inset:auto!important;display:flex!important;margin:20px 0 18px!important}
+ html body .app-shell .hero-actions{position:relative!important;inset:auto!important;transform:none!important;margin:0!important}
+ html body .app-shell .hero-feature{order:2!important;display:block!important;margin:8px 0 0!important}
+ html body .app-shell .feature-card{position:relative!important;inset:auto!important;transform:none!important;min-height:210px!important;margin:0!important}
+ html body .app-shell .cards-grid{position:relative!important;inset:auto!important;transform:none!important;clear:both!important;margin:14px 0 0!important;padding:0!important}
+ html body .app-shell .info-card{position:relative!important;inset:auto!important;transform:none!important;min-height:172px!important}
+}
