@@ -31,14 +31,14 @@ export async function POST(req:NextRequest){
   return NextResponse.json({ok:false},{status:502});
  }
  const sub=await mp.json();
- const [userId,plan='pro']=String(sub.external_reference||'').split('|');
+ const [userId,rawPlan='pro']=String(sub.external_reference||'').split('|');
  if(!userId)return NextResponse.json({ok:true});
+ const plan=rawPlan==='performance'?'performance':'pro';
  const statusMap:Record<string,string>={authorized:'active',pending:'pending',paused:'paused',cancelled:'canceled',canceled:'canceled'};
- const isPro=plan!=='premium';
- const trialEnd=isPro&&sub.auto_recurring?.free_trial&&sub.date_created?new Date(new Date(sub.date_created).getTime()+7*86400000).toISOString():null;
+ const trialEnd=sub.auto_recurring?.free_trial&&sub.date_created?new Date(new Date(sub.date_created).getTime()+7*86400000).toISOString():null;
  const admin=createClient(url,service,{auth:{persistSession:false,autoRefreshToken:false}});
  const {error}=await admin.from('profiles').update({
-  plan:isPro?'pro':'premium',
+  plan,
   subscription_status:statusMap[sub.status]||'pending',
   mercadopago_preapproval_id:String(sub.id),
   mercadopago_payer_id:sub.payer_id?String(sub.payer_id):null,
