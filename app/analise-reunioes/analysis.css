@@ -71,9 +71,7 @@ html body .analysis-page>.content{
 @media(max-width:1450px){
   html body .analysis-page>.content{margin-left:210px!important;width:calc(100vw - 210px)!important;max-width:calc(100vw - 210px)!important}
 }
-@media(max-width:820px){
-  html body .analysis-page>.content{margin-left:184px!important;width:calc(100vw - 184px)!important;max-width:calc(100vw - 184px)!important;padding-left:16px!important;padding-right:14px!important}
-}
+
 
 
 /* Historical meeting-skill feedback: reuses the Score Geral card without changing layout. */
