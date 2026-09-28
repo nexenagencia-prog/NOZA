@@ -39,3 +39,15 @@
 
 /* Clean silver action hierarchy */
 .primary{border:1px solid rgba(255,255,255,.32)!important;background:linear-gradient(115deg,#8f949a 0%,#f4f5f6 48%,#a8adb3 100%)!important;color:#101214!important;font-weight:560!important;letter-spacing:.1px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 24px rgba(0,0,0,.16)!important;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease!important}.primary:hover{filter:brightness(1.06)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.58),0 10px 28px rgba(0,0,0,.22)!important;transform:translateY(-1px)}.primary:active{transform:translateY(0)}.google{background:rgba(255,255,255,.035)!important;border:1px solid rgba(255,255,255,.13)!important;color:#dfe2e5!important;font-weight:450!important;letter-spacing:.05px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important;transition:background .18s ease,border-color .18s ease,color .18s ease!important}.google:hover{background:rgba(255,255,255,.065)!important;border-color:rgba(255,255,255,.22)!important;color:#fff!important}.auth-links button{color:#9da2a8!important;transition:color .18s ease!important}.auth-links button:hover{color:#f0f1f2!important}
+
+/* Smaller mobile login */
+@media(max-width:850px){
+ .auth{min-height:100dvh!important;overflow-y:auto!important;padding:18px 0!important;box-sizing:border-box!important}
+ .auth-panel{width:calc(100% - 48px)!important;max-width:330px!important;padding:74px 0 20px!important}
+ .auth-logo{top:34px!important;width:86px!important}
+ .auth-copy h1{font-size:25px!important;margin:7px 0!important}
+ .auth-copy p{font-size:12px!important;line-height:1.4!important;margin:0 0 16px!important}
+ .auth-copy span{font-size:8px!important}
+ .auth form{gap:7px!important}.auth input,.auth .primary,.auth .google{height:42px!important;min-height:42px!important;border-radius:9px!important}
+ .or{margin:10px 0!important}.auth-links{margin-top:10px!important}.auth-msg{margin-top:10px!important}
+}
