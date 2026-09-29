@@ -122,3 +122,14 @@
 
 /* My Performance — conversational voice */
 .sp-mic{height:38px;padding:0 13px;display:inline-flex;align-items:center;gap:8px;border-radius:8px;border:1px solid rgba(225,231,234,.16);background:rgba(255,255,255,.035);color:#c3c9cb;font:500 10px "Arial Narrow","Avenir Next Condensed",sans-serif;letter-spacing:.1em;cursor:pointer}.sp-mic svg{width:15px;height:15px;stroke-width:1.5}.sp-mic.listening{border-color:rgba(240,244,246,.55);color:#fff;box-shadow:0 0 18px rgba(255,255,255,.08)}.sp-mic:disabled{opacity:.55;cursor:wait}.sp-voice-dialog{margin:0 0 14px;padding:12px;border:1px solid rgba(225,231,234,.10);border-radius:9px;background:rgba(255,255,255,.025)}.sp-voice-dialog p{margin:0!important;font-size:12.5px!important;line-height:1.5!important}.sp-voice-dialog p+p{margin-top:10px!important}.sp-voice-dialog span{display:block;margin-bottom:4px;font:500 9px "Arial Narrow","Avenir Next Condensed",sans-serif;letter-spacing:.12em;color:#858e92}.sp-voice-dialog .noza{color:#eef1f2!important}.sp-voice-dialog .you{color:#aeb5b8!important}@media(max-width:820px){.sp-header-actions{flex-wrap:wrap}.sp-mic{height:36px}.sp-voice-dialog{margin-top:2px}}
+
+/* My Performance — visual orb */
+.sp-voice{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:999px!important;padding:0 10px 0 4px!important;gap:9px!important;position:relative}
+.sp-voice:before{content:"";width:30px;height:30px;border-radius:50%;display:block;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9) 0 3%,rgba(210,220,228,.38) 16%,rgba(118,130,143,.18) 42%,rgba(25,29,34,.9) 72%);border:1px solid rgba(235,241,245,.3);box-shadow:inset 0 1px rgba(255,255,255,.35),0 0 12px rgba(190,214,230,.1);transition:.3s ease}
+.sp-voice svg{position:absolute;left:12px;width:12px!important;height:12px!important;z-index:2;opacity:.82}
+.sp-voice.on:before{box-shadow:inset 0 1px rgba(255,255,255,.42),0 0 16px rgba(202,222,236,.18)}
+.sp-voice.on:after{content:"";position:absolute;left:0;width:38px;height:38px;border-radius:50%;border:1px solid rgba(214,229,239,.16);animation:nozaOrbRing 1.8s ease-out infinite}
+.sp-voice.on:before{animation:nozaOrbBreath 1.8s ease-in-out infinite}
+@keyframes nozaOrbBreath{0%,100%{transform:scale(.92);filter:brightness(.82)}50%{transform:scale(1.08);filter:brightness(1.28)}}
+@keyframes nozaOrbRing{0%{transform:scale(.7);opacity:.55}100%{transform:scale(1.25);opacity:0}}
+@media(prefers-reduced-motion:reduce){.sp-voice.on:before,.sp-voice.on:after{animation:none!important}}
