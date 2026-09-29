@@ -44,7 +44,6 @@ export async function POST(req:NextRequest){
   const {data:{user}}=await supabase.auth.getUser();
   if(!user)return NextResponse.json({error:'UNAUTHORIZED'},{status:401});
   const body=await req.json();
-  const isMyPerformance=body?.surface==='my-performance';
   const messages=(Array.isArray(body?.messages)?body.messages:[]).slice(-16).filter((m:any)=>m&&(m.role==='user'||m.role==='assistant')&&typeof m.content==='string').map((m:any)=>({role:m.role,content:m.content.slice(0,5000)})) as Msg[];
   if(!messages.length)return NextResponse.json({error:'EMPTY_MESSAGE'},{status:400});
 
@@ -67,8 +66,7 @@ export async function POST(req:NextRequest){
   const meetingContext=safeMeetings.map((m:any)=>({subject:m.subject,date:m.starts_at||m.created_at,status:m.status,analysis:m.analysis||{},transcript_excerpt:typeof m.transcript==='string'?m.transcript.slice(0,1800):''}));
   const context={evidence_summary:{skill_count:safeSkills.length,event_count:safeEvents.length,meeting_count:safeMeetings.length,goal_count:(goals||[]).length},skills:skillContext,recent_evidence:safeEvents.slice(0,30),meetings:meetingContext,goals:goals||[]};
   const hasEvidence=safeEvents.length>0||safeMeetings.some((m:any)=>m.transcript||Object.keys(m.analysis||{}).length);
-  const myPerformanceInstructions=isMyPerformance?`\nMY PERFORMANCE VOICE\nVocê está conversando por voz dentro do My Performance. Responda de forma natural e falável, normalmente em 2 a 5 frases. Entenda linguagem livre; não trate a fala como uma lista rígida de comandos. Se, e somente se, a intenção ou sua análise indicar claramente que a interface deve destacar uma capacidade, termine a resposta com exatamente um marcador: [MY_PERFORMANCE_ACTION:foco], [MY_PERFORMANCE_ACTION:memoria], [MY_PERFORMANCE_ACTION:disciplina], [MY_PERFORMANCE_ACTION:criatividade], [MY_PERFORMANCE_ACTION:emocional], [MY_PERFORMANCE_ACTION:comunicacao], [MY_PERFORMANCE_ACTION:visao], [MY_PERFORMANCE_ACTION:lideranca] ou [MY_PERFORMANCE_ACTION:produtividade]. Não mencione o marcador na resposta falada. Se nenhuma mudança visual ajudar, não inclua marcador. Não invente evidência pessoal para justificar uma ação.`:'';
-  const instructions=INSTRUCTIONS+myPerformanceInstructions+(hasEvidence?'':`\nESTADO ATUAL: A NOZA ainda não possui evidências suficientes deste usuário. Não faça diagnóstico pessoal nem atribua forças/fraquezas. Converse normalmente e investigue o objetivo do usuário.`);
+  const instructions=INSTRUCTIONS+(hasEvidence?'':`\nESTADO ATUAL: A NOZA ainda não possui evidências suficientes deste usuário. Não faça diagnóstico pessoal nem atribua forças/fraquezas. Converse normalmente e investigue o objetivo do usuário.`);
 
   const response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{Authorization:`Bearer ${process.env.OPENAI_API_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({
    model:process.env.OPENAI_HUMAN_PRO_MODEL||'gpt-5.6',

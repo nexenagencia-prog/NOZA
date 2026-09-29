@@ -35,41 +35,44 @@ export default function Page(){
  const [profileName,setProfileName]=useState('Sandro');
  const [voiceOn,setVoiceOn]=useState(false);
  const [speaking,setSpeaking]=useState(false);
+ useEffect(()=>{
+   const readAvatar=()=>{
+     try{setProfileAvatar(localStorage.getItem('zyvo-profile-avatar')||'');setProfileName((localStorage.getItem('noza-profile-name')||'Sandro').trim().split(/\s+/)[0]||'Sandro')}catch{setProfileAvatar('');setProfileName('Sandro')}
+   };
+   readAvatar();
+   window.addEventListener('storage',readAvatar);
+   window.addEventListener('focus',readAvatar);
+   return()=>{window.removeEventListener('storage',readAvatar);window.removeEventListener('focus',readAvatar)}
+ },[]);
+
+ const speak=(text:string)=>{
+   if(typeof window==='undefined'||!('speechSynthesis' in window))return;
+   window.speechSynthesis.cancel();
+   const utterance=new SpeechSynthesisUtterance(text);
+   utterance.lang='pt-BR';utterance.rate=.92;utterance.pitch=.92;utterance.volume=1;
+   const voices=window.speechSynthesis.getVoices();
+   const pt=voices.filter(v=>/^pt(-|_)/i.test(v.lang));
+   const preferred=pt.find(v=>/Daniel|Luciana|Felipe|premium|natural/i.test(v.name))||pt[0]||voices[0];
+   if(preferred)utterance.voice=preferred;
+   utterance.onstart=()=>setSpeaking(true);utterance.onend=()=>setSpeaking(false);utterance.onerror=()=>setSpeaking(false);
+   window.speechSynthesis.speak(utterance);
+ };
+ const toggleVoice=()=>{
+   const next=!voiceOn;setVoiceOn(next);
+   try{localStorage.setItem('noza-performance-voice',next?'on':'off')}catch{}
+   if(!next&&typeof window!=='undefined'&&'speechSynthesis' in window){window.speechSynthesis.cancel();setSpeaking(false);return}
+   if(next)speak('Bom dia, '+profileName+'. O que você quer evoluir hoje? Eu tenho sugestões para você, ou podemos seguir pelo que você quer desenvolver.');
+ };
+ useEffect(()=>{try{setVoiceOn(localStorage.getItem('noza-performance-voice')==='on')}catch{};return()=>{if(typeof window!=='undefined'&&'speechSynthesis' in window)window.speechSynthesis.cancel()}},[]);
+
  const[active,setActive]=useState(skills[0]);
  const insight=feedbacks[active.id]||feedbacks.foco;
-
- const askNoza=async(text:string)=>{
-   const clean=text.trim();if(!clean||thinking)return;
-   setThinking(true);setVoiceTranscript(clean);
-   try{
-     const res=await fetch('/api/human-pro/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({surface:'my-performance',messages:[{role:'user',content:clean}]})});
-     const data=await res.json();if(!res.ok)throw new Error(data?.error||'AI_ERROR');
-     const raw=String(data.reply||'');const match=raw.match(/\[MY_PERFORMANCE_ACTION:([a-z_-]+)\]/i);
-     const reply=raw.replace(/\s*\[MY_PERFORMANCE_ACTION:[a-z_-]+\]\s*/ig,' ').trim();
-     if(match){const target=skills.find(s=>s.id===match[1].toLowerCase());if(target)setActive(target)}
-     setVoiceReply(reply);if(voiceOn&&reply)speak(reply);
-   }catch{const msg='Não consegui acessar minha inteligência agora. Tente novamente em instantes.';setVoiceReply(msg);if(voiceOn)speak(msg)}
-   finally{setThinking(false)}
- };
- const listen=()=>{
-   if(typeof window==='undefined')return;
-   const w=window as any;const Recognition=w.SpeechRecognition||w.webkitSpeechRecognition;
-   if(!Recognition){setVoiceReply('O reconhecimento de voz não está disponível neste navegador.');return}
-   if(listening)return;
-   window.speechSynthesis?.cancel();setSpeaking(false);
-   const recognition=new Recognition();recognition.lang='pt-BR';recognition.interimResults=false;recognition.continuous=false;
-   recognition.onstart=()=>setListening(true);
-   recognition.onend=()=>setListening(false);
-   recognition.onerror=()=>setListening(false);
-   recognition.onresult=(event:any)=>{const text=event.results?.[0]?.[0]?.transcript||'';setListening(false);void askNoza(text)};
-   recognition.start();
- };
-
  return <main className="sp-shell"><AppSidebar/><div className="sp-page">
   <header className="sp-header">
    <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / MY PERFORMANCE</div><h1>My Performance</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
    <label><Search/><input placeholder="Buscar habilidade"/><kbd>⌘ K</kbd></label>
-   <div className="sp-header-actions"><button className={"sp-voice "+(voiceOn?"on":"")} onClick={toggleVoice} aria-pressed={voiceOn}>{voiceOn?<Volume2/>:<VolumeX/>}<span>{speaking?"FALANDO...":voiceOn?"VOICE ON":"VOICE OFF"}</span></button><div className="sp-status"><Activity/><span>LIVE ANALYSIS</span><b>03</b></div></div>\n  </header>
+   <div className="sp-header-actions"><button className={"sp-voice "+(voiceOn?"on":"")} onClick={toggleVoice} aria-pressed={voiceOn}>{voiceOn?<Volume2/>:<VolumeX/>}<span>{speaking?"FALANDO...":voiceOn?"VOICE ON":"VOICE OFF"}</span></button><div className="sp-status"><Activity/><span>LIVE ANALYSIS</span><b>03</b></div></div>
+  </header>
   <div className="sp-grid">
    <nav className="sp-skills">{skills.map((s)=>{const Icon=icons[s.id];return <button key={s.id} className={active.id===s.id?'active':''} onClick={()=>setActive(s)}>
     <span className="sp-icon"><Icon/></span><span className="sp-skillcopy"><b>{s.name}</b><small>{s.tag}</small></span><span className="sp-skillstate">{active.id===s.id?'ACTIVE':'VIEW'}</span>
