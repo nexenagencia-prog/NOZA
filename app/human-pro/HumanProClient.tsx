@@ -1,9 +1,9 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,BarChart3,BookOpen,BrainCircuit,Lightbulb,Paperclip,Target,UserRound} from 'lucide-react';
+import {ArrowUp,BrainCircuit,Paperclip,UserRound} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
-import {createHumanParticleField,getHumanProPresentation,HUMAN_PRO_PROMPTS,shouldSubmitOnKeyDown} from './human-pro-model.mjs';
+import {createHumanParticleField,getHumanProPresentation} from './human-pro-model.mjs';
 import '../app-sidebar.css';
 import './human-pro.css';
 import {getPerformanceProfile} from '../../lib/performance/core';
@@ -11,8 +11,6 @@ import {getPerformanceProfile} from '../../lib/performance/core';
 type Meeting={id:string;title:string;objective?:string;phrase?:string;summary?:string;transcript?:string};
 type ChatMessage={id:string;role:'user'|'assistant';content:string};
 const RECORDINGS_KEY='zyvo-recordings';
-const promptIcons=[Target,Lightbulb,BookOpen,UserRound,BarChart3];
-const prompts=HUMAN_PRO_PROMPTS.map((label,index)=>({label,Icon:promptIcons[index]}));
 const presentation=getHumanProPresentation();
 const particles=createHumanParticleField(156);
 const defaultMeetings:Meeting[]=[
@@ -66,7 +64,6 @@ export default function HumanProClient(){
     event.preventDefault();
     runAnalysis();
   };
-  const choosePrompt=(value:string)=>runAnalysis(value);
   const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\n\n':''}Contexto do arquivo ${file.name}:\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
 
   return <main className="human-pro-page">
@@ -94,8 +91,6 @@ export default function HumanProClient(){
           <h1>{presentation.title}</h1>
           {presentation.subtitle&&<p>{presentation.subtitle}</p>}
         </header>
-
-        <div className="human-prompts" aria-label="Perguntas sugeridas">{prompts.map(({label,Icon})=><button key={label} onClick={()=>choosePrompt(label)}><Icon/><span>{label}</span></button>)}</div>
 
         <section className={`human-chat ${messages.length?'has-messages':''}`}>
           {!!messages.length&&<div className="human-chat-thread" aria-live="polite">
