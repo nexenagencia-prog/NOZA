@@ -548,3 +548,22 @@ html body .app-shell .info-card .round-go{width:42px!important;height:42px!impor
    border:0!important;outline:0!important;box-shadow:none!important;border-radius:0!important;
  }
 }
+
+/* HOME MOBILE — transparent logo + remove stray CTA line v7 */
+@media(max-width:820px){
+ .home-mobile-brand,.home-mobile-brand img{background:transparent!important;background-color:transparent!important;box-shadow:none!important;border:0!important;outline:0!important}
+ .home-mobile-brand img{filter:none!important}
+ .app-shell .hero-actions .calibration-cta,
+ .app-shell .hero-actions .calibration-cta *{
+   text-decoration:none!important;outline:0!important;box-shadow:none!important;
+ }
+ .app-shell .hero-actions .calibration-cta-content>span{
+   border:0!important;border-bottom:0!important;background-image:none!important;
+ }
+ .app-shell .hero-actions .calibration-cta-content svg{
+   border:0!important;stroke-width:1.8!important;
+ }
+ .app-shell .hero-actions .calibration-cta-content svg line{
+   display:none!important;
+ }
+}
