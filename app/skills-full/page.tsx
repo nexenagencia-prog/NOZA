@@ -69,6 +69,9 @@ export default function Page(){
  };
  useEffect(()=>{try{setVoiceOn(localStorage.getItem('noza-performance-voice')==='on')}catch{};return()=>{if(typeof window!=='undefined'&&'speechSynthesis' in window)window.speechSynthesis.cancel()}},[]);
 
+ const[active,setActive]=useState(skills[0]);
+ const insight=feedbacks[active.id]||feedbacks.foco;
+
  const askNoza=async(text:string)=>{
    const clean=text.trim();if(!clean||thinking)return;
    setThinking(true);setVoiceTranscript(clean);
@@ -96,8 +99,6 @@ export default function Page(){
    recognition.start();
  };
 
- const[active,setActive]=useState(skills[0]);
- const insight=feedbacks[active.id]||feedbacks.foco;
  return <main className="sp-shell"><AppSidebar/><div className="sp-page">
   <header className="sp-header">
    <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / MY PERFORMANCE</div><h1>My Performance</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
