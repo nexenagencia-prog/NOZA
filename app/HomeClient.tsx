@@ -76,7 +76,7 @@ export default function HomeClient({content}:{content:HomeContent}){
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
     <section className={`content ${expanded?'shifted':''}`}>
       <AppTopbar floating={false} nextLabel="AGORA" nextDateTime={homeDateTime} performancePercent={content.hero.performancePercent} showContext/>
-      <div className="home-mobile-brand" aria-hidden="true"><img src="/noza-wordmark.png" alt="" /></div><section className="hero-grid">
+      <div className="home-mobile-brand" aria-hidden="true"><span className="noza-wordmark" aria-label="NOZA"><span>N</span><span>O</span><span>Z</span><span className="noza-a">A</span></span></div><section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
