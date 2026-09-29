@@ -237,3 +237,22 @@ body:has(.space-page) .sidebar:not(.space-collapsed) ~ .content{
     max-width:100%!important;
   }
 }
+
+/* Canonical sidebar: no route is allowed to alter its geometry. */
+@media(min-width:821px){
+ html body .sidebar,
+ html body .sidebar.expanded,
+ html body:has(.space-page) .sidebar,
+ html body:has(.space-page) .sidebar.expanded,
+ html body:has(.space-page) .sidebar.space-collapsed{
+   width:224px!important;
+   padding:28px 20px 24px!important;
+ }
+ html body:has(.space-page) .sidebar .avatar-meta{display:flex!important}
+ html body:has(.space-page) .sidebar .side-item{height:48px!important;min-height:48px!important;padding:0 24px!important;gap:15px!important;justify-content:flex-start!important}
+ html body:has(.space-page) .sidebar .side-item span{display:inline!important;font-size:12.6px!important}
+ html body:has(.space-page) .sidebar .side-item svg{width:19px!important;height:19px!important}
+ html body:has(.space-page) .content,
+ html body:has(.space-page) .space-content{margin-left:224px!important;width:calc(100vw - 224px)!important;max-width:calc(100vw - 224px)!important}
+ .space-sidebar-toggle{display:none!important}
+}
