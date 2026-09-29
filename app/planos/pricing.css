@@ -286,3 +286,22 @@ html body:has(.pricing-page) .business-price{
   font-weight:350!important;
   letter-spacing:-.02em!important;
 }
+
+/* Pricing annual-first refinement */
+html body:has(.pricing-page) .billing-toggle{width:238px!important;height:36px!important;margin:14px auto 18px!important}
+html body:has(.pricing-page) .billing-toggle button.inactive-period{opacity:.34!important;cursor:default!important;pointer-events:none!important;background:transparent!important;color:#777b80!important}
+html body:has(.pricing-page) .pricing-grid{gap:10px!important}
+html body:has(.pricing-page) .price-card,html body:has(.pricing-page) .price-card.featured{min-height:530px!important;padding:17px 18px 14px!important;border-radius:11px!important}
+html body:has(.pricing-page) .plan-icon,html body:has(.pricing-page) .featured .plan-icon{width:32px!important;height:32px!important}
+html body:has(.pricing-page) .plan-eyebrow,html body:has(.pricing-page) .featured .plan-eyebrow{margin-top:12px!important;min-height:24px!important;font-size:7.5px!important;line-height:1.35!important}
+html body:has(.pricing-page) .price-card h2{margin:4px 0 6px!important;font-size:23px!important;line-height:1!important}
+html body:has(.pricing-page) .plan-price{font-size:34px!important;line-height:1!important}
+html body:has(.pricing-page) .monthly-reference{height:15px;margin:4px 0 7px;color:#777b80;font:500 8px/1.2 monospace;letter-spacing:.015em}
+html body:has(.pricing-page) .monthly-reference span{opacity:.62}
+html body:has(.pricing-page) .ai-allowance,html body:has(.pricing-page) .featured .ai-allowance{padding:8px 10px!important}
+html body:has(.pricing-page) .plan-divider,html body:has(.pricing-page) .featured .plan-divider{margin:9px 0!important}
+html body:has(.pricing-page) .price-card ul{gap:6px!important;margin-bottom:14px!important}
+html body:has(.pricing-page) .plan-card-footer{padding-top:4px!important}
+html body:has(.pricing-page) .plan-card-footer .plan-note{margin-top:7px!important;min-height:28px!important}
+html body:has(.pricing-page) .business-price{font-size:18px!important;font-weight:350!important;letter-spacing:0!important}
+html body:has(.pricing-page) .price-card:has(.business-price) .plan-price{min-height:34px!important;align-items:center!important}
