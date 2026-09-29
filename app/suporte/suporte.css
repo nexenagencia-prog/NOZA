@@ -27,3 +27,6 @@
 .support-chat form{flex:0 0 44px!important}
 .support-chat footer{flex:0 0 auto!important}
 
+
+/* precise mobile pass */
+@media(max-width:820px){.support-page,.support-content{width:100%!important;max-width:100%!important;min-height:100dvh!important;height:auto!important;overflow-x:hidden!important;overflow-y:visible!important}.support-content{margin:0!important;padding:112px 20px 40px!important}.support-shell{width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}.support-content h1{font-size:clamp(42px,11vw,58px)!important;line-height:1!important;letter-spacing:-.045em!important;white-space:normal!important}.support-content p{max-width:100%!important;font-size:16px!important;line-height:1.5!important}.support-content textarea{width:100%!important;max-width:100%!important;min-height:180px!important}.support-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important;width:100%!important}.support-grid>*{width:100%!important;max-width:100%!important;min-height:0!important}}
