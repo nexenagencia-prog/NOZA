@@ -301,3 +301,37 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
  .human-attach,.human-send{width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important}
  .human-chat.has-messages{height:56dvh!important;min-height:360px!important;border-radius:15px!important}
 }
+
+
+/* Human Pro — NOZA graphite only: remove legacy blue from conversation surfaces */
+.human-pro-page .human-composer,
+.human-pro-page .human-composer:focus-within{
+  background:#151719!important;
+  background-image:linear-gradient(145deg,#1b1e20,#101214)!important;
+  border-color:rgba(224,226,227,.16)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.045),0 16px 42px rgba(0,0,0,.30)!important
+}
+.human-pro-page .human-composer textarea{color:#f0f1f1!important;caret-color:#f2f2f2!important}
+.human-pro-page .human-composer textarea::placeholder{color:#85898c!important}
+.human-pro-page .human-composer>div>span{color:#7f8487!important}
+.human-pro-page .human-attach{
+  color:#d8dada!important;background:#202326!important;border-color:rgba(255,255,255,.10)!important
+}
+.human-pro-page .human-send{
+  color:#eceeee!important;background:#303438!important;border-color:rgba(255,255,255,.13)!important
+}
+.human-pro-page .human-attach:hover,
+.human-pro-page .human-send:hover:not(:disabled){background:#393d40!important;border-color:rgba(255,255,255,.20)!important}
+.human-pro-page .human-message.user p,
+.human-pro-page .human-message.user .human-message-text,
+.human-pro-page [data-role="user"] p{
+  color:#f2f2f1!important;background:#25282b!important;background-image:none!important;
+  border-color:rgba(255,255,255,.11)!important;box-shadow:none!important
+}
+.human-pro-page .human-chat.has-messages{
+  background:#101214!important;border-color:rgba(255,255,255,.10)!important
+}
+.human-pro-page .human-chat.has-messages .human-composer,
+.human-pro-page .human-chat.has-messages .human-composer:focus-within{
+  background:#17191b!important;background-image:none!important;border-top-color:rgba(255,255,255,.08)!important
+}
