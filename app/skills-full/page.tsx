@@ -45,7 +45,7 @@ export default function Page(){
 
  const[active,setActive]=useState(skills[0]);
  const insight=feedbacks[active.id]||feedbacks.foco;
- return <><link rel="preload" href="/models/brain-hologram/scene.bin" as="fetch" crossOrigin="anonymous"/><main className="sp-shell"><AppSidebar/><div className="sp-page">
+ return <main className="sp-shell"><AppSidebar/><div className="sp-page">
   <header className="sp-header">
    <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / SKILLS FULL</div><h1>Skills Pro</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
    <label><Search/><input placeholder="Buscar habilidade"/><kbd>⌘ K</kbd></label>
@@ -84,5 +84,5 @@ export default function Page(){
    </aside>
   </div>
   <footer><div className="foot-stat"><div className="foot-profile">{profileAvatar?<img src={profileAvatar} alt="Foto do perfil"/>:<span/>}</div><ChartNoAxesColumnIncreasing/><span>PERFORMANCE INDEX</span><b>73.4</b></div><div className="foot-bars">{Array.from({length:34},(_,i)=><i key={i} style={{height:`${10+((i*13)%24)}px`}}/> )}</div><p>Performance longitudinal baseada em padrões recorrentes.<small>NOZA INTELLIGENCE / SESSION 024</small></p></footer>
- </div></main></>
+ </div></main>
 }
