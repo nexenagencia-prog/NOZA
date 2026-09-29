@@ -263,3 +263,26 @@ html body:has(.pricing-page) .business-price{
   font-weight:400!important;
   letter-spacing:-.035em!important;
 }
+
+/* Pricing — cleaner title hierarchy */
+html body:has(.pricing-page) .price-card h2{
+  margin:10px 0 10px!important;
+  font-size:25px!important;
+  line-height:1.08!important;
+  font-weight:350!important;
+  letter-spacing:-.02em!important;
+}
+html body:has(.pricing-page) .plan-eyebrow,
+html body:has(.pricing-page) .featured .plan-eyebrow{
+  margin-top:18px!important;
+  font-size:8px!important;
+  font-weight:500!important;
+  line-height:1.45!important;
+  letter-spacing:.12em!important;
+}
+html body:has(.pricing-page) .business-price{
+  font-size:22px!important;
+  line-height:1.1!important;
+  font-weight:350!important;
+  letter-spacing:-.02em!important;
+}
