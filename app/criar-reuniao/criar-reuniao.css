@@ -64,3 +64,10 @@ html:has(.meeting-create-page),body:has(.meeting-create-page){height:auto!import
   .meeting-type-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
   .meeting-member-grid{grid-template-columns:1fr!important;}
 }
+
+/* Mobile: CONTEXTO → SKILLS → PERFORMANCE abaixo da descrição */
+@media (max-width:720px){
+  .meeting-create-hero{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:14px!important;}
+  .meeting-create-hero>div:first-child{width:100%!important;}
+  .meeting-intelligence{align-self:flex-start!important;margin:0!important;}
+}
