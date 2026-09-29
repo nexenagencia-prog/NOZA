@@ -234,3 +234,32 @@ html body:has(.pricing-page) .pricing-grid{margin-top:0!important}
 /* Refined pricing plan titles */
 html body:has(.pricing-page) .price-card h2{font-weight:400!important;letter-spacing:-.025em!important}
 
+
+/* Pricing cards — consistent CTA placement */
+html body:has(.pricing-page) .pricing-grid{align-items:stretch!important}
+html body:has(.pricing-page) .price-card{
+  display:flex!important;
+  flex-direction:column!important;
+  height:100%!important;
+  box-sizing:border-box!important;
+}
+html body:has(.pricing-page) .price-card ul{margin-bottom:22px!important}
+html body:has(.pricing-page) .plan-card-footer{
+  margin-top:auto!important;
+  padding-top:8px!important;
+}
+html body:has(.pricing-page) .plan-card-footer .plan-cta{
+  position:static!important;
+  width:100%!important;
+  margin:0!important;
+}
+html body:has(.pricing-page) .plan-card-footer .plan-note{
+  margin:10px 0 0!important;
+  min-height:34px!important;
+}
+html body:has(.pricing-page) .business-price{
+  color:#f1f1ee!important;
+  font-size:28px!important;
+  font-weight:400!important;
+  letter-spacing:-.035em!important;
+}
