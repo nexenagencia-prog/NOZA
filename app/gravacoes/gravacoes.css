@@ -99,3 +99,12 @@
 .recordings-page .modal-close,
 .recordings-page .modal-actions button{background:#1b1d20!important;border-color:#303236!important;color:#dededb!important}
 .recordings-page .modal-actions .save{background:#e8e8e4!important;border-color:#e8e8e4!important;color:#111315!important}
+
+.recordings-page .recording-date{display:block;margin:7px 0 2px;color:rgba(235,237,237,.64);font:500 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase}
+.recordings-page .recording-small-date{display:block;margin-top:4px;color:rgba(255,255,255,.58);font:500 8px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace}
+.recording-player-layer{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;padding:30px;background:rgba(2,3,4,.82);backdrop-filter:blur(18px)}
+.recording-player{width:min(1120px,92vw);background:#090b0d;border:1px solid rgba(255,255,255,.11);border-radius:16px;overflow:hidden;box-shadow:0 32px 100px rgba(0,0,0,.62)}
+.recording-player header{height:62px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07)}
+.recording-player header>div{display:grid;gap:3px}.recording-player header strong{color:#eee;font-size:13px;font-weight:550}.recording-player header time{color:#73787c;font:500 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace}
+.recording-player header button{width:32px;height:32px;border:0;border-radius:9px;background:rgba(255,255,255,.06);color:#aaa;display:grid;place-items:center}.recording-player header svg{width:15px}
+.recording-player video{display:block;width:100%;max-height:74vh;background:#000;object-fit:contain}.recording-video-missing{height:50vh;display:grid;place-items:center;color:#777;font-size:12px}
