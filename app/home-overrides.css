@@ -611,3 +611,21 @@ html body .app-shell .info-card .round-go{width:42px!important;height:42px!impor
    line-height:1!important;text-align:center!important;
  }
 }
+
+
+/* HOME MOBILE — crop original NOZA PNG background, preserve artwork v9 */
+@media(max-width:820px){
+ .home-mobile-brand{
+   top:10px!important;right:20px!important;
+   width:168px!important;height:54px!important;
+   overflow:hidden!important;background:transparent!important;
+ }
+ .home-mobile-brand img{
+   width:168px!important;max-width:none!important;height:54px!important;
+   object-fit:cover!important;object-position:center!important;
+   clip-path:inset(17% 3% 17% 3%)!important;
+   transform:scale(1.18)!important;
+   background:transparent!important;
+   mix-blend-mode:screen!important;
+ }
+}
