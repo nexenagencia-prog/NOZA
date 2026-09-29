@@ -13,7 +13,7 @@ const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 let cachedProfileAvatar:string|null|undefined;
 const icons=[Grid2X2,CirclePlus,CalendarDays,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Calibragem','Skills Pro','Human Pro','Skills Full','Space','Suporte','Configurações','Sair'];
-const extras:[]=[];
+const extras:{label:string;Icon:typeof BrainCircuit}[]=[];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
 
 export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels:_labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
