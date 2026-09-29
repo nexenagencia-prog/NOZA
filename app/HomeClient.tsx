@@ -76,12 +76,12 @@ export default function HomeClient({content}:{content:HomeContent}){
     <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
     <section className={`content ${expanded?'shifted':''}`}>
       <AppTopbar floating={false} nextLabel="AGORA" nextDateTime={homeDateTime} performancePercent={content.hero.performancePercent} showContext/>
-      <div className="home-mobile-brand" aria-hidden="true"><img src="/noza-logo.svg" alt=""/></div><section className="hero-grid">
+      <div className="home-mobile-brand" aria-hidden="true"><img src="/noza-hero-logo.png" alt=""/></div><section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>{hasNozaHistory?'SUA EVOLUÇÃO':'PRIMEIRO PASSO'}</small><span>{adaptiveHero.subtitle}</span></div>
-          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><Crosshair size={20}/>{hasNozaHistory?'Fazer Calibragem':'Fazer minha primeira calibragem'}</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><span className="calibration-cta-content"><Crosshair size={18}/><span>{hasNozaHistory?'Fazer Calibragem':'Fazer minha primeira calibragem'}</span></span></button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
