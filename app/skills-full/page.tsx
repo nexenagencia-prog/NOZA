@@ -47,7 +47,7 @@ export default function Page(){
  const insight=feedbacks[active.id]||feedbacks.foco;
  return <main className="sp-shell"><AppSidebar/><div className="sp-page">
   <header className="sp-header">
-   <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / SKILLS FULL</div><h1>Skills Pro</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
+   <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / MY PERFORMANCE</div><h1>My Performance</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
    <label><Search/><input placeholder="Buscar habilidade"/><kbd>⌘ K</kbd></label>
    <div className="sp-status"><Activity/><span>LIVE ANALYSIS</span><b>03</b></div>
   </header>
