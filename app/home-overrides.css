@@ -435,3 +435,7 @@ html body .app-shell .info-card .round-go{width:42px!important;height:42px!impor
    display:grid!important;place-items:center!important;width:38px!important;height:38px!important;margin:0!important;transform:none!important;
  }
 }
+
+/* home mobile final polish */
+.home-mobile-brand{display:none}
+@media(max-width:820px){.home-mobile-brand{display:flex!important;position:absolute!important;top:32px!important;left:50%!important;transform:translateX(-50%)!important;z-index:20!important;align-items:center!important;justify-content:center!important;width:74px!important;height:34px!important}.home-mobile-brand img{display:block!important;width:70px!important;max-width:70px!important;height:auto!important;object-fit:contain!important}.app-shell .hero-actions .calibration-cta{justify-content:center!important;text-align:center!important;gap:10px!important;padding-left:14px!important;padding-right:14px!important}.app-shell .hero-actions .calibration-cta svg{flex:0 0 auto!important}}
