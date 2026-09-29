@@ -2,7 +2,7 @@
 import {useEffect,useState} from 'react';
 import Brain3D from './Brain3D';
 import AppSidebar from '../AppSidebar';
-import {BrainCircuit,ChevronRight,Search,Target,Database,Layers3,Stars,HeartPulse,MessageCircleMore,Telescope,UsersRound,Zap,Activity,ScanLine,ChartNoAxesColumnIncreasing} from 'lucide-react';
+import {BrainCircuit,ChevronRight,Search,Target,Database,Layers3,Stars,HeartPulse,MessageCircleMore,Telescope,UsersRound,Zap,Activity,ScanLine,ChartNoAxesColumnIncreasing,Volume2,VolumeX} from 'lucide-react';
 import './skills-full.css';
 
 const icons:any={foco:Target,memoria:Database,disciplina:Layers3,criatividade:Stars,emocional:HeartPulse,comunicacao:MessageCircleMore,visao:Telescope,lideranca:UsersRound,produtividade:Zap};
@@ -32,9 +32,12 @@ const feedbacks:any={
 
 export default function Page(){
  const [profileAvatar,setProfileAvatar]=useState('');
+ const [profileName,setProfileName]=useState('Sandro');
+ const [voiceOn,setVoiceOn]=useState(false);
+ const [speaking,setSpeaking]=useState(false);
  useEffect(()=>{
    const readAvatar=()=>{
-     try{setProfileAvatar(localStorage.getItem('zyvo-profile-avatar')||'')}catch{setProfileAvatar('')}
+     try{setProfileAvatar(localStorage.getItem('zyvo-profile-avatar')||'');setProfileName((localStorage.getItem('noza-profile-name')||'Sandro').trim().split(/\s+/)[0]||'Sandro')}catch{setProfileAvatar('');setProfileName('Sandro')}
    };
    readAvatar();
    window.addEventListener('storage',readAvatar);
@@ -42,6 +45,25 @@ export default function Page(){
    return()=>{window.removeEventListener('storage',readAvatar);window.removeEventListener('focus',readAvatar)}
  },[]);
 
+ const speak=(text:string)=>{
+   if(typeof window==='undefined'||!('speechSynthesis' in window))return;
+   window.speechSynthesis.cancel();
+   const utterance=new SpeechSynthesisUtterance(text);
+   utterance.lang='pt-BR';utterance.rate=.92;utterance.pitch=.92;utterance.volume=1;
+   const voices=window.speechSynthesis.getVoices();
+   const pt=voices.filter(v=>/^pt(-|_)/i.test(v.lang));
+   const preferred=pt.find(v=>/Daniel|Luciana|Felipe|premium|natural/i.test(v.name))||pt[0]||voices[0];
+   if(preferred)utterance.voice=preferred;
+   utterance.onstart=()=>setSpeaking(true);utterance.onend=()=>setSpeaking(false);utterance.onerror=()=>setSpeaking(false);
+   window.speechSynthesis.speak(utterance);
+ };
+ const toggleVoice=()=>{
+   const next=!voiceOn;setVoiceOn(next);
+   try{localStorage.setItem('noza-performance-voice',next?'on':'off')}catch{}
+   if(!next&&typeof window!=='undefined'&&'speechSynthesis' in window){window.speechSynthesis.cancel();setSpeaking(false);return}
+   if(next)speak('Bom dia, '+profileName+'. O que você quer evoluir hoje? Eu tenho sugestões para você, ou podemos seguir pelo que você quer desenvolver.');
+ };
+ useEffect(()=>{try{setVoiceOn(localStorage.getItem('noza-performance-voice')==='on')}catch{};return()=>{if(typeof window!=='undefined'&&'speechSynthesis' in window)window.speechSynthesis.cancel()}},[]);
 
  const[active,setActive]=useState(skills[0]);
  const insight=feedbacks[active.id]||feedbacks.foco;
@@ -49,7 +71,7 @@ export default function Page(){
   <header className="sp-header">
    <div><div className="sci-class">NOZA / HUMAN PERFORMANCE / MY PERFORMANCE</div><h1>My Performance</h1><p>Leitura comportamental aplicada à evolução de performance.</p></div>
    <label><Search/><input placeholder="Buscar habilidade"/><kbd>⌘ K</kbd></label>
-   <div className="sp-status"><Activity/><span>LIVE ANALYSIS</span><b>03</b></div>
+   <div className="sp-header-actions"><button className={"sp-voice "+(voiceOn?"on":"")} onClick={toggleVoice} aria-pressed={voiceOn}>{voiceOn?<Volume2/>:<VolumeX/>}<span>{speaking?"FALANDO...":voiceOn?"VOICE ON":"VOICE OFF"}</span></button><div className="sp-status"><Activity/><span>LIVE ANALYSIS</span><b>03</b></div></div>
   </header>
   <div className="sp-grid">
    <nav className="sp-skills">{skills.map((s)=>{const Icon=icons[s.id];return <button key={s.id} className={active.id===s.id?'active':''} onClick={()=>setActive(s)}>
@@ -73,7 +95,7 @@ export default function Page(){
    </section>
    <aside className="sp-panel sp-panel-intelligence">
     <div className="panel-head"><span className="sp-pill">SKILL EM DESTAQUE</span><span>NOZA INTELLIGENCE</span><b>•••</b></div>
-    <h2>{active.name}</h2><p className="sp-sub">{active.tag}</p>
+    <h2>{active.name}</h2>{voiceOn&&<button className="sp-listen" onClick={()=>speak(active.name+". "+insight.lead+" "+insight.change)}><Volume2/> OUVIR ANÁLISE</button>}<p className="sp-sub">{active.tag}</p>
     <div className="sp-impact"><span>Impacto observado</span><b>{insight.impact}</b></div>
     <section className="intel-block intel-primary"><span className="intel-label">LEITURA DO SEU COMPORTAMENTO</span><p>{insight.lead}</p></section>
     <section className="intel-block"><span className="intel-label">COMO ESSA DECISÃO SE FORMA</span><p>{insight.read}</p></section>
