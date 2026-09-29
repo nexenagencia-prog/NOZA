@@ -649,3 +649,11 @@ html body .app-shell .info-card .round-go{width:42px!important;height:42px!impor
  .home-mobile-brand .noza-a::before{left:5px!important;transform:rotate(35deg)!important;transform-origin:top!important}
  .home-mobile-brand .noza-a::after{right:5px!important;transform:rotate(-35deg)!important;transform-origin:top!important}
 }
+
+
+/* HOME MOBILE — logo oficial enviado pelo usuário */
+@media(max-width:820px){
+ .home-mobile-brand{top:4px!important;right:20px!important;left:auto!important;transform:none!important;width:168px!important;height:54px!important;background:transparent!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-end!important}
+ .home-mobile-brand .noza-wordmark{display:none!important}
+ .home-mobile-brand img{display:block!important;width:148px!important;max-width:148px!important;height:auto!important;object-fit:contain!important;background:transparent!important;opacity:.96!important;filter:none!important}
+}
