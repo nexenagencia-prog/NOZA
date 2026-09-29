@@ -100,3 +100,15 @@
 
 /* precise mobile pass */
 @media(max-width:820px){.sp-shell{width:100%!important;max-width:100%!important;min-height:100dvh!important;overflow-x:hidden!important}.sp-page{margin:0!important;width:100%!important;max-width:100%!important;min-height:100dvh!important;padding:96px 18px 36px!important;overflow:visible!important}.sp-header{display:block!important;height:auto!important;padding:0 0 20px!important}.sp-header h1{font-size:42px!important;line-height:1!important}.sp-header label{width:100%!important;margin-top:18px!important}.sp-status{display:none!important}.sp-grid{display:flex!important;flex-direction:column!important;gap:18px!important;width:100%!important;height:auto!important;padding-top:18px!important}.sp-skills{width:100%!important;gap:10px!important}.sp-skills button{width:100%!important;height:auto!important;min-height:74px!important;padding:12px!important}.sp-skillcopy b{font-size:14px!important}.sp-skillcopy small{font-size:11px!important}.sp-brain{order:2!important;width:100%!important;height:520px!important;min-height:520px!important}}
+/* mobile precision v2: brain first, compact skills */
+@media(max-width:820px){
+.sp-page{padding:92px 16px 34px!important}
+.sp-header{margin:0!important;padding:0 0 14px!important}.sp-header h1{font-size:36px!important;line-height:.96!important}
+.sp-grid{display:flex!important;flex-direction:column!important;gap:14px!important;padding-top:8px!important}
+.sp-brain{order:1!important;width:100%!important;height:330px!important;min-height:330px!important;margin:0!important;border-radius:12px!important;overflow:hidden!important}
+.sp-skills{order:2!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;width:100%!important}
+.sp-skills button{min-height:66px!important;height:66px!important;padding:9px 10px!important;border-radius:10px!important;gap:9px!important}
+.sp-skills button>span:first-child,.sp-skills button>div:first-child{width:34px!important;height:34px!important;min-width:34px!important}
+.sp-skillcopy{min-width:0!important}.sp-skillcopy b{font-size:11px!important;line-height:1.1!important;letter-spacing:.03em!important}.sp-skillcopy small{font-size:9px!important;line-height:1.15!important;margin-top:3px!important}.sp-skills button>[class*="status"],.sp-skills button>small:last-child{display:none!important}
+.sp-insight,.sp-panel,.sp-analysis{order:3!important;width:100%!important;max-width:100%!important;margin:0!important}
+}
