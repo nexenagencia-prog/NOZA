@@ -1,8 +1,8 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { createClient } from '../../lib/supabase/client';
 import './login.css';
 
@@ -84,42 +84,30 @@ export default function Login() {
         <Image src="/noza-logo.svg" alt="NOZA" width={150} height={44} priority />
       </header>
 
-      <section className="auth-intro">
-        <div className="intro-kicker">
-          <span className="intro-line" />
-          INTELIGÊNCIA · PADRÕES · EVOLUÇÃO
-        </div>
-
-        <h1>
-          Você não veio aqui
-          <br />
-          para saber mais.
-          <strong>
-            Veio para perceber
-            <br />
-            o que ainda não percebe.
-          </strong>
-        </h1>
-
-        <p>
-          A NOZA aprende como você pensa, identifica seus padrões
-          <br className="desktop-only" />
-          e mostra o que realmente merece ser desenvolvido.
-        </p>
-
-        <div className="auth-brain" aria-hidden="true">
-          <div className="brain-glow" />
-          <Image
-            src="/noza-skills-brain.png"
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 900px) 55vw, 520px"
-          />
-          <span className="brain-node node-perception">PERCEPÇÃO</span>
-          <span className="brain-node node-reasoning">RACIOCÍNIO</span>
-          <span className="brain-node node-influence">INFLUÊNCIA</span>
-          <span className="brain-node node-adaptability">ADAPTABILIDADE</span>
+      <section className="auth-intro" aria-label="Feedback sobre a NOZA">
+        <div className="intro-testimonial">
+          <div className="testimonial-photo">
+            <Image
+              src="/noza-home-slide-human.png"
+              alt=""
+              fill
+              sizes="64px"
+              priority
+            />
+          </div>
+          <div className="testimonial-copy">
+            <div className="testimonial-quote">“A NOZA é insano.</div>
+            <div className="testimonial-text">
+              Porque ela enxerga o que você ainda não percebe.”
+            </div>
+            <div className="testimonial-author">
+              <span />
+              <div>
+                <strong>Eric</strong>
+                <small>Usuário NOZA</small>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -129,20 +117,19 @@ export default function Login() {
         </div>
 
         <div className="auth-copy">
-          <span>{mode === 'forgot' ? 'RECUPERAR ACESSO' : mode === 'signup' ? 'COMEÇAR AGORA' : 'ACESSO À INTELIGÊNCIA'}</span>
           <h2>
             {mode === 'forgot'
               ? 'Recupere seu acesso.'
               : mode === 'signup'
                 ? 'Pronto para começar?'
-                : 'Você está pronto para evoluir?'}
+                : 'Bem-vindo.'}
           </h2>
           <p>
             {mode === 'forgot'
               ? 'Informe seu e-mail e enviaremos as instruções.'
               : mode === 'signup'
-                ? 'Crie seu acesso e comece a construir seu mapa de evolução.'
-                : 'Entre para continuar construindo sua evolução com a NOZA.'}
+                ? 'Crie seu acesso e comece sua jornada evolutiva.'
+                : 'Sua jornada é evolutiva.'}
           </p>
         </div>
 
