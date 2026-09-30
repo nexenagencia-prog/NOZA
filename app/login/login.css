@@ -41,7 +41,7 @@
 .intro-testimonial{
   display:flex;
   align-items:flex-start;
-  gap:18px;
+  gap:0;
   width:100%;
 }
 .testimonial-photo{
