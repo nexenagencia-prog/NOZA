@@ -1,9 +1,57 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { createClient } from '../../lib/supabase/client';
 import './login.css';
+
+const testimonials = [
+  {
+    quote: 'A NOZA é insano.',
+    text: 'Porque ela enxerga o que você ainda não percebe.',
+    name: 'Eric',
+    role: 'Usuário NOZA',
+    image: '/noza-home-slide-human.png',
+    position: 'center',
+    demo: false,
+  },
+  {
+    quote: 'Passei a enxergar padrões que antes me escapavam.',
+    text: 'Exemplo de feedback — demonstração.',
+    name: 'Perfil demonstrativo 1',
+    role: 'Exemplo, não é depoimento real',
+    image: '/human-pro-portraits.png',
+    position: '10% center',
+    demo: true,
+  },
+  {
+    quote: 'Clareza para transformar percepção em direção.',
+    text: 'Exemplo de feedback — demonstração.',
+    name: 'Perfil demonstrativo 2',
+    role: 'Exemplo, não é depoimento real',
+    image: '/human-pro-portraits.png',
+    position: '30% center',
+    demo: true,
+  },
+  {
+    quote: 'Entender o que acontece muda a próxima decisão.',
+    text: 'Exemplo de feedback — demonstração.',
+    name: 'Perfil demonstrativo 3',
+    role: 'Exemplo, não é depoimento real',
+    image: '/human-pro-portraits.png',
+    position: '65% center',
+    demo: true,
+  },
+  {
+    quote: 'Evoluir começa com uma pergunta melhor.',
+    text: 'Exemplo de feedback — demonstração.',
+    name: 'Perfil demonstrativo 4',
+    role: 'Exemplo, não é depoimento real',
+    image: '/human-pro-portraits.png',
+    position: '90% center',
+    demo: true,
+  },
+];
 
 export default function Login() {
   const s = createClient();
@@ -14,7 +62,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState('');
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState(false);\n  const [testimonialIndex, setTestimonialIndex] = useState(0);\n\n  useEffect(() => {\n    const timer = window.setInterval(() => {\n      setTestimonialIndex((index) => (index + 1) % testimonials.length);\n    }, 6500);\n    return () => window.clearInterval(timer);\n  }, []);
 
   const openForm = (nextMode: 'login' | 'signup' | 'forgot' = 'login') => {
     setMode(nextMode);
@@ -77,19 +125,49 @@ export default function Login() {
         <Image src="/noza-logo.svg" alt="NOZA" width={150} height={44} priority />
       </header>
 
-      <section className="auth-intro" aria-label="Feedback">
-        <div className="intro-testimonial">
+      <section className="auth-intro" aria-label="Feedback da NOZA">
+        <div className="intro-testimonial" aria-live="polite" aria-atomic="true">
           <div className="testimonial-photo">
-            <Image src="/noza-home-slide-human.png" alt="" fill sizes="68px" priority />
+            <Image
+              src={testimonials[testimonialIndex].image}
+              alt={testimonials[testimonialIndex].demo ? "Retrato ilustrativo" : "Foto de Eric"}
+              fill
+              sizes="68px"
+              priority={testimonialIndex === 0}
+              style={{ objectPosition: testimonials[testimonialIndex].position }}
+            />
           </div>
           <div className="testimonial-copy">
-            <div className="testimonial-quote">“A NOZA é insano.</div>
-            <div className="testimonial-text">Porque ela enxerga o que você ainda não percebe.”</div>
+            <div className="testimonial-quote">“{testimonials[testimonialIndex].quote}”</div>
+            <div className="testimonial-text">{testimonials[testimonialIndex].text}</div>
             <div className="testimonial-author">
               <span />
-              <div><strong>Eric</strong><small>Usuário NOZA</small></div>
+              <div>
+                <strong>{testimonials[testimonialIndex].name}</strong>
+                <small>{testimonials[testimonialIndex].role}</small>
+              </div>
             </div>
           </div>
+        </div>
+        <div style={{ display: 'flex', gap: 6, margin: '12px 0 0 86px' }}>
+          {testimonials.map((item, index) => (
+            <button
+              key={item.name}
+              type="button"
+              aria-label={`Mostrar feedback ${index + 1}`}
+              aria-pressed={testimonialIndex === index}
+              onClick={() => setTestimonialIndex(index)}
+              style={{
+                width: 14,
+                height: 14,
+                padding: 0,
+                border: 0,
+                borderRadius: 99,
+                background: testimonialIndex === index ? '#d9dde0' : 'rgba(255,255,255,.3)',
+                cursor: 'pointer',
+              }}
+            />
+          ))}
         </div>
       </section>
 
