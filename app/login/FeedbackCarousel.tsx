@@ -13,33 +13,16 @@ const feedbacks = [
 
 export default function FeedbackCarousel() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
-
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(media.matches);
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  useEffect(() => {
-    if (paused || hovered || focused || reducedMotion) return;
     const timer = window.setInterval(() => {
       if (!document.hidden) setActive(index => (index + 1) % feedbacks.length);
-    }, 6000);
+    }, 5000);
     return () => window.clearInterval(timer);
-  }, [paused, hovered, focused, reducedMotion]);
+  }, []);
 
   return (
-    <section className="auth-intro" aria-label="Feedbacks" aria-roledescription="carrossel"
-      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-      onFocusCapture={() => setFocused(true)}
-      onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
-      <div className="feedback-slides" aria-live={paused || reducedMotion ? 'polite' : 'off'}>
+    <section className="auth-intro" aria-label="Feedbacks" aria-roledescription="carrossel">
+      <div className="feedback-slides" aria-live="off">
         {feedbacks.map((feedback, index) => (
           <div key={feedback.name} className={`intro-testimonial feedback-slide${index === active ? ' is-active' : ''}`}
             aria-hidden={index !== active}>
@@ -57,13 +40,6 @@ export default function FeedbackCarousel() {
             </div>
           </div>
         ))}
-      </div>
-      <div className="feedback-controls">
-        {feedbacks.map((feedback, index) => <button key={feedback.name} type="button"
-          aria-label={`Ver feedback de ${feedback.name}`} aria-pressed={active === index}
-          className={active === index ? 'is-active' : ''} onClick={() => setActive(index)} />)}
-        <button type="button" className="feedback-pause" onClick={() => setPaused(value => !value)}
-          aria-label={paused ? 'Reproduzir feedbacks' : 'Pausar feedbacks'}>{paused ? '▶' : 'Ⅱ'}</button>
       </div>
     </section>
   );

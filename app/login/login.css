@@ -246,11 +246,7 @@
 .feedback-slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s;pointer-events:none}
 .feedback-slide.is-active{opacity:1;visibility:visible;pointer-events:auto}
 .feedback-portrait{background-image:url('/human-pro-portraits.png');background-size:400% 200%}
-.feedback-controls{display:flex;align-items:center;gap:7px;margin:10px 0 0 86px}
-.feedback-controls button{width:22px;height:24px;padding:0;border:0;background:transparent;cursor:pointer;color:#aeb4ba}
-.feedback-controls button:not(.feedback-pause)::before{content:'';display:block;width:5px;height:5px;margin:auto;border-radius:50%;background:#555c62}
-.feedback-controls button.is-active::before{background:#c7ccd0}
-.feedback-controls button:focus-visible,.auth button:focus-visible{outline:2px solid #c7ccd0;outline-offset:3px}
+.auth button:focus-visible{outline:2px solid #c7ccd0;outline-offset:3px}
 .feedback-controls .feedback-pause{font-size:10px}
 @media(prefers-reduced-motion:reduce){.feedback-slide{transition:none}}
 @media(max-width:650px){
@@ -260,6 +256,5 @@
  .auth-intro{position:relative;left:auto;top:auto;bottom:auto;width:100%;max-width:440px;margin:32px auto 0;order:3}
  .card-logo{margin-bottom:24px}
  .feedback-slides{min-height:120px}
- .feedback-controls{margin-left:72px}
  .auth-footer{position:relative;left:auto;bottom:auto;order:4;text-align:center;margin-top:24px;font-size:7px;letter-spacing:2px}
 }

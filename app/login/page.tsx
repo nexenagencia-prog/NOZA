@@ -72,14 +72,14 @@ export default function Login() {
   return (
     <main className="auth">
       <header className="auth-brand">
-        <Image src="/noza-logo.svg" alt="NOZA" width={150} height={44} priority />
+        <Image src="/noza-logo-original.png" alt="NOZA" width={150} height={44} priority />
       </header>
 
       <FeedbackCarousel />
 
       <section className="auth-card" aria-label="Acesso à NOZA">
         <div className="card-logo">
-          <Image src="/noza-logo.svg" alt="NOZA" width={128} height={38} priority />
+          <Image src="/noza-logo-original.png" alt="NOZA" width={128} height={38} priority />
         </div>
 
         {!showForm ? (
