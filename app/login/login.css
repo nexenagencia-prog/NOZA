@@ -10,7 +10,7 @@
 .auth-brand{
   position:absolute;
   z-index:5;
-  top:10.4%;
+  top:7.6%;
   left:6.7%;
 }
 .auth-brand img{
@@ -79,6 +79,10 @@
 .auth-card{
   position:absolute;
   z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   top:20.6%;
   right:7.7%;
   width:28.7%;
@@ -103,6 +107,7 @@
   height:auto;
   opacity:.9;
 }
+.auth-copy{width:100%}
 .auth-copy h2{
   margin:0 0 13px;
   color:#f0f2f3;
@@ -120,7 +125,7 @@
   font-weight:300;
   text-align:center;
 }
-.auth-card form{display:grid;gap:10px}
+.auth-card form{display:grid;gap:10px;width:100%}
 .auth input{
   width:100%;
   height:48px;
@@ -165,6 +170,7 @@
 .primary:disabled{cursor:wait;opacity:.8}
 .button-arrow{margin-left:10px;font-size:17px}
 .or{
+  width:100%;
   display:flex;
   align-items:center;
   gap:14px;
@@ -213,7 +219,7 @@
 }
 @media (max-width:900px){
   .auth{background-position:center center}
-  .auth-brand{top:5.5%;left:7%}
+  .auth-brand{top:4.2%;left:7%}
   .auth-brand img{width:118px}
   .auth-intro{left:7%;top:auto;bottom:8%;width:48%}
   .testimonial-photo{flex-basis:54px;width:54px;height:54px}
@@ -246,7 +252,7 @@
 .google-mark{background:conic-gradient(#4285f4 0deg 90deg,#34a853 90deg 180deg,#fbbc05 180deg 240deg,#ea4335 240deg 300deg,#4285f4 300deg);background-clip:text;-webkit-background-clip:text;color:transparent}
 .auth button:focus-visible{outline:2px solid #c7ccd0;outline-offset:3px}
 @media(max-width:650px){
- .auth{display:flex;flex-direction:column;min-height:100svh;padding:26px 6% 32px;overflow:visible}
+ .auth{display:flex;flex-direction:column;min-height:100svh;padding:18px 6% 32px;overflow:visible}
  .auth-brand{position:relative;top:auto;left:auto;margin-bottom:34px}
  .auth-card{position:relative;top:auto;right:auto;width:100%;max-width:440px;margin:0 auto;padding:30px 25px}
  .auth-intro{position:relative;left:auto;top:auto;bottom:auto;width:100%;max-width:440px;margin:32px auto 0;order:3}
@@ -265,6 +271,7 @@
 
 /* Ajustes visuais exclusivos da tela de login NOZA */
 .auth-card .card-logo{display:none}
-.auth::after{content:"";position:absolute;z-index:10;pointer-events:none;left:0;top:0;width:2px;height:100%;min-height:100svh;background:linear-gradient(180deg,transparent 0%,rgba(172,180,188,.2) 20%,#f4f6f7 42%,#a8afb6 53%,rgba(172,180,188,.18) 70%,transparent 100%);background-size:100% 220%;background-position:0 100%;box-shadow:0 0 8px rgba(220,226,231,.28);animation:silver-login-flow 3.2s linear infinite}
-@keyframes silver-login-flow{from{background-position:0 100%}to{background-position:0 0}}
-@media(prefers-reduced-motion:reduce){.auth::after{animation:none;background-position:0 50%}}
+.auth::after{content:"";position:absolute;z-index:10;pointer-events:none;left:0;top:0;width:1px;height:100%;min-height:100svh;background:linear-gradient(180deg,rgba(190,198,205,.12),rgba(226,231,235,.4) 18%,rgba(247,248,249,.55) 50%,rgba(218,224,229,.32) 82%,rgba(190,198,205,.12));box-shadow:0 0 4px rgba(220,226,231,.18)}
+.auth::before{content:"";position:absolute;z-index:11;pointer-events:none;left:-1px;top:-35%;width:3px;height:35%;background:linear-gradient(180deg,transparent 0%,rgba(242,245,247,.12) 28%,rgba(249,250,251,.75) 58%,rgba(214,221,227,.26) 82%,transparent 100%);filter:blur(.45px);opacity:0;animation:silver-login-shimmer 8s ease-in-out infinite}
+@keyframes silver-login-shimmer{0%{transform:translateY(0);opacity:0}12%{opacity:.42}52%{opacity:.72}88%{opacity:.34}100%{transform:translateY(385%);opacity:0}}
+@media(prefers-reduced-motion:reduce){.auth::before{animation:none;opacity:.18;top:32%;transform:none}}
