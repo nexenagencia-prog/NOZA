@@ -1,18 +1,10 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { createClient } from '../../lib/supabase/client';
 import './login.css';
-
-const testimonial = {
-  quote: 'A NOZA é insano.',
-  text: 'Porque ela enxerga o que você ainda não percebe.',
-  name: 'Eric',
-  role: 'Usuário NOZA',
-  image: '/noza-home-slide-human.png',
-  position: 'center',
-};
+import FeedbackCarousel from './FeedbackCarousel';
 
 export default function Login() {
   const s = createClient();
@@ -79,37 +71,11 @@ export default function Login() {
 
   return (
     <main className="auth">
-      <div className="phrase-mask" aria-hidden="true" />
-
       <header className="auth-brand">
         <Image src="/noza-logo.svg" alt="NOZA" width={150} height={44} priority />
       </header>
 
-      <section className="auth-intro" aria-label="Feedback da NOZA">
-        <div className="intro-testimonial" aria-live="polite" aria-atomic="true">
-          <div className="testimonial-photo">
-            <Image
-              src={testimonial.image}
-              alt="Foto de Eric"
-              fill
-              sizes="68px"
-              priority
-              style={{ objectPosition: testimonial.position }}
-            />
-          </div>
-          <div className="testimonial-copy">
-            <div className="testimonial-quote">“{testimonial.quote}”</div>
-            <div className="testimonial-text">{testimonial.text}</div>
-            <div className="testimonial-author">
-              <span />
-              <div>
-                <strong>{testimonial.name}</strong>
-                <small>{testimonial.role}</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeedbackCarousel />
 
       <section className="auth-card" aria-label="Acesso à NOZA">
         <div className="card-logo">
@@ -119,8 +85,8 @@ export default function Login() {
         {!showForm ? (
           <>
             <div className="auth-copy">
-              <h2>Bem-vindo.</h2>
-              <p>Sua jornada é evolutiva.</p>
+              <h2>Bem-vindo</h2>
+              <p>Aqui a sua jornada é evolutiva.</p>
             </div>
 
             <button className="primary" type="button" onClick={() => openForm('login')}>
@@ -147,7 +113,7 @@ export default function Login() {
           <>
             <div className="auth-copy">
               <h2>{mode === 'forgot' ? 'Recupere seu acesso.' : mode === 'signup' ? 'Criar acesso.' : 'Entrar na NOZA.'}</h2>
-              <p>Sua jornada é evolutiva.</p>
+              <p>Aqui a sua jornada é evolutiva.</p>
             </div>
 
             <form onSubmit={submit}>
@@ -190,6 +156,7 @@ export default function Login() {
           </>
         )}
       </section>
+      <footer className="auth-footer">INTELIGÊNCIA · PADRÕES · EVOLUÇÃO</footer>
     </main>
   );
 }
