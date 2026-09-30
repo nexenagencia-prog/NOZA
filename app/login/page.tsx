@@ -62,7 +62,15 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState('');
-  const [busy, setBusy] = useState(false);\n  const [testimonialIndex, setTestimonialIndex] = useState(0);\n\n  useEffect(() => {\n    const timer = window.setInterval(() => {\n      setTestimonialIndex((index) => (index + 1) % testimonials.length);\n    }, 6500);\n    return () => window.clearInterval(timer);\n  }, []);
+  const [busy, setBusy] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setTestimonialIndex((index) => (index + 1) % testimonials.length);
+    }, 6500);
+    return () => window.clearInterval(timer);
+  }, []);
 
   const openForm = (nextMode: 'login' | 'signup' | 'forgot' = 'login') => {
     setMode(nextMode);
