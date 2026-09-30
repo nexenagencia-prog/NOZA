@@ -33,7 +33,7 @@ export default function FeedbackCarousel() {
               <div className="testimonial-quote">“{feedback.quote}</div>
               <div className="testimonial-text">{feedback.text}”</div>
               <div className="testimonial-author"><span /><div><strong>{feedback.name}</strong>
-                <small>{feedback.example ? 'Feedback ilustrativo' : 'Usuário NOZA'}</small></div></div>
+                <small>{feedback.example ? 'Usuário NOZA' : 'Usuário NOZA'}</small></div></div>
             </div>
           </div>
         ))}
