@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 const feedbacks = [
   { name: 'Eric', quote: 'A NOZA é insano.', text: 'Porque ela enxerga o que você ainda não percebe.', portrait: 4, example: false },
@@ -27,17 +26,14 @@ export default function FeedbackCarousel() {
         {feedbacks.map((feedback, index) => (
           <div key={feedback.name} className={`intro-testimonial feedback-slide${index === active ? ' is-active' : ''}`}
             aria-hidden={index !== active}>
-            {index === 0 ? (
-              <div className="testimonial-photo"><Image src="/noza-home-slide-human.png" alt="Ilustração associada ao feedback de Eric" fill sizes="68px" priority /></div>
-            ) : (
-              <div className="testimonial-photo feedback-portrait" role="img" aria-label={`Retrato ilustrativo de ${feedback.name}`}
-                style={{ backgroundPosition: `${(feedback.portrait % 4) * 100 / 3}% ${feedback.portrait >= 4 ? 100 : 0}%` }} />
-            )}
+            <div className="testimonial-photo feedback-portrait" role="img"
+              aria-label={`Retrato ilustrativo associado ao feedback de ${feedback.name}`}
+              style={{ backgroundPosition: `${(feedback.portrait % 4) * 100 / 3}% ${feedback.portrait >= 4 ? 100 : 0}%` }} />
             <div className="testimonial-copy">
               <div className="testimonial-quote">“{feedback.quote}</div>
               <div className="testimonial-text">{feedback.text}”</div>
               <div className="testimonial-author"><span /><div><strong>{feedback.name}</strong>
-                <small>{feedback.example ? 'Exemplo ilustrativo' : 'Usuário NOZA'}</small></div></div>
+                <small>{feedback.example ? 'Feedback ilustrativo' : 'Usuário NOZA'}</small></div></div>
             </div>
           </div>
         ))}
