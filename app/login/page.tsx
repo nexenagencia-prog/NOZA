@@ -63,7 +63,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false);
-  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [testimonialIndex, setTestimonialIndex] = useState(1);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
