@@ -10,12 +10,12 @@
 .auth-brand{
   position:absolute;
   z-index:5;
-  top:13.2%;
+  top:10.4%;
   left:6.7%;
 }
 .auth-brand img{
   display:block;
-  width:132px;
+  width:118px;
   height:auto;
   opacity:.92;
 }
@@ -85,7 +85,7 @@
   max-width:480px;
   min-height:65.3%;
   box-sizing:border-box;
-  padding:66px 50px 45px;
+  padding:54px 50px 45px;
   border:1px solid rgba(255,255,255,.18);
   border-radius:15px;
   background:linear-gradient(145deg,rgba(13,17,19,.72),rgba(4,6,7,.78));
@@ -154,12 +154,15 @@
   box-sizing:border-box;
 }
 .primary{
-  border:1px solid rgba(255,255,255,.3);
-  background:rgba(43,47,50,.65);
-  color:#e8ebed;
-  font-weight:400;
-  box-shadow:0 5px 20px rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.72);
+  background:linear-gradient(135deg,#f3f4f5 0%,#c9cdd1 34%,#9ea4aa 66%,#e4e6e8 100%);
+  color:#171a1d;
+  font-weight:500;
+  box-shadow:0 6px 24px rgba(193,201,208,.16),inset 0 1px 0 rgba(255,255,255,.8);
+  transition:filter .22s ease,box-shadow .22s ease;
 }
+.primary:hover:not(:disabled){filter:brightness(1.07);box-shadow:0 8px 28px rgba(220,225,230,.23),inset 0 1px 0 rgba(255,255,255,.9)}
+.primary:disabled{cursor:wait;opacity:.8}
 .button-arrow{margin-left:10px;font-size:17px}
 .or{
   display:flex;
@@ -210,8 +213,8 @@
 }
 @media (max-width:900px){
   .auth{background-position:center center}
-  .auth-brand{top:7%;left:7%}
-  .auth-brand img{width:145px}
+  .auth-brand{top:5.5%;left:7%}
+  .auth-brand img{width:118px}
   .auth-intro{left:7%;top:auto;bottom:8%;width:48%}
   .testimonial-photo{flex-basis:54px;width:54px;height:54px}
   .auth-card{
@@ -219,14 +222,14 @@
     right:5%;
     width:42%;
     min-height:72%;
-    padding:48px 28px 34px;
+    padding:42px 28px 34px;
   }
   .card-logo{margin-bottom:55px}
 }
 @media (max-width:650px){
   .auth{background-position:58% center}
   .auth-brand{top:5%;left:7%}
-  .auth-brand img{width:104px}
+  .auth-brand img{width:92px}
   .auth-intro{left:7%;bottom:5%;width:86%}
   .testimonial-copy{font-size:10px}
   .testimonial-quote{font-size:12px}
@@ -243,9 +246,9 @@
 .google-mark{background:conic-gradient(#4285f4 0deg 90deg,#34a853 90deg 180deg,#fbbc05 180deg 240deg,#ea4335 240deg 300deg,#4285f4 300deg);background-clip:text;-webkit-background-clip:text;color:transparent}
 .auth button:focus-visible{outline:2px solid #c7ccd0;outline-offset:3px}
 @media(max-width:650px){
- .auth{display:flex;flex-direction:column;min-height:100svh;padding:38px 6% 32px;overflow:visible}
+ .auth{display:flex;flex-direction:column;min-height:100svh;padding:26px 6% 32px;overflow:visible}
  .auth-brand{position:relative;top:auto;left:auto;margin-bottom:34px}
- .auth-card{position:relative;top:auto;right:auto;width:100%;max-width:440px;margin:0 auto;padding:32px 25px}
+ .auth-card{position:relative;top:auto;right:auto;width:100%;max-width:440px;margin:0 auto;padding:30px 25px}
  .auth-intro{position:relative;left:auto;top:auto;bottom:auto;width:100%;max-width:440px;margin:32px auto 0;order:3}
  .card-logo{margin-bottom:24px}
  .feedback-slides{min-height:120px}
@@ -259,3 +262,9 @@
 .feedback-portrait{background-image:url('/human-pro-portraits.png');background-size:400% 200%}
 @media(prefers-reduced-motion:reduce){.feedback-slide{transition:none}}
 @media(max-width:650px){.feedback-slides{min-height:100px}}
+
+/* Ajustes visuais exclusivos da tela de login NOZA */
+.auth-card .card-logo{display:none}
+.auth::after{content:"";position:absolute;z-index:10;pointer-events:none;left:0;top:0;width:2px;height:100%;min-height:100svh;background:linear-gradient(180deg,transparent 0%,rgba(172,180,188,.2) 20%,#f4f6f7 42%,#a8afb6 53%,rgba(172,180,188,.18) 70%,transparent 100%);background-size:100% 220%;background-position:0 100%;box-shadow:0 0 8px rgba(220,226,231,.28);animation:silver-login-flow 3.2s linear infinite}
+@keyframes silver-login-flow{from{background-position:0 100%}to{background-position:0 0}}
+@media(prefers-reduced-motion:reduce){.auth::after{animation:none;background-position:0 50%}}
