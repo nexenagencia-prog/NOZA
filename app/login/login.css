@@ -17,16 +17,7 @@
   background:linear-gradient(90deg,rgba(2,4,5,.98),rgba(2,4,5,.93) 82%,rgba(2,4,5,.15));
   pointer-events:none;
 }
-.logo-mask{
-  position:absolute;
-  z-index:2;
-  left:5.4%;
-  top:11%;
-  width:19%;
-  height:9%;
-  background:rgba(2,4,5,.9);
-  pointer-events:none;
-}
+
 .auth-brand{
   position:absolute;
   z-index:5;
@@ -35,7 +26,7 @@
 }
 .auth-brand img{
   display:block;
-  width:235px;
+  width:155px;
   height:auto;
   opacity:.92;
 }
@@ -119,7 +110,7 @@
 }
 .card-logo img{
   display:inline-block;
-  width:122px;
+  width:108px;
   height:auto;
   opacity:.9;
 }
@@ -231,7 +222,7 @@
 @media (max-width:900px){
   .auth{background-position:center center}
   .auth-brand{top:7%;left:7%}
-  .auth-brand img{width:145px}
+  .auth-brand img{width:132px}
   .auth-intro{left:7%;top:auto;bottom:8%;width:48%}
   .testimonial-photo{flex-basis:54px;width:54px;height:54px}
   .auth-card{
@@ -246,9 +237,8 @@
 @media (max-width:650px){
   .auth{background-position:58% center}
   .phrase-mask{left:0;top:25%;width:72%;height:20%}
-  .logo-mask{left:4%;top:4%;width:30%;height:8%}
   .auth-brand{top:5%;left:7%}
-  .auth-brand img{width:122px}
+  .auth-brand img{width:112px}
   .auth-intro{left:7%;bottom:5%;width:86%}
   .testimonial-copy{font-size:10px}
   .testimonial-quote{font-size:12px}
