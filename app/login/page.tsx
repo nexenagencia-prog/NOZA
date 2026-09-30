@@ -87,6 +87,16 @@ export default function Login() {
 
       <section className="auth-intro" aria-label="Feedback da NOZA">
         <div className="intro-testimonial" aria-live="polite" aria-atomic="true">
+          <div className="testimonial-photo">
+            <Image
+              src={testimonial.image}
+              alt="Foto de Eric"
+              fill
+              sizes="68px"
+              priority
+              style={{ objectPosition: testimonial.position }}
+            />
+          </div>
           <div className="testimonial-copy">
             <div className="testimonial-quote">“{testimonial.quote}”</div>
             <div className="testimonial-text">{testimonial.text}</div>
