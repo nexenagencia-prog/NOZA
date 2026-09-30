@@ -252,26 +252,10 @@
  .auth-footer{position:relative;left:auto;bottom:auto;order:4;text-align:center;margin-top:24px;font-size:7px;letter-spacing:2px}
 }
 
-.login-value h1{
-  max-width:420px;
-  margin:0 0 16px;
-  color:#f0f2f3;
-  font-size:32px;
-  line-height:1.16;
-  letter-spacing:-.8px;
-  font-weight:300;
-}
-.login-value p{
-  max-width:360px;
-  margin:0;
-  color:#c3c8cc;
-  font-size:13px;
-  line-height:1.6;
-  font-weight:300;
-}
-@media(max-width:900px){
-  .login-value h1{font-size:27px}
-}
-@media(max-width:650px){
-  .login-value h1{font-size:24px;max-width:350px}
-}
+
+.feedback-slides{display:grid;min-height:110px}
+.feedback-slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s;pointer-events:none}
+.feedback-slide.is-active{opacity:1;visibility:visible;pointer-events:auto}
+.feedback-portrait{background-image:url('/human-pro-portraits.png');background-size:400% 200%}
+@media(prefers-reduced-motion:reduce){.feedback-slide{transition:none}}
+@media(max-width:650px){.feedback-slides{min-height:100px}}

@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { createClient } from '../../lib/supabase/client';
 import './login.css';
-import LoginValueMessage from './LoginValueMessage';
+import FeedbackCarousel from './FeedbackCarousel';
 
 export default function Login() {
   const s = createClient();
@@ -75,7 +75,7 @@ export default function Login() {
         <Image src="/noza-logo-original.png" alt="NOZA" width={150} height={44} priority />
       </header>
 
-      <LoginValueMessage />
+      <FeedbackCarousel />
 
       <section className="auth-card" aria-label="Acesso à NOZA">
         <div className="card-logo">
