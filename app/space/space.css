@@ -1065,3 +1065,37 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
  content:none!important;display:none!important;background:none!important;
  backdrop-filter:none!important;-webkit-backdrop-filter:none!important
 }
+
+/* Stable participant mosaic: uniform cards, no masonry gaps or overlapping image veils. */
+@media(min-width:821px){
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:clamp(240px,28vh,340px)!important;grid-auto-flow:row!important;
+  gap:6px!important;align-content:start!important;column-count:initial!important;
+  height:calc(100% - 38px)!important;padding:4px 6px 16px!important;
+  overflow-y:auto!important;overflow-x:hidden!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:nth-child(n){
+  grid-row:auto!important;grid-column:auto!important;height:100%!important;min-height:0!important;
+  margin:0!important;border-radius:16px!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>img{
+  object-fit:cover!important;object-position:center 35%!important;filter:none!important;transform:none!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:before,
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card:after{
+  content:none!important;display:none!important;background:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>div{
+  bottom:58px!important;text-align:center!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card small{
+  margin-bottom:5px!important;font-size:11px!important;color:rgba(255,255,255,.9)!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card strong{
+  font-size:clamp(15px,1.45vw,21px)!important;text-shadow:0 1px 5px rgba(0,0,0,.5)!important
+ }
+ .space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card>span{
+  bottom:10px!important;width:38px!important;height:38px!important;background:rgba(0,0,0,.18)!important
+ }
+}
