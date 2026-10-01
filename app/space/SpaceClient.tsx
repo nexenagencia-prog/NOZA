@@ -37,14 +37,14 @@ const initialNotes:Note[]=[
   {id:'space-note-2',subject:'Feedback da reunião',body:'Revisar perguntas estratégicas antes do próximo encontro.',created_at:'2026-09-11T12:10:00.000Z',updated_at:'2026-09-11T12:10:00.000Z'},
 ];
 const participants:Participant[]=[
-  {id:'p1',name:'Theresa Webb',activity:'Cantando',image:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=520&q=82',active:true,muted:false},
-  {id:'p2',name:'Jane Cooper',activity:'Apresentando',image:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=520&q=82',active:true,muted:false},
-  {id:'p3',name:'Arlene McCoy',activity:'Ouvindo',image:'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=520&q=82',active:false,muted:true},
-  {id:'p4',name:'Darrell Steward',activity:'Ouvindo',image:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=520&q=82',active:true,muted:true},
-  {id:'p5',name:'Dianne Russell',activity:'Fotografando',image:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=520&q=82',active:true,muted:false},
-  {id:'p6',name:'Ronald Richards',activity:'Falando',image:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=520&q=82',active:true,muted:false},
-  {id:'p7',name:'Albert Flores',activity:'Ouvindo',image:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=520&q=82',active:false,muted:true},
-  {id:'p8',name:'Devon Lane',activity:'Ouvindo',image:'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=520&q=82',active:true,muted:false},
+  {id:'p1',name:'Theresa Webb',activity:'Cantando',image:'/space/participants-ai-01.jpg',active:true,muted:false},
+  {id:'p2',name:'Jane Cooper',activity:'Apresentando',image:'/space/participants-ai-02.jpg',active:true,muted:false},
+  {id:'p3',name:'Arlene McCoy',activity:'Ouvindo',image:'/space/participants-ai-03.jpg',active:false,muted:true},
+  {id:'p4',name:'Darrell Steward',activity:'Ouvindo',image:'/space/participants-ai-04.jpg',active:true,muted:true},
+  {id:'p5',name:'Dianne Russell',activity:'Fotografando',image:'/space/participants-ai-05.jpg',active:true,muted:false},
+  {id:'p6',name:'Ronald Richards',activity:'Falando',image:'/space/participants-ai-06.jpg',active:true,muted:false},
+  {id:'p7',name:'Albert Flores',activity:'Ouvindo',image:'/space/participants-ai-07.jpg',active:false,muted:true},
+  {id:'p8',name:'Devon Lane',activity:'Ouvindo',image:'/space/participants-ai-08.jpg',active:true,muted:false},
 ];
 const initialSlides:Slide[]=[];
 
