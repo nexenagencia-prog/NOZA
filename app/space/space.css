@@ -1143,3 +1143,25 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
   bottom:12px!important;width:42px!important;height:42px!important;border-radius:50%!important
  }
 }
+
+/* Restore room for the participant cards and use the NOZA site typeface. */
+@media(min-width:1181px){
+ .space-page .space-workspace{
+  --participants-panel-w:min(calc(var(--video-stage-w)*1.4),max(340px,calc(100vw - var(--video-stage-w) - 545px)))
+ }
+ .space-page .space-workspace:not(.support-cards-collapsed){
+  grid-template-columns:var(--video-stage-w) var(--participants-panel-w) minmax(280px,1fr)!important
+ }
+ .space-page .space-workspace.support-cards-collapsed{
+  grid-template-columns:var(--video-stage-w) var(--participants-panel-w)!important
+ }
+ .space-page .space-participants-panel{
+  width:var(--participants-panel-w)!important;min-width:var(--participants-panel-w)!important;
+  max-width:var(--participants-panel-w)!important;aspect-ratio:auto!important
+ }
+}
+.space-page .space-participants-panel .space-participant-card,
+.space-page .space-participants-panel .space-participant-card small,
+.space-page .space-participants-panel .space-participant-card strong{
+ font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important
+}
