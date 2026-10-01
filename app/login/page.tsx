@@ -39,14 +39,14 @@ export default function Login() {
           email, password, options: { data: { full_name: name } },
         });
         if (error) throw error;
-        if (data.session) { window.location.replace('/'); return; }
+        if (data.session) { window.location.replace(returnPath()); return; }
         const { error: loginError } = await s.auth.signInWithPassword({ email, password });
-        if (!loginError) { window.location.replace('/'); return; }
+        if (!loginError) { window.location.replace(returnPath()); return; }
         setMsg('Não foi possível iniciar sua sessão. Tente entrar novamente.');
       } else {
         const { error } = await s.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        window.location.replace('/');
+        window.location.replace(returnPath());
       }
     } catch (x: any) {
       const m = String(x?.message || '');
@@ -62,10 +62,11 @@ export default function Login() {
     }
   };
 
+  const returnPath=()=>{const path=new URLSearchParams(location.search).get('next')||'/';return path.startsWith('/')&&!path.startsWith('//')?path:'/'};
   const google = async () => {
     await s.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: location.origin + '/auth/callback' },
+      options: { redirectTo: location.origin + '/auth/callback?next='+encodeURIComponent(returnPath()) },
     });
   };
 
