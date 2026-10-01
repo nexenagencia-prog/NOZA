@@ -20,8 +20,8 @@ export async function middleware(request:NextRequest){
    new Promise<never>((_,reject)=>setTimeout(()=>reject(new Error('auth-timeout')),1800))
   ]);
   const user=auth.data.user;
-  if(!user&&!publicPath){const next=request.nextUrl.clone();next.pathname='/login';next.searchParams.set('next',path);return NextResponse.redirect(next)}
-  if(user&&path==='/login')return NextResponse.redirect(new URL('/',request.url));
+  if(!user&&!publicPath){const next=request.nextUrl.clone();next.pathname='/login';next.searchParams.set('next',path+request.nextUrl.search);return NextResponse.redirect(next)}
+  if(user&&path==='/login'){const target=request.nextUrl.searchParams.get('next')||'/';return NextResponse.redirect(new URL(target.startsWith('/')&&!target.startsWith('//')?target:'/',request.url))}
  }catch{
   // Keep the application reachable if the auth provider is temporarily slow.
   // Protected server APIs still validate authentication independently.
