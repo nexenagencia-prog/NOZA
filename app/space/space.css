@@ -1161,9 +1161,11 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
  }
 }
 .space-page .space-participants-panel .space-participant-card,
-.space-page .space-participants-panel .space-participant-card small,
-.space-page .space-participants-panel .space-participant-card strong{
+.space-page .space-participants-panel .space-participant-card small{
  font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important
+}
+.space-page .space-participants-panel:not(.is-focused) .space-participants.mosaic .space-participant-card strong{
+ font-family:Georgia,"Times New Roman",serif!important
 }
 
 /* Match the wider participant cards shown in the supplied reference. */
