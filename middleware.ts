@@ -15,11 +15,9 @@ export async function middleware(request:NextRequest){
  }});
 
  try{
-  const auth=await Promise.race([
-   supabase.auth.getUser(),
-   new Promise<never>((_,reject)=>setTimeout(()=>reject(new Error('auth-timeout')),1800))
-  ]);
-  const user=auth.data.user;
+  const {data,error}=await supabase.auth.getClaims();
+  if(error)throw error;
+  const user=data.claims?.sub;
   if(!user&&!publicPath){const next=request.nextUrl.clone();next.pathname='/login';next.searchParams.set('next',path);return NextResponse.redirect(next)}
   if(user&&path==='/login')return NextResponse.redirect(new URL('/',request.url));
  }catch{
