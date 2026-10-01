@@ -88,8 +88,10 @@ export function useSpaceRoom(stream:MediaStream|null,cameraOn:boolean,micOn:bool
 
 export function ParticipantMedia({person}:{person:RoomParticipant}){
  const ref=useRef<HTMLVideoElement>(null);
- useEffect(()=>{if(ref.current)ref.current.srcObject=person.stream||null},[person.stream,person.cameraOn]);
- return person.cameraOn&&person.stream?<video ref={ref} autoPlay playsInline muted/>:<img src={person.image||initialsImage(person.name)} alt=""/>;
+ const [ready,setReady]=useState(false);
+ useEffect(()=>{setReady(false);if(ref.current){ref.current.srcObject=person.stream||null;void ref.current.play().catch(()=>{})}},[person.stream,person.cameraOn]);
+ const showVideo=person.cameraOn&&Boolean(person.stream)&&ready;
+ return <><img src={person.image||initialsImage(person.name)} alt="" style={showVideo?{display:'none'}:undefined}/>{person.cameraOn&&person.stream?<video ref={ref} autoPlay playsInline muted onLoadedData={()=>setReady(true)} onError={()=>setReady(false)} style={{display:showVideo?'block':'none'}}/>:null}</>;
 }
 export function ParticipantAudio({person,muted}:{person:RoomParticipant;muted:boolean}){
  const ref=useRef<HTMLAudioElement>(null);
