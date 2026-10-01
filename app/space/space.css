@@ -1165,3 +1165,10 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-page .space-participants-panel .space-participant-card strong{
  font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif!important
 }
+
+/* Match the wider participant cards shown in the supplied reference. */
+@media(min-width:1181px){
+ .space-page .space-workspace{
+  --participants-panel-w:min(calc(var(--video-stage-w)*1.65),max(340px,calc(100vw - var(--video-stage-w) - 545px)))
+ }
+}
