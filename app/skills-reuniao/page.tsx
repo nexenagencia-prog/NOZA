@@ -6,7 +6,7 @@ export default function MeetingSkillsPage(){
   return <main className="app-shell skills-page meeting-skills-page">
     <AppSidebar/>
     <div className="meeting-skills-scroll">
-      <SkillsContent/>
+      <SkillsContent artwork="/skills-card.webp?v=noza-meeting-20261004"/>
     </div>
     <style jsx global>{`
       .meeting-skills-page{min-height:100vh;background:#0d0f10;overflow:hidden}
