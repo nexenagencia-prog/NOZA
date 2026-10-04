@@ -19,3 +19,5 @@
 .agenda-reschedule-subject{margin:0 0 3px;color:#b5c0bb;font-size:11px}
 .agenda-next-card .agenda-avatar-stack{margin-left:2px}
 @media(max-width:720px){.agenda-add-guest{flex-wrap:wrap}.agenda-add-guest label{flex-basis:100%}}
+
+.agenda-avatar-add{flex:0 0 18px;width:18px;height:18px;box-sizing:border-box;display:grid;place-items:center;margin-left:2px;border:1px dashed #5d8c81;border-radius:50%;background:#172622;color:#c2f4e8;font-size:12px;font-style:normal;line-height:1}
