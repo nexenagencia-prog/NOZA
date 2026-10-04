@@ -1,20 +1,20 @@
 .human-pro-page{
   display:flex;width:100%;height:100dvh;min-height:100dvh;overflow:hidden;
-  color:#ececec;background:#000;
+  color:#ececec;background:linear-gradient(140deg,#040404 0%,#090909 56%,#151719 100%);
   font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
 .human-pro-content{
   display:flex;flex:1 1 auto;flex-direction:column;min-width:0;height:100dvh;
-  margin-left:224px;overflow:hidden;background:#000;color:#ececec;
+  margin-left:224px;overflow:hidden;background:transparent;color:#ececec;
 }
 .human-chat-header{
   height:56px;flex:0 0 56px;display:flex;align-items:center;padding:0 24px;
-  border-bottom:1px solid rgba(255,255,255,.07);background:#000;
+  border-bottom:1px solid rgba(255,255,255,.07);background:transparent;
 }
 .human-chat-product{display:flex;align-items:center;gap:10px;color:#f0f0f0;font-size:15px;font-weight:600}
 .chat-noza-mark{display:inline-grid;place-items:center;width:19px;height:19px;color:#f3f3f3;font-size:17px;font-weight:750;line-height:1;letter-spacing:-.07em}
 .human-chat-main{
-  display:flex;flex:1 1 auto;flex-direction:column;align-items:center;min-height:0;width:100%;background:#000;
+  display:flex;flex:1 1 auto;flex-direction:column;align-items:center;min-height:0;width:100%;background:transparent;
 }
 .human-chat-landing{
   display:flex;flex:1 1 auto;flex-direction:column;justify-content:center;gap:24px;
