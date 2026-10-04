@@ -1,9 +1,9 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,BrainCircuit,Paperclip,UserRound} from 'lucide-react';
+import {ArrowUp,BrainCircuit,Plus} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
-import {createHumanParticleField,getHumanProPresentation} from './human-pro-model.mjs';
+
 import '../app-sidebar.css';
 import './human-pro.css';
 import {getPerformanceProfile} from '../../lib/performance/core';
@@ -11,8 +11,6 @@ import {getPerformanceProfile} from '../../lib/performance/core';
 type Meeting={id:string;title:string;objective?:string;phrase?:string;summary?:string;transcript?:string};
 type ChatMessage={id:string;role:'user'|'assistant';content:string};
 const RECORDINGS_KEY='zyvo-recordings';
-const presentation=getHumanProPresentation();
-const particles=createHumanParticleField(156);
 const defaultMeetings:Meeting[]=[
   {id:'r1',title:'Reunião de planejamento',objective:'gestão',phrase:'Estratégia, proposta e próximos passos.'},
   {id:'r2',title:'Alinhamento comercial',objective:'venda',phrase:'Decisões mais claras para acelerar o fechamento.'},
@@ -37,11 +35,14 @@ export default function HumanProClient(){
   const[working,setWorking]=useState(false);
   const[performanceContext,setPerformanceContext]=useState('');
   const fileRef=useRef<HTMLInputElement>(null);
+  const threadEndRef=useRef<HTMLDivElement>(null);
 
   useEffect(()=>{
     setMeetings(loadMeetings());
     getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\n'))}).catch(()=>{});
   },[]);
+
+  useEffect(()=>{threadEndRef.current?.scrollIntoView({behavior:'smooth',block:'end'})},[messages,working]);
 
   const runAnalysis=async(value=question)=>{
     const clean=value.trim();if(!clean||working)return;
@@ -69,42 +70,30 @@ export default function HumanProClient(){
   return <main className="human-pro-page">
     <AppSidebar/>
     <section className="human-pro-content">
-      <div className="human-scenery" aria-hidden="true">
-        <div className="human-light-cone"/>
-        <div className="human-horizon"/>
-        <div className="human-glow-orb glow-left"/>
-        <div className="human-glow-orb glow-right"/>
-        <div className="human-light-stream"><i/><i/><i/></div>
-      </div>
-      <div className="human-particle-field" aria-hidden="true">{particles.map(particle=><span key={particle.id} style={{
-        '--particle-x':`${particle.x}%`,
-        '--particle-y':`${particle.y}%`,
-        '--particle-size':`${particle.size}px`,
-        '--particle-opacity':particle.opacity,
-        '--particle-duration':`${particle.duration}s`,
-        '--particle-delay':`${particle.delay}s`,
-        '--particle-drift-x':`${particle.driftX}px`,
-        '--particle-drift-y':`${particle.driftY}px`,
-      } as React.CSSProperties}/>)}</div>
-      <div className="human-main">
-        <header className="human-hero">
-          <h1>{presentation.title}</h1>
-          {presentation.subtitle&&<p>{presentation.subtitle}</p>}
-        </header>
-
-        <section className={`human-chat ${messages.length?'has-messages':''}`}>
-          {!!messages.length&&<div className="human-chat-thread" aria-live="polite">
-            {messages.map(message=><article className={`human-message ${message.role}`} key={message.id}>
-              <div className="human-message-avatar">{message.role==='assistant'?<BrainCircuit/>:<UserRound/>}</div>
-              <div><strong>{message.role==='assistant'?'Human Pro':'Você'}</strong><p>{message.content}</p></div>
-            </article>)}
-            {working&&<article className="human-message assistant thinking"><div className="human-message-avatar"><BrainCircuit/></div><div><strong>Human Pro</strong><p>Cruzando seu histórico, evidências e padrões...</p></div></article>}
-          </div>}
+      <header className="human-chat-header">
+        <div className="human-chat-product"><BrainCircuit/><span>Human Pro</span></div>
+      </header>
+      <div className="human-chat-main">
+        <div className={`human-chat-thread ${messages.length?'has-messages':'is-empty'}`} aria-live="polite" aria-relevant="additions text">
+          {messages.length===0?<section className="human-chat-empty"><h1>Como posso ajudar?</h1><p>Converse sobre suas reuniões, decisões e evolução profissional.</p></section>:messages.map(message=><article className={`human-message ${message.role}`} key={message.id} aria-label={message.role==='assistant'?'Resposta do Human Pro':'Sua mensagem'}>
+            {message.role==='assistant'&&<div className="human-message-avatar"><BrainCircuit/></div>}
+            <div className="human-message-content">{message.role==='assistant'&&<strong>Human Pro</strong>}<p>{message.content}</p></div>
+          </article>)}
+          {working&&<article className="human-message assistant thinking" role="status" aria-label="Human Pro está pensando"><div className="human-message-avatar"><BrainCircuit/></div><div className="human-message-content"><strong>Human Pro</strong><span className="human-thinking-dots" aria-hidden="true"><i/><i/><i/></span></div></article>}
+          <div ref={threadEndRef}/>
+        </div>
+        <div className="human-composer-area">
           <form className="human-composer" onSubmit={submit}>
-            <textarea aria-label="Pergunta para o Human Pro" value={question} onChange={event=>setQuestion(event.target.value)} onKeyDown={submitOnEnter} placeholder="O que você quer entender sobre sua performance?"/>
-            <div><button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Paperclip/></button><input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/><span>{performanceContext?'Perfil longitudinal conectado':`${meetings.length} reuniões locais disponíveis`}</span><button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button></div>
+            <textarea aria-label="Pergunta para o Human Pro" value={question} onChange={event=>setQuestion(event.target.value)} onKeyDown={submitOnEnter} placeholder="Pergunte ao Human Pro"/>
+            <div className="human-composer-toolbar">
+              <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
+              <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
+              <span>{performanceContext?'Perfil de performance conectado':`${meetings.length} reuniões disponíveis`}</span>
+              <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
+            </div>
           </form>
-        </section>
+          <p className="human-disclaimer">O Human Pro pode cometer erros. Confira informações importantes.</p>
+        </div>
       </div>
     </section>
   </main>;
