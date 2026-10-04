@@ -11,7 +11,8 @@ export async function sendAgendaEmail(guests:Guest[],subject:string,title:string
   const key=process.env.RESEND_API_KEY,from=process.env.NOZA_MEETINGS_FROM;
   if(!key||!from)return{configured:false,total:to.length,sent:0,failed:0};
 
-  const roomPath='/space?room='+encodeURIComponent(id);\n  const loginUrl='https://noza-silk.vercel.app/login?next='+encodeURIComponent(roomPath);
+  const roomPath='/space?room='+encodeURIComponent(id);
+  const loginUrl='https://noza-silk.vercel.app/login?next='+encodeURIComponent(roomPath);
   let sent=0,failed=0;
   await Promise.all(to.map(async address=>{
     try{
