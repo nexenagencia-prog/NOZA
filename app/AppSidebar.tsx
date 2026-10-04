@@ -7,7 +7,6 @@ import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
 import {isSidebarRouteActive,resolveSidebarRoute} from './sidebar-navigation.mjs';
 import './app-sidebar.css';
-import {createClient} from '../lib/supabase/client';
 
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 let cachedProfileAvatar:string|null|undefined;
@@ -26,7 +25,7 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
   const final=[...labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label==='Configurações'||item.label==='Sair'),...(!labels.includes('Configurações')?[{label:'Configurações',index:998,Icon:Hexagon}]:[])].sort((a,b)=>a.label==='Sair'?1:b.label==='Sair'?-1:a.index-b.index);
   const emit=(eventName:string)=>window.dispatchEvent(new Event(eventName));
   useEffect(()=>{setMobileOpen(false)},[pathname]);
-  const action=(label:string)=>{if(label==='Suporte'){router.push('/suporte');return}const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes');else if(label==='Criar slides')router.push('/slides');else if(label==='Sair'){setMobileOpen(false);const s=createClient();void s.auth.signOut({scope:'local'});window.location.replace('/login')}};
+  const action=(label:string)=>{if(label==='Suporte'){router.push('/suporte');return}const route=resolveSidebarRoute(label);if(route)router.push(route);else if(label==='Calculadora')onCalculator?onCalculator():emit('zyvo:open-calculator');else if(label==='Anotar')onAnotar?onAnotar():emit('zyvo:open-notes');else if(label==='Criar slides')router.push('/slides');else if(label==='Sair'){setMobileOpen(false);void import('../lib/supabase/client').then(({createClient})=>createClient().auth.signOut({scope:'local'})).finally(()=>window.location.replace('/login'))}};
   const active=(label:string)=>isSidebarRouteActive(label,pathname);
   return <><button className="mobile-nav-trigger" onClick={()=>setMobileOpen(true)} aria-label="Abrir menu"><Menu/></button>{mobileOpen&&<button className="mobile-nav-backdrop" onClick={()=>setMobileOpen(false)} aria-label="Fechar menu"/>}<aside className={`sidebar expanded ${mobileOpen?'mobile-open':''}`} aria-label="Menu lateral"><button className="mobile-nav-close" onClick={()=>setMobileOpen(false)} aria-label="Fechar menu"><X/></button>
     <button className="sidebar-brand" onClick={()=>router.push('/')} aria-label={BRAND_NAME}><img src={BRAND_LOGO} alt={BRAND_NAME}/></button>
