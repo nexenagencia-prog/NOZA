@@ -2,7 +2,7 @@
 import AppSidebar from '../AppSidebar';
 import {useCallback,useEffect,useMemo,useState} from 'react';
 import type {CSSProperties,FormEvent} from 'react';
-import {Bell,CalendarDays,ChevronLeft,ChevronRight,Clock,Mail,MapPin,Plus,Search,Trash2,Users,X} from 'lucide-react';
+import {ArrowRight,Bell,CalendarDays,ChevronLeft,ChevronRight,Clock,Mail,MapPin,Plus,Search,Trash2,Users,X} from 'lucide-react';
 import './agenda.css';
 
 type Guest={name?:string;email:string;avatarUrl?:string};
