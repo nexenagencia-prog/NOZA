@@ -71,3 +71,39 @@ html:has(.meeting-create-page),body:has(.meeting-create-page){height:auto!import
   .meeting-create-hero>div:first-child{width:100%!important;}
   .meeting-intelligence{align-self:flex-start!important;margin:0!important;}
 }
+
+
+/* Preparação aprofundada e diagnóstico da reunião */
+.meeting-deep-toggle{width:calc(100% - 46px);margin:2px 0 0 46px;padding:14px 15px;display:flex;align-items:center;justify-content:space-between;border:1px solid #303236;border-radius:8px;background:#111315;color:#dededb;cursor:pointer;text-align:left;font-size:12px}
+.meeting-deep-toggle span{display:flex;align-items:center;gap:9px}
+.meeting-deep-toggle svg{width:15px;height:15px;color:#bfc1bf}
+.meeting-deep-toggle>svg{transition:transform .18s ease}
+.meeting-deep-toggle>svg.rotated{transform:rotate(90deg)}
+.meeting-deep-questions{margin:4px 0 0 46px;padding:15px;border:1px solid #292b2e;border-radius:9px;background:rgba(8,9,10,.55);display:flex;flex-direction:column;gap:20px}
+.meeting-deep-questions label{grid-template-columns:20px 1fr!important;gap:9px!important;border:0!important;padding:0!important}
+.meeting-deep-questions label>span{font:600 10px monospace;color:#878a8d}
+.meeting-deep-questions textarea{grid-column:2!important;margin-top:4px!important;min-height:64px!important}
+.meeting-analyze{width:100%;height:46px;margin:16px 0 0;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border:1px solid #3b3e41;border-radius:8px;background:#1b1d1f;color:#e7e7e4;cursor:pointer;font-size:11px;font-weight:600}
+.meeting-analyze svg{width:16px}
+.meeting-primary:disabled{opacity:.65;cursor:wait}
+.meeting-create-notice{margin:12px 2px 0;color:#bfc1bf;font-size:11px;line-height:1.5}
+.meeting-diagnosis{margin:18px 0 12px;padding:16px;border:1px solid #393c3f;border-radius:9px;background:linear-gradient(155deg,rgba(235,235,230,.055),rgba(12,13,14,.38))}
+.meeting-diagnosis-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.meeting-diagnosis-head span{display:flex;align-items:center;gap:7px;color:#a8abad;font:600 8px monospace;letter-spacing:.1em}
+.meeting-diagnosis-head span svg{width:14px;height:14px}
+.meeting-diagnosis-head strong{color:#f0f0ed;font-size:11px;font-weight:500}
+.meeting-coverage{margin:14px 0}
+.meeting-coverage>div{display:flex;justify-content:space-between;color:#85888b;font-size:10px}
+.meeting-coverage b{color:#e7e7e4;font-weight:500}
+.meeting-coverage>i{display:block;height:3px;margin-top:7px;border-radius:3px;background:#303235;overflow:hidden}
+.meeting-coverage>i em{display:block;height:100%;border-radius:3px;background:#d9d9d5;transition:width .2s ease}
+.meeting-diagnosis-summary{margin:12px 0 15px;color:#c1c3c2;font-size:11px;line-height:1.6}
+.meeting-diagnosis-block{padding:10px 0;border-top:1px solid #292b2e}
+.meeting-diagnosis-block small,.meeting-diagnosis-gaps small{color:#777b7e;font:600 8px monospace;letter-spacing:.1em}
+.meeting-diagnosis-block p,.meeting-diagnosis-gaps p{margin:5px 0 0;color:#c1c3c2;font-size:10px;line-height:1.55}
+.meeting-diagnosis-gaps{margin-top:9px;padding:11px;border-radius:7px;background:rgba(255,255,255,.035)}
+@media(max-width:720px){
+  .meeting-deep-toggle,.meeting-deep-questions{width:calc(100% - 46px);margin-left:46px;box-sizing:border-box}
+  .meeting-deep-questions{padding:12px}
+  .meeting-diagnosis{padding:14px}
+}
