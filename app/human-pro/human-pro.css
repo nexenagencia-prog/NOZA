@@ -12,7 +12,7 @@
   border-bottom:1px solid rgba(255,255,255,.07);background:#000;
 }
 .human-chat-product{display:flex;align-items:center;gap:10px;color:#f0f0f0;font-size:15px;font-weight:600}
-.chatnosa-mark{display:inline-grid;place-items:center;width:19px;height:19px;color:#f3f3f3;font-size:17px;font-weight:750;line-height:1;letter-spacing:-.07em}
+.chat-noza-mark{display:inline-grid;place-items:center;width:19px;height:19px;color:#f3f3f3;font-size:17px;font-weight:750;line-height:1;letter-spacing:-.07em}
 .human-chat-main{
   display:flex;flex:1 1 auto;flex-direction:column;align-items:center;min-height:0;width:100%;background:#000;
 }
@@ -33,7 +33,7 @@
   display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;margin-top:1px;
   border:1px solid #3b3b3b;border-radius:50%;background:#111;color:#efefef;
 }
-.human-message-avatar .chatnosa-mark{font-size:15px}
+.human-message-avatar .chat-noza-mark{font-size:15px}
 .human-message-content{flex:1 1 auto;min-width:0}
 .human-message-content strong{display:block;margin:3px 0 7px;color:#f0f0f0;font-size:14px;font-weight:600}
 .human-message-content p{margin:0;color:#e5e5e5;font-size:16px;font-weight:400;line-height:1.72;white-space:pre-wrap;overflow-wrap:anywhere}
