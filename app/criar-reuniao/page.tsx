@@ -55,7 +55,7 @@ function diagnoseMeeting(input:{type:string;person:string;goal:string;context:st
   return {score,total,level,diagnosis,missing,goal:deep.desiredOutcome.trim()||goal.trim()||'Defina o resultado observável que precisa alcançar.',risk:deep.objection.trim()||deep.alternatives.trim()||'Investigue o que ainda impede a decisão antes de apresentar a solução.',evidence:deep.proofPoints.trim()||'Separe um exemplo, dado ou caso verificável que conecte a proposta à necessidade.',criteria:[deep.decisionMaker.trim(),deep.urgency.trim()].filter(Boolean).join(' · ')||'Descubra quem decide, o que pesa na escolha e até quando a decisão precisa acontecer.',opening:deep.opening.trim()||'Abra perguntando qual resultado tornaria a conversa valiosa para a outra pessoa.',nextStep,skills,differentiator:deep.valueDifferentiator.trim()||'Explicite a diferença relevante para a necessidade da pessoa.',targetPrice:deep.targetPrice.trim(),profileUrl:deep.profileUrl.trim()};
 }
 
-export default function CriarReuniao(){export default function CriarReuniao(){
+export default function CriarReuniao(){
   const router=useRouter();
   const[type,setType]=useState('venda');
   const[person,setPerson]=useState('');
