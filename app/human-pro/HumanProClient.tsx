@@ -101,7 +101,7 @@ export default function HumanProClient(){
 
   const composer=<div className="human-composer-area">
     <form className="human-composer" onSubmit={submit}>
-      <textarea ref={questionRef} aria-label="Mensagem para Chatnosa" value={question} onChange={changeQuestion} onKeyDown={submitOnEnter} placeholder="Converse com a Chatnosa"/>
+      <textarea ref={questionRef} aria-label="Mensagem para Chat Noza" value={question} onChange={changeQuestion} onKeyDown={submitOnEnter} placeholder="Converse com a Chat Noza"/>
       <div className="human-composer-toolbar">
         <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
@@ -109,14 +109,14 @@ export default function HumanProClient(){
         <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
       </div>
     </form>
-    <p className="human-disclaimer">A Chatnosa pode cometer erros. Confira informações importantes.</p>
+    <p className="human-disclaimer">A Chat Noza pode cometer erros. Confira informações importantes.</p>
   </div>;
 
   return <main className="human-pro-page">
     <AppSidebar/>
     <section className="human-pro-content">
       <header className="human-chat-header">
-        <div className="human-chat-product"><span className="chatnosa-mark" aria-hidden="true">N</span><span>Chatnosa</span></div>
+        <div className="human-chat-product"><span className="chat-noza-mark" aria-hidden="true">N</span><span>Chat Noza</span></div>
       </header>
       <div className="human-chat-main">
         {messages.length===0?
@@ -126,9 +126,9 @@ export default function HumanProClient(){
           </div>:
           <>
             <div className="human-chat-thread has-messages" aria-live="polite" aria-relevant="additions text">
-              {messages.map((message,index)=><article className={`human-message ${message.role}`} key={message.id} aria-label={message.role==='assistant'?'Resposta da Chatnosa':'Sua mensagem'}>
-                {message.role==='assistant'&&<div className="human-message-avatar"><span className="chatnosa-mark" aria-hidden="true">N</span></div>}
-                <div className="human-message-content">{message.role==='assistant'&&<strong>Chatnosa</strong>}<p>{message.content}</p>
+              {messages.map((message,index)=><article className={`human-message ${message.role}`} key={message.id} aria-label={message.role==='assistant'?'Resposta da Chat Noza':'Sua mensagem'}>
+                {message.role==='assistant'&&<div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div>}
+                <div className="human-message-content">{message.role==='assistant'&&<strong>Chat Noza</strong>}<p>{message.content}</p>
                   {message.role==='assistant'&&<div className="human-message-tools" aria-label="Ações da resposta">
                     <button type="button" onClick={()=>copyMessage(message)} aria-label={copiedId===message.id?'Copiado':'Copiar resposta'} title={copiedId===message.id?'Copiado':'Copiar'}>{copiedId===message.id?<Check/>:<Clipboard/>}</button>
                     <button type="button" className={feedback[message.id]==='up'?'selected':''} onClick={()=>toggleFeedback(message.id,'up')} aria-label="Gostei da resposta" aria-pressed={feedback[message.id]==='up'} title="Gostei"><ThumbsUp/></button>
@@ -138,7 +138,7 @@ export default function HumanProClient(){
                   </div>}
                 </div>
               </article>)}
-              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chatnosa está pensando"><div className="human-message-avatar"><span className="chatnosa-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chatnosa</strong><span className="human-thinking-dots" aria-hidden="true"><i/><i/><i/></span></div></article>}
+              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chat Noza está pensando"><div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chat Noza</strong><span className="human-thinking-dots" aria-hidden="true"><i/><i/><i/></span></div></article>}
               <div ref={threadEndRef}/>
             </div>
             {composer}
