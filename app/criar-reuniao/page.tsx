@@ -2,7 +2,7 @@
 
 import {useMemo,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {ArrowRight,BrainCircuit,BriefcaseBusiness,Check,ChevronRight,CircleDollarSign,GraduationCap,Handshake,Mic2,Plus,Presentation,Target,Users,X} from 'lucide-react';
+import {ArrowRight,BrainCircuit,BriefcaseBusiness,CalendarDays,Check,ChevronRight,CircleDollarSign,GraduationCap,Handshake,Mic2,Plus,Presentation,Target,Users,X} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 import AppTopbar from '../AppTopbar';
 import './criar-reuniao.css';
