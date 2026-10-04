@@ -1,8 +1,10 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import {useCallback,useEffect,useState} from 'react';
-import FloatingCalculator from './FloatingCalculator';
-import FloatingNotes,{FloatingNotesMode} from './FloatingNotes';
+import type {FloatingNotesMode} from './FloatingNotes';
+const FloatingCalculator=dynamic(()=>import('./FloatingCalculator'),{ssr:false});
+const FloatingNotes=dynamic(()=>import('./FloatingNotes'),{ssr:false});
 
 export default function GlobalFloatingTools(){
   const[calculatorOpen,setCalculatorOpen]=useState(false);
