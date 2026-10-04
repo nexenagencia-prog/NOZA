@@ -95,3 +95,5 @@
   .human-thinking-dots i{animation:none;opacity:.8}
   .human-composer,.human-attach,.human-send{transition:none}
 }
+
+body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{display:none!important}
