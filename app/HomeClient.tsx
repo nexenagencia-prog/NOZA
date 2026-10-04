@@ -2,15 +2,18 @@
 // NOZA production sync
 
 import {ArrowLeft,ArrowRight,BrainCircuit,Crosshair,Focus,Route,TrendingUp} from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {CSSProperties,useEffect,useMemo,useState} from 'react';
 import type {HomeContent} from '../lib/cms/types';
 import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
-import FloatingCalculator from './FloatingCalculator';
-import FloatingNotes,{type FloatingNotesMode} from './FloatingNotes';
+import type {FloatingNotesMode} from './FloatingNotes';
 import {homeCardRoute} from './home-card-route.mjs';
+
+const FloatingCalculator=dynamic(()=>import('./FloatingCalculator'),{ssr:false});
+const FloatingNotes=dynamic(()=>import('./FloatingNotes'),{ssr:false});
 
 const cardIcon=(slug:string)=>slug==='skills'?BrainCircuit:slug==='insights'?Focus:Route;
 const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-three';
@@ -31,7 +34,6 @@ export default function HomeClient({content}:{content:HomeContent}){
     return active.length?active:content.carousel;
   },[content.carousel]);
 
-  useEffect(()=>{router.prefetch('/anotacoes');router.prefetch('/skills')},[router]);
   useEffect(()=>{
     const update=()=>{
       const now=new Date();
