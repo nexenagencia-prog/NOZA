@@ -8,7 +8,7 @@ const routes={
   'Gravações':'/gravacoes',
   'Skills Pro':'/skills-pro',
   'My Performance':'/skills-full',
-  'Human Pro':'/human-pro',
+  'Chatnosa':'/human-pro',\n  'Human Pro':'/human-pro',
   'Space':'/space',
   'Anotações':'/anotacoes',
   'Configurações':'/configuracoes',
