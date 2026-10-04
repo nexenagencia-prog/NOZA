@@ -11,7 +11,7 @@ function initialsImage(name:string){return 'data:image/svg+xml,'+encodeURICompon
 async function profileImage(value:string,name:string):Promise<string>{
  if(!value)return initialsImage(name);
  if(!value.startsWith('data:'))return value.startsWith('https://')?value:initialsImage(name);
- return new Promise(resolve=>{const img=new Image();img.onload=()=>{const canvas=document.createElement('canvas');canvas.width=canvas.height=160;const ctx=canvas.getContext('2d');if(!ctx)return resolve(initialsImage(name));ctx.drawImage(img,0,0,160,160);resolve(canvas.toDataURL('image/jpeg',.65))};img.onerror=()=>resolve(initialsImage(name));img.src=value});
+ return new Promise(resolve=>{const img=new Image();img.onload=()=>{const portrait=img.naturalHeight/img.naturalWidth>1.25;const canvas=document.createElement('canvas');canvas.width=portrait?180:160;canvas.height=portrait?320:160;const ctx=canvas.getContext('2d');if(!ctx)return resolve(initialsImage(name));ctx.drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.68))};img.onerror=()=>resolve(initialsImage(name));img.src=value});
 }
 
 export function useSpaceRoom(stream:MediaStream|null,cameraOn:boolean,micOn:boolean){
@@ -46,7 +46,7 @@ export function useSpaceRoom(stream:MediaStream|null,cameraOn:boolean,micOn:bool
    const url=new URL(location.href);let roomId=url.searchParams.get('room');
    if(!roomId||!/^\w[\w-]{20,100}$/.test(roomId)){roomId=crypto.randomUUID();url.searchParams.set('room',roomId);history.replaceState(history.state,'',url)}
    const name=(localStorage.getItem('noza-profile-name')||user.user_metadata?.full_name||user.user_metadata?.name||'Participante').slice(0,80);
-   const image=await profileImage(localStorage.getItem('zyvo-profile-avatar')||user.user_metadata?.avatar_url||'',name);if(disposed)return;
+   const image=await profileImage(localStorage.getItem('zyvo-space-avatar')||localStorage.getItem('zyvo-profile-avatar')||user.user_metadata?.avatar_url||'',name);if(disposed)return;
    const identity:Presence={id:sessionId,userId:user.id,name,image,activity:'',active:true,muted:!localRef.current.micOn,cameraOn:localRef.current.cameraOn};setSelf(identity);
    room=supabase.channel('noza-space:'+roomId,{config:{presence:{key:sessionId},broadcast:{self:false}}});channelRef.current=room;
    syncRef.current=()=>{
