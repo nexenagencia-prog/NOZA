@@ -50,7 +50,7 @@ export default function HumanProClient(){
     const storageName=(event:StorageEvent)=>{if(event.key==='noza-profile-name'&&event.newValue)setProfileName(event.newValue)};
     window.addEventListener('noza:profile-name',updateName);
     window.addEventListener('storage',storageName);
-    getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\\n'))}).catch(()=>{});
+    getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\n'))}).catch(()=>{});
     return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel()};
   },[]);
 
@@ -79,7 +79,7 @@ export default function HumanProClient(){
     event.preventDefault();
     runAnalysis();
   };
-  const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\\n\\n':''}Contexto do arquivo ${file.name}:\\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
+  const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\n\n':''}Contexto do arquivo ${file.name}:\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
   const copyMessage=async(message:ChatMessage)=>{
     try{await navigator.clipboard.writeText(message.content);setCopiedId(message.id);window.setTimeout(()=>setCopiedId(current=>current===message.id?null:current),1800)}catch{}
   };
@@ -97,7 +97,7 @@ export default function HumanProClient(){
     if(lastUser)runAnalysis(lastUser.content,prior);
   };
   const toggleFeedback=(id:string,value:Feedback)=>setFeedback(current=>({...current,[id]:current[id]===value?undefined:value} as Record<string,Feedback>));
-  const firstName=profileName.trim().split(/\\s+/)[0]||'';
+  const firstName=profileName.trim().split(/\s+/)[0]||'';
 
   const composer=<div className="human-composer-area">
     <form className="human-composer" onSubmit={submit}>
