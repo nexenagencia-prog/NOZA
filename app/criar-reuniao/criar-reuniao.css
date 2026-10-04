@@ -107,3 +107,5 @@ html:has(.meeting-create-page),body:has(.meeting-create-page){height:auto!import
   .meeting-deep-questions{padding:12px}
   .meeting-diagnosis{padding:14px}
 }
+
+.meeting-ai-loading{margin:12px 0;padding:11px;border:1px solid #36393c;border-radius:7px;color:#c9cbc9;font-size:11px;line-height:1.5}.meeting-ai-output{margin:12px 0;padding:13px;border:1px solid #45484b;border-radius:8px;background:rgba(255,255,255,.04)}.meeting-ai-output small{color:#aaa;font:600 8px monospace;letter-spacing:.12em}.meeting-ai-output p{white-space:pre-wrap;margin:7px 0 0;color:#e0e1de;font-size:11px;line-height:1.65}
