@@ -35,6 +35,7 @@ export default function HumanProClient(){
   const[working,setWorking]=useState(false);
   const[performanceContext,setPerformanceContext]=useState('');
   const fileRef=useRef<HTMLInputElement>(null);
+  const questionRef=useRef<HTMLTextAreaElement>(null);
   const threadEndRef=useRef<HTMLDivElement>(null);
 
   useEffect(()=>{
@@ -49,7 +50,7 @@ export default function HumanProClient(){
     const stamp=Date.now();
     const userMessage:ChatMessage={id:`user-${stamp}`,role:'user',content:clean};
     const next=[...messages,userMessage];
-    setMessages(next);setQuestion('');setWorking(true);
+    setMessages(next);setQuestion('');if(questionRef.current)questionRef.current.style.height='auto';setWorking(true);
     try{
       const response=await fetch('/api/human-pro/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:next.map(({role,content})=>({role,content}))})});
       const data=await response.json();
@@ -59,6 +60,7 @@ export default function HumanProClient(){
       setMessages(current=>[...current,{id:`assistant-${stamp}`,role:'assistant',content:'Não consegui acessar sua inteligência de performance agora. Tente novamente em alguns instantes.'}]);
     }finally{setWorking(false)}
   };
+  const changeQuestion=(event:ChangeEvent<HTMLTextAreaElement>)=>{setQuestion(event.target.value);event.currentTarget.style.height='auto';event.currentTarget.style.height=Math.min(event.currentTarget.scrollHeight,200)+'px'};
   const submit=(event:FormEvent)=>{event.preventDefault();runAnalysis()};
   const submitOnEnter=(event:KeyboardEvent<HTMLTextAreaElement>)=>{
     if(event.key!=='Enter'||event.shiftKey||event.nativeEvent.isComposing)return;
@@ -84,7 +86,7 @@ export default function HumanProClient(){
         </div>
         <div className="human-composer-area">
           <form className="human-composer" onSubmit={submit}>
-            <textarea aria-label="Pergunta para o Human Pro" value={question} onChange={event=>setQuestion(event.target.value)} onKeyDown={submitOnEnter} placeholder="Pergunte ao Human Pro"/>
+            <textarea ref={questionRef} aria-label="Pergunta para o Human Pro" value={question} onChange={changeQuestion} onKeyDown={submitOnEnter} placeholder="Pergunte ao Human Pro"/>
             <div className="human-composer-toolbar">
               <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
               <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
