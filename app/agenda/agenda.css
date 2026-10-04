@@ -63,3 +63,9 @@
 .agenda-detail-modal .agenda-room-link{font-size:16px}
 .agenda-detail-modal .agenda-actions button{font-size:15px}
 @media(max-width:720px){.agenda-event{padding:6px 7px}.agenda-event strong{font-size:11px}.agenda-event-date,.agenda-event-time{font-size:9px}.agenda-next-card strong{font-size:11px}.agenda-detail-modal h2{font-size:25px}.agenda-detail-modal .agenda-info p{font-size:15px}}
+
+/* Preserve uma linha própria para a data e outra para o horário, mesmo em cards baixos. */
+.agenda-event{grid-template-rows:auto auto;row-gap:1px;padding:4px 7px}
+.agenda-event-date{padding:1px 4px;line-height:14px}
+.agenda-event-time{line-height:14px}
+@media(max-width:720px){.agenda-event{padding:4px 6px}}
