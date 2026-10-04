@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-const PRICES={pro:79.9,performance:129.9} as const;
+const PRICES={monthly:{pro:99,performance:149},annual:{pro:79,performance:129}} as const;
+const LEGACY_PRICES={pro:79.9,performance:129.9} as const;
 export async function POST(req:NextRequest){
  const token=process.env.MERCADOPAGO_ACCESS_TOKEN;
  const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -13,16 +14,19 @@ export async function POST(req:NextRequest){
  const {data:{user}}=await supabase.auth.getUser();
  if(!user?.email)return NextResponse.json({error:'Faça login para assinar.'},{status:401});
  const body=await req.json().catch(()=>({}));
- const plan=body.plan as keyof typeof PRICES;
- if(!PRICES[plan])return NextResponse.json({error:'Plano inválido.'},{status:400});
+ const plan=body.plan as keyof typeof LEGACY_PRICES;
+ const requestedBilling=body.billing;
+ const billing=requestedBilling==='annual'||requestedBilling==='monthly'?requestedBilling:null;
+ const price=billing?PRICES[billing][plan]:LEGACY_PRICES[plan];
+ if(!price)return NextResponse.json({error:'Plano inválido.'},{status:400});
  const origin=new URL(req.url).origin;
- const external_reference=user.id+'|'+plan;
+ const external_reference=user.id+'|'+plan+(billing?'|'+billing:'');
  const payload:any={
-   reason:plan==='pro'?'NOZA PRO':'NOZA PERFORMANCE',
+   reason:(plan==='pro'?'NOZA PRO':'NOZA PERFORMANCE')+(billing==='annual'?' ANUAL':''),
    external_reference,
    payer_email:user.email,
    back_url:origin+'/planos?billing=return',
-   auto_recurring:{frequency:1,frequency_type:'months',transaction_amount:PRICES[plan],currency_id:'BRL',free_trial:{frequency:7,frequency_type:'days'}}
+   auto_recurring:{frequency:billing==='annual'?12:1,frequency_type:'months',transaction_amount:price*(billing==='annual'?12:1),currency_id:'BRL',free_trial:{frequency:7,frequency_type:'days'}}
  };
  const mp=await fetch('https://api.mercadopago.com/preapproval',{method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},body:JSON.stringify(payload),cache:'no-store'});
  const data=await mp.json();
