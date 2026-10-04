@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,CirclePlus,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,UserRound,Video,X} from 'lucide-react';
+import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,CirclePlus,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,Video,X} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -10,7 +10,8 @@ import './app-sidebar.css';
 
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 let cachedProfileAvatar:string|null|undefined;
-const icons=[Grid2X2,CirclePlus,CalendarDays,BrainCircuit,BarChart3,UserRound,Bell,Video,Hexagon,DoorOpen];
+const ChatnosaMark=()=> <span className="sidebar-chatnosa-mark" aria-hidden="true">N</span>;
+const icons=[Grid2X2,CirclePlus,CalendarDays,BrainCircuit,BarChart3,ChatnosaMark,Bell,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Calibragem','Skills Pro','Human Pro','My Performance','Space','Suporte','Configurações','Sair'];
 const extras:{label:string;Icon:typeof BrainCircuit}[]=[];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
@@ -33,7 +34,7 @@ export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',ava
     <div className="avatar-wrap"><button className="avatar-button" onClick={()=>fileRef.current?.click()}><div className="avatar" style={avatar?{backgroundImage:`url(${avatar})`}:undefined}>{!avatar&&profileName.split(/\s+/).map(value=>value[0]).slice(0,2).join('')}</div><span className="avatar-camera"><Camera size={11}/></span></button><input ref={fileRef} className="avatar-input" type="file" accept="image/*" onChange={changeAvatar}/><div className="avatar-meta">{editingName?<input className="name-input" value={profileName} autoFocus onChange={event=>setProfileName(event.target.value)} onBlur={()=>{setEditingName(false);try{localStorage.setItem('noza-profile-name',profileName);window.dispatchEvent(new CustomEvent('noza:profile-name',{detail:profileName}))}catch{}}}/>:<button className="name-edit" onClick={()=>setEditingName(true)}><strong>{profileName}</strong><Pencil size={12}/></button>}<span>{rebrandPublicText(planLabel)}</span></div></div>
     <div className="side-nav">
       {primary.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)} onMouseEnter={()=>prefetch(label)} onFocus={()=>prefetch(label)}><Icon/><span>{label}</span></button>)}
-      {extras.map(({label,Icon})=>label==='Human Pro'||label==='Skills Pro'||label==='My Performance'?<Link className={`side-item ${active(label)?'active':''}`} href={resolveSidebarRoute(label)!} key={label}><Icon/><span>{label}</span></Link>:<button className={`side-item ${active(label)?'active':''}`} key={label} onClick={()=>action(label)} onMouseEnter={()=>prefetch(label)} onFocus={()=>prefetch(label)}><Icon/><span>{label}</span></button>)}
+      {extras.map(({label,Icon})=>label==='Chatnosa'||label==='Skills Pro'||label==='My Performance'?<Link className={`side-item ${active(label)?'active':''}`} href={resolveSidebarRoute(label)!} key={label}><Icon/><span>{label}</span></Link>:<button className={`side-item ${active(label)?'active':''}`} key={label} onClick={()=>action(label)} onMouseEnter={()=>prefetch(label)} onFocus={()=>prefetch(label)}><Icon/><span>{label}</span></button>)}
       {final.map(({label,index,Icon})=><button className={`side-item ${active(label)?'active':''}`} key={`${label}-${index}`} onClick={()=>action(label)} onMouseEnter={()=>prefetch(label)} onFocus={()=>prefetch(label)}><Icon/><span>{label}</span></button>)}
     </div>
   </aside></>
