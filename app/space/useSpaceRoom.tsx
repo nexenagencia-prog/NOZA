@@ -11,7 +11,7 @@ function initialsImage(name:string){return 'data:image/svg+xml,'+encodeURICompon
 async function profileImage(value:string,name:string):Promise<string>{
  if(!value)return initialsImage(name);
  if(!value.startsWith('data:'))return value.startsWith('https://')?value:initialsImage(name);
- return new Promise(resolve=>{const img=new Image();img.onload=()=>{const portrait=img.naturalHeight/img.naturalWidth>1.25;const canvas=document.createElement('canvas');canvas.width=portrait?180:160;canvas.height=portrait?320:160;const ctx=canvas.getContext('2d');if(!ctx)return resolve(initialsImage(name));ctx.drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.68))};img.onerror=()=>resolve(initialsImage(name));img.src=value});
+ return new Promise(resolve=>{const img=new Image();img.onload=()=>{const portrait=img.naturalHeight/img.naturalWidth>1.25;const targetRatio=portrait?9/16:1;let sw=img.naturalWidth,sh=img.naturalHeight;if(sw/sh>targetRatio)sw=sh*targetRatio;else sh=sw/targetRatio;const canvas=document.createElement('canvas');canvas.width=720;canvas.height=portrait?1280:720;const ctx=canvas.getContext('2d');if(!ctx)return resolve(initialsImage(name));ctx.drawImage(img,(img.naturalWidth-sw)/2,(img.naturalHeight-sh)/2,sw,sh,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.88))};img.onerror=()=>resolve(initialsImage(name));img.src=value});
 }
 
 export function useSpaceRoom(stream:MediaStream|null,cameraOn:boolean,micOn:boolean){
