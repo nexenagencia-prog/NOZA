@@ -256,3 +256,8 @@ body:has(.space-page) .sidebar:not(.space-collapsed) ~ .content{
  html body:has(.space-page) .space-content{margin-left:224px!important;width:calc(100vw - 224px)!important;max-width:calc(100vw - 224px)!important}
  .space-sidebar-toggle{display:none!important}
 }
+
+
+/* Chatnosa sidebar monogram */
+.sidebar .sidebar-chatnosa-mark{width:19px;height:19px;flex:0 0 19px;display:grid;place-items:center;color:#bbbdbc;font-size:16px;font-weight:750;line-height:1;letter-spacing:-.07em}
+.side-item.active .sidebar-chatnosa-mark{color:#f1f1ef}
