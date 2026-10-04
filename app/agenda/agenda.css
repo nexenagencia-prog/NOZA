@@ -39,3 +39,27 @@
 /* Redimensionamento dos cards da grade e painel aberto sem rolagem interna. */
 .agenda-event{grid-template-columns:minmax(0,1fr) max-content}.agenda-event-resizer{position:absolute;right:-7px;top:50%;transform:translateY(-50%);width:14px;height:42px;display:grid;place-items:center;border:1px solid #dfe3df;border-radius:7px;background:#fff;color:#68736e;box-shadow:0 2px 9px #0003;cursor:ew-resize;touch-action:none;z-index:3}.agenda-event-resizer svg{width:13px;height:19px}.agenda-event-resizer:hover{color:#126d61;border-color:#78aaa0}.agenda-detail-modal{max-height:none!important;overflow:visible!important}.agenda-backdrop:has(.agenda-detail-modal){overflow-y:auto;align-items:start;padding-top:18px;padding-bottom:18px}.agenda-detail-modal .agenda-participants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 14px}.agenda-detail-modal .agenda-participants>small{grid-column:1/-1}.agenda-detail-modal .agenda-participants .agenda-guest{margin-top:0;min-width:0}
 @media(max-width:700px){.agenda-event-resizer{width:12px}.agenda-backdrop:has(.agenda-detail-modal){padding-top:10px;padding-bottom:10px}.agenda-detail-modal .agenda-participants{grid-template-columns:1fr}}
+
+/* Áreas de redimensionamento invisíveis; tipografia ampliada para leitura dos cards. */
+.agenda-event-resizer{right:-3px;top:0;transform:none;width:10px;height:100%;display:block;border:0;border-radius:0;background:transparent;color:transparent;box-shadow:none;cursor:ew-resize;touch-action:none}
+.agenda-event-resizer svg{display:none}
+.agenda-event-resizer:hover{border:0;background:transparent;color:transparent;box-shadow:none}
+.agenda-resize-handle{right:-9px;top:0;transform:none;width:18px;height:100%;border:0;border-radius:0;background:transparent;color:transparent;box-shadow:none;cursor:ew-resize}
+.agenda-resize-handle:hover{border:0;background:transparent;color:transparent;box-shadow:none}
+.agenda-event{font-size:12px;padding:8px 10px;column-gap:9px}
+.agenda-event strong{font-size:12px;line-height:1.25}
+.agenda-event-date{font-size:10px;line-height:15px}
+.agenda-event-time{font-size:10px;line-height:17px}
+.agenda-next-card time{font-size:11px}
+.agenda-next-card strong{font-size:12px}
+.agenda-next-card small{font-size:10px}
+.agenda-status{font-size:10px}
+.agenda-detail-modal h2{font-size:28px}
+.agenda-detail-modal .agenda-meta{font-size:15px}
+.agenda-detail-modal .agenda-info p{font-size:16px}
+.agenda-detail-modal .agenda-info>small{font-size:13px}
+.agenda-detail-modal .agenda-guest b{font-size:15px}
+.agenda-detail-modal .agenda-guest small{font-size:14px}
+.agenda-detail-modal .agenda-room-link{font-size:16px}
+.agenda-detail-modal .agenda-actions button{font-size:15px}
+@media(max-width:720px){.agenda-event{padding:6px 7px}.agenda-event strong{font-size:11px}.agenda-event-date,.agenda-event-time{font-size:9px}.agenda-next-card strong{font-size:11px}.agenda-detail-modal h2{font-size:25px}.agenda-detail-modal .agenda-info p{font-size:15px}}
