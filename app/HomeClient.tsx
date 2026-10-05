@@ -83,7 +83,7 @@ export default function HomeClient({content}:{content:HomeContent}){
           <div className="hero-greeting">Bem-vindo, <strong>{firstName}!</strong></div><div className="eyebrow">{content.hero.eyebrow}</div>
           <h1 className="hero-refined-headline">{titleLines.map((line,index)=><span key={index}>{line}{index<titleLines.length-1&&<br/>}</span>)}</h1>
           <div className="performance-insight"><small>{hasNozaHistory?'SUA EVOLUÇÃO':'PRIMEIRO PASSO'}</small><span>{adaptiveHero.subtitle}</span></div>
-          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><ScanLine size={20}/>{hasNozaHistory?'Fazer Calibragem':'Fazer minha primeira calibragem'}</button><div className="calibration-tooltip">É preciso fazer a primeira calibragem para a NOZA identificar seu nível de performance atual. Depois, você pode refazer a calibragem sempre que preferir.</div></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
+          <div className="hero-actions"><div className="calibration-cta-wrap"><button className="primary-btn calibration-cta" onClick={()=>router.push("/calibragem-cognitiva")}><ScanLine size={20}/>Fazer calibragem</button></div><button className="secondary-btn" onClick={()=>router.push("/skills")}><TrendingUp size={20}/>Continuar evolução</button></div>
         </div>
         <div className="hero-feature"><div className="feature-card">
           <div className="feature-photo" key={`noza-${slide}`} style={{backgroundImage:`url(${visual.imageUrl})`}}/>
