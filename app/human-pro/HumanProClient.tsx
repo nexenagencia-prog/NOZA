@@ -1,8 +1,7 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX,ChevronDown} from 'lucide-react';
-import Link from 'next/link';
+import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX,ChevronDown,ChevronRight} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
@@ -20,6 +19,8 @@ export default function HumanProClient(){
   const[speakingId,setSpeakingId]=useState<string|null>(null);
   const[voiceInput,setVoiceInput]=useState(false);
   const[voiceNotice,setVoiceNotice]=useState('');
+  const[planMenuOpen,setPlanMenuOpen]=useState(false);
+  const[awaitingPerformanceUpgrade,setAwaitingPerformanceUpgrade]=useState(false);
   const fileRef=useRef<HTMLInputElement>(null);
   const questionRef=useRef<HTMLTextAreaElement>(null);
   const threadEndRef=useRef<HTMLDivElement>(null);
@@ -54,8 +55,32 @@ export default function HumanProClient(){
       setMessages(current=>[...current,{id:`assistant-${stamp}`,role:'assistant',content:'Não consegui acessar sua inteligência de performance agora. Tente novamente em alguns instantes.'}]);
     }finally{setWorking(false)}
   };
+  const choosePerformance=()=>{
+    setPlanMenuOpen(false);
+    setAwaitingPerformanceUpgrade(true);
+    setMessages(current=>[...current,{id:`assistant-upgrade-question-${Date.now()}`,role:'assistant',content:'Você quer fazer upgrade para o plano Performance?'}]);
+  };
+  const answerPerformanceUpgrade=(value=question)=>{
+    const clean=value.trim();
+    if(!clean)return;
+    const normalized=clean.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');
+    const positive=/^(sim|s|quero|pode|claro|vamos|confirmo|isso)(\\b|[,.!])/i.test(normalized);
+    const negative=/^(nao|n|depois|cancelar|prefiro nao)(\\b|[,.!])/i.test(normalized);
+    const stamp=Date.now();
+    const response=positive
+      ?'Perfeito. Vou te encaminhar para a página de planos para você concluir o upgrade para Performance.'
+      :negative
+        ?'Tudo bem. Você pode continuar a conversa e consultar os planos pelo seletor Pro quando quiser.'
+        :'Para seguir com o upgrade, responda “sim”. Se preferir, responda “não” e continuamos a conversa.';
+    setMessages(current=>[...current,{id:`user-upgrade-${stamp}`,role:'user',content:clean},{id:`assistant-upgrade-${stamp}`,role:'assistant',content:response}]);
+    setQuestion('');
+    if(questionRef.current)questionRef.current.style.height='auto';
+    if(positive||negative)setAwaitingPerformanceUpgrade(false);
+    if(positive)window.setTimeout(()=>window.location.assign('/planos'),1300);
+  };
+  const sendCurrentMessage=()=>awaitingPerformanceUpgrade?answerPerformanceUpgrade():runAnalysis();
   const changeQuestion=(event:ChangeEvent<HTMLTextAreaElement>)=>{setQuestion(event.target.value);event.currentTarget.style.height='auto';event.currentTarget.style.height=Math.min(event.currentTarget.scrollHeight,200)+'px'};
-  const submit=(event:FormEvent)=>{event.preventDefault();runAnalysis()};
+  const submit=(event:FormEvent)=>{event.preventDefault();sendCurrentMessage()};
   const submitOnEnter=(event:KeyboardEvent<HTMLTextAreaElement>)=>{
     if(event.key!=='Enter'||event.shiftKey||event.nativeEvent.isComposing)return;
     event.preventDefault();
@@ -98,7 +123,10 @@ export default function HumanProClient(){
       <div className="human-composer-toolbar">
         <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
-        <Link className="human-plan-selector" href="/planos" aria-label="Ver os planos Pro e Performance" title="Conhecer os planos Pro e Performance"><span>Pro</span><ChevronDown aria-hidden="true"/></Link>
+        <div className="human-plan-selector-wrap">
+          <button type="button" className="human-plan-selector" onClick={()=>setPlanMenuOpen(open=>!open)} aria-expanded={planMenuOpen} aria-controls="human-plan-menu" aria-label="Selecionar plano" title="Ver opções de plano"><span>Pro</span><ChevronDown aria-hidden="true"/></button>
+          {planMenuOpen&&<div className="human-plan-menu" id="human-plan-menu" role="menu"><button type="button" role="menuitem" onClick={choosePerformance}><span><strong>Performance</strong><small>Ver upgrade e valores</small></span><ChevronRight aria-hidden="true"/></button></div>}
+        </div>
         <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><Mic/></button>
         <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
       </div>
