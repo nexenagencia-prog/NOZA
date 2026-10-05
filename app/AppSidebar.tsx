@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {Activity,Bot,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X} from 'lucide-react';
+import {Activity,Orbit,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -10,7 +10,7 @@ import './app-sidebar.css';
 
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 let cachedProfileAvatar:string|null|undefined;
-const icons=[PanelsTopLeft,CalendarPlus,CalendarClock,ScanLine,Sparkles,Bot,Activity,Video,Hexagon,DoorOpen];
+const icons=[PanelsTopLeft,CalendarPlus,CalendarClock,ScanLine,Sparkles,Orbit,Activity,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Calibragem','Skills Pro','Chat Noza','My Performance','Space','Suporte','Configurações','Sair'];
 const extras:{label:string;Icon:typeof BrainCircuit}[]=[];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};

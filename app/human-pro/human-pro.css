@@ -127,3 +127,41 @@
    .human-composer,.human-attach,.human-send,.human-voice,.human-message-tools button{transition:none}
 }
 body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{display:none!important}
+
+
+/* Live microphone capture: waveform, transcript, cancel, stop and send. */
+.human-composer.recording{padding-top:10px}
+.human-voice-capture{
+  display:grid;grid-template-columns:36px minmax(0,1fr) 36px;align-items:center;gap:12px;
+  min-height:58px;padding:2px 3px 9px;
+}
+.human-voice-capture-body{min-width:0}
+.human-voice-live-head{display:flex;align-items:center;gap:12px;min-height:25px}
+.human-voice-live-head>span{flex:0 0 auto;color:#eee;font-size:13px;font-weight:500}
+.human-voice-bars{display:flex;align-items:center;justify-content:flex-start;gap:3px;height:30px;min-width:0;overflow:hidden}
+.human-voice-bars i{display:block;flex:0 0 3px;min-height:4px;max-height:28px;border-radius:4px;background:#d8d8d8;opacity:.9;transition:height 70ms linear}
+.human-voice-transcript{
+  min-height:18px;margin:1px 0 0;color:#aaa;font-size:13px;line-height:1.4;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.human-record-cancel,.human-record-stop{
+  display:grid;place-items:center;width:34px;height:34px;border:0;border-radius:50%;
+  cursor:pointer;transition:background .15s ease,color .15s ease;
+}
+.human-record-cancel{background:transparent;color:#b6b6b6}
+.human-record-cancel:hover{background:#454545;color:#fff}
+.human-record-cancel svg{width:19px;height:19px;stroke-width:1.8}
+.human-record-stop{background:#414141;color:#f4f4f4}
+.human-record-stop:hover{background:#565656;color:#fff}
+.human-record-stop svg{width:13px;height:13px;fill:currentColor;stroke-width:1}
+.human-recording-label{flex:1 1 auto;color:#aaa;font-size:12px;margin-left:4px}
+.human-composer.recording .human-send{margin-left:auto}
+@media(max-width:480px){
+  .human-voice-capture{grid-template-columns:32px minmax(0,1fr) 32px;gap:7px}
+  .human-voice-bars{gap:2px}
+  .human-voice-bars i{flex-basis:2px}
+  .human-voice-transcript{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .human-voice-bars i,.human-record-cancel,.human-record-stop{transition:none}
+}
