@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
+import { Mail } from 'lucide-react';
 import { createClient } from '../../lib/supabase/client';
 import './login.css';
 import FeedbackCarousel from './FeedbackCarousel';
@@ -86,12 +87,12 @@ export default function Login() {
         {!showForm ? (
           <>
             <div className="auth-copy">
-              <h2>Bem-vindo</h2>
+              <h2>Bem-vindo!</h2>
               <p>Aqui a sua jornada é evolutiva.</p>
             </div>
 
             <button className="primary" type="button" onClick={() => openForm('login')}>
-              Entrar na NOZA <span className="button-arrow">→</span>
+              Fazer Login <span className="button-arrow">→</span>
             </button>
 
             <div className="or"><i /><span>ou</span><i /></div>
@@ -102,7 +103,7 @@ export default function Login() {
             </button>
 
             <button className="email-entry" type="button" onClick={() => openForm('login')}>
-              <span className="email-icon">□</span>
+              <span className="email-icon"><Mail aria-hidden="true"/></span>
               Entrar com e-mail
             </button>
 
