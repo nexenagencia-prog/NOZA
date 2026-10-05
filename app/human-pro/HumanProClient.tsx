@@ -1,7 +1,7 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX} from 'lucide-react';
+import {ArrowUp,AudioLines,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
@@ -39,9 +39,12 @@ export default function HumanProClient(){
   const[copiedId,setCopiedId]=useState<string|null>(null);
   const[feedback,setFeedback]=useState<Record<string,Feedback>>({});
   const[speakingId,setSpeakingId]=useState<string|null>(null);
+  const[voiceInput,setVoiceInput]=useState(false);
+  const[voiceNotice,setVoiceNotice]=useState('');
   const fileRef=useRef<HTMLInputElement>(null);
   const questionRef=useRef<HTMLTextAreaElement>(null);
   const threadEndRef=useRef<HTMLDivElement>(null);
+  const audioInputRef=useRef<any>(null);
 
   useEffect(()=>{
     setMeetings(loadMeetings());
@@ -51,13 +54,15 @@ export default function HumanProClient(){
     window.addEventListener('noza:profile-name',updateName);
     window.addEventListener('storage',storageName);
     getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\n'))}).catch(()=>{});
-    return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel()};
+    return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel();audioInputRef.current?.abort?.()};
   },[]);
 
   useEffect(()=>{threadEndRef.current?.scrollIntoView({behavior:'smooth',block:'end'})},[messages,working]);
+  useEffect(()=>{const field=questionRef.current;if(field){field.style.height='auto';field.style.height=Math.min(field.scrollHeight,200)+'px'}},[question]);
 
   const runAnalysis=async(value=question,priorMessages?:ChatMessage[])=>{
     const clean=value.trim();if(!clean||working)return;
+    audioInputRef.current?.stop?.();setVoiceInput(false);setVoiceNotice('');
     const stamp=Date.now();
     const next=priorMessages?[...priorMessages]:[...messages,{id:`user-${stamp}`,role:'user' as const,content:clean}];
     if(priorMessages)setMessages(priorMessages);
@@ -80,6 +85,17 @@ export default function HumanProClient(){
     runAnalysis();
   };
   const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\n\n':''}Contexto do arquivo ${file.name}:\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
+  const toggleVoiceInput=()=>{
+    if(voiceInput){audioInputRef.current?.stop?.();setVoiceInput(false);setVoiceNotice('');return}
+    const speechApi=(window as any).SpeechRecognition||(window as any).webkitSpeechRecognition;
+    if(!speechApi){setVoiceNotice('O ditado por áudio não está disponível neste navegador.');return}
+    const recognition=new speechApi();
+    recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=false;
+    recognition.onresult=(event:any)=>{let transcript='';for(let index=event.resultIndex;index<event.results.length;index++)if(event.results[index].isFinal)transcript+=event.results[index][0].transcript;if(transcript.trim()){setQuestion(current=>current+(current.trim()?' ':'')+transcript.trim());setVoiceNotice('Ouvindo… fale sua pergunta.')}};
+    recognition.onerror=()=>{setVoiceInput(false);setVoiceNotice('Não foi possível captar o áudio. Verifique a permissão do microfone.');audioInputRef.current=null};
+    recognition.onend=()=>{setVoiceInput(false);audioInputRef.current=null};
+    try{recognition.start();audioInputRef.current=recognition;setVoiceInput(true);setVoiceNotice('Ouvindo… fale sua pergunta.')}catch{setVoiceInput(false);setVoiceNotice('Não foi possível iniciar o microfone.')}
+  };
   const copyMessage=async(message:ChatMessage)=>{
     try{await navigator.clipboard.writeText(message.content);setCopiedId(message.id);window.setTimeout(()=>setCopiedId(current=>current===message.id?null:current),1800)}catch{}
   };
@@ -106,9 +122,11 @@ export default function HumanProClient(){
         <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
         <span>{performanceContext?'Perfil de performance conectado':`${meetings.length} reuniões disponíveis`}</span>
+        <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><AudioLines/></button>
         <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
       </div>
     </form>
+    {voiceNotice&&<p className="human-audio-notice" role="status">{voiceNotice}</p>}
     <p className="human-disclaimer">A Chat Noza pode cometer erros. Confira informações importantes.</p>
   </div>;
 
@@ -138,7 +156,7 @@ export default function HumanProClient(){
                   </div>}
                 </div>
               </article>)}
-              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chat Noza está pensando"><div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chat Noza</strong><span className="human-thinking-dots" aria-hidden="true"><i/><i/><i/></span></div></article>}
+              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chat Noza está pensando"><div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chat Noza</strong><div className="human-thinking-matrix" aria-label="Chat Noza está processando sua pergunta">{Array.from({length:24},(_,index)=><i key={index} style={{animationDelay:(index%8)*.065+Math.floor(index/8)*.12+'s'}}/>)}<span>Elaborando resposta</span></div></div></article>}
               <div ref={threadEndRef}/>
             </div>
             {composer}
