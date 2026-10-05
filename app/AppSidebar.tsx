@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,CirclePlus,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,Video,X} from 'lucide-react';
+import {Activity,BarChart3,Bell,BrainCircuit,Calculator,CalendarDays,Camera,CirclePlus,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,Pencil,Presentation,Sparkles,StickyNote,Video,X} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -11,7 +11,7 @@ import './app-sidebar.css';
 const PROFILE_AVATAR_KEY='zyvo-profile-avatar';
 let cachedProfileAvatar:string|null|undefined;
 const ChatnosaMark=()=> <span className="sidebar-chatnosa-mark" aria-hidden="true">N</span>;
-const icons=[Grid2X2,CirclePlus,CalendarDays,BrainCircuit,BarChart3,ChatnosaMark,Bell,Video,Hexagon,DoorOpen];
+const icons=[Grid2X2,CirclePlus,CalendarDays,BrainCircuit,BarChart3,ChatnosaMark,Activity,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Calibragem','Skills Pro','Chat Noza','My Performance','Space','Suporte','Configurações','Sair'];
 const extras:{label:string;Icon:typeof BrainCircuit}[]=[];
 type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
