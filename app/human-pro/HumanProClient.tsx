@@ -1,7 +1,7 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX,ChevronDown,ChevronRight} from 'lucide-react';
+import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX,ChevronDown,ChevronRight,Square,X} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
@@ -19,12 +19,18 @@ export default function HumanProClient(){
   const[speakingId,setSpeakingId]=useState<string|null>(null);
   const[voiceInput,setVoiceInput]=useState(false);
   const[voiceNotice,setVoiceNotice]=useState('');
+  const[voiceLevel,setVoiceLevel]=useState(0);
   const[planMenuOpen,setPlanMenuOpen]=useState(false);
   const[awaitingPerformanceUpgrade,setAwaitingPerformanceUpgrade]=useState(false);
   const fileRef=useRef<HTMLInputElement>(null);
   const questionRef=useRef<HTMLTextAreaElement>(null);
   const threadEndRef=useRef<HTMLDivElement>(null);
   const audioInputRef=useRef<any>(null);
+  const mediaStreamRef=useRef<MediaStream|null>(null);
+  const audioContextRef=useRef<AudioContext|null>(null);
+  const meterFrameRef=useRef<number|null>(null);
+  const voiceBaseTextRef=useRef('');
+  const voiceTextRef=useRef('');
 
   useEffect(()=>{
     try{setProfileName(localStorage.getItem('noza-profile-name')||'Sandro Bello')}catch{}
@@ -32,15 +38,40 @@ export default function HumanProClient(){
     const storageName=(event:StorageEvent)=>{if(event.key==='noza-profile-name'&&event.newValue)setProfileName(event.newValue)};
     window.addEventListener('noza:profile-name',updateName);
     window.addEventListener('storage',storageName);
-    return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel();audioInputRef.current?.abort?.()};
+    return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel();audioInputRef.current?.abort?.();if(meterFrameRef.current!==null)cancelAnimationFrame(meterFrameRef.current);mediaStreamRef.current?.getTracks().forEach(track=>track.stop());void audioContextRef.current?.close()};
   },[]);
 
   useEffect(()=>{threadEndRef.current?.scrollIntoView({behavior:'smooth',block:'end'})},[messages,working]);
   useEffect(()=>{const field=questionRef.current;if(field){field.style.height='auto';field.style.height=Math.min(field.scrollHeight,200)+'px'}},[question]);
 
+  const releaseVoiceMeter=()=>{
+    if(meterFrameRef.current!==null)cancelAnimationFrame(meterFrameRef.current);
+    meterFrameRef.current=null;
+    mediaStreamRef.current?.getTracks().forEach(track=>track.stop());
+    mediaStreamRef.current=null;
+    if(audioContextRef.current)void audioContextRef.current.close();
+    audioContextRef.current=null;
+    setVoiceLevel(0);
+  };
+  const stopVoiceInput=()=>{
+    const recognition=audioInputRef.current;
+    audioInputRef.current=null;
+    recognition?.stop?.();
+    setVoiceInput(false);
+    releaseVoiceMeter();
+    setVoiceNotice(voiceTextRef.current.trim()?'Transcrição pronta para enviar.':'Gravação encerrada.');
+  };
+  const cancelVoiceInput=()=>{
+    audioInputRef.current?.abort?.();
+    audioInputRef.current=null;
+    setQuestion(voiceBaseTextRef.current);
+    setVoiceInput(false);
+    releaseVoiceMeter();
+    setVoiceNotice('');
+  };
   const runAnalysis=async(value=question,priorMessages?:ChatMessage[])=>{
     const clean=value.trim();if(!clean||working)return;
-    audioInputRef.current?.stop?.();setVoiceInput(false);setVoiceNotice('');
+    audioInputRef.current?.abort?.();audioInputRef.current=null;setVoiceInput(false);setVoiceNotice('');releaseVoiceMeter();
     const stamp=Date.now();
     const next=priorMessages?[...priorMessages]:[...messages,{id:`user-${stamp}`,role:'user' as const,content:clean}];
     if(priorMessages)setMessages(priorMessages);
@@ -87,16 +118,64 @@ export default function HumanProClient(){
     sendCurrentMessage();
   };
   const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\n\n':''}Contexto do arquivo ${file.name}:\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
-  const toggleVoiceInput=()=>{
-    if(voiceInput){audioInputRef.current?.stop?.();setVoiceInput(false);setVoiceNotice('');return}
+  const toggleVoiceInput=async()=>{
+    if(voiceInput){stopVoiceInput();return}
     const speechApi=(window as any).SpeechRecognition||(window as any).webkitSpeechRecognition;
-    if(!speechApi){setVoiceNotice('O ditado por áudio não está disponível neste navegador.');return}
-    const recognition=new speechApi();
-    recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=false;
-    recognition.onresult=(event:any)=>{let transcript='';for(let index=event.resultIndex;index<event.results.length;index++)if(event.results[index].isFinal)transcript+=event.results[index][0].transcript;if(transcript.trim()){setQuestion(current=>current+(current.trim()?' ':'')+transcript.trim());setVoiceNotice('Ouvindo… fale sua pergunta.')}};
-    recognition.onerror=()=>{setVoiceInput(false);setVoiceNotice('Não foi possível captar o áudio. Verifique a permissão do microfone.');audioInputRef.current=null};
-    recognition.onend=()=>{setVoiceInput(false);audioInputRef.current=null};
-    try{recognition.start();audioInputRef.current=recognition;setVoiceInput(true);setVoiceNotice('Ouvindo… fale sua pergunta.')}catch{setVoiceInput(false);setVoiceNotice('Não foi possível iniciar o microfone.')}
+    if(!speechApi){setVoiceNotice('A transcrição por voz não está disponível neste navegador.');return}
+    if(!navigator.mediaDevices?.getUserMedia){setVoiceNotice('Este navegador não permite acessar o microfone.');return}
+    voiceBaseTextRef.current=question.trim();
+    voiceTextRef.current='';
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaStreamRef.current=stream;
+      const AudioContextClass=(window as any).AudioContext||(window as any).webkitAudioContext;
+      if(AudioContextClass){
+        const context:AudioContext=new AudioContextClass();
+        audioContextRef.current=context;
+        const analyser=context.createAnalyser();
+        analyser.fftSize=256;
+        context.createMediaStreamSource(stream).connect(analyser);
+        const samples=new Uint8Array(analyser.fftSize);
+        const measure=()=>{
+          analyser.getByteTimeDomainData(samples);
+          let energy=0;
+          for(const sample of samples){const value=(sample-128)/128;energy+=value*value}
+          setVoiceLevel(Math.min(1,Math.sqrt(energy/samples.length)*4.5));
+          meterFrameRef.current=requestAnimationFrame(measure);
+        };
+        measure();
+      }
+      const recognition=new speechApi();
+      audioInputRef.current=recognition;
+      recognition.lang='pt-BR';recognition.continuous=true;recognition.interimResults=true;
+      recognition.onresult=(event:any)=>{
+        let finalTranscript='',interimTranscript='';
+        for(let index=0;index<event.results.length;index++){
+          const result=event.results[index];
+          if(result.isFinal)finalTranscript+=result[0].transcript;
+          else interimTranscript+=result[0].transcript;
+        }
+        voiceTextRef.current=finalTranscript;
+        const heard=(finalTranscript+' '+interimTranscript).trim();
+        const prefix=voiceBaseTextRef.current;
+        setQuestion(heard?(prefix+(prefix?' ':'')+heard):prefix);
+        setVoiceNotice(heard?'Transcrição ao vivo':'Ouvindo… fale sua pergunta.');
+      };
+      recognition.onerror=()=>{
+        audioInputRef.current=null;setVoiceInput(false);releaseVoiceMeter();
+        setVoiceNotice('Não foi possível captar o áudio. Confira a permissão do microfone.');
+      };
+      recognition.onend=()=>{
+        audioInputRef.current=null;setVoiceInput(false);releaseVoiceMeter();
+        setVoiceNotice(voiceTextRef.current.trim()?'Transcrição pronta para enviar.':'');
+      };
+      recognition.start();
+      setVoiceInput(true);
+      setVoiceNotice('Ouvindo… fale sua pergunta.');
+    }catch{
+      audioInputRef.current?.abort?.();audioInputRef.current=null;setVoiceInput(false);releaseVoiceMeter();
+      setVoiceNotice('Não foi possível iniciar o microfone. Confira a permissão do navegador.');
+    }
   };
   const copyMessage=async(message:ChatMessage)=>{
     try{await navigator.clipboard.writeText(message.content);setCopiedId(message.id);window.setTimeout(()=>setCopiedId(current=>current===message.id?null:current),1800)}catch{}
@@ -118,17 +197,28 @@ export default function HumanProClient(){
   const firstName=profileName.trim().split(/\s+/)[0]||'';
 
   const composer=<div className="human-composer-area">
-    <form className="human-composer" onSubmit={submit}>
-      <textarea ref={questionRef} aria-label="Mensagem para Chat Noza" value={question} onChange={changeQuestion} onKeyDown={submitOnEnter} placeholder="Converse com a Chat Noza"/>
+    <form className={voiceInput?'human-composer recording':'human-composer'} onSubmit={submit}>
+      {voiceInput?
+        <div className="human-voice-capture">
+          <button type="button" className="human-record-cancel" onClick={cancelVoiceInput} aria-label="Cancelar gravação" title="Cancelar"><X/></button>
+          <div className="human-voice-capture-body">
+            <div className="human-voice-live-head"><span>Ouvindo</span><div className="human-voice-bars" role="img" aria-label={"Nível do áudio "+Math.round(voiceLevel*100)+" por cento"}>{Array.from({length:24},(_,index)=>{const pulse=.25+.75*Math.abs(Math.sin(index*.73+voiceLevel*6));const height=Math.max(5,Math.round(4+voiceLevel*30*pulse));return <i key={index} style={{height:height+'px'}}/>})}</div></div>
+            <p className="human-voice-transcript" aria-live="polite">{question.slice(voiceBaseTextRef.current.length).trim()||'Fale agora… sua voz será transcrita aqui.'}</p>
+          </div>
+          <button type="button" className="human-record-stop" onClick={stopVoiceInput} aria-label="Parar gravação" title="Parar gravação"><Square/></button>
+        </div>:
+        <textarea ref={questionRef} aria-label="Mensagem para Chat Noza" value={question} onChange={changeQuestion} onKeyDown={submitOnEnter} placeholder="Converse com a Chat Noza"/>
+      }
       <div className="human-composer-toolbar">
-        <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
+        {!voiceInput&&<><button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
         <div className="human-plan-selector-wrap">
           <button type="button" className="human-plan-selector" onClick={()=>setPlanMenuOpen(open=>!open)} aria-expanded={planMenuOpen} aria-controls="human-plan-menu" aria-label="Selecionar plano" title="Ver opções de plano"><span>Pro</span><ChevronDown aria-hidden="true"/></button>
           {planMenuOpen&&<div className="human-plan-menu" id="human-plan-menu" role="menu"><button type="button" role="menuitem" onClick={choosePerformance}><span><strong>Performance</strong><small>Ver upgrade e valores</small></span><ChevronRight aria-hidden="true"/></button></div>}
         </div>
-        <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><Mic/></button>
-        <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
+        <button type="button" className="human-voice" onClick={()=>void toggleVoiceInput()} aria-label="Fazer pergunta por áudio" aria-pressed={false} title="Perguntar por áudio"><Mic/></button></>}
+        {voiceInput&&<span className="human-recording-label" role="status">Gravando áudio</span>}
+        <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem" title="Enviar transcrição"><ArrowUp/></button>
       </div>
     </form>
     {voiceNotice&&<p className="human-audio-notice" role="status">{voiceNotice}</p>}
