@@ -7,7 +7,6 @@ import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
 import './human-pro.css';
-import {getPerformanceProfile} from '../../lib/performance/core';
 
 type ChatMessage={id:string;role:'user'|'assistant';content:string};
 type Feedback='up'|'down';
@@ -15,7 +14,6 @@ export default function HumanProClient(){
   const[question,setQuestion]=useState('');
   const[messages,setMessages]=useState<ChatMessage[]>([]);
   const[working,setWorking]=useState(false);
-  const[performanceContext,setPerformanceContext]=useState('');
   const[profileName,setProfileName]=useState('Sandro Bello');
   const[copiedId,setCopiedId]=useState<string|null>(null);
   const[feedback,setFeedback]=useState<Record<string,Feedback>>({});
@@ -33,7 +31,6 @@ export default function HumanProClient(){
     const storageName=(event:StorageEvent)=>{if(event.key==='noza-profile-name'&&event.newValue)setProfileName(event.newValue)};
     window.addEventListener('noza:profile-name',updateName);
     window.addEventListener('storage',storageName);
-    getPerformanceProfile().then(profile=>{const intelligence=(profile.intelligence||[]).slice(0,12).map((s:any)=>`${s.skill}: score ${s.score}, confiança ${Math.round(s.confidence*100)}%, tendência ${s.direction} (${s.trend>0?'+':''}${s.trend}), recorrência ${s.recurrence}, contradição ${Math.round(s.contradiction*100)}%, evidência recente: ${s.latestEvidence||'sem evidência textual'}`).join('\n');const recent=profile.events.slice(0,8).map((e:any)=>`${e.created_at||''} · ${e.source} · ${e.skill||e.event_type}: ${e.evidence||''}`).join('\n');setPerformanceContext([intelligence,recent].filter(Boolean).join('\n'))}).catch(()=>{});
     return()=>{window.removeEventListener('noza:profile-name',updateName);window.removeEventListener('storage',storageName);window.speechSynthesis?.cancel();audioInputRef.current?.abort?.()};
   },[]);
 
