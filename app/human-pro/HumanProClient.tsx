@@ -109,7 +109,7 @@ export default function HumanProClient(){
     if(positive||negative)setAwaitingPerformanceUpgrade(false);
     if(positive)window.setTimeout(()=>window.location.assign('/planos'),1300);
   };
-  const sendCurrentMessage=()=>awaitingPerformanceUpgrade?answerPerformanceUpgrade():runAnalysis();
+  const sendCurrentMessage=()=>{if(voiceInput&&!question.trim()){setVoiceNotice('Ainda não reconheci fala para enviar.');return}return awaitingPerformanceUpgrade?answerPerformanceUpgrade():runAnalysis()};
   const changeQuestion=(event:ChangeEvent<HTMLTextAreaElement>)=>{setQuestion(event.target.value);event.currentTarget.style.height='auto';event.currentTarget.style.height=Math.min(event.currentTarget.scrollHeight,200)+'px'};
   const submit=(event:FormEvent)=>{event.preventDefault();sendCurrentMessage()};
   const submitOnEnter=(event:KeyboardEvent<HTMLTextAreaElement>)=>{
@@ -132,6 +132,7 @@ export default function HumanProClient(){
       if(AudioContextClass){
         const context:AudioContext=new AudioContextClass();
         audioContextRef.current=context;
+        await context.resume();
         const analyser=context.createAnalyser();
         analyser.fftSize=256;
         context.createMediaStreamSource(stream).connect(analyser);
@@ -202,7 +203,7 @@ export default function HumanProClient(){
         <div className="human-voice-capture">
           <button type="button" className="human-record-cancel" onClick={cancelVoiceInput} aria-label="Cancelar gravação" title="Cancelar"><X/></button>
           <div className="human-voice-capture-body">
-            <div className="human-voice-live-head"><span>Ouvindo</span><div className="human-voice-bars" role="img" aria-label={"Nível do áudio "+Math.round(voiceLevel*100)+" por cento"}>{Array.from({length:24},(_,index)=>{const pulse=.25+.75*Math.abs(Math.sin(index*.73+voiceLevel*6));const height=Math.max(5,Math.round(4+voiceLevel*30*pulse));return <i key={index} style={{height:height+'px'}}/>})}</div></div>
+            <div className="human-voice-live-head"><span>Ouvindo</span><div className="human-voice-bars" role="img" aria-label={"Nível do áudio "+Math.round(voiceLevel*100)+" por cento"}>{Array.from({length:24},(_,index)=>{const pulse=.25+.75*Math.abs(Math.sin(index*.73+voiceLevel*6));const activity=.22+voiceLevel*1.25;const height=Math.max(5,Math.round(4+activity*24*pulse));return <i key={index} style={{height:height+'px',animationDelay:(index*-45)+'ms'}}/>})}</div></div>
             <p className="human-voice-transcript" aria-live="polite">{question.slice(voiceBaseTextRef.current.length).trim()||'Fale agora… sua voz será transcrita aqui.'}</p>
           </div>
           <button type="button" className="human-record-stop" onClick={stopVoiceInput} aria-label="Parar gravação" title="Parar gravação"><Square/></button>
@@ -218,7 +219,7 @@ export default function HumanProClient(){
         </div>
         <button type="button" className="human-voice" onClick={()=>void toggleVoiceInput()} aria-label="Fazer pergunta por áudio" aria-pressed={false} title="Perguntar por áudio"><Mic/></button></>}
         {voiceInput&&<span className="human-recording-label" role="status">Gravando áudio</span>}
-        <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem" title="Enviar transcrição"><ArrowUp/></button>
+        <button className="human-send" disabled={(!question.trim()&&!voiceInput)||working} aria-label="Enviar mensagem" title="Enviar transcrição"><ArrowUp/></button>
       </div>
     </form>
     {voiceNotice&&<p className="human-audio-notice" role="status">{voiceNotice}</p>}
