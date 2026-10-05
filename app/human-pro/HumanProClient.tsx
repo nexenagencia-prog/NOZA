@@ -1,38 +1,19 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX} from 'lucide-react';
+import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX,ChevronDown} from 'lucide-react';
+import Link from 'next/link';
 import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
 import './human-pro.css';
 import {getPerformanceProfile} from '../../lib/performance/core';
 
-type Meeting={id:string;title:string;objective?:string;phrase?:string;summary?:string;transcript?:string};
 type ChatMessage={id:string;role:'user'|'assistant';content:string};
 type Feedback='up'|'down';
-const RECORDINGS_KEY='zyvo-recordings';
-const defaultMeetings:Meeting[]=[
-  {id:'r1',title:'Reunião de planejamento',objective:'gestão',phrase:'Estratégia, proposta e próximos passos.'},
-  {id:'r2',title:'Alinhamento comercial',objective:'venda',phrase:'Decisões mais claras para acelerar o fechamento.'},
-  {id:'r3',title:'Reunião com cliente',objective:'venda',phrase:'Objeções, escuta e próximos compromissos.'},
-  {id:'r5',title:'Revisão semanal',objective:'liderança',phrase:'O que avançou e o que precisa mudar.'},
-  {id:'r6',title:'Apresentação de proposta',objective:'negociação',phrase:'Valor percebido, timing e decisão.'},
-  {id:'r9',title:'Entrevista estratégica',objective:'comunicação',phrase:'Perguntas melhores, respostas mais úteis.'},
-];
-
-function loadMeetings(){
-  try{
-    const parsed=JSON.parse(localStorage.getItem(RECORDINGS_KEY)||'[]');
-    const value=Array.isArray(parsed)?parsed:Array.isArray(parsed?.recordings)?parsed.recordings:[];
-    return value.length?value:defaultMeetings;
-  }catch{return defaultMeetings}
-}
-
 export default function HumanProClient(){
   const[question,setQuestion]=useState('');
   const[messages,setMessages]=useState<ChatMessage[]>([]);
-  const[meetings,setMeetings]=useState<Meeting[]>(defaultMeetings);
   const[working,setWorking]=useState(false);
   const[performanceContext,setPerformanceContext]=useState('');
   const[profileName,setProfileName]=useState('Sandro Bello');
@@ -47,7 +28,6 @@ export default function HumanProClient(){
   const audioInputRef=useRef<any>(null);
 
   useEffect(()=>{
-    setMeetings(loadMeetings());
     try{setProfileName(localStorage.getItem('noza-profile-name')||'Sandro Bello')}catch{}
     const updateName=(event:Event)=>{const value=(event as CustomEvent<string>).detail;if(typeof value==='string'&&value.trim())setProfileName(value.trim())};
     const storageName=(event:StorageEvent)=>{if(event.key==='noza-profile-name'&&event.newValue)setProfileName(event.newValue)};
@@ -121,7 +101,7 @@ export default function HumanProClient(){
       <div className="human-composer-toolbar">
         <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
-        <span>{performanceContext?'Perfil de performance conectado':`${meetings.length} reuniões disponíveis`}</span>
+        <Link className="human-plan-selector" href="/planos" aria-label="Ver os planos Pro e Performance" title="Conhecer os planos Pro e Performance"><span>Pro</span><ChevronDown aria-hidden="true"/></Link>
         <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><Mic/></button>
         <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
       </div>
