@@ -8,7 +8,7 @@ import FloatingNotes,{type FloatingNotesMode} from '../FloatingNotes';
 import {appendMessage,createLocalSlide,filterParticipants,getParticipantPanelView,getSlideOverlay,mergeSlides,previousSlideIndex,toggleAgendaItem,upsertNote} from './space-model.mjs';
 import './space.css';
 import {useSpaceRoom,ParticipantMedia,ParticipantAudio,type RoomParticipant} from './useSpaceRoom';
-import {recordPerformanceEvidence} from '../../lib/performance/core';
+import {recordPerformanceEvidence,resetLegacyPerformanceCacheOnce} from '../../lib/performance/core';
 
 type Message={id:string;author:string;body:string;time:string;mine:boolean};
 type AgendaItem={id:string;time:string;title:string;done:boolean};
@@ -23,11 +23,6 @@ const NOTES_KEY='zyvo:guest-notes';
 const CREATOR_SLIDES_KEY='zyvo-created-slides';
 const SPACE_IMPORTED_SLIDES_KEY='noza-space-imported-slides-v1';
 
-const initialMessages:Message[]=[
-  {id:'message-1',author:'Amanda',body:'Ótima apresentação!',time:'14:21',mine:false},
-  {id:'message-2',author:'Marcus',body:'Concordo, faz todo sentido.',time:'14:22',mine:false},
-  {id:'message-3',author:'Julia',body:'Podemos alinhar isso na próxima?',time:'14:22',mine:false},
-];
 const initialAgenda:AgendaItem[]=[
   {id:'agenda-1',time:'14:00',title:'Reunião de planejamento',done:false},
   {id:'agenda-2',time:'16:30',title:'Alinhamento com time',done:false},
@@ -56,7 +51,7 @@ export default function SpaceClient(){
   const recordingStartedAtRef=useRef<number>(0);
   const slideUrlsRef=useRef<string[]>([]);
   const [hydrated,setHydrated]=useState(false);
-  const [messages,setMessages]=useState<Message[]>(initialMessages);
+  const [messages,setMessages]=useState<Message[]>([]);
   const [message,setMessage]=useState('');
   const [agenda,setAgenda]=useState<AgendaItem[]>(initialAgenda);
   const [agendaForm,setAgendaForm]=useState(false);
@@ -111,7 +106,9 @@ export default function SpaceClient(){
   const scheduleContacts=()=>{const names=participants.filter(person=>contactSelection.includes(person.id)).map(person=>person.name).join(', ');setAgendaTitle(names?`Reunião com ${names}`:'Próxima reunião');setAgendaForm(true);setContactsOpen(false);setTimeout(()=>document.querySelector<HTMLInputElement>('.space-agenda-form input[type="time"]')?.focus(),0)};
 
   useEffect(()=>{
-    setMessages(readStored(MESSAGES_KEY,initialMessages));
+    resetLegacyPerformanceCacheOnce();
+    try{localStorage.removeItem(MESSAGES_KEY)}catch{}
+    setMessages([]);
     setAgenda(readStored(AGENDA_KEY,initialAgenda));
     setNotes(readStored(NOTES_KEY,initialNotes));
     const creator=readStored<Slide[]>(CREATOR_SLIDES_KEY,[]);
@@ -123,7 +120,6 @@ export default function SpaceClient(){
     setHydrated(true);
     return()=>{streamRef.current?.getTracks().forEach(track=>track.stop());slideUrlsRef.current.forEach(url=>URL.revokeObjectURL(url));window.removeEventListener('storage',syncCreatorSlides);window.removeEventListener('zyvo:slides-updated',syncCreatorSlides)};
   },[]);
-  useEffect(()=>{if(hydrated)try{localStorage.setItem(MESSAGES_KEY,JSON.stringify(messages))}catch{}},[messages,hydrated]);
   useEffect(()=>{if(hydrated)try{localStorage.setItem(AGENDA_KEY,JSON.stringify(agenda))}catch{}},[agenda,hydrated]);
   useEffect(()=>{if(hydrated)try{localStorage.setItem(NOTES_KEY,JSON.stringify(notes))}catch{}},[notes,hydrated]);
 
@@ -166,7 +162,7 @@ export default function SpaceClient(){
         <section className="space-live-card" aria-label="Reunião ao vivo">
           <div className="space-host"><span className="space-live-dot"/><strong>{ownParticipant?.name||'Você'}</strong><time>{formatMeetingTime(recordingSeconds)}</time><button aria-label="Mais opções da reunião" aria-expanded={meetingMenuOpen} onClick={()=>setMeetingMenuOpen(value=>!value)}><Ellipsis/></button>{meetingMenuOpen&&<div className="space-host-menu"><button onClick={()=>setChatOpen(value=>!value)}>{chatOpen?'Ocultar':'Mostrar'} chat</button><button onClick={()=>setMediaError('Qualidade automática ativada.')}>Qualidade automática</button></div>}</div>
           <div className="space-host-media">{ownParticipant?<img src={ownParticipant.image} alt={ownParticipant.name}/>:<div className="space-host-waiting">Câmera desligada</div>}<video ref={videoRef} autoPlay muted playsInline className={cameraOn?'is-visible':''} style={{filter:videoFilter==='contrast'?'contrast(1.15) saturate(.9)':videoFilter==='soft'?'brightness(1.06) contrast(.92)':videoFilter==='mono'?'grayscale(1) contrast(1.05)':'none'}}/><div className="space-reactions"><button onClick={()=>setReactionCounts(value=>({...value,likes:value.likes+1}))} aria-label="Curtir reunião"><Heart fill="currentColor"/>{reactionCounts.likes}</button><button onClick={()=>setChatOpen(true)} aria-label="Abrir chat"><MessageCircle/>{reactionCounts.messages}</button><button onClick={()=>{setReactionCounts(value=>({...value,shares:value.shares+1}));shareSpace()}} aria-label="Compartilhar reunião"><Send/>{reactionCounts.shares}</button></div></div>
-          {chatOpen&&<div className="space-chat-panel"><div className="space-chat-list">{messages.slice(-4).map(item=><div className={item.mine?'mine':''} key={item.id}><b>{item.author}</b><time>{item.time}</time><p>{item.body}</p></div>)}</div><form onSubmit={submitMessage}><input value={message} onChange={e=>setMessage(e.target.value)} aria-label="Mensagem" placeholder="Enviar uma mensagem..."/><Smile/><button aria-label="Enviar mensagem"><Send/></button></form></div>}
+          {chatOpen&&<div className="space-chat-panel"><div className="space-chat-list">{messages.length?messages.slice(-4).map(item=><div className={item.mine?'mine':''} key={item.id}><b>{item.author}</b><time>{item.time}</time><p>{item.body}</p></div>):<div className="space-chat-empty">As mensagens desta reunião aparecerão aqui.</div>}</div><form onSubmit={submitMessage}><input value={message} onChange={e=>setMessage(e.target.value)} aria-label="Mensagem" placeholder="Enviar uma mensagem..."/><Smile/><button aria-label="Enviar mensagem"><Send/></button></form></div>}
         </section>
 
         <section className={`space-participants-panel space-glass ${participantView.mode==='focus'?'is-focused':''}`} aria-label="Participantes">

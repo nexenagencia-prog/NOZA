@@ -73,3 +73,14 @@ export async function getPerformanceProfile(){
  ]);
  const safeSkills=skills||[],safeEvents=events||[];return {skills:safeSkills,events:safeEvents,goals:goals||[],intelligence:buildSkillIntelligence(safeSkills,safeEvents)};
 }
+
+
+const INITIAL_ZERO_STATE_KEY='noza-performance-zero-state-v1';
+export function resetLegacyPerformanceCacheOnce(){
+ if(typeof window==='undefined')return;
+ try{
+  if(localStorage.getItem(INITIAL_ZERO_STATE_KEY)==='done')return;
+  ['zyvo-space-messages','noza-performance-baseline','noza-cognitive-performance-baseline','noza-cognitive-calibration-history','noza-cognitive-calibration-focus','noza-cognitive-selected-topics','noza-meeting-performance-history','noza-last-meeting-report'].forEach(key=>localStorage.removeItem(key));
+  localStorage.setItem(INITIAL_ZERO_STATE_KEY,'done');
+ }catch{}
+}
