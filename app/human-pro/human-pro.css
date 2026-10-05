@@ -139,7 +139,7 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
 .human-voice-live-head{display:flex;align-items:center;gap:12px;min-height:25px}
 .human-voice-live-head>span{flex:0 0 auto;color:#eee;font-size:13px;font-weight:500}
 .human-voice-bars{display:flex;align-items:center;justify-content:flex-start;gap:3px;height:30px;min-width:0;overflow:hidden}
-.human-voice-bars i{display:block;flex:0 0 3px;min-height:4px;max-height:28px;border-radius:4px;background:#d8d8d8;opacity:.9;transition:height 70ms linear}
+.human-voice-bars i{display:block;flex:0 0 3px;min-height:4px;max-height:28px;border-radius:4px;background:#d8d8d8;opacity:.9;transform:scaleY(.35);transform-origin:center;animation:nozaLiveWave .72s ease-in-out infinite alternate;transition:height 70ms linear}@keyframes nozaLiveWave{from{transform:scaleY(.28);opacity:.55}to{transform:scaleY(1);opacity:1}}
 .human-voice-transcript{
   min-height:18px;margin:1px 0 0;color:#aaa;font-size:13px;line-height:1.4;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -164,4 +164,5 @@ body:has(.human-pro-page) .zyvo-ai-chat,body:has(.human-pro-page) .zybos-panel{d
 }
 @media(prefers-reduced-motion:reduce){
   .human-voice-bars i,.human-record-cancel,.human-record-stop{transition:none}
+  .human-voice-bars i{animation-duration:1.4s}
 }
