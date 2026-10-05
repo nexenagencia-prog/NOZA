@@ -63,9 +63,9 @@ export default function HumanProClient(){
   const answerPerformanceUpgrade=(value=question)=>{
     const clean=value.trim();
     if(!clean)return;
-    const normalized=clean.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');
-    const positive=/^(sim|s|quero|pode|claro|vamos|confirmo|isso)(\\b|[,.!])/i.test(normalized);
-    const negative=/^(nao|n|depois|cancelar|prefiro nao)(\\b|[,.!])/i.test(normalized);
+    const normalized=clean.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const positive=/^(sim|s|quero|pode|claro|vamos|confirmo|isso)(\b|[,.!])/i.test(normalized);
+    const negative=/^(nao|n|depois|cancelar|prefiro nao)(\b|[,.!])/i.test(normalized);
     const stamp=Date.now();
     const response=positive
       ?'Perfeito. Vou te encaminhar para a página de planos para você concluir o upgrade para Performance.'
@@ -84,7 +84,7 @@ export default function HumanProClient(){
   const submitOnEnter=(event:KeyboardEvent<HTMLTextAreaElement>)=>{
     if(event.key!=='Enter'||event.shiftKey||event.nativeEvent.isComposing)return;
     event.preventDefault();
-    runAnalysis();
+    sendCurrentMessage();
   };
   const attach=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>setQuestion(current=>`${current}${current?'\n\n':''}Contexto do arquivo ${file.name}:\n${String(reader.result).slice(0,5000)}`);reader.readAsText(file);event.target.value=''};
   const toggleVoiceInput=()=>{
