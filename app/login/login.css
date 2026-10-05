@@ -275,3 +275,6 @@
 .auth::before{content:"";position:absolute;z-index:11;pointer-events:none;left:-1px;top:-35%;width:3px;height:35%;background:linear-gradient(180deg,transparent 0%,rgba(242,245,247,.12) 28%,rgba(249,250,251,.75) 58%,rgba(214,221,227,.26) 82%,transparent 100%);filter:blur(.45px);opacity:0;animation:silver-login-shimmer 8s ease-in-out infinite}
 @keyframes silver-login-shimmer{0%{transform:translateY(0);opacity:0}12%{opacity:.42}52%{opacity:.72}88%{opacity:.34}100%{transform:translateY(385%);opacity:0}}
 @media(prefers-reduced-motion:reduce){.auth::before{animation:none;opacity:.18;top:32%;transform:none}}
+
+.email-icon{display:inline-grid;place-items:center;line-height:0}
+.email-icon svg{display:block;width:17px;height:17px;stroke-width:1.7}
