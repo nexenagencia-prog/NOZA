@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {Activity,Orbit,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,Orbit,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X} from 'lucide-react';
+import {Activity,Orbit,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,Menu,NotebookPen,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
