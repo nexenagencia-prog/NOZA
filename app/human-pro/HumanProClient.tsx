@@ -1,7 +1,7 @@
 'use client';
 
 import {ChangeEvent,FormEvent,KeyboardEvent,useEffect,useRef,useState} from 'react';
-import {ArrowUp,AudioLines,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX} from 'lucide-react';
+import {ArrowUp,Mic,Check,Clipboard,Plus,RotateCw,ThumbsDown,ThumbsUp,Volume2,VolumeX} from 'lucide-react';
 import AppSidebar from '../AppSidebar';
 
 import '../app-sidebar.css';
@@ -122,7 +122,7 @@ export default function HumanProClient(){
         <button type="button" className="human-attach" onClick={()=>fileRef.current?.click()} aria-label="Anexar contexto"><Plus/></button>
         <input ref={fileRef} type="file" hidden accept=".txt,.md,.json,text/plain,application/json" onChange={attach}/>
         <span>{performanceContext?'Perfil de performance conectado':`${meetings.length} reuniões disponíveis`}</span>
-        <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><AudioLines/></button>
+        <button type="button" className={`human-voice ${voiceInput?'active':''}`} onClick={toggleVoiceInput} aria-label={voiceInput?'Parar ditado por áudio':'Fazer pergunta por áudio'} aria-pressed={voiceInput} title={voiceInput?'Parar ditado':'Perguntar por áudio'}><Mic/></button>
         <button className="human-send" disabled={!question.trim()||working} aria-label="Enviar mensagem"><ArrowUp/></button>
       </div>
     </form>
@@ -156,7 +156,7 @@ export default function HumanProClient(){
                   </div>}
                 </div>
               </article>)}
-              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chat Noza está pensando"><div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chat Noza</strong><div className="human-thinking-matrix" aria-label="Chat Noza está processando sua pergunta">{Array.from({length:24},(_,index)=><i key={index} style={{animationDelay:(index%8)*.065+Math.floor(index/8)*.12+'s'}}/>)}<span>Elaborando resposta</span></div></div></article>}
+              {working&&<article className="human-message assistant thinking" role="status" aria-label="Chat Noza está pensando"><div className="human-message-avatar"><span className="chat-noza-mark" aria-hidden="true">N</span></div><div className="human-message-content"><strong>Chat Noza</strong><span className="human-thinking-dots" aria-hidden="true"><i/><i/><i/></span></div></article>}
               <div ref={threadEndRef}/>
             </div>
             {composer}
