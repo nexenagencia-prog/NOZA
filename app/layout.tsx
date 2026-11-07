@@ -1,6 +1,7 @@
 import './globals.css';
 import './logo.css';
 import './mobile.css';
+import './tablet.css';
 import type { Metadata } from 'next';
 import GlobalFloatingTools from './GlobalFloatingTools';
 
