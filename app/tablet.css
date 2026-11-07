@@ -240,3 +240,99 @@
   html body .app-topbar.app-topbar-floating { left:216px!important;right:20px!important; }
   html body .space-workspace { grid-template-columns:minmax(0,1fr)!important; }
 }
+
+
+/* TABLET PORTRAIT — keep the complete original home composition, vertically scrollable.
+   Sidebar starts compact; its dedicated control expands/collapses it on tablet only. */
+@media (min-width:768px) and (max-width:1024px) and (orientation:portrait) {
+  html,body {height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+  html body .app-shell {width:100%!important;height:auto!important;min-height:100dvh!important;overflow:visible!important}
+  html body .app-shell>.content,
+  html body .app-shell>.content.shifted {
+    position:relative!important;
+    width:calc(100vw - 92px)!important;
+    max-width:calc(100vw - 92px)!important;
+    min-height:100dvh!important;
+    height:auto!important;
+    margin-left:92px!important;
+    padding:28px 22px 38px!important;
+    overflow:visible!important;
+    transform:none!important;
+  }
+  html body .sidebar,
+  html body .sidebar.expanded {
+    left:12px!important;top:18px!important;bottom:18px!important;
+    width:68px!important;min-width:68px!important;
+    padding:22px 8px 14px!important;
+    border-radius:23px!important;
+    align-items:center!important;
+    overflow:visible!important;
+  }
+  html body .sidebar.tablet-expanded {
+    width:188px!important;min-width:188px!important;
+    align-items:stretch!important;
+    padding:22px 12px 14px!important;
+  }
+  html body .sidebar .avatar-wrap {height:58px!important;min-height:58px!important;justify-content:center!important;padding:0!important}
+  html body .sidebar .avatar {width:42px!important;height:42px!important}
+  html body .sidebar .avatar-meta {display:none!important}
+  html body .sidebar.tablet-expanded .avatar-wrap {justify-content:flex-start!important}
+  html body .sidebar.tablet-expanded .avatar-meta {display:flex!important}
+  html body .sidebar .side-nav {align-items:center!important;gap:8px!important;margin-top:12px!important}
+  html body .sidebar .side-item {width:46px!important;min-height:44px!important;height:44px!important;padding:0!important;justify-content:center!important}
+  html body .sidebar .side-item span {display:none!important}
+  html body .sidebar.tablet-expanded .side-nav {align-items:stretch!important}
+  html body .sidebar.tablet-expanded .side-item {width:100%!important;padding:0 10px!important;justify-content:flex-start!important}
+  html body .sidebar.tablet-expanded .side-item span {display:inline!important}
+  html body .tablet-menu-toggle {
+    display:grid!important;place-items:center!important;
+    width:42px!important;height:42px!important;min-height:42px!important;
+    margin:0 auto 12px!important;padding:0!important;
+    border:1px solid rgba(255,255,255,.2)!important;border-radius:13px!important;
+    background:rgba(255,255,255,.09)!important;color:#edf3f8!important;
+    cursor:pointer!important;
+  }
+  html body .sidebar.tablet-expanded .tablet-menu-toggle {margin-left:auto!important;margin-right:0!important}
+  html body .sidebar .sidebar-brand {display:none!important}
+  html body .sidebar.tablet-expanded .sidebar-brand {display:flex!important;min-height:36px!important;height:36px!important;margin:0 0 12px!important}
+  html body .sidebar .sidebar-toggle {display:none!important}
+  html body .sidebar.tablet-expanded ~ .content,
+  html body .sidebar.tablet-expanded ~ .content.shifted {
+    width:calc(100vw - 212px)!important;max-width:calc(100vw - 212px)!important;margin-left:212px!important;
+  }
+
+  /* Restore the full home hero and carousel; stack rather than hide either one. */
+  html body .app-shell .hero-grid {
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    align-items:start!important;
+    gap:24px!important;
+    min-height:0!important;
+    margin-top:22px!important;
+  }
+  html body .app-shell .hero-copy {padding:0!important;min-width:0!important}
+  html body .app-shell .hero-refined-headline {font-size:clamp(36px,5.6vw,54px)!important;line-height:1.02!important}
+  html body .app-shell .hero-feature {
+    display:flex!important;visibility:visible!important;
+    width:100%!important;height:auto!important;min-height:230px!important;
+    margin:0!important;
+  }
+  html body .app-shell .feature-card {
+    width:100%!important;max-width:none!important;height:220px!important;
+    min-height:220px!important;
+  }
+  html body .app-shell .feature-photo {height:100%!important;max-width:42%!important;aspect-ratio:1!important}
+  html body .app-shell .feature-text {font-size:clamp(18px,2.8vw,25px)!important}
+  html body .app-shell .cards-grid {
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;margin:24px 0 0!important;padding:0!important;
+  }
+  html body .app-shell .info-card {min-height:220px!important;height:auto!important;padding:22px!important}
+  html body .app-shell .info-card:last-child {grid-column:1 / -1}
+  html body .app-shell .topbar {grid-template-columns:minmax(0,1fr) auto!important;gap:12px!important}
+  html body .app-shell .topnav {display:none!important}
+  html body .app-shell .search-box {max-width:100%!important}
+}
+
+/* The tablet-only control must never appear on desktop or phone. */
+html body .tablet-menu-toggle {display:none}
