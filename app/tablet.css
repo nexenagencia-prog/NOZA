@@ -1,0 +1,242 @@
+/* NOZA — tablet responsiveness only.
+   Preserves the existing visual system; adjusts geometry and density for 7–13" screens.
+   Mobile rules now end at 767px; desktop remains unchanged above 1280px. */
+
+@media (min-width:768px) and (max-width:1280px) {
+  html, body {
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+  }
+  *, *::before, *::after { box-sizing:border-box; }
+  img, video, canvas, svg { max-width:100%; }
+  body { min-width:0; }
+
+  /* Persistent navigation rail and matching content offset */
+  html body .sidebar,
+  html body .sidebar.expanded,
+  html body:has(.space-page) .sidebar,
+  html body:has(.space-page) .sidebar.expanded {
+    width:196px!important;
+    min-width:196px!important;
+    padding:22px 14px 20px!important;
+  }
+  html body .sidebar .sidebar-brand {
+    min-height:46px!important;
+    height:46px!important;
+    margin-bottom:12px!important;
+    padding:0 18px!important;
+  }
+  html body .sidebar .sidebar-brand img { width:104px!important; }
+  html body .sidebar .avatar-wrap {
+    min-height:56px!important;
+    margin-bottom:12px!important;
+    padding:6px 8px!important;
+  }
+  html body .sidebar .avatar { width:40px!important;height:40px!important; }
+  html body .sidebar .side-nav { gap:5px!important; }
+  html body .sidebar .side-item {
+    min-height:43px!important;
+    height:43px!important;
+    padding:0 15px!important;
+    gap:12px!important;
+  }
+  html body .sidebar .side-item span { font-size:11.5px!important; }
+  html body .sidebar .side-item svg { width:18px!important;height:18px!important; }
+
+  html body.zyvo-sidebar-expanded .content,
+  html body.zyvo-sidebar-expanded .content.shifted,
+  html body.zyvo-sidebar-expanded .skills-site-content,
+  html body.zyvo-sidebar-expanded .notes-page,
+  html body.zyvo-sidebar-expanded .pricing-page,
+  html body .app-shell>.content,
+  html body .app-shell>.skills-site-content,
+  html body .human-pro-content,
+  html body .skills-pro-content,
+  html body .space-content,
+  html body .settings-main,
+  html body .support-content,
+  html body .pricing-page,
+  html body .notes-page {
+    width:calc(100vw - 196px)!important;
+    max-width:calc(100vw - 196px)!important;
+    margin-left:196px!important;
+    min-width:0!important;
+    transform:none!important;
+  }
+  html body .app-shell>.content,
+  html body .app-shell>.content.shifted,
+  html body.zyvo-sidebar-expanded .content,
+  html body.zyvo-sidebar-expanded .content.shifted {
+    padding:28px 26px 34px!important;
+  }
+  html body .skills-site-content,
+  html body .skills-pro-content,
+  html body .human-pro-content,
+  html body .space-content,
+  html body .settings-main,
+  html body .support-content,
+  html body .pricing-page,
+  html body .notes-page {
+    padding-left:24px!important;
+    padding-right:24px!important;
+    min-width:0!important;
+  }
+
+  /* Topbar stays inside the available content width */
+  html body .app-topbar.app-topbar-floating {
+    top:22px!important;
+    left:216px!important;
+    right:24px!important;
+    width:auto!important;
+    max-width:none!important;
+  }
+  html body .app-topbar .topnav { gap:clamp(14px,2.4vw,30px)!important; }
+  html body .app-topbar .topnav a { font-size:13px!important; }
+  html body .app-topbar .search-box { max-width:min(100%,520px)!important; }
+
+  /* Home hero: keep the same composition without desktop-sized minimum columns */
+  html body .app-shell .hero-grid {
+    display:grid!important;
+    grid-template-columns:minmax(0,1.12fr) minmax(240px,.88fr)!important;
+    gap:clamp(18px,2.5vw,32px)!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+  }
+  html body .app-shell .hero-copy { min-width:0!important;padding-left:0!important; }
+  html body .app-shell .hero-copy h1,
+  html body .app-shell .hero-refined-headline {
+    max-width:100%!important;
+    font-size:clamp(38px,4.5vw,58px)!important;
+    line-height:1.02!important;
+    overflow-wrap:anywhere;
+  }
+  html body .app-shell .hero-feature { min-width:0!important;display:flex!important; }
+  html body .app-shell .feature-card { width:100%!important;max-width:440px!important; }
+  html body .app-shell .feature-logo { width:clamp(100px,12vw,145px)!important;height:auto!important;aspect-ratio:1; }
+  html body .app-shell .feature-text { font-size:clamp(17px,2vw,23px)!important; }
+  html body .app-shell .cards-grid {
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:16px!important;
+    padding:0!important;
+    margin-top:18px!important;
+  }
+  html body .app-shell .info-card { min-width:0!important;height:auto!important;min-height:230px!important; }
+
+  /* Shared page grids — preserve cards and their existing styling */
+  html body .pricing-grid,
+  html body .settings-grid,
+  html body .analysis-grid,
+  html body .support-grid,
+  html body .skills-top-grid,
+  html body .skills-metrics,
+  html body .skills-bottom-grid,
+  html body .human-main,
+  html body .dashboard-grid,
+  html body .performance-grid {
+    min-width:0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:16px!important;
+  }
+  html body main,
+  html body .content,
+  html body .human-pro-content,
+  html body .skills-pro-content,
+  html body .skills-site-content,
+  html body .space-content,
+  html body .settings-main,
+  html body .support-content,
+  html body .pricing-page,
+  html body .notes-page {
+    min-width:0!important;
+    max-width:100%!important;
+    overflow-x:clip!important;
+  }
+  html body [class*="shell"],
+  html body [class*="container"],
+  html body [class*="content"] {
+    min-width:0;
+    max-width:100%;
+  }
+  html body .price-card,
+  html body .settings-card,
+  html body .analysis-card,
+  html body .support-card,
+  html body .info-card {
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  /* Forms, controls and tables remain usable by touch */
+  html body button,
+  html body [role="button"],
+  html body input,
+  html body select {
+    min-height:40px;
+  }
+  html body input,
+  html body textarea,
+  html body select { max-width:100%; }
+  html body table {
+    max-width:100%;
+    border-collapse:collapse;
+  }
+  html body .table-wrap,
+  html body [class*="table-container"],
+  html body [class*="table-scroll"] {
+    max-width:100%;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  /* Meeting room: fit the call and participant panels to tablet width */
+  html body .space-workspace {
+    min-width:0!important;
+    max-width:100%!important;
+    grid-template-columns:minmax(0,1fr) minmax(210px,28%)!important;
+    gap:14px!important;
+  }
+  html body .space-workspace>* { min-width:0!important; }
+  html body .space-live-card,
+  html body .space-participants-panel { min-width:0!important;max-width:100%!important; }
+
+  /* Avoid fixed desktop widths on media, dialogs and floating utilities */
+  html body dialog,
+  html body [role="dialog"],
+  html body .modal,
+  html body .modal-content,
+  html body .notification-panel {
+    max-width:calc(100vw - 32px)!important;
+  }
+  html body .floating-tool,
+  html body .floating-panel {
+    max-width:calc(100vw - 24px);
+  }
+}
+
+/* Portrait / compact tablets: single-column content where two columns become cramped */
+@media (min-width:768px) and (max-width:900px) {
+  html body .app-shell .hero-grid {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body .app-shell .hero-feature { display:none!important; }
+  html body .app-shell .cards-grid,
+  html body .pricing-grid,
+  html body .settings-grid,
+  html body .analysis-grid,
+  html body .support-grid,
+  html body .skills-top-grid,
+  html body .skills-metrics,
+  html body .skills-bottom-grid,
+  html body .human-main,
+  html body .dashboard-grid,
+  html body .performance-grid {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body .app-topbar .topnav { display:none!important; }
+  html body .app-topbar.app-topbar-floating { left:216px!important;right:20px!important; }
+  html body .space-workspace { grid-template-columns:minmax(0,1fr)!important; }
+}
