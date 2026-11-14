@@ -261,3 +261,36 @@ body:has(.space-page) .sidebar:not(.space-collapsed) ~ .content{
 /* Chatnosa sidebar monogram */
 .sidebar .sidebar-chatnosa-mark{width:19px;height:19px;flex:0 0 19px;display:grid;place-items:center;color:#bbbdbc;font-size:16px;font-weight:750;line-height:1;letter-spacing:-.07em}
 .side-item.active .sidebar-chatnosa-mark{color:#f1f1ef}
+
+@layer noza-shell {
+@media (min-width:768px) and (max-width:1366px) {
+/* Tablet-only permanent rail; phone and desktop retain their original rules. */
+html[data-noza-layout] body :is(.sidebar-toggle,.space-sidebar-toggle,.tablet-menu-toggle,.mobile-nav-trigger,.mobile-nav-close,.mobile-nav-backdrop){display:none!important}
+html[data-noza-layout] body .sidebar .avatar-meta{display:flex!important}
+html[data-noza-layout] body .sidebar .side-item span{display:inline!important}
+html[data-noza-layout] body .sidebar .side-nav {
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+@media(min-width:768px){
+  html[data-noza-layout]{--zyvo-sidebar-expanded:200px!important}
+  html[data-noza-layout] body .sidebar.expanded{
+    width:var(--zyvo-sidebar-expanded)!important;
+    height:100dvh!important;min-height:0!important;
+    top:0!important;bottom:0!important;left:0!important;
+    border-radius:0!important;
+    align-items:stretch!important;
+  }
+  html[data-noza-layout] body :is(.content,.skills-site-content,.notes-page,.pricing-page,.human-pro-content,.skills-pro-content,.cal-main,.agenda-content,.contacts-content,.cognitive-map-content,.sp-page){
+    margin-left:var(--zyvo-sidebar-expanded)!important;
+    width:calc(100% - var(--zyvo-sidebar-expanded))!important;
+    max-width:calc(100% - var(--zyvo-sidebar-expanded))!important;
+    min-width:0!important;
+  }
+}
+
+}
+
+}
