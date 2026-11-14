@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {Activity,Orbit,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,NotebookPen,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X,MessageSquareText} from 'lucide-react';
+import {Menu,Activity,Orbit,BrainCircuit,Calculator,CalendarClock,CalendarPlus,Camera,DoorOpen,Grid2X2,Hexagon,Headphones,NotebookPen,PanelsTopLeft,Pencil,Presentation,ScanLine,Sparkles,StickyNote,Video,X,MessageSquareText} from 'lucide-react';
 import {ChangeEvent,useEffect,useRef,useState} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {BRAND_LOGO,BRAND_NAME,rebrandPublicText} from './brand.mjs';
@@ -13,12 +13,12 @@ let cachedProfileAvatar:string|null|undefined;
 const icons=[PanelsTopLeft,CalendarPlus,CalendarClock,ScanLine,Sparkles,MessageSquareText,Activity,Video,Hexagon,DoorOpen];
 const defaults=['Início','Criar reunião','Agenda','Calibragem','Skills Pro','Chat Noza','My Performance','Space','Suporte','Configurações','Sair'];
 const extras:{label:string;Icon:typeof BrainCircuit}[]=[];
-type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void;onExpandedChange?:(value:boolean)=>void};
+type Props={name?:string;planLabel?:string;avatarUrl?:string|null;labels?:string[];onCalculator?:()=>void;onAnotar?:()=>void};
 
-export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels:_labels=defaults,onCalculator,onAnotar,onExpandedChange}:Props){
+export default function AppSidebar({name='Sandro Bello',planLabel='NOZA Pro',avatarUrl=null,labels:_labels=defaults,onCalculator,onAnotar}:Props){
   const labels=defaults;
   const router=useRouter();const pathname=usePathname();const[mobileOpen,setMobileOpen]=useState(false);const[profileName,setProfileName]=useState(name);const[editingName,setEditingName]=useState(false);const[avatar,setAvatar]=useState<string|null>(()=>avatarUrl||cachedProfileAvatar||null);const fileRef=useRef<HTMLInputElement>(null);
-  useEffect(()=>{document.body.classList.add('zyvo-sidebar-expanded');onExpandedChange?.(true);try{const saved=localStorage.getItem(PROFILE_AVATAR_KEY);if(saved){cachedProfileAvatar=saved;if(!avatar)setAvatar(saved)}const savedName=localStorage.getItem('noza-profile-name');if(savedName)setProfileName(savedName)}catch{}},[onExpandedChange]);
+  useEffect(()=>{document.body.classList.add('zyvo-sidebar-expanded');try{const saved=localStorage.getItem(PROFILE_AVATAR_KEY);if(saved){cachedProfileAvatar=saved;if(!avatar)setAvatar(saved)}const savedName=localStorage.getItem('noza-profile-name');if(savedName)setProfileName(savedName)}catch{}},[]);
   const changeAvatar=(event:ChangeEvent<HTMLInputElement>)=>{const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{const value=String(reader.result);cachedProfileAvatar=value;setAvatar(value);try{localStorage.setItem(PROFILE_AVATAR_KEY,value)}catch{}};reader.readAsDataURL(file)};
   const hiddenLabels=new Set<string>();
   const primary=labels.map((label,index)=>({label,index,Icon:icons[index]||Grid2X2})).filter(item=>item.label!=='Configurações'&&item.label!=='Sair'&&!hiddenLabels.has(item.label));
