@@ -20,6 +20,7 @@ const cardClass=(index:number)=>index===0?'card-one':index===1?'card-two':'card-
 
 export default function HomeClient({content}:{content:HomeContent}){
   const router=useRouter();
+  const[expanded,setExpanded]=useState(false);
   const[slide,setSlide]=useState(0);
   const[loaded,setLoaded]=useState(false);
   const[homeName,setHomeName]=useState(content.profile.name);
@@ -74,8 +75,8 @@ export default function HomeClient({content}:{content:HomeContent}){
   const firstName=homeName.trim().split(/\s+/)[0]||'Sandro';
   return <main className={`app-shell ${loaded?'loaded':''}`}>
     {content.hero.imageUrl&&<div className="hero-media" style={heroStyle}/>}
-    <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')}/>
-    <section className="content shifted">
+    <AppSidebar name={content.profile.name} planLabel={content.profile.planLabel} avatarUrl={content.profile.avatarUrl} labels={content.navigation.sidebar} onCalculator={()=>setCalculatorOpen(true)} onAnotar={()=>setNotesMode('editor')} onExpandedChange={setExpanded}/>
+    <section className={`content ${expanded?'shifted':''}`}>
       <AppTopbar floating={false} nextLabel="AGORA" nextDateTime={homeDateTime} performancePercent={content.hero.performancePercent} showContext/>
       <div className="home-mobile-brand" aria-hidden="true"><span className="noza-wordmark" aria-label="NOZA"><span>N</span><span>O</span><span>Z</span><span className="noza-a">A</span></span></div><section className="hero-grid">
         <div className="hero-copy">
