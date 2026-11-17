@@ -305,3 +305,93 @@ html body:has(.pricing-page) .plan-card-footer{padding-top:4px!important}
 html body:has(.pricing-page) .plan-card-footer .plan-note{margin-top:7px!important;min-height:28px!important}
 html body:has(.pricing-page) .business-price{font-size:18px!important;font-weight:350!important;letter-spacing:0!important}
 html body:has(.pricing-page) .price-card:has(.business-price) .plan-price{min-height:34px!important;align-items:center!important}
+
+
+/* Quatro planos e destaque de capacidade: mantém a identidade da aplicação. */
+.pricing-grid-four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pricing-grid-four .price-card{padding:18px 16px 16px}
+.pricing-hours-emphasis{display:block!important;font-size:19px!important;line-height:1.25!important;font-weight:750!important;letter-spacing:-.025em}
+.pricing-guests-emphasis{margin-top:9px;font-size:12px;font-weight:600;line-height:1.45;opacity:.88}
+.pricing-business-customizer{margin:14px 0;padding:13px;border:1px solid rgba(113,132,143,.25);border-radius:13px;background:rgba(129,147,160,.07)}
+.pricing-business-customizer>strong{display:block;font-size:13px;margin-bottom:11px}
+.pricing-addon-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0;font-size:12px;font-weight:650}
+.pricing-addon-row small{display:block;margin-top:4px;font-size:10px;font-weight:400;opacity:.7}
+.pricing-stepper{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.pricing-stepper button{width:32px;height:32px;border:1px solid rgba(120,135,145,.35);border-radius:8px;background:rgba(255,255,255,.1);color:inherit;font-size:18px;cursor:pointer}
+.pricing-stepper button:disabled{opacity:.3;cursor:default}
+.pricing-stepper output{min-width:27px;font-size:13px;font-weight:750;text-align:center;font-variant-numeric:tabular-nums}
+.pricing-custom-summary{display:flex;flex-direction:column;gap:5px;margin-top:14px;padding:11px;border-radius:10px;background:rgba(100,118,132,.13);font-size:12px;line-height:1.45}
+.pricing-custom-summary span{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+@media(max-width:1200px){.pricing-grid-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.pricing-grid-four{grid-template-columns:1fr}}
+
+
+/* Tablet em retrato: leitura confortável, sem cards comprimidos ou cortados. */
+@media (min-width:681px) and (max-width:1024px) and (orientation:portrait){
+ html body:has(.pricing-page) main.pricing-page{
+  width:calc(100% - 210px)!important;
+  max-width:calc(100vw - 210px)!important;
+  margin-left:210px!important;
+  padding:90px 22px 36px!important;
+  display:block!important;
+  min-height:100dvh!important;
+  overflow-x:hidden!important;
+ }
+ html body:has(.pricing-page) .pricing-shell{
+  width:100%!important;
+  max-width:650px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  transform:none!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:16px!important;
+  width:100%!important;
+  align-items:stretch!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card,
+ html body:has(.pricing-page) .pricing-grid-four .price-card.featured{
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  transform:none!important;
+  padding:22px 24px 20px!important;
+  box-sizing:border-box!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .plan-eyebrow{
+  font-size:10px!important;min-height:0!important;line-height:1.5!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card h2{
+  font-size:27px!important;line-height:1.2!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .monthly-reference{
+  height:auto!important;min-height:18px!important;font-size:10px!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .pricing-hours-emphasis{
+  font-size:21px!important;line-height:1.35!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .pricing-guests-emphasis{
+  font-size:13px!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card li{
+  font-size:12px!important;line-height:1.55!important;
+ }
+ html body:has(.pricing-page) .pricing-business-customizer{
+  padding:16px!important;
+ }
+ html body:has(.pricing-page) .pricing-addon-row{
+  font-size:13px!important;gap:12px!important;
+ }
+ html body:has(.pricing-page) .pricing-stepper button{
+  width:40px!important;height:40px!important;
+ }
+ html body:has(.pricing-page) .pricing-custom-summary{
+  padding:14px!important;
+ }
+ html body:has(.pricing-page) .pricing-footnote{
+  max-width:100%!important;overflow-wrap:anywhere!important;
+ }
+}
