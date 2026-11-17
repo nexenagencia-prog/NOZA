@@ -324,3 +324,74 @@ html body:has(.pricing-page) .price-card:has(.business-price) .plan-price{min-he
 .pricing-custom-summary span{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
 @media(max-width:1200px){.pricing-grid-four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.pricing-grid-four{grid-template-columns:1fr}}
+
+
+/* Tablet em retrato: leitura confortável, sem cards comprimidos ou cortados. */
+@media (min-width:681px) and (max-width:1024px) and (orientation:portrait){
+ html body:has(.pricing-page) main.pricing-page{
+  width:calc(100% - 210px)!important;
+  max-width:calc(100vw - 210px)!important;
+  margin-left:210px!important;
+  padding:90px 22px 36px!important;
+  display:block!important;
+  min-height:100dvh!important;
+  overflow-x:hidden!important;
+ }
+ html body:has(.pricing-page) .pricing-shell{
+  width:100%!important;
+  max-width:650px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  transform:none!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:16px!important;
+  width:100%!important;
+  align-items:stretch!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card,
+ html body:has(.pricing-page) .pricing-grid-four .price-card.featured{
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  transform:none!important;
+  padding:22px 24px 20px!important;
+  box-sizing:border-box!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .plan-eyebrow{
+  font-size:10px!important;min-height:0!important;line-height:1.5!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card h2{
+  font-size:27px!important;line-height:1.2!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .monthly-reference{
+  height:auto!important;min-height:18px!important;font-size:10px!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .pricing-hours-emphasis{
+  font-size:21px!important;line-height:1.35!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .pricing-guests-emphasis{
+  font-size:13px!important;
+ }
+ html body:has(.pricing-page) .pricing-grid-four .price-card li{
+  font-size:12px!important;line-height:1.55!important;
+ }
+ html body:has(.pricing-page) .pricing-business-customizer{
+  padding:16px!important;
+ }
+ html body:has(.pricing-page) .pricing-addon-row{
+  font-size:13px!important;gap:12px!important;
+ }
+ html body:has(.pricing-page) .pricing-stepper button{
+  width:40px!important;height:40px!important;
+ }
+ html body:has(.pricing-page) .pricing-custom-summary{
+  padding:14px!important;
+ }
+ html body:has(.pricing-page) .pricing-footnote{
+  max-width:100%!important;overflow-wrap:anywhere!important;
+ }
+}
