@@ -1143,3 +1143,122 @@ html:has(.space-page),body:has(.space-page){overflow-y:auto!important}
 .space-host-waiting{display:grid;place-items:center;width:100%;height:100%;color:#8c9197;font-size:12px;background:#151719}
 
 .space-page .space-chat-list>.space-chat-empty{align-self:stretch;max-width:none;padding:8px 10px;background:transparent!important;border:0!important;color:rgba(255,255,255,.62)!important;font-size:10px;text-align:center;box-shadow:none}
+
+
+/* Space tablet portrait: agenda and notes always accessible below video stages. */
+@media (min-width:768px) and (max-width:1100px) and (orientation:portrait){
+ html:has(.space-page),body:has(.space-page){overflow-x:hidden!important}
+ .space-page .space-content{
+  height:100dvh!important;
+  max-height:100dvh!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding-bottom:112px!important;
+  overscroll-behavior-y:contain!important;
+  scrollbar-width:thin;
+ }
+ .space-page .space-workspace,
+ .space-page .space-workspace:not(.support-cards-collapsed),
+ .space-page .space-workspace.support-cards-collapsed{
+  --video-stage-h:clamp(250px,36dvh,440px);
+  --video-stage-w:100%;
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+  grid-auto-rows:auto!important;
+  align-items:start!important;
+  gap:12px!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin-top:78px!important;
+  padding:0 0 28px!important;
+  overflow:visible!important;
+ }
+ .space-page .space-workspace .space-live-card,
+ .space-page .space-workspace .space-participants-panel{
+  position:relative!important;
+  grid-row:1!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:var(--video-stage-h)!important;
+  min-height:var(--video-stage-h)!important;
+  max-height:var(--video-stage-h)!important;
+  aspect-ratio:auto!important;
+  margin:0!important;
+  align-self:stretch!important;
+  justify-self:stretch!important;
+ }
+ .space-page .space-workspace .space-live-card{grid-column:1!important}
+ .space-page .space-workspace .space-participants-panel{grid-column:2!important}
+ .space-page .space-workspace .space-evolution{
+  grid-column:1 / -1!important;
+  grid-row:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:150px!important;
+  max-height:none!important;
+  aspect-ratio:16/9!important;
+  margin:0!important;
+ }
+ .space-page .space-workspace .space-agenda,
+ .space-page .space-workspace .space-notes{
+  display:block!important;
+  grid-row:auto!important;
+  width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:230px!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:15px!important;
+  overflow:visible!important;
+  align-self:stretch!important;
+  box-sizing:border-box!important;
+ }
+ .space-page .space-workspace .space-agenda{grid-column:1!important}
+ .space-page .space-workspace .space-notes{grid-column:2!important}
+ .space-page .space-workspace .space-agenda.is-collapsed,
+ .space-page .space-workspace .space-notes.is-collapsed{
+  min-height:52px!important;height:52px!important;
+ }
+ .space-page .space-agenda-list{
+  max-height:240px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+ }
+ .space-page .space-note-list{
+  max-height:200px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+ }
+ .space-page .space-agenda header,
+ .space-page .space-notes header{
+  height:auto!important;
+  min-height:43px!important;
+  flex-wrap:wrap!important;
+  gap:8px!important;
+ }
+ .space-page .space-notes header>div:first-child{min-width:125px!important}
+ .space-page .space-notes-library-link{
+  min-height:30px!important;
+  white-space:normal!important;
+ }
+ .space-page .space-note-form{min-width:0!important}
+ .space-page .space-note-form input,
+ .space-page .space-note-form textarea{width:100%!important;min-width:0!important}
+ .space-page .space-agenda-entry{
+  grid-template-columns:minmax(0,1fr) 52px!important;
+ }
+ .space-page .space-agenda-main{min-width:0!important}
+ .space-page .space-controls{z-index:60!important}
+}
+@media (min-width:768px) and (max-width:860px) and (orientation:portrait){
+ .space-page .space-workspace .space-agenda,
+ .space-page .space-workspace .space-notes{
+  grid-column:1 / -1!important;
+ }
+}
