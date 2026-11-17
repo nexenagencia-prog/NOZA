@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Mail } from 'lucide-react';
 import { createClient } from '../../lib/supabase/client';
@@ -9,7 +9,7 @@ import FeedbackCarousel from './FeedbackCarousel';
 
 export default function Login() {
   const s = createClient();
-  const [mode, setMode] = useState<'login' | 'signup' | 'forgot'>('login');
+  const [mode, setMode] = useState<'login' | 'signup' | 'forgot' | 'reset'>('login');
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,6 +17,17 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('reset') === '1') {
+      setMode('reset');
+      setShowForm(true);
+      s.auth.getSession().then(({data}) => {
+        if (!data.session) setMsg('Abra o link de recuperação enviado ao seu e-mail para definir uma nova senha.');
+      });
+    }
+  }, []);
 
   const openForm = (nextMode: 'login' | 'signup' | 'forgot' = 'login') => {
     setMode(nextMode);
@@ -29,21 +40,30 @@ export default function Login() {
     setBusy(true);
     setMsg('');
     try {
-      if (mode === 'forgot') {
+      if (mode === 'reset') {
+        const {data:{session}} = await s.auth.getSession();
+        if (!session) {
+          setMsg('O link de recuperação expirou ou não foi validado. Solicite outro e-mail.');
+          return;
+        }
+        const {error} = await s.auth.updateUser({password});
+        if (error) throw error;
+        setPassword('');
+        setMode('login');
+        setMsg('Senha atualizada. Entre com sua nova senha.');
+      } else if (mode === 'forgot') {
         const { error } = await s.auth.resetPasswordForEmail(email, {
-          redirectTo: location.origin + '/login?reset=1',
+          redirectTo: location.origin + '/auth/callback?next=' + encodeURIComponent('/login?reset=1'),
         });
         if (error) throw error;
         setMsg('Enviamos as instruções para o seu e-mail.');
       } else if (mode === 'signup') {
         const { data, error } = await s.auth.signUp({
-          email, password, options: { data: { full_name: name } },
+          email, password, options: { emailRedirectTo: location.origin + '/auth/callback?next=' + encodeURIComponent('/space'), data: { full_name: name } },
         });
         if (error) throw error;
         if (data.session) { window.location.replace(returnPath()); return; }
-        const { error: loginError } = await s.auth.signInWithPassword({ email, password });
-        if (!loginError) { window.location.replace(returnPath()); return; }
-        setMsg('Não foi possível iniciar sua sessão. Tente entrar novamente.');
+        setMsg('Conta criada! Confira seu e-mail e clique no link de confirmação da NOZA para ativar seu acesso.');
       } else {
         const { error } = await s.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -56,7 +76,7 @@ export default function Login() {
       } else if (m.includes('Invalid login credentials')) {
         setMsg('E-mail ou senha incorretos. Confira os dados ou recupere sua senha.');
       } else {
-        setMsg(m || 'Não foi possível concluir. Tente novamente.');
+        setMsg('Não foi possível concluir sua solicitação. Confira os dados e tente novamente.');
       }
     } finally {
       setBusy(false);
@@ -114,7 +134,7 @@ export default function Login() {
         ) : (
           <>
             <div className="auth-copy">
-              <h2>{mode === 'forgot' ? 'Recupere seu acesso.' : mode === 'signup' ? 'Criar acesso.' : 'Entrar na NOZA.'}</h2>
+              <h2>{mode === 'reset' ? 'Defina sua nova senha.' : mode === 'forgot' ? 'Recupere seu acesso.' : mode === 'signup' ? 'Criar acesso.' : 'Entrar na NOZA.'}</h2>
               <p>Aqui a sua jornada é evolutiva.</p>
             </div>
 
@@ -122,7 +142,7 @@ export default function Login() {
               {mode === 'signup' && (
                 <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome e sobrenome" autoComplete="name" required />
               )}
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail" autoComplete="email" required />
+              {mode !== 'reset' && <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail" autoComplete="email" required /> }
               {mode !== 'forgot' && (
                 <div className="password-field">
                   <input
@@ -131,7 +151,7 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Senha"
                     minLength={6}
-                    autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                    autoComplete={mode === 'signup' || mode === 'reset' ? 'new-password' : 'current-password'}
                     required
                   />
                   <button type="button" className="password-eye" onClick={() => setShowPassword((v) => !v)}>
@@ -140,7 +160,7 @@ export default function Login() {
                 </div>
               )}
               <button className="primary" disabled={busy}>
-                {busy ? 'Aguarde...' : mode === 'signup' ? 'Criar minha conta' : mode === 'forgot' ? 'Enviar instruções' : 'Entrar na NOZA'}
+                {busy ? 'Aguarde...' : mode === 'signup' ? 'Criar minha conta' : mode === 'forgot' ? 'Enviar instruções' : mode === 'reset' ? 'Salvar nova senha' : 'Entrar na NOZA'}
                 {!busy && mode === 'login' && <span className="button-arrow">→</span>}
               </button>
             </form>
